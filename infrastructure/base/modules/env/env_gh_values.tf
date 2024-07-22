@@ -17,11 +17,11 @@ locals {
   # could be achieved using GH environments as well, which would be a good alternative flow, but it is not available in all GH plans
   action_variable_map = {
     for key, value in local.action_variable_map_with_unprefixed_keys :
-    "TF_${upper(var.environment)}_${key}" => value
+    "TF_${key}" => value
   }
   action_secret_map = {
     for key, value in local.action_secret_map_with_unprefixed_keys :
-    "TF_${upper(var.environment)}_${key}" => value
+    "TF_${key}" => value
   }
 
   # secondly, the variables / secrets which are used by the client / cms and need to be provided in the .env file when building the image
@@ -40,11 +40,11 @@ locals {
   client_secret_map_with_unprefixed_keys = {}
   client_variable_map = {
     for key, value in local.client_variable_map_with_unprefixed_keys :
-    "TF_CLIENT_${key}" => value
+    "TF_CLIENT_ENV_${key}" => value
   }
   client_secret_map = {
     for key, value in local.client_secret_map_with_unprefixed_keys :
-    "TF_CLIENT_${key}" => value
+    "TF_CLIENT_ENV_${key}" => value
   }
 
   cms_variable_map_with_unprefixed_keys = {
@@ -82,12 +82,17 @@ locals {
 
   cms_variable_map = {
     for key, value in local.cms_variable_map_with_unprefixed_keys :
-    "TF_CMS_${key}" => value
+    "TF_CMS_ENV_${key}" => value
   }
   cms_secret_map = {
     for key, value in local.cms_secret_map_with_unprefixed_keys :
-    "TF_CMS_${key}" => value
+    "TF_CMS_ENV_${key}" => value
   }
+}
+
+resource github_repository_environment "environment" {
+  repository = var.repo_name
+  environment = var.environment
 }
 
 module "github_values" {

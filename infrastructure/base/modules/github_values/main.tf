@@ -1,8 +1,3 @@
-resource github_repository_environment "environment" {
-  count = var.github_environment != null ? 1 : 0
-  repository = var.repo_name
-  environment = var.github_environment
-}
 
 resource "github_actions_environment_variable" "environment_variable" {
   for_each = var.environment_variable_map

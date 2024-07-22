@@ -16,3 +16,8 @@ output "environment_cname" {
   value       = aws_elastic_beanstalk_environment.application_environment.cname
   description = "The URL of the environment"
 }
+
+output "eb_role_id" {
+  value       = aws_iam_role.beanstalk_ec2_role.id
+  description = "The id of the ELB EC2 Role"
+}
