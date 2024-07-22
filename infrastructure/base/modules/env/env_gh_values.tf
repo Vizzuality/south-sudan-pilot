@@ -40,11 +40,11 @@ locals {
   client_secret_map_with_unprefixed_keys = {}
   client_variable_map = {
     for key, value in local.client_variable_map_with_unprefixed_keys :
-    "TF_${upper(var.environment)}_CLIENT_ENV_${key}" => value
+    "TF_CLIENT_${key}" => value
   }
   client_secret_map = {
     for key, value in local.client_secret_map_with_unprefixed_keys :
-    "TF_${upper(var.environment)}_CLIENT_ENV_${key}" => value
+    "TF_CLIENT_${key}" => value
   }
 
   cms_variable_map_with_unprefixed_keys = {
@@ -82,23 +82,24 @@ locals {
 
   cms_variable_map = {
     for key, value in local.cms_variable_map_with_unprefixed_keys :
-    "TF_${upper(var.environment)}_CMS_ENV_${key}" => value
+    "TF_CMS_${key}" => value
   }
   cms_secret_map = {
     for key, value in local.cms_secret_map_with_unprefixed_keys :
-    "TF_${upper(var.environment)}_CMS_ENV_${key}" => value
+    "TF_CMS_${key}" => value
   }
 }
 
 module "github_values" {
   source    = "../github_values"
   repo_name = var.repo_name
-  secret_map = merge(
+  github_environment = var.environment
+  environment_secret_map = merge(
     local.action_secret_map,
     local.client_secret_map,
     local.cms_secret_map
   )
-  variable_map = merge(
+  environment_variable_map = merge(
     local.action_variable_map,
     local.client_variable_map,
     local.cms_variable_map

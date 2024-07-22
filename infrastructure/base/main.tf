@@ -81,7 +81,7 @@ resource "aws_iam_service_linked_role" "elasticbeanstalk" {
 module "github_values" {
   source    = "./modules/github_values"
   repo_name = var.repo_name
-  secret_map = {
+  global_secret_map = {
     TF_AWS_REGION                      = var.aws_region
     TF_PROJECT_NAME                    = var.project_name
     TF_CMS_REPOSITORY_NAME             = module.cms_ecr.repository_name
