@@ -1,24 +1,28 @@
 terraform {
   backend "s3" {
-    // TF does not allow vars here.
-    // Use output state_bucket or "{var.project}-tfstate" from the state project
-    bucket = "project-terraform-state"
-    // Use var.aws_region from the state project
-    region = "eu-west-3"
-    // Use output state_lock_table or "{var.project}-tfstate-lock" from the state project
-    dynamodb_table = "project-terraform-state-lock"
-    encrypt        = true
-    key            = "state"
+     // TF does not allow vars here.
+       // Use output state_bucket or "{var.project}-tfstate" from the state project
+       bucket = "wims-ss-terraform-state"
+       // Use var.aws_region from the state project
+       region = "eu-west-3"
+       // Use output state_lock_table or "{var.project}-tfstate-lock" from the state project
+       dynamodb_table = "wims-ss-terraform-state-lock"
+       encrypt        = true
+       key            = "state"
   }
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.31"
-    }
+    },
+     github = {
+       source  = "integrations/github"
+       version = "~> 5.17"
+     }
   }
 
-  required_version = "~> 1.6.6"
+  required_version = "~> 1.9.2"
 }
 
 provider "aws" {
