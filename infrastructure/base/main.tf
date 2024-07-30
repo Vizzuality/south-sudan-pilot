@@ -44,7 +44,7 @@ module "github_values" {
     TF_PIPELINE_USER_ACCESS_KEY_ID     = module.iam.pipeline_user_access_key_id
     TF_PIPELINE_USER_SECRET_ACCESS_KEY = module.iam.pipeline_user_access_key_secret
   }
-  variable_map = {}
+  global_variable_map = {}
 }
 
 //ENVIRONMENTS

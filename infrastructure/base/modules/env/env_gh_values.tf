@@ -109,4 +109,5 @@ module "github_values" {
     local.client_variable_map,
     local.cms_variable_map
   )
+  depends_on = [github_repository_environment.environment]
 }

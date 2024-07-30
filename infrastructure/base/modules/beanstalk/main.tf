@@ -137,7 +137,7 @@ locals {
     {
       namespace = "aws:elbv2:listener:443"
       name      = "ListenerEnabled"
-      value     = var.acm_certificate.arn == "" ? "false" : "true"
+      value     = var.acm_certificate[0].arn == "" ? "false" : "true"
     },
     {
       namespace = "aws:elbv2:listener:443"
@@ -147,7 +147,7 @@ locals {
     {
       namespace = "aws:elbv2:listener:443"
       name      = "SSLCertificateArns"
-      value     = var.acm_certificate.arn
+      value     = var.acm_certificate[0].arn
     }
   ]
 }
