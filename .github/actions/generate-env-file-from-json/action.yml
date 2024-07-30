@@ -1,0 +1,60 @@
+name: Generate Env file from JSON secret/variable collection
+description: Takes a set of GH variables and secrets in JSON format and generates an env file for the docker image building step for the relevant environment and component (CMS, client, etc)
+
+inputs:
+  secrets_json:
+    description: "The GH Secrets collection in JSON format"
+    required: true
+  vars_json:
+    description: "The GH Variables collection in JSON format"
+    required: true
+  ENVIRONMENT:
+    description: "Environment name"
+    required: true
+  APP_ENV_PREFIX:
+    description: "Something"
+    required: true
+
+outputs:
+  env_file:
+    description: "The env file contents"
+    value: ${{steps.env_entries_stripped.outputs.entries_stripped}}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Output secrets and vars as key=value entries
+      # Use jq to convert JSON to key=value entries
+      # 1. to_entries converts JSON to array of key/value pairs
+      # 2. map(.key + "=" + .value) converts each key/value pair to key=value
+      # 3. .[] flattens array to key=value entries
+      id: env_entries_all
+      shell: bash
+      run: |
+        {
+          echo 'entries_all<<EOF'
+          echo '${{ inputs.secrets_json }}' '${{ inputs.vars_json }}' | jq -r 'to_entries | map(.key + "=" + .value) | .[]'
+          echo 'EOF'
+        } >> $GITHUB_OUTPUT
+
+    - name: Filter secrets and vars for inclusion in .env file by environment and application prefixes
+      # Use grep to filter client secrets & vars and save .env file (names starting with (TF_)[CLIENT_ENV|CMS_ENV]_
+      id: env_entries_filtered
+      shell: bash
+      run: |
+        {
+          echo 'entries_filtered<<EOF'
+          echo '${{ steps.env_entries_all.outputs.entries_all }}' | grep -E "^(TF_)?${APP_ENV_PREFIX}_"
+          echo 'EOF'
+        } >> $GITHUB_OUTPUT
+
+    - name: Strip environment and application prefixes from secret and var names
+      # Use sed to strip environment and application prefixes from secret and var names
+      id: env_entries_stripped
+      shell: bash
+      run: |
+        {
+          echo 'entries_stripped<<EOF'
+          echo '${{ steps.env_entries_filtered.outputs.entries_filtered }}' | sed -E "s/^(TF_)?"$APP_ENV_PREFIX"_//g"
+          echo 'EOF'
+        } >> $GITHUB_OUTPUT
