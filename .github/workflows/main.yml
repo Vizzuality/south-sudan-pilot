@@ -1,34 +1,410 @@
+# The workflow also processes GH secrets and variables managed by Terraform or manually, with the TF_ prefix
+# for each relevant GH environment, which are used to build the .env files for the containers.
+# These follow the naming convention:
+# - TF_[CLIENT_ENV|CMS_ENV]_* - managed by Terraform
+# - [CLIENT_ENV|CMS_ENV]_* - managed manually
 
-name: Run deploy to GCP
+name: Run deploy to AWS
 
 on:
   workflow_dispatch:
     inputs:
       ENVIRONMENT_NAME_OVERRIDE:
-        description: "Environment name to override the environment used in the workflow"
+        description: "Environment name to override"
         required: false
         type: string
       dry_run:
-        description: "Makes the workflow trigger in dry run mode (no components will be published or deployed to the actual environment infrastructure)"
+        description: "Dry Run (No deployment)"
         required: false
         default: false
         type: boolean
-
   push:
     branches:
       - main
-      - staging
 
     paths:
       - 'client/**'
       - 'cms/**'
+#      - 'tiler/**'
       - '.github/workflows/*'
       - 'infrastructure/**'
 
-
 jobs:
-  hello-world:
+  build_client_image:
+    name: Build Client image and push to Amazon ECR
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    env:
+      APP_ENV_PREFIX: CLIENT_ENV
+      APP_ENV_PATH: client/.env.local
+
     steps:
-      - name: Hello World
-        run: echo "Hello World"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: client-changes
+        with:
+          filters: |
+            client:
+              - 'client/**'
+              - '.github/workflows/**'
+
+      - name: Applicable check
+        id: applicable_check
+        run: |
+          {
+            echo "flag=${{ github.event_name == 'workflow_dispatch' || steps.client-changes.outputs.client == 'true' }}"
+          } >> $GITHUB_OUTPUT
+
+      - name: Extract branch name
+        if: ${{ steps.applicable_check.outputs.flag }}
+        run: |
+          {
+            branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+            echo "branch=${branch}"
+            echo "branch_upper=${branch^^}"
+          } >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Set environment name
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: environment_name
+        run: |
+          {
+            echo "ENVIRONMENT=${{ inputs.ENVIRONMENT_NAME_OVERRIDE || steps.extract_branch.outputs.branch == 'main' && 'PRODUCTION' || steps.extract_branch.outputs.branch_upper }}"
+          } >> $GITHUB_ENV
+
+      - name: Set environment name (lowercase)
+        #GH Actions doesn't have support for string manipulation, so it needs to be done in a runner (default bash for non windows), using shell parameter exapnsion
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: environment_name_lowercase
+        run: |
+          {
+            echo "ENVIRONMENT_LOWER=${ENVIRONMENT@L}"
+          } >> $GITHUB_ENV
+
+      - name: Output secrets and vars as JSON
+        if: ${{ steps.applicable_check.outputs.flag }}
+        # Use GH Actions toJSON function to convert secrets and vars to JSON; in case no values present, output null (otherwise jq will fail)
+        run: |
+          {
+            echo 'secrets<<EOF'
+            echo '${{ secrets != null && toJSON(secrets) || null }}'
+            echo 'EOF'
+            echo 'vars<<EOF'
+            echo '${{ vars != null && toJSON(vars) || null }}'
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+        id: env_json
+
+      - name: Generate Env file from Secrets/Vars
+        id: generate_env_file
+        if: ${{ steps.applicable_check.outputs.flag }}
+        uses: ./.github/actions/generate-env-file-from-json
+        with:
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          APP_ENV_PREFIX: ${{ env.APP_ENV_PREFIX }}
+          secrets_json: ${{ steps.env_json.outputs.secrets }}
+          vars_json: ${{ steps.env_json.outputs.vars }}
+
+      - name: Save .env file
+        if: ${{ steps.applicable_check.outputs.flag }}
+        run: |
+          echo '${{ steps.generate_env_file.outputs.env_file }}' >> $APP_ENV_PATH
+          cat $APP_ENV_PATH
+
+      - name: Build, tag, and push Client image to Amazon ECR
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: build_and_push
+        uses: ./.github/actions/build-and-push-to-ecr
+        with:
+          PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.TF_PIPELINE_USER_ACCESS_KEY_ID }}
+          PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.TF_PIPELINE_USER_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.TF_AWS_REGION }}
+          REPOSITORY_NAME: ${{ secrets.TF_CLIENT_REPOSITORY_NAME }}
+          COMPONENT_PATH: './client'
+          ENVIRONMENT_LOWER: ${{ env.ENVIRONMENT_LOWER }}
+          DRY_RUN: ${{ inputs.dry_run }}
+
+  build_cms_image:
+    name: Build CMS image and push to Amazon ECR
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV_PREFIX: CMS_ENV
+      APP_ENV_PATH: cms/.env
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: cms-changes
+        with:
+          filters: |
+            cms:
+              - 'cms/**'
+              - '.github/workflows/**'
+
+      - name: Applicable check
+        id: applicable_check
+        run: |
+          {
+            echo "flag=${{ github.event_name == 'workflow_dispatch' || steps.cms-changes.outputs.cms == 'true' }}"
+          } >> $GITHUB_OUTPUT
+
+      - name: Extract branch name
+        if: ${{ steps.applicable_check.outputs.flag }}
+        run: |
+          {
+            branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+            echo "branch=${branch}"
+            echo "branch_upper=${branch^^}"
+          } >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Set environment name
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: environment_name
+        run: |
+          {
+            echo "ENVIRONMENT=${{ inputs.ENVIRONMENT_NAME_OVERRIDE || steps.extract_branch.outputs.branch == 'main' && 'PRODUCTION' || steps.extract_branch.outputs.branch_upper }}"
+          } >> $GITHUB_ENV
+
+      - name: Set environment name (lowercase)
+        #GH Actions doesn't have support for string manipulation, so it needs to be done in a runner (default bash for non windows), using shell parameter exapnsion
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: environment_name_lowercase
+        run: |
+          {
+            echo "ENVIRONMENT_LOWER=${ENVIRONMENT@L}"
+          } >> $GITHUB_ENV
+
+      - name: Output secrets and vars as JSON
+        if: ${{ steps.applicable_check.outputs.flag }}
+        # Use GH Actions toJSON function to convert secrets and vars to JSON; in case no values present, output null (otherwise jq will fail)
+        run: |
+          {
+            echo 'secrets<<EOF'
+            echo '${{ secrets != null && toJSON(secrets) || null }}'
+            echo 'EOF'
+            echo 'vars<<EOF'
+            echo '${{ vars != null && toJSON(vars) || null }}'
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+        id: env_json
+
+      - name: Generate Env file from Secrets/Vars
+        id: generate_env_file
+        if: ${{ steps.applicable_check.outputs.flag }}
+        uses: ./.github/actions/generate-env-file-from-json
+        with:
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          APP_ENV_PREFIX: ${{ env.APP_ENV_PREFIX }}
+          secrets_json: ${{ steps.env_json.outputs.secrets }}
+          vars_json: ${{ steps.env_json.outputs.vars }}
+
+      - name: Save .env file
+        if: ${{ steps.applicable_check.outputs.flag }}
+        run: |
+          echo '${{ steps.generate_env_file.outputs.env_file }}' >> $APP_ENV_PATH
+          cat $APP_ENV_PATH
+
+      - name: Build, tag, and push Client image to Amazon ECR
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: build_and_push
+        uses: ./.github/actions/build-and-push-to-ecr
+        with:
+          PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.TF_PIPELINE_USER_ACCESS_KEY_ID }}
+          PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.TF_PIPELINE_USER_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.TF_AWS_REGION }}
+          REPOSITORY_NAME: ${{ secrets.TF_CMS_REPOSITORY_NAME }}
+          COMPONENT_PATH: './cms'
+          ENVIRONMENT_LOWER: ${{ env.ENVIRONMENT_LOWER }}
+          DRY_RUN: ${{ inputs.dry_run }}
+
+  deploy:
+    name: Deploy Client and CMS to Amazon EB
+    needs: [build_client_image, build_cms_image] #, build_tiler_image]
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.TF_PIPELINE_USER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TF_PIPELINE_USER_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.TF_AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Extract branch name
+        run: |
+          {
+            branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+            echo "branch=${branch}"
+            echo "branch_upper=${branch^^}"
+          } >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Set environment name
+        if: ${{ steps.applicable_check.outputs.flag }}
+        id: environment_name
+        run: |
+          {
+            echo "ENVIRONMENT_LOWER=${{ inputs.ENVIRONMENT_NAME_OVERRIDE || steps.extract_branch.outputs.branch == 'main' && 'production' || steps.extract_branch.outputs.branch }}"
+          } >> $GITHUB_ENV
+
+      - name: Generate docker compose file
+        working-directory: infrastructure/source_bundle
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY_CLIENT: ${{ secrets.TF_CLIENT_REPOSITORY_NAME }}
+          ECR_REPOSITORY_CMS: ${{ secrets.TF_CMS_REPOSITORY_NAME }}
+#          ECR_REPOSITORY_TILER: ${{ secrets.TF_TILER_REPOSITORY_NAME }}
+          IMAGE_TAG: ${{ steps.extract_branch.outputs.branch == 'main' && 'production' || steps.extract_branch.outputs.branch }}
+        run: |
+          echo "version: '3.3'" > docker-compose.yml
+          echo "services:" >> docker-compose.yml
+          echo "  client:" >> docker-compose.yml
+          echo "    image: $ECR_REGISTRY/$ECR_REPOSITORY_CLIENT:$IMAGE_TAG" >> docker-compose.yml
+          echo "    restart: always" >> docker-compose.yml
+          echo "    ports:" >> docker-compose.yml
+          echo "      - 3000:3000" >> docker-compose.yml
+          echo "  cms:" >> docker-compose.yml
+          echo "    image: $ECR_REGISTRY/$ECR_REPOSITORY_CMS:$IMAGE_TAG" >> docker-compose.yml
+          echo "    restart: always" >> docker-compose.yml
+          echo "    ports:" >> docker-compose.yml
+          echo "      - 1337:1337" >> docker-compose.yml
+
+
+          echo "  nginx:" >> docker-compose.yml
+          echo "    image: nginx" >> docker-compose.yml
+          echo "    restart: always" >> docker-compose.yml
+          echo "    volumes:" >> docker-compose.yml
+          echo "      - ./proxy/conf.d:/etc/nginx/conf.d" >> docker-compose.yml
+          echo "      - \"\${EB_LOG_BASE_DIR}/nginx:/var/log/nginx\"" >> docker-compose.yml
+          echo "    ports:" >> docker-compose.yml
+          echo "      - 80:80" >> docker-compose.yml
+          echo "    depends_on:" >> docker-compose.yml
+          echo "      - cms" >> docker-compose.yml
+          echo "      - client" >> docker-compose.yml
+
+      - name: Generate zip file
+        working-directory: infrastructure/source_bundle
+        run: |
+          zip -r deploy.zip * .[^.]*
+
+      - name: Deploy to Amazon EB
+        if: ${{ inputs.DRY_RUN == 'false' || inputs.DRY_RUN == '' }}
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.TF_PIPELINE_USER_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.TF_PIPELINE_USER_SECRET_ACCESS_KEY }}
+          application_name: ${{ secrets.TF_PROJECT_NAME}}-${{ env.ENVIRONMENT_LOWER }}
+          environment_name: ${{ secrets.TF_PROJECT_NAME}}-${{ env.ENVIRONMENT_LOWER }}-environment
+          region: ${{ secrets.TF_AWS_REGION }}
+          version_label: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          deployment_package: infrastructure/source_bundle/deploy.zip
+
+#Add this block to the docker compose file generation once tiler server is confirmed.
+#          echo "  tiler:" >> docker-compose.yml
+#          echo "    image: $ECR_REGISTRY/$ECR_REPOSITORY_TILER:$IMAGE_TAG" >> docker-compose.yml
+#          echo "    restart: always" >> docker-compose.yml
+#          echo "    ports:" >> docker-compose.yml
+#          echo "      - 1337:1337" >> docker-compose.yml
+
+#  build_tiler_image:
+#    name: Build Tiler Server image and push to Amazon ECR
+#    runs-on: ubuntu-latest
+#    env:
+#      APP_ENV_PREFIX: TILER_ENV
+#      APP_ENV_PATH: tiler/.env
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#
+#      - uses: dorny/paths-filter@v3
+#        id: tiler-changes
+#        with:
+#          filters: |
+#            tiler:
+#              - 'tiler/**'
+#              - '.github/workflows/**'
+#
+#      - name: Applicable check
+#        id: applicable_check
+#        run: |
+#          {
+#            echo "flag=${{ github.event_name == 'workflow_dispatch' || steps.tiler-changes.outputs.tiler == 'true' }}"
+#          } >> $GITHUB_OUTPUT
+#
+#      - name: Extract branch name
+#        if: ${{ steps.applicable_check.outputs.flag }}
+#        run: |
+#          {
+#            branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+#            echo "branch=${branch}"
+#            echo "branch_upper=${branch^^}"
+#          } >> $GITHUB_OUTPUT
+#        id: extract_branch
+#
+#      - name: Set environment name
+#        if: ${{ steps.applicable_check.outputs.flag }}
+#        id: environment_name
+#        run: |
+#          {
+#            echo "ENVIRONMENT=${{ inputs.ENVIRONMENT_NAME_OVERRIDE || steps.extract_branch.outputs.branch == 'main' && 'PRODUCTION' || steps.extract_branch.outputs.branch_upper }}"
+#          } >> $GITHUB_ENV
+#
+#      - name: Output secrets and vars as JSON
+#        if: ${{ steps.applicable_check.outputs.flag }}
+#        # Use GH Actions toJSON function to convert secrets and vars to JSON; in case no values present, output null (otherwise jq will fail)
+#        run: |
+#          {
+#            echo 'secrets<<EOF'
+#            echo '${{ secrets != null && toJSON(secrets) || null }}'
+#            echo 'EOF'
+#            echo 'vars<<EOF'
+#            echo '${{ vars != null && toJSON(vars) || null }}'
+#            echo 'EOF'
+#          } >> $GITHUB_OUTPUT
+#        id: env_json
+#
+#      - name: Generate Env file from Secrets/Vars
+#        id: generate_env_file
+#        if: ${{ steps.applicable_check.outputs.flag }}
+#        uses: ./.github/actions/generate-env-file-from-json
+#        with:
+#          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+#          APP_ENV_PREFIX: ${{ env.APP_ENV_PREFIX }}
+#          secrets_json: ${{ steps.env_json.outputs.secrets }}
+#          vars_json: ${{ steps.env_json.outputs.vars }}
+#
+#      - name: Save .env file
+#        if: ${{ steps.applicable_check.outputs.flag }}
+#        run: |
+#          echo '${{ steps.generate_env_file.outputs.env_file }}' >> $APP_ENV_PATH
+#          cat $APP_ENV_PATH
+#
+#      - name: Build, tag, and push Client image to Amazon ECR
+#        if: ${{ steps.applicable_check.outputs.flag }}
+#        id: build_and_push
+#        uses: ./.github/actions/build-and-push-to-ecr
+#        with:
+#          PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.TF_PIPELINE_USER_ACCESS_KEY_ID }}
+#          PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.TF_PIPELINE_USER_SECRET_ACCESS_KEY }}
+#          AWS_REGION: ${{ secrets.TF_AWS_REGION }}
+#          REPOSITORY_NAME: ${{ secrets.TF_TILER_REPOSITORY_NAME }}
+#          COMPONENT_PATH: './tiler'
+#          ENVIRONMENT_LOWER: ${{ steps.extract_branch.outputs.branch == 'main' && 'production' || steps.extract_branch.outputs.branch }}
+#          DRY_RUN: ${{ inputs.dry_run }}
