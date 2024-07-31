@@ -31,6 +31,8 @@ COPY .nvmrc \
      yarn.lock \
      ./
 
+RUN chmod +x entrypoint.sh
+
 RUN yarn install
 
 ENV PATH /app/node_modules/.bin:$PATH
