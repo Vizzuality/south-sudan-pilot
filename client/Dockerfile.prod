@@ -27,6 +27,8 @@ COPY .browserslistrc \
      .yarnrc.yml \
      ./
 
+RUN chmod +x entrypoint.sh
+
 RUN yarn install
 
 RUN yarn build

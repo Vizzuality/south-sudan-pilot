@@ -31,6 +31,8 @@ COPY .env \
      yarn.lock \
      ./
 
+RUN chmod +x entrypoint.sh
+
 RUN yarn install
 
 RUN yarn strapi ts:generate-types

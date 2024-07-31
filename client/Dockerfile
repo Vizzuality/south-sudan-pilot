@@ -17,12 +17,15 @@ COPY .browserslistrc \
      .env.local \
      next.config.mjs \
      package.json \
+     entrypoint.sh \
      postcss.config.mjs \
      README.md \
      tailwind.config.ts \
      tsconfig.json \
      yarn.lock \
      ./
+
+RUN chmod +x entrypoint.sh
 
 RUN yarn install
 

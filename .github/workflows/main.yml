@@ -256,7 +256,6 @@ jobs:
         id: extract_branch
 
       - name: Set environment name
-        if: ${{ steps.applicable_check.outputs.flag }}
         id: environment_name
         run: |
           {
@@ -270,7 +269,7 @@ jobs:
           ECR_REPOSITORY_CLIENT: ${{ secrets.TF_CLIENT_REPOSITORY_NAME }}
           ECR_REPOSITORY_CMS: ${{ secrets.TF_CMS_REPOSITORY_NAME }}
 #          ECR_REPOSITORY_TILER: ${{ secrets.TF_TILER_REPOSITORY_NAME }}
-          IMAGE_TAG: ${{ steps.extract_branch.outputs.branch == 'main' && 'production' || steps.extract_branch.outputs.branch }}
+          IMAGE_TAG: ${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
         run: |
           echo "version: '3.3'" > docker-compose.yml
           echo "services:" >> docker-compose.yml
