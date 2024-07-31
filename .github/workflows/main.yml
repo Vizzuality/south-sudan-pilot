@@ -1,0 +1,34 @@
+
+name: Run deploy to GCP
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENVIRONMENT_NAME_OVERRIDE:
+        description: "Environment name to override the environment used in the workflow"
+        required: false
+        type: string
+      dry_run:
+        description: "Makes the workflow trigger in dry run mode (no components will be published or deployed to the actual environment infrastructure)"
+        required: false
+        default: false
+        type: boolean
+
+  push:
+    branches:
+      - main
+      - staging
+
+    paths:
+      - 'client/**'
+      - 'cms/**'
+      - '.github/workflows/*'
+      - 'infrastructure/**'
+
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        run: echo "Hello World"
