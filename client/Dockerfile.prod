@@ -1,0 +1,57 @@
+# Build all the things
+FROM node:20.5-bullseye-slim AS build
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y libc6  && \
+    apt-get clean
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+WORKDIR /app
+
+COPY .yarn ./.yarn
+COPY public ./public
+COPY src ./src
+
+COPY .browserslistrc \
+     .env.local \
+     next.config.mjs \
+     package.json \
+     entrypoint.sh \
+     postcss.config.mjs \
+     README.md \
+     tailwind.config.ts \
+     tsconfig.json \
+     yarn.lock \
+     index.js \
+     .yarnrc.yml \
+     ./
+
+RUN yarn install
+
+RUN yarn build
+
+# Copy only the built files into the final image
+FROM node:20.5-bullseye-slim AS runner
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+WORKDIR /app
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=build --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=build --chown=nextjs:nodejs /app/entrypoint.sh ./entrypoint.sh
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/public ./public
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/index.js ./index.js
+COPY --from=build /app/.env.local ./.env.local
+
+USER nextjs
+
+EXPOSE 3000
+ENV PORT 3000
+
+ENTRYPOINT ["/app/entrypoint.sh"]
