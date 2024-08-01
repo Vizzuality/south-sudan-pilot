@@ -10,7 +10,6 @@
     "strapi": "strapi",
     "config-sync": "config-sync"
   },
-  "devDependencies": {},
   "dependencies": {
     "@strapi/plugin-cloud": "4.25.5",
     "@strapi/plugin-i18n": "4.25.5",
