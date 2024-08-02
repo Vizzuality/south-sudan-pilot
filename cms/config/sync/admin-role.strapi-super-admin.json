@@ -4,6 +4,269 @@
   "description": "Super Admins can access and manage all features and settings.",
   "permissions": [
     {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "Name",
+          "Description",
+          "Sources",
+          "License",
+          "Citations",
+          "Spatial_coverage",
+          "Spatial_resolution",
+          "Temporal_coverage",
+          "Temporal_resolution",
+          "Unit",
+          "layers",
+          "Default_layer"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "Name",
+          "Description",
+          "Sources",
+          "License",
+          "Citations",
+          "Spatial_coverage",
+          "Spatial_resolution",
+          "Temporal_coverage",
+          "Temporal_resolution",
+          "Unit",
+          "layers",
+          "Default_layer"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "Name",
+          "Description",
+          "Sources",
+          "License",
+          "Citations",
+          "Spatial_coverage",
+          "Spatial_resolution",
+          "Temporal_coverage",
+          "Temporal_resolution",
+          "Unit",
+          "layers",
+          "Default_layer"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "Name",
+          "Slug",
+          "Type",
+          "Config",
+          "Params_config",
+          "Legend_config",
+          "Interaction_config",
+          "Temporal_step",
+          "Temporal_step_unit",
+          "Temporal_start_date",
+          "Temporal_end_date"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "Name",
+          "Slug",
+          "Type",
+          "Config",
+          "Params_config",
+          "Legend_config",
+          "Interaction_config",
+          "Temporal_step",
+          "Temporal_step_unit",
+          "Temporal_start_date",
+          "Temporal_end_date"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "Name",
+          "Slug",
+          "Type",
+          "Config",
+          "Params_config",
+          "Legend_config",
+          "Interaction_config",
+          "Temporal_step",
+          "Temporal_step_unit",
+          "Temporal_start_date",
+          "Temporal_end_date"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "Name",
+          "Description",
+          "datasets"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "Name",
+          "Description",
+          "datasets"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "Name",
+          "Description",
+          "datasets"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "Name",
+          "Slug",
+          "sub_topics"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "Name",
+          "Slug",
+          "sub_topics"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "Name",
+          "Slug",
+          "sub_topics"
+        ]
+      },
+      "conditions": []
+    },
+    {
       "action": "admin::api-tokens.access",
       "actionParameters": {},
       "subject": null,

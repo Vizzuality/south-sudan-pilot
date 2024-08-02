@@ -1,0 +1,326 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::dataset.dataset",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Name",
+      "defaultSortBy": "Name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Name": {
+        "edit": {
+          "label": "Name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Description": {
+        "edit": {
+          "label": "Description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Sources": {
+        "edit": {
+          "label": "Sources",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Sources",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "License": {
+        "edit": {
+          "label": "License",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "License",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Citations": {
+        "edit": {
+          "label": "Citations",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Citations",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Spatial_coverage": {
+        "edit": {
+          "label": "Spatial_coverage",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Spatial_coverage",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Spatial_resolution": {
+        "edit": {
+          "label": "Spatial_resolution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Spatial_resolution",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Temporal_coverage": {
+        "edit": {
+          "label": "Temporal_coverage",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Temporal_coverage",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Temporal_resolution": {
+        "edit": {
+          "label": "Temporal_resolution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Temporal_resolution",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Unit": {
+        "edit": {
+          "label": "Unit",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Unit",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "layers": {
+        "edit": {
+          "label": "layers",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Name"
+        },
+        "list": {
+          "label": "layers",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "Default_layer": {
+        "edit": {
+          "label": "Default_layer",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Name"
+        },
+        "list": {
+          "label": "Default_layer",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "Name",
+        "Description",
+        "Sources"
+      ],
+      "edit": [
+        [
+          {
+            "name": "Name",
+            "size": 6
+          },
+          {
+            "name": "Description",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "Sources",
+            "size": 6
+          },
+          {
+            "name": "License",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "Citations",
+            "size": 6
+          },
+          {
+            "name": "Spatial_coverage",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "Spatial_resolution",
+            "size": 6
+          },
+          {
+            "name": "Temporal_coverage",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "Temporal_resolution",
+            "size": 6
+          },
+          {
+            "name": "Unit",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "layers",
+            "size": 6
+          },
+          {
+            "name": "Default_layer",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "uid": "api::dataset.dataset"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

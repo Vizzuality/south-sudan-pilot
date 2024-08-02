@@ -590,6 +590,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -741,46 +788,161 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
+export interface ApiDatasetDataset extends Schema.CollectionType {
+  collectionName: 'datasets';
   info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
+    singularName: 'dataset';
+    pluralName: 'datasets';
+    displayName: 'Dataset';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
+    Name: Attribute.String;
+    Description: Attribute.Text;
+    Sources: Attribute.Text;
+    License: Attribute.String;
+    Citations: Attribute.Text;
+    Spatial_coverage: Attribute.String;
+    Spatial_resolution: Attribute.String;
+    Temporal_coverage: Attribute.String;
+    Temporal_resolution: Attribute.String;
+    Unit: Attribute.String;
+    layers: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToMany',
+      'api::layer.layer'
+    >;
+    Default_layer: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToOne',
+      'api::layer.layer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::dataset.dataset',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::dataset.dataset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLayerLayer extends Schema.CollectionType {
+  collectionName: 'layers';
+  info: {
+    singularName: 'layer';
+    pluralName: 'layers';
+    displayName: 'Layer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Slug: Attribute.String;
+    Type: Attribute.Enumeration<['raster', 'vector', 'animated']>;
+    Config: Attribute.JSON;
+    Params_config: Attribute.JSON;
+    Legend_config: Attribute.JSON;
+    Interaction_config: Attribute.JSON;
+    Temporal_step: Attribute.Integer;
+    Temporal_step_unit: Attribute.Enumeration<['day', 'month', 'year']>;
+    Temporal_start_date: Attribute.Date;
+    Temporal_end_date: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::layer.layer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::layer.layer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubTopicSubTopic extends Schema.CollectionType {
+  collectionName: 'sub_topics';
+  info: {
+    singularName: 'sub-topic';
+    pluralName: 'sub-topics';
+    displayName: 'Sub-Topic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Description: Attribute.Text;
+    datasets: Attribute.Relation<
+      'api::sub-topic.sub-topic',
+      'oneToMany',
+      'api::dataset.dataset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sub-topic.sub-topic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sub-topic.sub-topic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTopicTopic extends Schema.CollectionType {
+  collectionName: 'topics';
+  info: {
+    singularName: 'topic';
+    pluralName: 'topics';
+    displayName: 'Topic';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Slug: Attribute.String;
+    sub_topics: Attribute.Relation<
+      'api::topic.topic',
+      'oneToMany',
+      'api::sub-topic.sub-topic'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::topic.topic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::topic.topic',
       'oneToOne',
       'admin::user'
     > &
@@ -802,10 +964,14 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
+      'api::dataset.dataset': ApiDatasetDataset;
+      'api::layer.layer': ApiLayerLayer;
+      'api::sub-topic.sub-topic': ApiSubTopicSubTopic;
+      'api::topic.topic': ApiTopicTopic;
     }
   }
 }

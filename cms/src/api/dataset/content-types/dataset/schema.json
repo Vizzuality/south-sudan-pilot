@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "datasets",
+  "info": {
+    "singularName": "dataset",
+    "pluralName": "datasets",
+    "displayName": "Dataset"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Sources": {
+      "type": "text"
+    },
+    "License": {
+      "type": "string"
+    },
+    "Citations": {
+      "type": "text"
+    },
+    "Spatial_coverage": {
+      "type": "string"
+    },
+    "Spatial_resolution": {
+      "type": "string"
+    },
+    "Temporal_coverage": {
+      "type": "string"
+    },
+    "Temporal_resolution": {
+      "type": "string"
+    },
+    "Unit": {
+      "type": "string"
+    },
+    "layers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::layer.layer"
+    },
+    "Default_layer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::layer.layer"
+    }
+  }
+}
