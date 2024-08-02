@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sub_topics",
+  "info": {
+    "singularName": "sub-topic",
+    "pluralName": "sub-topics",
+    "displayName": "Sub-Topic"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "datasets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dataset.dataset"
+    }
+  }
+}

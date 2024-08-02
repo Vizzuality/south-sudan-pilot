@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "layers",
+  "info": {
+    "singularName": "layer",
+    "pluralName": "layers",
+    "displayName": "Layer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "raster",
+        "vector",
+        "animated"
+      ]
+    },
+    "Config": {
+      "type": "json"
+    },
+    "Params_config": {
+      "type": "json"
+    },
+    "Legend_config": {
+      "type": "json"
+    },
+    "Interaction_config": {
+      "type": "json"
+    },
+    "Temporal_step": {
+      "type": "integer"
+    },
+    "Temporal_step_unit": {
+      "type": "enumeration",
+      "enum": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "Temporal_start_date": {
+      "type": "date"
+    },
+    "Temporal_end_date": {
+      "type": "date"
+    }
+  }
+}
