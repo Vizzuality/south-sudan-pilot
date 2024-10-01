@@ -3,11 +3,11 @@ allowed_account_id = "533267347591"
 project_name       = "wims-ss"
 repo_name          = "wims-south-sudan"
 
-staging_domain                      = "staging.wims-south-sudan.dev-vizzuality.com"
+staging_domain                      = "ss-hydro-pilot.gmv.com"
 staging_ec2_instance_type           = "m5.large"
 staging_rds_backup_retention_period = 3
 
-production_domain                      = "wims-southsudan.com"
+production_domain                      = "ss.to-be-determined.com"
 production_ec2_instance_type           = "c5a.large"
 production_rds_backup_retention_period = 7
 

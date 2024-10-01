@@ -33,7 +33,7 @@ output "acm_certificate_domain_validation_options" {
 
 output "acm_certificate_arn" {
   description = "The ARN of the ACM certificate"
-  value       = aws_acm_certificate.acm_certificate.arn
+  value       = aws_acm_certificate.acm_certificate[*].arn
 }
 
 output "dkim_tokens" {
