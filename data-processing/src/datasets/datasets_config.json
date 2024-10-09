@@ -1,0 +1,506 @@
+{
+    "Model-based flood hazard": {
+        "Fluvial Flood Depth - 5-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Fluvial%20Defended/2020/WBHYDROSS_fathom_FluvialDefended_RP0005y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Fluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Fluvial Flood Depth - 10-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Fluvial%20Defended/2020/WBHYDROSS_fathom_FluvialDefended_RP0010y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Fluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Fluvial Flood Depth - 20-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Fluvial%20Defended/2020/WBHYDROSS_fathom_FluvialDefended_RP0020y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Fluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Fluvial Flood Depth - 50-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Fluvial%20Defended/2020/WBHYDROSS_fathom_FluvialDefended_RP0050y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Fluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Fluvial Flood Depth - 100-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Fluvial%20Defended/2020/WBHYDROSS_fathom_FluvialDefended_RP0100y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Fluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pluvial Flood Depth - 5-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Pluvial%20Defended/2020/WBHYDROSS_fathom_PluvialDefended_RP0005y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Pluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pluvial Flood Depth - 10-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Pluvial%20Defended/2020/WBHYDROSS_fathom_PluvialDefended_RP0010y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Pluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pluvial Flood Depth - 20-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Pluvial%20Defended/2020/WBHYDROSS_fathom_PluvialDefended_RP0020y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Pluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pluvial Flood Depth - 50-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Pluvial%20Defended/2020/WBHYDROSS_fathom_PluvialDefended_RP0050y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Pluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pluvial Flood Depth - 100-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/05-Datasets%20to%20inform%20hazard%20mappig/50-Global%20Flood%20Hazard%20Maps/Fathom/Pluvial%20Defended/2020/WBHYDROSS_fathom_PluvialDefended_RP0100y_2020_current_SouthSudan_20240430.tif",
+            "styles": "../data/raw/LayerStyles/1_FloodHazard_ModelBased/WBHYDROSS_ModelBased-FloodHazard_Pluvial-RP100y_SouthSudan_Baseline_20240705.qml"
+        }
+    },
+    "EO-based flood hazard": {
+        "Flood extent (2017-2022)": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/1_FloodHazard_EOBased/WBHYDROSS_EO-FloodHazard_S1-VIIRS_FloodExtent_SouthSudan_2017-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/2_FloodHazard_EOBased/WBHYDROSS_EO-FloodHazard_S1-VIIRS_FloodExtent_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Flood max frequency (2017-2022)": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/1_FloodHazard_EOBased/WBHYDROSS_EO-FloodHazard_S1-VIIRS_MaximumFloodFrequency_SouthSudan_2017-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/2_FloodHazard_EOBased/WBHYDROSS_EO-FloodHazard_S1-VIIRS_MaximumFloodFrequency_SouthSudan_2017-2022_20240705.qml"
+        }
+    },
+    "Meteorological drought hazard": {
+        "Combined SPI and SPEI indices": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/2_DroughtHazard/WBHYDROSS_MeteorologicalDroughtHazard_SPEI-SPI_SouthSudan_1981-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/3_DroughtHazard/WBHYDROSS_MeteorologicalDroughtHazard_SPEI-SPI_SouthSudan_1981-2022_20240705.qml"
+        }
+    },
+    "Agricultural drought hazard": {
+        "Combined SNDVI and SMA indices": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/2_DroughtHazard/WBHYDROSS_AgriculturalDroughtHazard_NDVI-SMA_SouthSudan_2001-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/3_DroughtHazard/WBHYDROSS_AgriculturalDroughtHazard_NDVI-SMA_SouthSudan_2001-2022_20240705.qml"
+        }
+    },
+    "Model-based flood exposure": {
+        "Built-up surface - 5-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_1-BuiltUpSurface_SouthSudan_Baseline_20240705.tif",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_1-BuiltUpSurface_SouthSudan_Baseline_20240705.qml"
+        },
+        "Built-up surface - 100-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_1-BuiltUpSurface_SouthSudan_Baseline_20240705.tif",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_1-BuiltUpSurface_SouthSudan_Baseline_20240705.qml"
+        },
+        "Population - 5-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_2-Population_SouthSudan_Baseline_20240705.tif",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_2-Population_SouthSudan_Baseline_20240705.qml"
+        },
+        "Population - 100-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_2-Population_SouthSudan_Baseline_20240705.tif",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_2-Population_SouthSudan_Baseline_20240705.qml"
+        },
+        "Internally displaced people camps - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_7-IDPcamps_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_7-IDPcamps_Exposed_SouthSudan_Baseline_20240705.qml"
+        },
+        "Internally displaced people camps - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_7-IDPcamps_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_7-IDPcamps_Exposed_SouthSudan_Baseline_20240705.qml"
+        },
+        "Cropland and grassland - 5-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_3-CroplandGrassland_SouthSudan_Baseline_20240705.tif",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_3-CroplandGrassland_SouthSudan_Baseline_20240705.qml"
+        },
+        "Cropland and grassland - 100-yr RP": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_3-CroplandGrassland_SouthSudan_Baseline_20240705.tif",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_3-CroplandGrassland_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pastures - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_4-Pastures_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_4-Pastures_SouthSudan_Baseline_20240705.qml"
+        },
+        "Pastures - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_4-Pastures_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_4-Pastures_SouthSudan_Baseline_20240705.qml"
+        },
+        "Transportation infrastructure - Airports - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_5-TransportationInfrastructure_Airports_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_5-TransportationInfrastructure_Airports_SouthSudan_Baseline_20240705.qml"
+        },
+        "Transportation infrastructure - Airports - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_5-TransportationInfrastructure_Airports_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_5-TransportationInfrastructure_Airports_SouthSudan_Baseline_20240705.qml"
+        },
+        "Transportation infrastructure - Railways - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_5-TransportationInfrastructure_Railways_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_5-TransportationInfrastructure_Railways_SouthSudan_Baseline_20240705.qml"
+        },
+        "Transportation infrastructure - Railways - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_5-TransportationInfrastructure_Railways_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_5-TransportationInfrastructure_Railways_SouthSudan_Baseline_20240705.qml"
+        },
+        "Transportation infrastructure - Roads - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_5-TransportationInfrastructure_Roads_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_5-TransportationInfrastructure_Roads_SouthSudan_Baseline_20240705.qml"
+        },
+        "Transportation infrastructure - Roads - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_5-TransportationInfrastructure_Roads_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_5-TransportationInfrastructure_Roads_SouthSudan_Baseline_20240705.qml"
+        },
+        "Essential services - Education facilities - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_6-EssentialServices_EducationFacilities_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_6-EssentialServices_EducationFacilities_SouthSudan_Baseline_20240705.qml"
+        },
+        "Essential services - Education facilities - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_6-EssentialServices_EducationFacilities_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_6-EssentialServices_EducationFacilities_SouthSudan_Baseline_20240705.qml"
+        },
+        "Essential services - Health facilities - 5-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/3_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_6-EssentialServices_HealthFacilities_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/4_FloodExposure_ModelBased_5y/WBHYDROSS_ModelBased-FloodExposure_RP5y_6-EssentialServices_HealthFacilities_SouthSudan_Baseline_20240705.qml"
+        },
+        "Essential services - Health facilities - 100-yr RP": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/4_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_6-EssentialServices_HealthFacilities_SouthSudan_Baseline_20240705.shp",
+            "styles": "../data/raw/LayerStyles/5_FloodExposure_ModelBased_100y/WBHYDROSS_ModelBased-FloodExposure_RP100y_6-EssentialServices_HealthFacilities_SouthSudan_Baseline_20240705.qml"
+        }
+    },
+    "EO-based flood exposure": {
+        "Built-up surface": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_1-BuiltUpSurface_SouthSudan_2017-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_1-BuiltUpSurface_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Population": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_2-Population_SouthSudan_2017-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_2-Population_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Internally displaced people camps": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_7-IDPcamps_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_7-IDPcamps_Exposed_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Cropland and grassland": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_3-CroplandGrassland_SouthSudan_2017-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_3-CroplandGrassland_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Pastures": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_4-Pastures_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_4-Pastures_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Transportation infrastructure - Airports": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_5-TransportationInfrastructure_Airports_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_5-TransportationInfrastructure_Airports_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Transportation infrastructure - Railways": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_5-TransportationInfrastructure_Railways_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_5-TransportationInfrastructure_Railways_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Transportation infrastructure - Roads": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_5-TransportationInfrastructure_Roads_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_5-TransportationInfrastructure_Roads_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Essential services - Education facilities": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_6-EssentialServices_EducationFacilities_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_6-EssentialServices_EducationFacilities_SouthSudan_2017-2022_20240705.qml"
+        },
+        "Essential services - Health facilities": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/5_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_6-EssentialServices_HealthFacilities_SouthSudan_2017-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/6_FloodExposure_EObased/WBHYDROSS_EO-FloodExposure_6-EssentialServices_HealthFacilities_SouthSudan_2017-2022_20240705.qml"
+        }
+    },
+    "Meteorological drought exposure": {
+        "Built-up surface": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_1-BuiltUpSurface_SouthSudan_1981-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_1-BuiltUpSurface_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Population": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_2-Population_SouthSudan_1981-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_2-Population_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Internally displaced people camps": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_6-IDPcamps_SouthSudan_1981-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_6-IDPcamps_Exposed_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Cropland and grassland": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_3-CroplandGrassland_SouthSudan_1981-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_3-CroplandGrassland_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Pastures": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_4-Pastures_SouthSudan_1981-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_4-Pastures_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Water Related Infrastructure - Waterpoints": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_5-Water-relatedInfrastructure_Waterpoints_SouthSudan_1981-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_5-Water-relatedInfrastructure_Waterpoints_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Water Related Infrastructure - Waterways (lines)": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_5-Water-relatedInfrastructure_Waterways-lines_SouthSudan_1981-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_5-Water-relatedInfrastructure_Waterways-lines_SouthSudan_1981-2022_20240705.qml"
+        },
+        "Water Related Infrastructure - Waterways (polygons)": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/7_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_5-Water-relatedInfrastructure_Waterways-polygons_SouthSudan_1981-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/8_MeteorologicalDroughtExposure/WBHYDROSS_MeteorologicalDroughtExposure_5-Water-relatedInfrastructure_Waterways-polygons_SouthSudan_1981-2022_20240705.qml"
+        }
+    },
+    "Agricultural drought exposure": {
+        "Built-up surface": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_1-BuiltUpSurface_SouthSudan_2001-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_1-BuiltUpSurface_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Population": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_2-Population_SouthSudan_2001-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_2-Population_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Internally displaced people camps": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_6-IDPcamps_SouthSudan_2001-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_6-IDPcamps_Exposed_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Cropland and grassland": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_3-CroplandGrassland_SouthSudan_2001-2022_20240705.tif",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_3-CroplandGrassland_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Pastures": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_4-Pastures_SouthSudan_2001-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_4-Pastures_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Water Related Infrastructure - Waterpoints": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_5-Water-relatedInfrastructure_Waterpoints_SouthSudan_2001-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_5-Water-relatedInfrastructure_Waterpoints_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Water Related Infrastructure - Waterways (lines)": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_5-Water-relatedInfrastructure_Waterways-lines_SouthSudan_2001-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_5-Water-relatedInfrastructure_Waterways-lines_SouthSudan_2001-2022_20240705.qml"
+        },
+        "Water Related Infrastructure - Waterways (polygons)": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D4-%20Flood_and_drought_hazard_%20and_exposure_maps/6_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_5-Water-relatedInfrastructure_Waterways-polygons_SouthSudan_2001-2022_20240705.shp",
+            "styles": "../data/raw/LayerStyles/7_AgriculturalDroughtExposure/WBHYDROSS_AgriculturalDroughtExposure_5-Water-relatedInfrastructure_Waterways-polygons_SouthSudan_2001-2022_20240705.qml"
+        }
+    },
+    "Hydrometeorological Data": {
+        "Precipitation": {
+            "type": "raster",
+            "format": "Zarr",
+            "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Rainfall-CHIRPS/WBHYDROSSD_CHIRPS_5km_Precipitation_SouthSudan_1981_2022_20240425.zarr",
+            "styles": ""
+        },
+        "Temperature": {
+            "type": "raster",
+            "format": "Zarr",
+            "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Temperature-ERA5Land/WBHYDROSSD_ERA5-Land_t2m-D-mean_South_Sudan-EPSG4326_19500101_20231231_20240209091716.zarr",
+            "styles": ""
+        },
+        "Evapotranspiration": {
+            "type": "raster",
+            "format": "Zarr",
+            "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Evapotranspiration-WaPOR/WBHYDROSSD_WaPOR_Evapotranspiration_100m_SouthSudan_2023_20240220.zarr",
+            "styles": ""
+        },
+        "Soil moisture": {
+            "type": "raster",
+            "format": "Zarr",
+            "base_url": "gs://wbhydross_deliverables/D3-Database/03-Soil Moisture_hydrological_soil_properties/Soil Moisture-ERA5Land/WBHYDROSSD_ERA5-Land_mean-swvl1swvl2-M-mean_South_Sudan-EPSG4326_195001_202312_20240208154611.zarr",
+            "styles": ""
+        }
+    },
+    "Contextual layers": {
+        "Population": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Population-GHS/WBHYDROSSD_GHS-POP_4326_100m_SouthSudan_2020_20240429.tif",
+            "styles": ""
+        },
+        "Land cover": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/ESA-WorldCover/WBHYDROSSD_ESAWorldCover_4326_SouthSudan_2023_20240103.tif",
+            "styles": ""
+        },
+        "Seasonal cattle grazing areas": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Pastures-REACH/WBHYDROSSD_REACH-SeasonalCattleGrazingAreas_4326_SouthSudan_2020_20240103.shp",
+            "styles": ""
+        }
+    },
+    "Boundaries": {
+        "Administrative Boundaries - adm0": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/OCHA-SubnationalAdministrativeBoundaries/WBHYDROSSD_OCHA_SubnationalAdministrativeBoundaries-adm0_4326_SouthSudan_20230829_20240228.shp",
+            "styles": ""
+        },
+        "Administrative Boundaries - adm1": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/OCHA-SubnationalAdministrativeBoundaries/WBHYDROSSD_OCHA_SubnationalAdministrativeBoundaries-adm1_4326_SouthSudan_20230829_20240228.shp",
+            "styles": ""
+        },
+        "Administrative Boundaries - adm2": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/OCHA-SubnationalAdministrativeBoundaries/WBHYDROSSD_OCHA_SubnationalAdministrativeBoundaries-adm2_4326_SouthSudan_20230829_20240228.shp",
+            "styles": ""
+        },
+        "Administrative Boundaries - adm3": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/OCHA-SubnationalAdministrativeBoundaries/WBHYDROSSD_OCHA_SubnationalAdministrativeBoundaries-adm3_4326_SouthSudan_20230829_20240228.shp",
+            "styles": ""
+        },
+        "Hydrological Basins": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/HydroSHEDS/HydroBasins/WBHYDROSSD_HydroBASINS-polys_4326_SouthSudan_2023_20240506.shp",
+            "styles": ""
+        }
+    },
+    "Hydrographic data": {
+        "Rivers": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/HydroSHEDS/HydroRIVERS/WBHYDROSSD_HydroRIVERS_4326_SouthSudan_2023_20240103.shp",
+            "styles": ""
+        },
+        "Digital Elevation Model": {
+            "type": "raster",
+            "format": "GeoTIFF",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/HydroSHEDS/DEM/WBHYDROSSD_HydroSHEDS_ConditionedDEM_3s_4326_SouthSudan_2023_20240103.tif",
+            "styles": ""
+        }
+    },
+    "Populated infrastructures": {
+        "Education facilities": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Populated%20Buildings%20and%20infrastructures-HOTOSM/Education_facilities/WBHYDROSSD_HOTOSM_EducationFacilities-points_4326_SouthSudan_2024_20240228.shp",
+            "styles": ""
+        },
+        "Health facilities": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Populated%20Buildings%20and%20infrastructures-HOTOSM/Health_facilities/WBHYDROSSD_HOTOSM_HealthFacilities-points_4326_2024_20240228.shp",
+            "styles": ""
+        }
+    },
+    "Transportation Network Infrastructures": {
+        "Roads": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Transportation%20Network%20Infrastructure/HOTOSM/WBHYDROSSD_HOTOSM_Roads-lines_4326_SouthSudan_2024_20240228.shp",
+            "styles": ""
+        }
+    },
+    "Water-related infrastructures": {
+        "Waterpoints": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Water%20related%20Infrastructures/Waterpoints-OCHA/WBHYDROSSD_OCHA_Waterpoints_4326_SouthSudan_2012_20240207.shp",
+            "styles": ""
+        },
+        "Waterways": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Water%20related%20Infrastructures/Waterways-HOTOSM/WBHYDROSSD_HOTOSM_Waterways-lines_4326_SouthSudan_2024_20240228.shp",
+            "styles": ""
+        }
+    }
+}

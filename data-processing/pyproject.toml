@@ -1,0 +1,31 @@
+[project]
+name="data_processing"
+version="0.1.0"
+
+[tool.ruff]
+line-length = 100
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = [
+    "D1", # pydocstyle errors
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # flake8
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+    "N", # Naming conventions
+    "I", # isort
+]
+ignore = [
+    "D104", # Missing docstring in public package
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/{tests}/*" = [
+    "D100", # Missing docstring in public module
+    "D103", # Missing docstring in public function
+]
+"*.ipynb" = [
+    "B018", # Useless expression. Found in cells with something like `df.head()`, used in notebooks to display data
+]
