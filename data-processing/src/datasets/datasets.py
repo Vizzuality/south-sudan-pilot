@@ -7,7 +7,7 @@ import json
 from factory.layers import get_layer
 from representations import AsDictionaryMixin
 
-from .processing import get_processing
+from .pre_processing import get_pre_processing
 
 
 class _DatasetDatabase:
@@ -96,7 +96,7 @@ class Layer(AsDictionaryMixin):
         self.url = info.get("base_url")
         self.styles = info.get("styles")
         self._layer = get_layer(self.type, self.format)
-        self._processing = get_processing(dataset_name, self.name)
+        self._pre_processing = get_pre_processing(dataset_name, self.name)
 
     def load_data(self):
         """
@@ -105,22 +105,32 @@ class Layer(AsDictionaryMixin):
         data = self._layer.load_data(self.url)
         return data
 
-    def process_data(self, data):
+    def pre_process_data(self, data):
         """
         Processes the data if a processing function is defined.
         Otherwise, returns the data as is.
         """
-        if self._processing is None:
+        if self._pre_processing is None:
             return data  # Return data without processing if no processing is defined
         else:
-            return self._processing.process(data)  # Process the data as before
+            return self._pre_processing.process(data)  # Process the data as before
 
     def get_data(self):
         """
         Returns the processed data.
         """
         data = self.load_data()
-        return self.process_data(data)
+        return self.pre_process_data(data)
+
+    def process_data(self, file_name):
+        """
+        Process the data and save it to the output path.
+        """
+        if self.type == "raster" and self.format == "GeoTIFF":
+            self._layer.process(self.url, self.styles, file_name)
+        else:
+            data = self.get_data()
+            self._layer.process(data, file_name)
 
 
 dataset_database = _DatasetDatabase()
