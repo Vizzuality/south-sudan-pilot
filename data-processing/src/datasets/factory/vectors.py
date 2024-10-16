@@ -27,7 +27,7 @@ class ShapefileVectorLayer:
     Represents a vector layer.
     """
 
-    VECTOR_PATH = Path("../data/processed/RasterLayers")
+    VECTOR_PATH = Path("../data/processed/VectorLayers")
 
     def load_data(self, url):
         """

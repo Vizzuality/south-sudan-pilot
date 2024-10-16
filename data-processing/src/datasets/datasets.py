@@ -128,6 +128,9 @@ class Layer(AsDictionaryMixin):
         """
         if self.type == "raster" and self.format == "GeoTIFF":
             self._layer.process(self.url, self.styles, file_name)
+        elif self.type == "raster" and self.format == "Zarr":
+            data = self.get_data()
+            self._layer.process(data, self.styles, file_name)
         else:
             data = self.get_data()
             self._layer.process(data, file_name)
