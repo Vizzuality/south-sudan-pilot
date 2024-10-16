@@ -37,7 +37,8 @@ def json_to_mbtiles(source_path: Path, output_path: Union[Path, None] = None) ->
         output_path = source_path.with_suffix(".json")
 
     subprocess.run(
-        f"tippecanoe -zg -f -P -o {output_path} --extend-zooms-if-still-dropping {source_path}",
+        f"tippecanoe -zg -f -P -o {output_path} --coalesce-densest-as-needed"
+        "--extend-zooms-if-still-dropping {source_path}",
         shell=True,
         check=True,
     )

@@ -32,7 +32,7 @@ docker exec -it data_processing_notebooks /bin/bash
 Create the environment with:
 
 ``` bash
-mamba env create -n data_processing -f environment.yml
+mamba env create -n south_sudan_pilot_gmv -f environment.yml
 ```
 
 This will create an environment called data-processing with a common set of dependencies.

@@ -10,14 +10,14 @@ from pathlib import Path
 import numpy as np
 import rasterio
 import xarray as xr
-from helpers.cog_converter import COGConverter
-from helpers.mbtiles_converter import MBTilesConverter
-from helpers.qml_parser import QMLParser
+from cog_converter import COGConverter
+from mbtiles_converter import MBTilesConverter
 from qgis.core import (
     QgsRasterFileWriter,
     QgsRasterLayer,
     QgsRasterPipe,
 )
+from qml_parser import QMLParser
 
 logging.basicConfig(level=logging.INFO)
 

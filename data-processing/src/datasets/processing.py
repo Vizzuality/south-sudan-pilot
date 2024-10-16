@@ -1,178 +1,81 @@
 """
-This module contains the _ProcessingSystem class, which is responsible for processing
-datasets based on the dataset ID.
+This module contains the function to process datasets and create layers.
 """
 
-import geopandas as gpd
-import xarray as xr
+import json
+from typing import List
+
+from tqdm import tqdm
 
 
-class _ProcessingSystem:
-    def __init__(self):
-        self._dataset_processing = {
-            "Boundaries": {
-                "Administrative Boundaries - adm0": VectorProcessing(
-                    columns=["ADM0_EN", "ADM0_PCODE", "geometry"], level=0
-                ),
-                "Administrative Boundaries - adm1": VectorProcessing(
-                    columns=["ADM0_EN", "ADM0_PCODE", "ADM1_EN", "ADM1_PCODE", "geometry"], level=1
-                ),
-                "Administrative Boundaries - adm2": VectorProcessing(
-                    columns=[
-                        "ADM0_EN",
-                        "ADM0_PCODE",
-                        "ADM1_EN",
-                        "ADM1_PCODE",
-                        "ADM2_EN",
-                        "ADM2_PCODE",
-                        "geometry",
-                    ],
-                    level=2,
-                ),
-                "Administrative Boundaries - adm3": VectorProcessing(
-                    columns=[
-                        "ADM0_EN",
-                        "ADM0_PCODE",
-                        "ADM1_EN",
-                        "ADM1_PCODE",
-                        "ADM2_EN",
-                        "ADM2_PCODE",
-                        "ADM3_EN",
-                        "ADM3_PCODE",
-                        "geometry",
-                    ],
-                    level=3,
-                ),
-                "Hydrological Basins": VectorProcessing(
-                    columns=["OBJECTID", "BasinName", "geometry"]
-                ),
-            },
-            "Hydrometeorological Data": {
-                "Precipitation": RasterProcessing(
-                    variable="precipitation_amount",
-                    temporal_coverage=slice("2022-01-01", "2022-12-31"),
-                    temporal_resolution="time.month",
-                    groupby_type="sum",
-                ),
-                "Temperature": RasterProcessing(
-                    variable="t2m",
-                    temporal_coverage=slice("2022-01-01", "2022-12-31"),
-                    temporal_resolution="time.month",
-                    groupby_type="mean",
-                ),
-                "Soil moisture": RasterProcessing(
-                    variable="mean_swvl1_swvl2",
-                    temporal_coverage=slice("2023-01-01", "2023-12-31"),
-                    temporal_resolution="time.month",
-                    groupby_type="mean",
-                ),
-            },
-            "Hydrographic data": {
-                "Rivers": VectorProcessing(
-                    columns=["FID_HydroR", "HYRIV_ID", "MAIN_RIV", "geometry"]
-                ),
-            },
-            "Populated infrastructures": {
-                "Education facilities": VectorProcessing(
-                    columns=["name", "amenity", "osm_id", "geometry"]
-                ),
-                "Health facilities": VectorProcessing(
-                    columns=["name", "amenity", "osm_id", "geometry"]
-                ),
-            },
-            "Transportation Network Infrastructures": {
-                "Roads": VectorProcessing(columns=["highway", "osm_id", "geometry"]),
-            },
-            "Water-related infrastructures": {
-                "Waterways": VectorProcessing(columns=["waterway", "osm_id", "geometry"]),
-            },
-        }
-
-    def get_processing(self, dataset_name, layer_name):
-        """
-        Returns the processing object for the given dataset ID.
-        """
-        processing = self._dataset_processing.get(dataset_name).get(layer_name)
-        return processing
-
-
-class VectorProcessing:
+class LayerProcessing:
     """
-    Represents the processing of a vector dataset.
+    Class to process datasets and create layers.
     """
 
-    def __init__(self, columns, level=None):
+    def __init__(self, datasets: dict, datasets_list: List, dict_path: str):
         """
-        Initializes the processing.
+        Initialize the DatasetProcessor class.
+
+        Args:
+            datasets (dict): Dictionary containing all the dataset objects.
+            datasets_list (List): The list of dataset names to process.
+            dict_path (str): The path to the json file to store
+                which layers have been processed.
         """
-        self.columns = columns
-        self.level = level
+        self.datasets = datasets
+        self.datasets_list = datasets_list
+        self.dict_path = dict_path
+        self.datasets_dict = self._load_datasets_dict()
 
-    def process(self, gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    def _load_datasets_dict(self):
+        with open(self.dict_path, "r") as file:
+            return json.load(file)
+
+    def _save_datasets_dict(self, dataset_name, layer_name, file_name):
         """
-        Processes the GeoDataFrame.
+        Update the datasets dictionary and save it to a file.
         """
-        if self.level is not None:
-            gdf["level"] = self.level
-            gdf = gdf[["level"] + self.columns]
-        else:
-            gdf = gdf[self.columns]
+        # Check if dataset_name is already in the dictionary, if not add it
+        if dataset_name not in self.datasets_dict:
+            self.datasets_dict[dataset_name] = {}
 
-        gdf.columns = [column.lower() for column in gdf.columns]
-        # Reorder columns
-        columns_except_geometry = [col for col in gdf.columns if col != "geometry"]
-        columns_new_order = columns_except_geometry + ["geometry"]
-        gdf = gdf[columns_new_order]
+        # Update the layer information
+        self.datasets_dict[dataset_name][layer_name] = file_name
 
-        return gdf.reset_index()
+        # Save the updated dictionary to the file
+        with open(self.dict_path, "w") as f:
+            json.dump(self.datasets_dict, f)
 
-
-class RasterProcessing:
-    """
-    Represents the processing of a raster dataset.
-    """
-
-    def __init__(
-        self, variable, temporal_coverage=None, temporal_resolution=None, groupby_type=None
-    ):
+    def _generate_file_name(self, dataset_name, layer_name):
         """
-        Initializes the processing.
+        Generate a file name based on the dataset name and layer name.
         """
-        self.variable = variable
-        self.temporal_coverage = temporal_coverage
-        self.temporal_resolution = temporal_resolution
-        self.groupby_type = groupby_type
+        # Generate shortened dataset name
+        shortened_dataset_name = "".join(word[0] for word in dataset_name.split()).upper()
 
-    def process(self, ds: xr.Dataset) -> xr.Dataset:
+        # Process layer name to create a file-friendly version
+        layer_name_lower = layer_name.lower().replace(" - ", " ").replace(" ", "_")
+
+        # Form the file name
+        file_name = f"{shortened_dataset_name}_{layer_name_lower}"
+        return file_name
+
+    def create_layers(self):
         """
-        Processes the xarray dataset.
+        Process the datasets and create layers.
         """
-        # Choose the variable of interest
-        da = ds[self.variable]
-        attrs = ds.attrs
-        # Select the temporal coverage
-        if self.temporal_coverage:
-            da = da.sel(time=self.temporal_coverage)
-            # Group by temporal resolution
-            if self.groupby_type == "mean":
-                da = da.groupby(self.temporal_resolution).mean()
-            elif self.groupby_type == "sum":
-                da = da.groupby(self.temporal_resolution).sum()
+        for dataset_name in tqdm(self.datasets_list):
+            print(dataset_name)
 
-        ds = xr.Dataset({self.variable: da})
-        ds.attrs = attrs
-
-        return ds
-
-
-_processing_system = _ProcessingSystem()
-
-
-def get_processing(dataset_name, layer_name):
-    """
-    Returns the processing object for the given dataset ID.
-    """
-    try:
-        return _processing_system.get_processing(dataset_name, layer_name)
-    except AttributeError:
-        return None
+            dataset = self.datasets.get(dataset_name)
+            layers = dataset.layers()
+            for layer_name, layer in tqdm(layers.items()):
+                if layer_name not in self.datasets_dict.get(dataset_name, {}):
+                    print("Processing", layer_name, "from", dataset_name)
+                    # Generate file name
+                    file_name = self._generate_file_name(dataset_name, layer_name)
+                    # Process the layer and save it
+                    layer.process_data(file_name)
+                    # Update and save the datasets dictionary
+                    self._save_datasets_dict(dataset_name, layer_name, file_name)

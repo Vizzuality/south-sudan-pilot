@@ -5,7 +5,10 @@ This module contains utility functions for creating animations.
 import os
 import re
 from pathlib import Path
+from typing import Dict, List, Tuple
 
+import matplotlib
+import numpy as np
 from apng import APNG
 
 
@@ -50,3 +53,20 @@ def get_files_with_years(input_folder):
     # Sort the list of tuples based on the year
     sorted_files = sorted(files_with_years, key=lambda x: x[1])
     return sorted_files
+
+
+def create_linear_segmented_colormap(colors_list: List[str]) -> Dict[int, Tuple[int, int, int]]:
+    """
+    Create a linear segmented colormap.
+
+    Attributes:
+        colors_list (list): A list of colors.
+    """
+    colors = matplotlib.colors.LinearSegmentedColormap.from_list("colors", colors_list, 256)
+
+    x = np.linspace(0, 1, 256)
+    cmap_vals = colors(x)[:, :]
+    cmap_uint8 = (cmap_vals * 255).astype("uint8")
+    cm = {idx: tuple(value) for idx, value in enumerate(cmap_uint8)}
+
+    return cm

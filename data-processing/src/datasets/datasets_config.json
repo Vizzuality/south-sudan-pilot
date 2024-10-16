@@ -380,25 +380,25 @@
             "type": "raster",
             "format": "Zarr",
             "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Rainfall-CHIRPS/WBHYDROSSD_CHIRPS_5km_Precipitation_SouthSudan_1981_2022_20240425.zarr",
-            "styles": ""
+            "styles": {"colors": ["#FFFFFF", "#67C3BF", "#211F4D"], "vmin": 0, "vmax": 500, "time_coord": "month"}
         },
         "Temperature": {
             "type": "raster",
             "format": "Zarr",
             "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Temperature-ERA5Land/WBHYDROSSD_ERA5-Land_t2m-D-mean_South_Sudan-EPSG4326_19500101_20231231_20240209091716.zarr",
-            "styles": ""
+            "styles": {"colors": ["#FFFFFF", "#E8eB5B", "#211F4D"], "vmin": 10, "vmax": 35, "time_coord": "month"}
         },
         "Evapotranspiration": {
             "type": "raster",
             "format": "Zarr",
             "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Evapotranspiration-WaPOR/WBHYDROSSD_WaPOR_Evapotranspiration_100m_SouthSudan_2023_20240220.zarr",
-            "styles": ""
+            "styles": {"colors": ["#FFFFFF", "#FFBC15", "#211F4D"], "vmin": 0, "vmax": 330, "time_coord": "months"}
         },
         "Soil moisture": {
             "type": "raster",
             "format": "Zarr",
             "base_url": "gs://wbhydross_deliverables/D3-Database/03-Soil Moisture_hydrological_soil_properties/Soil Moisture-ERA5Land/WBHYDROSSD_ERA5-Land_mean-swvl1swvl2-M-mean_South_Sudan-EPSG4326_195001_202312_20240208154611.zarr",
-            "styles": ""
+            "styles": {"colors": ["#FFFFFF", "#AE55A7", "#211F4D"], "vmin": 0, "vmax": 0.5, "time_coord": "month"}
         }
     },
     "Contextual layers": {
@@ -406,13 +406,13 @@
             "type": "raster",
             "format": "GeoTIFF",
             "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/01-Population_Assets_Infrastructures/Population-GHS/WBHYDROSSD_GHS-POP_4326_100m_SouthSudan_2020_20240429.tif",
-            "styles": ""
+            "styles": "../data/raw/LayerStyles/9_Contextual_layers/WBHYDROSSD_GHS-POP_4326_100m_SouthSudan_2020_20240429.qml"
         },
         "Land cover": {
             "type": "raster",
             "format": "GeoTIFF",
-            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/ESA-WorldCover/WBHYDROSSD_ESAWorldCover_4326_SouthSudan_2023_20240103.tif",
-            "styles": ""
+            "base_url": "../data/raw/WBHYDROSSD_ESAWorldCover_4326_SouthSudan_2023_20240103_cog.tif",
+            "styles": "../data/raw/LayerStyles/9_Contextual_layers/WBHYDROSSD_ESAWorldCover_4326_SouthSudan_2023_20240103.qml"
         },
         "Seasonal cattle grazing areas": {
             "type": "vector",
@@ -464,7 +464,7 @@
             "type": "raster",
             "format": "GeoTIFF",
             "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/00-%20Ancillary%20Layers/HydroSHEDS/DEM/WBHYDROSSD_HydroSHEDS_ConditionedDEM_3s_4326_SouthSudan_2023_20240103.tif",
-            "styles": ""
+            "styles": "../data/raw/LayerStyles/10_Hydrographic_data/WBHYDROSSD_HydroSHEDS_ConditionedDEM_3s_4326_SouthSudan_2023_20240103.qml"
         }
     },
     "Populated infrastructures": {
