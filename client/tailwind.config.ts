@@ -1,13 +1,40 @@
+import defaultTheme from "tailwindcss/defaultTheme";
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
-    extend: {
+    fontFamily: {
+      sans: ["var(--font-jost)", ...defaultTheme.fontFamily.sans],
+      serif: ["var(--font-dm-serif-text)", ...defaultTheme.fontFamily.serif],
+    },
+    colors: {
+      white: "#ffffff",
+      "casper-blue": {
+        50: "#f4f8fa",
+        200: "#d4e0e9",
+        300: "#b6cbda",
+        400: "#a4bdd0",
+        500: "#7999b8",
+        950: "#2b3340",
+      },
+      "rhino-blue": {
+        50: "#f3f5fb",
+        400: "#86a0d4",
+        500: "#6982c8",
+        900: "#38406e",
+        950: "#262a45",
+      },
+      "downy-green": {
+        300: "#67c3bf",
+      },
+      "supernova-yellow": {
+        300: "#ffe043",
+        400: "#ffcc15",
+      },
     },
   },
-  plugins: [],
+  extend: {},
 };
 export default config;
