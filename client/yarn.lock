@@ -1701,6 +1701,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@t3-oss/env-core@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@t3-oss/env-core@npm:0.11.1"
+  peerDependencies:
+    typescript: ">=5.0.0"
+    zod: ^3.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/1b59ff54b3f1541b35f5e415eb694daa3e37267d91db7c0654b07839d968b80251a965a7e5d8b913ed518027660c371cc8a5cd11b72c7e6b093569b3b5a6ad9a
+  languageName: node
+  linkType: hard
+
+"@t3-oss/env-nextjs@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@t3-oss/env-nextjs@npm:0.11.1"
+  dependencies:
+    "@t3-oss/env-core": "npm:0.11.1"
+  peerDependencies:
+    typescript: ">=5.0.0"
+    zod: ^3.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/3b74fc44706c9a80b8de378c41d9d55ac6913672b6358cc2a1d8e3eb73d9817422dc39d8881d3efba560eac8ddc095294d3482d53038b844971ec4772d46f3db
+  languageName: node
+  linkType: hard
+
 "@trysound/sax@npm:0.2.0":
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
@@ -2474,6 +2502,7 @@ __metadata:
   resolution: "client@workspace:."
   dependencies:
     "@svgr/webpack": "npm:^8.1.0"
+    "@t3-oss/env-nextjs": "npm:0.11.1"
     "@types/node": "npm:22.7.6"
     "@types/react": "npm:18.3.1"
     "@types/react-dom": "npm:18.3.1"
@@ -2483,6 +2512,7 @@ __metadata:
     eslint-config-prettier: "npm:9.1.0"
     eslint-plugin-prettier: "npm:5.2.1"
     express: "npm:4.21.1"
+    jiti: "npm:1.21.6"
     next: "npm:14.2.15"
     pino-http: "npm:10.3.0"
     postcss: "npm:^8"
@@ -2493,6 +2523,7 @@ __metadata:
     tailwindcss: "npm:3.4.14"
     typescript: "npm:5.6.3"
     typescript-eslint: "npm:8.9.0"
+    zod: "npm:3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -4474,7 +4505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.21.0":
+"jiti@npm:1.21.6, jiti@npm:^1.21.0":
   version: 1.21.6
   resolution: "jiti@npm:1.21.6"
   bin:
@@ -6993,5 +7024,12 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"zod@npm:3.23.8":
+  version: 3.23.8
+  resolution: "zod@npm:3.23.8"
+  checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
   languageName: node
   linkType: hard

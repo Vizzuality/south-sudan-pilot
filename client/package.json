@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "0.11.1",
     "express": "4.21.1",
     "next": "14.2.15",
     "pino-http": "10.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "typescript-eslint": "8.9.0"
+    "typescript-eslint": "8.9.0",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
@@ -26,6 +28,7 @@
     "eslint-config-next": "14.2.15",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
+    "jiti": "1.21.6",
     "postcss": "^8",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "0.6.8",
