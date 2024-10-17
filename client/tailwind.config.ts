@@ -37,4 +37,5 @@ const config: Config = {
   },
   extend: {},
 };
+
 export default config;
