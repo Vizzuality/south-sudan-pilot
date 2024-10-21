@@ -5,7 +5,7 @@ import ReactMapGL from "react-map-gl";
 import { env } from "@/env";
 import useBreakpoint from "@/hooks/use-breakpoint";
 
-import { DEFAULT_BOUNDS } from "./constants";
+import { DEFAULT_BOUNDS, DESKTOP_MAX_BOUNDS, MOBILE_MAX_BOUNDS } from "./constants";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -23,6 +23,7 @@ const Map = () => {
           padding: isDesktop ? 100 : 20,
         },
       }}
+      maxBounds={isDesktop ? DESKTOP_MAX_BOUNDS : MOBILE_MAX_BOUNDS}
       style={{ width: "100%", height: "100%" }}
       mapStyle={env.NEXT_PUBLIC_MAPBOX_STYLE}
     />
