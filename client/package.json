@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-nextjs": "0.11.1",
     "@types/mapbox-gl": "3.4.0",
+    "class-variance-authority": "0.7.0",
+    "clsx": "2.1.1",
     "express": "4.21.1",
     "mapbox-gl": "3.7.0",
     "next": "14.2.15",
@@ -19,6 +22,8 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-map-gl": "7.1.7",
+    "tailwind-merge": "2.5.4",
+    "tailwindcss-animate": "1.0.7",
     "typescript-eslint": "8.9.0",
     "zod": "3.23.8"
   },

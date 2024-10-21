@@ -8,6 +8,7 @@ import useBreakpoint from "@/hooks/use-breakpoint";
 import useMapBounds from "@/hooks/use-map-bounds";
 
 import { DESKTOP_MAX_BOUNDS, MOBILE_MAX_BOUNDS } from "./constants";
+import Controls from "./controls";
 
 import type { MapRef, LngLatLike } from "react-map-gl";
 
@@ -39,7 +40,9 @@ const Map = () => {
       style={{ width: "100%", height: "100%" }}
       mapStyle={env.NEXT_PUBLIC_MAPBOX_STYLE}
       onMove={onMove}
-    />
+    >
+      <Controls />
+    </ReactMapGL>
   );
 };
 

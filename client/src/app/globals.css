@@ -5,3 +5,8 @@
 body {
   @apply text-rhino-blue-950;
 }
+@layer base {
+  :root {
+    --radius: 0.5rem
+  }
+}
