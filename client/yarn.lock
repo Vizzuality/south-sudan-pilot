@@ -22,6 +22,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@artsy/fresnel@npm:7.1.4":
+  version: 7.1.4
+  resolution: "@artsy/fresnel@npm:7.1.4"
+  peerDependencies:
+    react: ">=18.0.0"
+  checksum: 10c0/a5b5834b2b1264e2039c7205af153a9fa328017c71a195c5e521e922891249f17a0a7613973147844a776a35aabeabdc4c3f42b8977ea5d1860793d774006b65
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.25.7":
   version: 7.25.7
   resolution: "@babel/code-frame@npm:7.25.7"
@@ -3171,6 +3180,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "client@workspace:."
   dependencies:
+    "@artsy/fresnel": "npm:7.1.4"
     "@radix-ui/react-dialog": "npm:1.1.2"
     "@radix-ui/react-separator": "npm:1.1.0"
     "@radix-ui/react-slot": "npm:1.1.0"
