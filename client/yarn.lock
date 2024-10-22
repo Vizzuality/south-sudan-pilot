@@ -1709,7 +1709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:1.1.2":
+"@radix-ui/react-dialog@npm:^1.1.2":
   version: 1.1.2
   resolution: "@radix-ui/react-dialog@npm:1.1.2"
   dependencies:
@@ -3181,7 +3181,7 @@ __metadata:
   resolution: "client@workspace:."
   dependencies:
     "@artsy/fresnel": "npm:7.1.4"
-    "@radix-ui/react-dialog": "npm:1.1.2"
+    "@radix-ui/react-dialog": "npm:^1.1.2"
     "@radix-ui/react-separator": "npm:1.1.0"
     "@radix-ui/react-slot": "npm:1.1.0"
     "@radix-ui/react-tooltip": "npm:1.1.3"
