@@ -6,6 +6,10 @@ body {
   @apply text-rhino-blue-950;
 }
 
+.mapboxgl-ctrl-bottom-right {
+  @apply !pb-1 !pr-5 sm:!p-0 flex flex-row items-end gap-3 [&_div]:shrink-0 [&_div]:!m-0 [&_div:nth-child(1)]:pb-1;
+}
+
 @layer base {
   :root {
     --radius: 0.5rem;
