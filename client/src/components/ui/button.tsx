@@ -13,10 +13,13 @@ const buttonVariants = cva(
           "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-neutral-950",
         yellow:
           "bg-supernova-yellow-400 hover:bg-supernova-yellow-300 text-casper-blue-950 focus-visible:ring-casper-blue-400",
+        ghost:
+          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-neutral-950",
       },
       size: {
         default: "h-10 px-4 py-2",
         icon: "h-10 w-10",
+        auto: "",
       },
     },
     defaultVariants: {

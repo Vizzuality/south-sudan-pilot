@@ -5,8 +5,21 @@
 body {
   @apply text-rhino-blue-950;
 }
+
+.mapboxgl-ctrl-bottom-right {
+  @apply !pb-1 !pr-5 sm:!p-0 flex flex-row items-end gap-3 [&_div]:shrink-0 [&_div]:!m-0 [&_div:nth-child(1)]:pb-1;
+}
+
 @layer base {
   :root {
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%
   }
 }
