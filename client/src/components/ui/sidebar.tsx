@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import ChevronDownIcon from "@/svgs/chevron-down.svg";
 
-const SIDEBAR_WIDTH = "460px";
+export const SIDEBAR_WIDTH = "460px";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 
 type SidebarContext = {

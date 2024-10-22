@@ -2,19 +2,13 @@
 
 import Intro from "@/components/intro";
 import MainPanel from "@/components/panels/main";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarHeader, SidebarTrigger } from "@/components/ui/sidebar";
 
 import Logo from "../logo";
 
 const NavigationDesktop = () => {
   return (
-    <SidebarProvider>
+    <>
       <Logo />
       <Sidebar>
         <SidebarHeader className="h-[88px] bg-rhino-blue-900 px-10 py-6 text-white">
@@ -27,7 +21,7 @@ const NavigationDesktop = () => {
           <MainPanel />
         </SidebarContent>
       </Sidebar>
-    </SidebarProvider>
+    </>
   );
 };
 
