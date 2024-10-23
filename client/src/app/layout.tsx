@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const jost = Jost({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-jost",
 });
 
