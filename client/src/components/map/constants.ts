@@ -39,6 +39,9 @@ export const LABELS: Record<LabelsStyle, { name: string }> = {
   light: {
     name: "Light",
   },
+  "": {
+    name: "No labels",
+  },
 };
 
 export const DEFAULT_MAP_SETTINGS = {

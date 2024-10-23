@@ -7,4 +7,5 @@ export enum BasemapStyle {
 export enum LabelsStyle {
   Dark = "dark",
   Light = "light",
+  NoLabels = "",
 }
