@@ -1,20 +1,21 @@
-import { PropsWithChildren } from "react";
-
+import MapSettingsPanel from "@/components/panels/map-settings";
 import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import GlobeIcon from "@/svgs/globe.svg";
-
-const MapSettingsPanel = ({ children }: PropsWithChildren) => {
-  return children;
-};
 
 const MapSettingsControls = () => {
   return (
-    <MapSettingsPanel>
-      <Button type="button" variant="yellow" size="icon">
-        <span className="sr-only">Map settings</span>
-        <GlobeIcon aria-hidden />
-      </Button>
-    </MapSettingsPanel>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button type="button" variant="yellow" size="icon">
+          <span className="sr-only">Map settings</span>
+          <GlobeIcon aria-hidden />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent side="left" align="end" className="w-[250px]">
+        <MapSettingsPanel />
+      </PopoverContent>
+    </Popover>
   );
 };
 
