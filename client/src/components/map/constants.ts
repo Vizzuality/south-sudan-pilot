@@ -33,11 +33,11 @@ export const BASEMAPS: Record<BasemapStyle, { name: string; image: string }> = {
 };
 
 export const LABELS: Record<LabelsStyle, { name: string }> = {
-  dark: {
-    name: "Dark",
-  },
   light: {
     name: "Light",
+  },
+  dark: {
+    name: "Dark",
   },
   "": {
     name: "No labels",
@@ -46,5 +46,5 @@ export const LABELS: Record<LabelsStyle, { name: string }> = {
 
 export const DEFAULT_MAP_SETTINGS = {
   basemap: BasemapStyle.Light,
-  labels: LabelsStyle.Dark,
+  labels: LabelsStyle.Light,
 };
