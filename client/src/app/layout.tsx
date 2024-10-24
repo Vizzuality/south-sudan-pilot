@@ -1,4 +1,5 @@
 import { Jost, DM_Serif_Text } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import Head from "@/components/head";
 
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 const jost = Jost({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-jost",
 });
 
@@ -35,7 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jost.variable} ${dmSerifText.variable}`}>
       <Head />
-      <body>{children}</body>
+      <body>
+        <NuqsAdapter>{children}</NuqsAdapter>
+      </body>
     </html>
   );
 }

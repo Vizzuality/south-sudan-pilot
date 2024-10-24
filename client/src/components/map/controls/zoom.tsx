@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import MinusIcon from "@/svgs/minus.svg";
 import PlusIcon from "@/svgs/plus.svg";
 
-const Controls = () => {
+const ZoomControls = () => {
   const { current: map } = useMap();
 
   const onClickZoomIn = useCallback(() => map?.zoomIn(), [map]);
   const onClickZoomOut = useCallback(() => map?.zoomOut(), [map]);
 
   return (
-    <div className="absolute bottom-6 right-10 z-10 flex flex-col gap-px">
+    <div className="flex flex-col gap-px">
       <Button
         type="button"
         variant="yellow"
@@ -37,4 +37,4 @@ const Controls = () => {
   );
 };
 
-export default Controls;
+export default ZoomControls;

@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactMapGL from "react-map-gl";
 
 import { SIDEBAR_WIDTH } from "@/components/ui/sidebar";
 import { env } from "@/env";
+import useApplyMapSettings from "@/hooks/use-apply-map-settings";
 import useBreakpoint from "@/hooks/use-breakpoint";
 import useIsSidebarExpanded from "@/hooks/use-is-sidebar-expanded";
 import useMapBounds from "@/hooks/use-map-bounds";
@@ -18,8 +19,10 @@ import type { MapRef, LngLatLike } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const Map = () => {
-  const isDesktop = useBreakpoint("xl", false, true);
   const mapRef = useRef<MapRef>(null);
+  const [map, setMap] = useState<MapRef | null>(null);
+
+  const isDesktop = useBreakpoint("xl", false, true);
 
   const isSidebarExpanded = useIsSidebarExpanded();
   const previousIsSidebarExpanded = usePrevious(isSidebarExpanded);
@@ -44,17 +47,18 @@ const Map = () => {
   }, [bounds, isDesktop, isSidebarExpanded]);
 
   const onMove = useCallback(() => {
-    if (mapRef.current) {
-      setBounds(mapRef.current.getBounds()?.toArray() as [LngLatLike, LngLatLike]);
-    }
-  }, [mapRef, setBounds]);
+    setBounds(map?.getBounds()?.toArray() as [LngLatLike, LngLatLike]);
+  }, [map, setBounds]);
 
   // Update the position of the map based on the sidebar's state
   useEffect(() => {
     if (isSidebarExpanded !== previousIsSidebarExpanded) {
-      mapRef.current?.fitBounds(bounds, initialViewState.fitBoundsOptions);
+      map?.fitBounds(bounds, initialViewState.fitBoundsOptions);
     }
-  }, [isSidebarExpanded, previousIsSidebarExpanded, initialViewState, bounds]);
+  }, [map, isSidebarExpanded, previousIsSidebarExpanded, initialViewState, bounds]);
+
+  // Apply the basemap and labels
+  useApplyMapSettings(map);
 
   return (
     <ReactMapGL
@@ -66,6 +70,7 @@ const Map = () => {
       mapStyle={env.NEXT_PUBLIC_MAPBOX_STYLE}
       onMove={onMove}
       logoPosition="bottom-right"
+      onLoad={() => setMap(mapRef.current)}
     >
       <Controls />
     </ReactMapGL>
