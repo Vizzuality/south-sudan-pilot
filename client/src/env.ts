@@ -6,7 +6,14 @@ export const env = createEnv({
    * Serverside Environment variables, not available on the client.
    * Will throw if you access these variables on the client.
    */
-  server: {},
+  server: {
+    // If `true` or left empty, crawlers (including search engines) are not allowed to index the
+    // website
+    NEXT_USE_RESTRICTIVE_ROBOTS_TXT: z.preprocess(
+      (value) => (!value || value === "true" ? true : false),
+      z.boolean(),
+    ),
+  },
   /*
    * Environment variables available on the client (and server).
    *
@@ -27,5 +34,6 @@ export const env = createEnv({
   runtimeEnv: {
     NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
     NEXT_PUBLIC_MAPBOX_STYLE: process.env.NEXT_PUBLIC_MAPBOX_STYLE,
+    NEXT_USE_RESTRICTIVE_ROBOTS_TXT: process.env.NEXT_USE_RESTRICTIVE_ROBOTS_TXT,
   },
 });
