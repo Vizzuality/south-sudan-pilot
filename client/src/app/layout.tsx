@@ -1,4 +1,5 @@
 import { Jost, DM_Serif_Text } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import Head from "@/components/head";
 
@@ -35,7 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jost.variable} ${dmSerifText.variable}`}>
       <Head />
-      <body>{children}</body>
+      <body>
+        <NuqsAdapter>{children}</NuqsAdapter>
+      </body>
     </html>
   );
 }
