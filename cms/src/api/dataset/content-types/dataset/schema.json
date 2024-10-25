@@ -4,52 +4,37 @@
   "info": {
     "singularName": "dataset",
     "pluralName": "datasets",
-    "displayName": "Dataset"
+    "displayName": "Dataset",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
-    },
-    "Description": {
-      "type": "text"
-    },
-    "Sources": {
-      "type": "text"
-    },
-    "License": {
-      "type": "string"
-    },
-    "Citations": {
-      "type": "text"
-    },
-    "Spatial_coverage": {
-      "type": "string"
-    },
-    "Spatial_resolution": {
-      "type": "string"
-    },
-    "Temporal_coverage": {
-      "type": "string"
-    },
-    "Temporal_resolution": {
-      "type": "string"
-    },
-    "Unit": {
-      "type": "string"
+    "name": {
+      "type": "string",
+      "required": true
     },
     "layers": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::layer.layer"
     },
-    "Default_layer": {
+    "default_layer": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::layer.layer"
+    },
+    "topic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::topic.topic"
+    },
+    "sub_topic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sub-topic.sub-topic"
     }
   }
 }

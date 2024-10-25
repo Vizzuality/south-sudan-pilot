@@ -794,34 +794,35 @@ export interface ApiDatasetDataset extends Schema.CollectionType {
     singularName: 'dataset';
     pluralName: 'datasets';
     displayName: 'Dataset';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    Name: Attribute.String;
-    Description: Attribute.Text;
-    Sources: Attribute.Text;
-    License: Attribute.String;
-    Citations: Attribute.Text;
-    Spatial_coverage: Attribute.String;
-    Spatial_resolution: Attribute.String;
-    Temporal_coverage: Attribute.String;
-    Temporal_resolution: Attribute.String;
-    Unit: Attribute.String;
+    name: Attribute.String & Attribute.Required;
     layers: Attribute.Relation<
       'api::dataset.dataset',
       'oneToMany',
       'api::layer.layer'
     >;
-    Default_layer: Attribute.Relation<
+    default_layer: Attribute.Relation<
       'api::dataset.dataset',
       'oneToOne',
       'api::layer.layer'
     >;
+    topic: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToOne',
+      'api::topic.topic'
+    >;
+    sub_topic: Attribute.Relation<
+      'api::dataset.dataset',
+      'oneToOne',
+      'api::sub-topic.sub-topic'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::dataset.dataset',
       'oneToOne',
@@ -843,25 +844,20 @@ export interface ApiLayerLayer extends Schema.CollectionType {
     singularName: 'layer';
     pluralName: 'layers';
     displayName: 'Layer';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    Name: Attribute.String;
-    Slug: Attribute.String;
-    Type: Attribute.Enumeration<['raster', 'vector', 'animated']>;
-    Config: Attribute.JSON;
-    Params_config: Attribute.JSON;
-    Legend_config: Attribute.JSON;
-    Interaction_config: Attribute.JSON;
-    Temporal_step: Attribute.Integer;
-    Temporal_step_unit: Attribute.Enumeration<['day', 'month', 'year']>;
-    Temporal_start_date: Attribute.Date;
-    Temporal_end_date: Attribute.Date;
+    name: Attribute.String & Attribute.Required;
+    type: Attribute.Enumeration<['static', 'animated']> & Attribute.Required;
+    mapbox_config: Attribute.JSON & Attribute.Required;
+    params_config: Attribute.JSON & Attribute.Required;
+    legend_config: Attribute.Component<'legend.legend-config'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::layer.layer',
       'oneToOne',
@@ -883,21 +879,15 @@ export interface ApiSubTopicSubTopic extends Schema.CollectionType {
     singularName: 'sub-topic';
     pluralName: 'sub-topics';
     displayName: 'Sub-Topic';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    Name: Attribute.String;
-    Description: Attribute.Text;
-    datasets: Attribute.Relation<
-      'api::sub-topic.sub-topic',
-      'oneToMany',
-      'api::dataset.dataset'
-    >;
+    name: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::sub-topic.sub-topic',
       'oneToOne',
@@ -922,19 +912,13 @@ export interface ApiTopicTopic extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    Name: Attribute.String;
-    Slug: Attribute.String;
-    sub_topics: Attribute.Relation<
-      'api::topic.topic',
-      'oneToMany',
-      'api::sub-topic.sub-topic'
-    >;
+    name: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::topic.topic',
       'oneToOne',

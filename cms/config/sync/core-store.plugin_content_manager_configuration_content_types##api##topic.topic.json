@@ -6,8 +6,8 @@
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "Name",
-      "defaultSortBy": "Name",
+      "mainField": "name",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -19,47 +19,32 @@
           "sortable": true
         }
       },
-      "Name": {
+      "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Name",
+          "label": "name",
           "searchable": true,
           "sortable": true
         }
       },
-      "Slug": {
+      "slug": {
         "edit": {
-          "label": "Slug",
+          "label": "slug",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Slug",
+          "label": "slug",
           "searchable": true,
           "sortable": true
-        }
-      },
-      "sub_topics": {
-        "edit": {
-          "label": "sub_topics",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "Name"
-        },
-        "list": {
-          "label": "sub_topics",
-          "searchable": false,
-          "sortable": false
         }
       },
       "createdAt": {
@@ -122,29 +107,22 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Slug",
-        "createdAt"
-      ],
       "edit": [
         [
           {
-            "name": "Name",
+            "name": "slug",
             "size": 6
           },
           {
-            "name": "Slug",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "sub_topics",
+            "name": "name",
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "slug",
+        "name"
       ]
     },
     "uid": "api::topic.topic"

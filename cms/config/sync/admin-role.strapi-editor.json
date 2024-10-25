@@ -4,6 +4,184 @@
   "description": "Editors can manage and publish contents including those of other users.",
   "permissions": [
     {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "layers",
+          "name"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "layers",
+          "name"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "layers",
+          "name"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "name"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "name"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "name"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "name",
+          "slug"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "name",
+          "slug"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "name",
+          "slug"
+        ]
+      },
+      "conditions": []
+    },
+    {
       "action": "plugin::upload.assets.copy-link",
       "actionParameters": {},
       "subject": null,
