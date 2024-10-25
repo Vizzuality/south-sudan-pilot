@@ -24,6 +24,8 @@ export const env = createEnv({
     NEXT_PUBLIC_MAPBOX_TOKEN: z.string(),
     /** Mapbox' style URL that contains the basemap */
     NEXT_PUBLIC_MAPBOX_STYLE: z.string(),
+    /** Strapi's instance URL (without trailing slash) */
+    NEXT_PUBLIC_API_URL: z.string(),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -35,5 +37,6 @@ export const env = createEnv({
     NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
     NEXT_PUBLIC_MAPBOX_STYLE: process.env.NEXT_PUBLIC_MAPBOX_STYLE,
     NEXT_USE_RESTRICTIVE_ROBOTS_TXT: process.env.NEXT_USE_RESTRICTIVE_ROBOTS_TXT,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
 });
