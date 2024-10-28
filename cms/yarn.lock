@@ -1124,6 +1124,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hapi/hoek@npm:^9.0.0":
+  version: 9.3.0
+  resolution: "@hapi/hoek@npm:9.3.0"
+  checksum: 10/ad83a223787749f3873bce42bd32a9a19673765bf3edece0a427e138859ff729469e68d5fdf9ff6bbee6fb0c8e21bab61415afa4584f527cfc40b59ea1957e70
+  languageName: node
+  linkType: hard
+
+"@hapi/topo@npm:^5.0.0":
+  version: 5.1.0
+  resolution: "@hapi/topo@npm:5.1.0"
+  dependencies:
+    "@hapi/hoek": "npm:^9.0.0"
+  checksum: 10/084bfa647015f4fd3fdd51fadb2747d09ef2f5e1443d6cbada2988b0c88494f85edf257ec606c790db146ac4e34ff57f3fcb22e3299b8e06ed5c87ba7583495c
+  languageName: node
+  linkType: hard
+
 "@internationalized/date@npm:^3.5.2":
   version: 3.5.5
   resolution: "@internationalized/date@npm:3.5.5"
@@ -1270,6 +1286,31 @@ __metadata:
   dependencies:
     "@lezer/common": "npm:^1.0.0"
   checksum: 10/6b5e155188f868cf3a86e051453ca5e3d98c6bddcd06601b51d7313bba33385ee128e79ccf841c1d72f3e887cddcd31648524400e7a9da33f92647ac5052c5ed
+  languageName: node
+  linkType: hard
+
+"@monaco-editor/loader@npm:^1.3.2":
+  version: 1.4.0
+  resolution: "@monaco-editor/loader@npm:1.4.0"
+  dependencies:
+    state-local: "npm:^1.0.6"
+  peerDependencies:
+    monaco-editor: ">= 0.21.0 < 1"
+  checksum: 10/32ad01de015fc187450aa1cc0aa763af167664b6a61efcb9e1523a0f51ca5d0b35ba11ed95889edd6d774dfe98f196ef58f1607243abcbdd3d6d743f82ba8285
+  languageName: node
+  linkType: hard
+
+"@monaco-editor/react@npm:4.4.5":
+  version: 4.4.5
+  resolution: "@monaco-editor/react@npm:4.4.5"
+  dependencies:
+    "@monaco-editor/loader": "npm:^1.3.2"
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    monaco-editor: ">= 0.25.0 < 1"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10/291a10f29de9ab260d3782b76840736dbd6fdd898b7d2e791e25e8648c7269f5fce5756da264e2c35b82751283462007af411f22c858cd0d04cda20aae176c32
   languageName: node
   linkType: hard
 
@@ -2497,6 +2538,29 @@ __metadata:
     "@sentry/types": "npm:6.19.7"
     tslib: "npm:^1.9.3"
   checksum: 10/0ea94d32940705d77b019ca821e45a5866bb3d443e0f19b9bf5edf3d7ffed68c451803f3388913fec4da875e4b7df46b5f8a8681c4d69972fb3d775d864997b2
+  languageName: node
+  linkType: hard
+
+"@sideway/address@npm:^4.1.3":
+  version: 4.1.5
+  resolution: "@sideway/address@npm:4.1.5"
+  dependencies:
+    "@hapi/hoek": "npm:^9.0.0"
+  checksum: 10/c4c73ac0339504f34e016d3a687118e7ddf197c1c968579572123b67b230be84caa705f0f634efdfdde7f2e07a6e0224b3c70665dc420d8bc95bf400cfc4c998
+  languageName: node
+  linkType: hard
+
+"@sideway/formula@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@sideway/formula@npm:3.0.1"
+  checksum: 10/8d3ee7f80df4e5204b2cbe92a2a711ca89684965a5c9eb3b316b7051212d3522e332a65a0bb2a07cc708fcd1d0b27fcb30f43ff0bcd5089d7006c7160a89eefe
+  languageName: node
+  linkType: hard
+
+"@sideway/pinpoint@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@sideway/pinpoint@npm:2.0.0"
+  checksum: 10/1ed21800128b2b23280ba4c9db26c8ff6142b97a8683f17639fd7f2128aa09046461574800b30fb407afc5b663c2331795ccf3b654d4b38fa096e41a5c786bf8
   languageName: node
   linkType: hard
 
@@ -4615,6 +4679,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bluebird@npm:^3.5.1":
+  version: 3.7.2
+  resolution: "bluebird@npm:3.7.2"
+  checksum: 10/007c7bad22c5d799c8dd49c85b47d012a1fe3045be57447721e6afbd1d5be43237af1db62e26cb9b0d9ba812d2e4ca3bac82f6d7e016b6b88de06ee25ceb96e7
+  languageName: node
+  linkType: hard
+
 "bn.js@npm:^4.0.0, bn.js@npm:^4.11.9":
   version: 4.12.0
   resolution: "bn.js@npm:4.12.0"
@@ -5267,6 +5338,7 @@ __metadata:
     react-dom: "npm:^18.0.0"
     react-router-dom: "npm:5.3.4"
     strapi-plugin-config-sync: "npm:1.2.6"
+    strapi-plugin-import-export-entries: "npm:1.23.1"
     styled-components: "npm:5.3.3"
   languageName: unknown
   linkType: soft
@@ -5843,6 +5915,19 @@ __metadata:
   version: 3.1.3
   resolution: "csstype@npm:3.1.3"
   checksum: 10/f593cce41ff5ade23f44e77521e3a1bcc2c64107041e1bf6c3c32adc5187d0d60983292fda326154d20b01079e24931aa5b08e4467cc488b60bb1e7f6d478ade
+  languageName: node
+  linkType: hard
+
+"csvtojson@npm:2.0.10":
+  version: 2.0.10
+  resolution: "csvtojson@npm:2.0.10"
+  dependencies:
+    bluebird: "npm:^3.5.1"
+    lodash: "npm:^4.17.3"
+    strip-bom: "npm:^2.0.0"
+  bin:
+    csvtojson: ./bin/csvtojson
+  checksum: 10/253ba22c85b8aeb844896468be702949f515b7c5f76aa675a3a8b5eff965445c9c567951f2e6813e7cc173db71ce25e070523a4fc05e36c428d6cb7f3dc34e04
   languageName: node
   linkType: hard
 
@@ -8843,6 +8928,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-utf8@npm:^0.2.0":
+  version: 0.2.1
+  resolution: "is-utf8@npm:0.2.1"
+  checksum: 10/167ccd2be869fc228cc62c1a28df4b78c6b5485d15a29027d3b5dceb09b383e86a3522008b56dcac14b592b22f0a224388718c2505027a994fd8471465de54b3
+  languageName: node
+  linkType: hard
+
 "is-windows@npm:^1.0.1, is-windows@npm:^1.0.2":
   version: 1.0.2
   resolution: "is-windows@npm:1.0.2"
@@ -8945,6 +9037,19 @@ __metadata:
   version: 1.4.0
   resolution: "jju@npm:1.4.0"
   checksum: 10/1067ff8ce02221faac5a842116ed0ec79a53312a111d0bf8342a80bd02c0a3fdf0b8449694a65947db0a3e8420e8b326dffb489c7dd5866efc380c0d1708a707
+  languageName: node
+  linkType: hard
+
+"joi@npm:17.6.0":
+  version: 17.6.0
+  resolution: "joi@npm:17.6.0"
+  dependencies:
+    "@hapi/hoek": "npm:^9.0.0"
+    "@hapi/topo": "npm:^5.0.0"
+    "@sideway/address": "npm:^4.1.3"
+    "@sideway/formula": "npm:^3.0.0"
+    "@sideway/pinpoint": "npm:^2.0.0"
+  checksum: 10/dfe3bf4d44c41805cf93d7c716d15c0bf39f71b78f316e737b80cb80ec4598f620d3390e86b8c899e57325816e498733e89bdcb66be79870569cfb1e5daa5b12
   languageName: node
   linkType: hard
 
@@ -9517,7 +9622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^2.0.0, loader-utils@npm:^2.0.4":
+"loader-utils@npm:^2.0.0, loader-utils@npm:^2.0.2, loader-utils@npm:^2.0.4":
   version: 2.0.4
   resolution: "loader-utils@npm:2.0.4"
   dependencies:
@@ -9591,7 +9696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4":
+"lodash@npm:4.17.21, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.3, lodash@npm:^4.17.4":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
@@ -10223,6 +10328,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"monaco-editor-webpack-plugin@npm:7.0.1":
+  version: 7.0.1
+  resolution: "monaco-editor-webpack-plugin@npm:7.0.1"
+  dependencies:
+    loader-utils: "npm:^2.0.2"
+  peerDependencies:
+    monaco-editor: ">= 0.31.0"
+    webpack: ^4.5.0 || 5.x
+  checksum: 10/06426ab5e55d41477ea440b7694d15288cebb793f49f6b08ce658a1bbf09aeb0c5087dfb9314a0baea24a659e773934f310a35d16924b3881d87874794d8783e
+  languageName: node
+  linkType: hard
+
+"monaco-editor@npm:0.33.0":
+  version: 0.33.0
+  resolution: "monaco-editor@npm:0.33.0"
+  checksum: 10/76ea129febfdf4f3ad7aff62de0faf2178b00dd259206ae64bfba043c028505a96b186a3ff76b166fd047adb184a9fa8e6717ceebcf5fe44701149b5bd240c00
+  languageName: node
+  linkType: hard
+
 "mrmime@npm:^2.0.0":
   version: 2.0.0
   resolution: "mrmime@npm:2.0.0"
@@ -10385,6 +10509,20 @@ __metadata:
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10/8eea1d4d965930a177a0508695beb0d89b4c1d80bf330646a035357a1e8fc31e0d09686e2374996e96e757b947a7ece319f98ede3146683f162597c0bcb4df90
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:2.6.9":
+  version: 2.6.9
+  resolution: "node-fetch@npm:2.6.9"
+  dependencies:
+    whatwg-url: "npm:^5.0.0"
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: 10/4d04273c97e3829b3fb070b9b2c14c9f6ecff9afd1d3d8043fb39d1d2440b23e2ddbdbab1b2f879bf71fa23275bf5711e777256e5784d1852333965a6cea38ab
   languageName: node
   linkType: hard
 
@@ -12057,6 +12195,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-singleton-hook@npm:3.3.0":
+  version: 3.3.0
+  resolution: "react-singleton-hook@npm:3.3.0"
+  peerDependencies:
+    react: 15 - 18
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10/9c45912ca23c6686a91880430c41b2bbdabaa379162a557476a41156b0b8e9cd46a4ec18fd68fb407be7c7ba73526cc3605434255abe243af53f3bd49c5fbc8d
+  languageName: node
+  linkType: hard
+
 "react-style-singleton@npm:^2.2.1":
   version: 2.2.1
   resolution: "react-style-singleton@npm:2.2.1"
@@ -13325,6 +13477,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"state-local@npm:^1.0.6":
+  version: 1.0.7
+  resolution: "state-local@npm:1.0.7"
+  checksum: 10/1d956043e270861d40a639ff3457938cf61dbc7e25209d21b55060d8dfaf74742b8a1e525ed6fcb0c2d89b7d3e305bb8589bf27392012889456b3ad82a4b7d0a
+  languageName: node
+  linkType: hard
+
 "static-extend@npm:^0.1.1":
   version: 0.1.2
   resolution: "static-extend@npm:0.1.2"
@@ -13367,6 +13526,25 @@ __metadata:
   bin:
     config-sync: bin/config-sync
   checksum: 10/93a13b87c2563119ed5f252bf4ef39fb5a43b8014dee91149bc4f3285436a6f5f1823d09ade675bac72c525eb7bdfc3f96f81125b2847f2a39ebbc9390cbb8b9
+  languageName: node
+  linkType: hard
+
+"strapi-plugin-import-export-entries@npm:1.23.1":
+  version: 1.23.1
+  resolution: "strapi-plugin-import-export-entries@npm:1.23.1"
+  dependencies:
+    "@monaco-editor/react": "npm:4.4.5"
+    csvtojson: "npm:2.0.10"
+    deepmerge: "npm:^4.2.2"
+    joi: "npm:17.6.0"
+    lodash: "npm:4.17.21"
+    monaco-editor: "npm:0.33.0"
+    monaco-editor-webpack-plugin: "npm:7.0.1"
+    node-fetch: "npm:2.6.9"
+    react-singleton-hook: "npm:3.3.0"
+  peerDependencies:
+    "@strapi/strapi": ^4.10.5
+  checksum: 10/86adeb385e6be334e140ec00e67f345d912cb4c663bfb86813a8426d554b3107098ab3c35bb808794f81692038d2370f01994083b4a13734abad961c7bdaaef8
   languageName: node
   linkType: hard
 
@@ -13495,6 +13673,15 @@ __metadata:
   dependencies:
     ansi-regex: "npm:^6.0.1"
   checksum: 10/475f53e9c44375d6e72807284024ac5d668ee1d06010740dec0b9744f2ddf47de8d7151f80e5f6190fc8f384e802fdf9504b76a7e9020c9faee7103623338be2
+  languageName: node
+  linkType: hard
+
+"strip-bom@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "strip-bom@npm:2.0.0"
+  dependencies:
+    is-utf8: "npm:^0.2.0"
+  checksum: 10/08efb746bc67b10814cd03d79eb31bac633393a782e3f35efbc1b61b5165d3806d03332a97f362822cf0d4dd14ba2e12707fcff44fe1c870c48a063a0c9e4944
   languageName: node
   linkType: hard
 

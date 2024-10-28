@@ -153,8 +153,18 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "default_layer",
+        "topic"
+      ],
       "edit": [
         [
+          {
+            "name": "layers",
+            "size": 6
+          },
           {
             "name": "name",
             "size": 6
@@ -162,30 +172,20 @@
         ],
         [
           {
-            "name": "topic",
+            "name": "default_layer",
             "size": 6
           },
           {
-            "name": "sub_topic",
+            "name": "topic",
             "size": 6
           }
         ],
         [
           {
-            "name": "layers",
-            "size": 6
-          },
-          {
-            "name": "default_layer",
+            "name": "sub_topic",
             "size": 6
           }
         ]
-      ],
-      "list": [
-        "id",
-        "topic",
-        "sub_topic",
-        "name"
       ]
     },
     "uid": "api::dataset.dataset"

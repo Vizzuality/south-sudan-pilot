@@ -116,6 +116,58 @@
     {
       "action": "plugin::content-manager.explorer.create",
       "actionParameters": {},
+      "subject": "api::location.location",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "level",
+          "code",
+          "children"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::location.location",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::location.location",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "level",
+          "code",
+          "children"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::location.location",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "level",
+          "code",
+          "children"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
@@ -549,6 +601,20 @@
     },
     {
       "action": "plugin::i18n.locale.update",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::import-export-entries.export",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::import-export-entries.import",
       "actionParameters": {},
       "subject": null,
       "properties": {},
