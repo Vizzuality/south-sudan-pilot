@@ -12,24 +12,12 @@ const ZoomControls = () => {
   const onClickZoomOut = useCallback(() => map?.zoomOut(), [map]);
 
   return (
-    <div className="flex flex-col gap-px">
-      <Button
-        type="button"
-        variant="yellow"
-        size="icon"
-        className="hidden xl:inline-flex"
-        onClick={onClickZoomIn}
-      >
+    <div className="hidden flex-col gap-px xl:flex">
+      <Button type="button" variant="yellow" size="icon" onClick={onClickZoomIn}>
         <span className="sr-only">Zoom in</span>
         <PlusIcon aria-hidden />
       </Button>
-      <Button
-        type="button"
-        variant="yellow"
-        size="icon"
-        className="hidden xl:inline-flex"
-        onClick={onClickZoomOut}
-      >
+      <Button type="button" variant="yellow" size="icon" onClick={onClickZoomOut}>
         <span className="sr-only">Zoom out</span>
         <MinusIcon aria-hidden />
       </Button>
