@@ -5,9 +5,9 @@
       "bulkable": true,
       "filterable": true,
       "searchable": true,
-      "pageSize": 10,
-      "mainField": "Name",
-      "defaultSortBy": "Name",
+      "pageSize": 100,
+      "mainField": "name",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -19,142 +19,16 @@
           "sortable": true
         }
       },
-      "Name": {
+      "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Name",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Description": {
-        "edit": {
-          "label": "Description",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Description",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Sources": {
-        "edit": {
-          "label": "Sources",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Sources",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "License": {
-        "edit": {
-          "label": "License",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "License",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Citations": {
-        "edit": {
-          "label": "Citations",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Citations",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Spatial_coverage": {
-        "edit": {
-          "label": "Spatial_coverage",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Spatial_coverage",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Spatial_resolution": {
-        "edit": {
-          "label": "Spatial_resolution",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Spatial_resolution",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Temporal_coverage": {
-        "edit": {
-          "label": "Temporal_coverage",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Temporal_coverage",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Temporal_resolution": {
-        "edit": {
-          "label": "Temporal_resolution",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Temporal_resolution",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Unit": {
-        "edit": {
-          "label": "Unit",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Unit",
+          "label": "name",
           "searchable": true,
           "sortable": true
         }
@@ -166,7 +40,7 @@
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Name"
+          "mainField": "name"
         },
         "list": {
           "label": "layers",
@@ -174,17 +48,47 @@
           "sortable": false
         }
       },
-      "Default_layer": {
+      "default_layer": {
         "edit": {
-          "label": "Default_layer",
+          "label": "default_layer",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Name"
+          "mainField": "name"
         },
         "list": {
-          "label": "Default_layer",
+          "label": "default_layer",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "topic": {
+        "edit": {
+          "label": "topic",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "topic",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "sub_topic": {
+        "edit": {
+          "label": "sub_topic",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "sub_topic",
           "searchable": true,
           "sortable": true
         }
@@ -249,60 +153,20 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Description",
-        "Sources"
-      ],
       "edit": [
         [
           {
-            "name": "Name",
-            "size": 6
-          },
-          {
-            "name": "Description",
+            "name": "name",
             "size": 6
           }
         ],
         [
           {
-            "name": "Sources",
+            "name": "topic",
             "size": 6
           },
           {
-            "name": "License",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "Citations",
-            "size": 6
-          },
-          {
-            "name": "Spatial_coverage",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "Spatial_resolution",
-            "size": 6
-          },
-          {
-            "name": "Temporal_coverage",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "Temporal_resolution",
-            "size": 6
-          },
-          {
-            "name": "Unit",
+            "name": "sub_topic",
             "size": 6
           }
         ],
@@ -312,10 +176,16 @@
             "size": 6
           },
           {
-            "name": "Default_layer",
+            "name": "default_layer",
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "topic",
+        "sub_topic",
+        "name"
       ]
     },
     "uid": "api::dataset.dataset"

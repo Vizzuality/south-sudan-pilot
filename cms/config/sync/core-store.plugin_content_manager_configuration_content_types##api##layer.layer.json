@@ -5,9 +5,9 @@
       "bulkable": true,
       "filterable": true,
       "searchable": true,
-      "pageSize": 10,
-      "mainField": "Name",
-      "defaultSortBy": "Name",
+      "pageSize": 100,
+      "mainField": "name",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -19,158 +19,74 @@
           "sortable": true
         }
       },
-      "Name": {
+      "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Name",
+          "label": "name",
           "searchable": true,
           "sortable": true
         }
       },
-      "Slug": {
+      "type": {
         "edit": {
-          "label": "Slug",
+          "label": "type",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Slug",
+          "label": "type",
           "searchable": true,
           "sortable": true
         }
       },
-      "Type": {
+      "mapbox_config": {
         "edit": {
-          "label": "Type",
+          "label": "mapbox_config",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Type",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Config": {
-        "edit": {
-          "label": "Config",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Config",
+          "label": "mapbox_config",
           "searchable": false,
           "sortable": false
         }
       },
-      "Params_config": {
+      "params_config": {
         "edit": {
-          "label": "Params_config",
+          "label": "params_config",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Params_config",
+          "label": "params_config",
           "searchable": false,
           "sortable": false
         }
       },
-      "Legend_config": {
+      "legend_config": {
         "edit": {
-          "label": "Legend_config",
+          "label": "legend_config",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Legend_config",
+          "label": "legend_config",
           "searchable": false,
           "sortable": false
-        }
-      },
-      "Interaction_config": {
-        "edit": {
-          "label": "Interaction_config",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Interaction_config",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "Temporal_step": {
-        "edit": {
-          "label": "Temporal_step",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Temporal_step",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Temporal_step_unit": {
-        "edit": {
-          "label": "Temporal_step_unit",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Temporal_step_unit",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Temporal_start_date": {
-        "edit": {
-          "label": "Temporal_start_date",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Temporal_start_date",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "Temporal_end_date": {
-        "edit": {
-          "label": "Temporal_end_date",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Temporal_end_date",
-          "searchable": true,
-          "sortable": true
         }
       },
       "createdAt": {
@@ -233,73 +149,40 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Slug",
-        "Type"
-      ],
       "edit": [
         [
           {
-            "name": "Name",
+            "name": "name",
             "size": 6
           },
           {
-            "name": "Slug",
+            "name": "type",
             "size": 6
           }
         ],
         [
           {
-            "name": "Type",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "Config",
+            "name": "mapbox_config",
             "size": 12
           }
         ],
         [
           {
-            "name": "Params_config",
+            "name": "params_config",
             "size": 12
           }
         ],
         [
           {
-            "name": "Legend_config",
+            "name": "legend_config",
             "size": 12
-          }
-        ],
-        [
-          {
-            "name": "Interaction_config",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "Temporal_step",
-            "size": 4
-          },
-          {
-            "name": "Temporal_step_unit",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "Temporal_start_date",
-            "size": 4
-          },
-          {
-            "name": "Temporal_end_date",
-            "size": 4
           }
         ]
+      ],
+      "list": [
+        "id",
+        "type",
+        "name"
       ]
     },
     "uid": "api::layer.layer"

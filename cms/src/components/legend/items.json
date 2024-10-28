@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_legend_item_items",
+  "info": {
+    "displayName": "item",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "color": {
+      "type": "string",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "required": true
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

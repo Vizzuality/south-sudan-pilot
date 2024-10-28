@@ -1,12 +1,18 @@
+import ContextualLayersControls from "./contextual-layers";
 import MapSettingsControls from "./map-settings";
 import ZoomControls from "./zoom";
 
 const Controls = () => {
   return (
-    <div className="absolute bottom-10 right-5 z-10 flex flex-col gap-2 xl:bottom-6 xl:right-10">
-      <ZoomControls />
-      <MapSettingsControls />
-    </div>
+    <>
+      <div className="absolute bottom-20 right-5 z-10 leading-none xl:bottom-auto xl:right-10 xl:top-6">
+        <ContextualLayersControls />
+      </div>
+      <div className="absolute bottom-10 right-5 z-10 flex flex-col gap-2 xl:bottom-6 xl:right-10">
+        <ZoomControls />
+        <MapSettingsControls />
+      </div>
+    </>
   );
 };
 

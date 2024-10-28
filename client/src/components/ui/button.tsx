@@ -17,7 +17,7 @@ const buttonVariants = cva(
           "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-neutral-950",
       },
       size: {
-        default: "h-10 px-4 py-2",
+        default: "h-8 w-auto xl:h-10 px-4 xl:py-2",
         icon: "h-8 w-8 xl:h-10 xl:w-10",
         auto: "",
       },

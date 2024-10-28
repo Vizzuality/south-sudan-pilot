@@ -6,8 +6,8 @@
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "Name",
-      "defaultSortBy": "Name",
+      "mainField": "name",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -19,47 +19,18 @@
           "sortable": true
         }
       },
-      "Name": {
+      "name": {
         "edit": {
-          "label": "Name",
+          "label": "name",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Name",
+          "label": "name",
           "searchable": true,
           "sortable": true
-        }
-      },
-      "Description": {
-        "edit": {
-          "label": "Description",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Description",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "datasets": {
-        "edit": {
-          "label": "datasets",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "Name"
-        },
-        "list": {
-          "label": "datasets",
-          "searchable": false,
-          "sortable": false
         }
       },
       "createdAt": {
@@ -124,24 +95,12 @@
     "layouts": {
       "list": [
         "id",
-        "Name",
-        "Description",
-        "datasets"
+        "name"
       ],
       "edit": [
         [
           {
-            "name": "Name",
-            "size": 6
-          },
-          {
-            "name": "Description",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "datasets",
+            "name": "name",
             "size": 6
           }
         ]

@@ -9,18 +9,11 @@
       "subject": "api::dataset.dataset",
       "properties": {
         "fields": [
-          "Name",
-          "Description",
-          "Sources",
-          "License",
-          "Citations",
-          "Spatial_coverage",
-          "Spatial_resolution",
-          "Temporal_coverage",
-          "Temporal_resolution",
-          "Unit",
+          "name",
           "layers",
-          "Default_layer"
+          "default_layer",
+          "topic",
+          "sub_topic"
         ]
       },
       "conditions": []
@@ -33,30 +26,16 @@
       "conditions": []
     },
     {
-      "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
-      "subject": "api::dataset.dataset",
-      "properties": {},
-      "conditions": []
-    },
-    {
       "action": "plugin::content-manager.explorer.read",
       "actionParameters": {},
       "subject": "api::dataset.dataset",
       "properties": {
         "fields": [
-          "Name",
-          "Description",
-          "Sources",
-          "License",
-          "Citations",
-          "Spatial_coverage",
-          "Spatial_resolution",
-          "Temporal_coverage",
-          "Temporal_resolution",
-          "Unit",
+          "name",
           "layers",
-          "Default_layer"
+          "default_layer",
+          "topic",
+          "sub_topic"
         ]
       },
       "conditions": []
@@ -67,18 +46,11 @@
       "subject": "api::dataset.dataset",
       "properties": {
         "fields": [
-          "Name",
-          "Description",
-          "Sources",
-          "License",
-          "Citations",
-          "Spatial_coverage",
-          "Spatial_resolution",
-          "Temporal_coverage",
-          "Temporal_resolution",
-          "Unit",
+          "name",
           "layers",
-          "Default_layer"
+          "default_layer",
+          "topic",
+          "sub_topic"
         ]
       },
       "conditions": []
@@ -89,17 +61,13 @@
       "subject": "api::layer.layer",
       "properties": {
         "fields": [
-          "Name",
-          "Slug",
-          "Type",
-          "Config",
-          "Params_config",
-          "Legend_config",
-          "Interaction_config",
-          "Temporal_step",
-          "Temporal_step_unit",
-          "Temporal_start_date",
-          "Temporal_end_date"
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type",
+          "legend_config.items.color",
+          "legend_config.items.value"
         ]
       },
       "conditions": []
@@ -112,29 +80,18 @@
       "conditions": []
     },
     {
-      "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
-      "subject": "api::layer.layer",
-      "properties": {},
-      "conditions": []
-    },
-    {
       "action": "plugin::content-manager.explorer.read",
       "actionParameters": {},
       "subject": "api::layer.layer",
       "properties": {
         "fields": [
-          "Name",
-          "Slug",
-          "Type",
-          "Config",
-          "Params_config",
-          "Legend_config",
-          "Interaction_config",
-          "Temporal_step",
-          "Temporal_step_unit",
-          "Temporal_start_date",
-          "Temporal_end_date"
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type",
+          "legend_config.items.color",
+          "legend_config.items.value"
         ]
       },
       "conditions": []
@@ -145,17 +102,13 @@
       "subject": "api::layer.layer",
       "properties": {
         "fields": [
-          "Name",
-          "Slug",
-          "Type",
-          "Config",
-          "Params_config",
-          "Legend_config",
-          "Interaction_config",
-          "Temporal_step",
-          "Temporal_step_unit",
-          "Temporal_start_date",
-          "Temporal_end_date"
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type",
+          "legend_config.items.color",
+          "legend_config.items.value"
         ]
       },
       "conditions": []
@@ -166,9 +119,7 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "Name",
-          "Description",
-          "datasets"
+          "name"
         ]
       },
       "conditions": []
@@ -181,21 +132,12 @@
       "conditions": []
     },
     {
-      "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
-      "subject": "api::sub-topic.sub-topic",
-      "properties": {},
-      "conditions": []
-    },
-    {
       "action": "plugin::content-manager.explorer.read",
       "actionParameters": {},
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "Name",
-          "Description",
-          "datasets"
+          "name"
         ]
       },
       "conditions": []
@@ -206,9 +148,7 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "Name",
-          "Description",
-          "datasets"
+          "name"
         ]
       },
       "conditions": []
@@ -219,9 +159,8 @@
       "subject": "api::topic.topic",
       "properties": {
         "fields": [
-          "Name",
-          "Slug",
-          "sub_topics"
+          "name",
+          "slug"
         ]
       },
       "conditions": []
@@ -234,21 +173,13 @@
       "conditions": []
     },
     {
-      "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
-      "subject": "api::topic.topic",
-      "properties": {},
-      "conditions": []
-    },
-    {
       "action": "plugin::content-manager.explorer.read",
       "actionParameters": {},
       "subject": "api::topic.topic",
       "properties": {
         "fields": [
-          "Name",
-          "Slug",
-          "sub_topics"
+          "name",
+          "slug"
         ]
       },
       "conditions": []
@@ -259,9 +190,8 @@
       "subject": "api::topic.topic",
       "properties": {
         "fields": [
-          "Name",
-          "Slug",
-          "sub_topics"
+          "name",
+          "slug"
         ]
       },
       "conditions": []
@@ -556,6 +486,34 @@
     },
     {
       "action": "plugin::content-type-builder.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::documentation.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::documentation.settings.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::documentation.settings.regenerate",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::documentation.settings.update",
       "actionParameters": {},
       "subject": null,
       "properties": {},

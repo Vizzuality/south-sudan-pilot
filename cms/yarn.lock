@@ -2970,6 +2970,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@strapi/plugin-documentation@npm:4.25.13":
+  version: 4.25.13
+  resolution: "@strapi/plugin-documentation@npm:4.25.13"
+  dependencies:
+    "@strapi/design-system": "npm:1.19.0"
+    "@strapi/helper-plugin": "npm:4.25.13"
+    "@strapi/icons": "npm:1.19.0"
+    "@strapi/utils": "npm:4.25.13"
+    bcryptjs: "npm:2.4.3"
+    cheerio: "npm:^1.0.0-rc.12"
+    formik: "npm:2.4.0"
+    fs-extra: "npm:10.0.0"
+    immer: "npm:9.0.19"
+    koa-static: "npm:^5.0.0"
+    lodash: "npm:4.17.21"
+    path-to-regexp: "npm:6.3.0"
+    react-helmet: "npm:^6.1.0"
+    react-intl: "npm:6.4.1"
+    react-query: "npm:3.39.3"
+    swagger-ui-dist: "npm:4.19.0"
+    yaml: "npm:1.10.2"
+    yup: "npm:0.32.9"
+  peerDependencies:
+    "@strapi/strapi": ^4.0.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+    react-router-dom: ^5.2.0
+    styled-components: ^5.2.1
+  checksum: 10/0e0bc8f8926c3e1c584a6aa887b87944e6b5a8d7cc81f52e21078f36bfc05e1163fc309bf3af00e1a3efebae01e3679bbc1d5e34ff9dc5a3ed01925df8ab7065
+  languageName: node
+  linkType: hard
+
 "@strapi/plugin-email@npm:4.25.13":
   version: 4.25.13
   resolution: "@strapi/plugin-email@npm:4.25.13"
@@ -4979,6 +5011,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cheerio-select@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "cheerio-select@npm:2.1.0"
+  dependencies:
+    boolbase: "npm:^1.0.0"
+    css-select: "npm:^5.1.0"
+    css-what: "npm:^6.1.0"
+    domelementtype: "npm:^2.3.0"
+    domhandler: "npm:^5.0.3"
+    domutils: "npm:^3.0.1"
+  checksum: 10/b5d89208c23468c3a32d1e04f88b9e8c6e332e3649650c5cd29255e2cebc215071ae18563f58c3dc3f6ef4c234488fc486035490fceb78755572288245e2931a
+  languageName: node
+  linkType: hard
+
+"cheerio@npm:^1.0.0-rc.12":
+  version: 1.0.0
+  resolution: "cheerio@npm:1.0.0"
+  dependencies:
+    cheerio-select: "npm:^2.1.0"
+    dom-serializer: "npm:^2.0.0"
+    domhandler: "npm:^5.0.3"
+    domutils: "npm:^3.1.0"
+    encoding-sniffer: "npm:^0.2.0"
+    htmlparser2: "npm:^9.1.0"
+    parse5: "npm:^7.1.2"
+    parse5-htmlparser2-tree-adapter: "npm:^7.0.0"
+    parse5-parser-stream: "npm:^7.1.2"
+    undici: "npm:^6.19.5"
+    whatwg-mimetype: "npm:^4.0.0"
+  checksum: 10/b535070add0f86b0a1f234274ad3ffb2c1c375c05b322d8057e89c3c797b3b4d2f05826c34a04df218bec9abf21b9f0d0bd71974a8dfe28b943fb87ab0170c38
+  languageName: node
+  linkType: hard
+
 "chokidar@npm:3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
@@ -5193,6 +5258,7 @@ __metadata:
   resolution: "cms@workspace:."
   dependencies:
     "@strapi/plugin-cloud": "npm:4.25.13"
+    "@strapi/plugin-documentation": "npm:4.25.13"
     "@strapi/plugin-i18n": "npm:4.25.13"
     "@strapi/plugin-users-permissions": "npm:4.25.13"
     "@strapi/strapi": "npm:4.25.13"
@@ -5733,6 +5799,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-select@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "css-select@npm:5.1.0"
+  dependencies:
+    boolbase: "npm:^1.0.0"
+    css-what: "npm:^6.1.0"
+    domhandler: "npm:^5.0.2"
+    domutils: "npm:^3.0.1"
+    nth-check: "npm:^2.0.1"
+  checksum: 10/d486b1e7eb140468218a5ab5af53257e01f937d2173ac46981f6b7de9c5283d55427a36715dc8decfc0c079cf89259ac5b41ef58f6e1a422eee44ab8bfdc78da
+  languageName: node
+  linkType: hard
+
 "css-to-react-native@npm:^3.0.0":
   version: 3.2.0
   resolution: "css-to-react-native@npm:3.2.0"
@@ -5744,7 +5823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-what@npm:^6.0.1":
+"css-what@npm:^6.0.1, css-what@npm:^6.1.0":
   version: 6.1.0
   resolution: "css-what@npm:6.1.0"
   checksum: 10/c67a3a2d0d81843af87f8bf0a4d0845b0f952377714abbb2884e48942409d57a2110eabee003609d02ee487b054614bdfcfc59ee265728ff105bd5aa221c1d0e
@@ -6207,7 +6286,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^3.0.1":
+"domutils@npm:^3.0.1, domutils@npm:^3.1.0":
   version: 3.1.0
   resolution: "domutils@npm:3.1.0"
   dependencies:
@@ -6347,6 +6426,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"encoding-sniffer@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "encoding-sniffer@npm:0.2.0"
+  dependencies:
+    iconv-lite: "npm:^0.6.3"
+    whatwg-encoding: "npm:^3.1.1"
+  checksum: 10/fe61a759dbef4d94ddc6f4fa645459897f4275eba04f0135d0459099b5f62fbba8a7ae57d23c9ec9b118c4c39ce056b51f1b8e62ad73a8ab365699448d655f4c
+  languageName: node
+  linkType: hard
+
 "encoding@npm:^0.1.13":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
@@ -6382,7 +6471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^4.2.0, entities@npm:^4.4.0":
+"entities@npm:^4.2.0, entities@npm:^4.4.0, entities@npm:^4.5.0":
   version: 4.5.0
   resolution: "entities@npm:4.5.0"
   checksum: 10/ede2a35c9bce1aeccd055a1b445d41c75a14a2bb1cd22e242f20cf04d236cdcd7f9c859eb83f76885327bfae0c25bf03303665ee1ce3d47c5927b98b0e3e3d48
@@ -7987,6 +8076,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"htmlparser2@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "htmlparser2@npm:9.1.0"
+  dependencies:
+    domelementtype: "npm:^2.3.0"
+    domhandler: "npm:^5.0.3"
+    domutils: "npm:^3.1.0"
+    entities: "npm:^4.5.0"
+  checksum: 10/6352fa2a5495781fa9a02c9049908334cd068ff36d753870d30cd13b841e99c19646717567a2f9e9c44075bbe43d364e102f9d013a731ce962226d63746b794f
+  languageName: node
+  linkType: hard
+
 "http-assert@npm:^1.3.0":
   version: 1.5.0
   resolution: "http-assert@npm:1.5.0"
@@ -8119,7 +8220,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"iconv-lite@npm:^0.6.2":
+"iconv-lite@npm:0.6.3, iconv-lite@npm:^0.6.2, iconv-lite@npm:^0.6.3":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
   dependencies:
@@ -9268,7 +9369,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koa-static@npm:5.0.0":
+"koa-static@npm:5.0.0, koa-static@npm:^5.0.0":
   version: 5.0.0
   resolution: "koa-static@npm:5.0.0"
   dependencies:
@@ -10920,6 +11021,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parse5-htmlparser2-tree-adapter@npm:^7.0.0":
+  version: 7.1.0
+  resolution: "parse5-htmlparser2-tree-adapter@npm:7.1.0"
+  dependencies:
+    domhandler: "npm:^5.0.3"
+    parse5: "npm:^7.0.0"
+  checksum: 10/75910af9137451e9c53e1e0d712f7393f484e89e592b1809ee62ad6cedd61b98daeaa5206ff5d9f06778002c91fac311afedde4880e1916fdb44fa71199dae73
+  languageName: node
+  linkType: hard
+
+"parse5-parser-stream@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "parse5-parser-stream@npm:7.1.2"
+  dependencies:
+    parse5: "npm:^7.0.0"
+  checksum: 10/75b232d460bce6bd0e35012750a78ef034f40ccf550b7c6cec3122395af6b4553202ad3663ad468cf537ead5a2e13b6727670395fd0ff548faccad1dc2dc93cf
+  languageName: node
+  linkType: hard
+
+"parse5@npm:^7.0.0, parse5@npm:^7.1.2":
+  version: 7.2.0
+  resolution: "parse5@npm:7.2.0"
+  dependencies:
+    entities: "npm:^4.5.0"
+  checksum: 10/49dabfe848f00e8cad8d9198a094d667fbdecbfa5143ddf8fb708e499b5ba76426c16135c8993b1d8e01827b92e8cfab0a9a248afa6ad7cc6f38aecf5bd017e6
+  languageName: node
+  linkType: hard
+
 "parseurl@npm:^1.3.2":
   version: 1.3.3
   resolution: "parseurl@npm:1.3.3"
@@ -11055,6 +11184,13 @@ __metadata:
     lru-cache: "npm:^10.2.0"
     minipass: "npm:^5.0.0 || ^6.0.2 || ^7.0.0"
   checksum: 10/5e8845c159261adda6f09814d7725683257fcc85a18f329880ab4d7cc1d12830967eae5d5894e453f341710d5484b8fdbbd4d75181b4d6e1eb2f4dc7aeadc434
+  languageName: node
+  linkType: hard
+
+"path-to-regexp@npm:6.3.0":
+  version: 6.3.0
+  resolution: "path-to-regexp@npm:6.3.0"
+  checksum: 10/6822f686f01556d99538b350722ef761541ec0ce95ca40ce4c29e20a5b492fe8361961f57993c71b2418de12e604478dcf7c430de34b2c31a688363a7a944d9c
   languageName: node
   linkType: hard
 
@@ -13469,6 +13605,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swagger-ui-dist@npm:4.19.0":
+  version: 4.19.0
+  resolution: "swagger-ui-dist@npm:4.19.0"
+  checksum: 10/40c93be4e38a0e88f65a5ca6937b72d7c681f359bf523535da5bedcb899a85dc4bd9ebc5037360b075bda1b063c6415617e8805e5369df74be2d808ba9219479
+  languageName: node
+  linkType: hard
+
 "swap-case@npm:^1.1.0":
   version: 1.1.2
   resolution: "swap-case@npm:1.1.2"
@@ -13966,6 +14109,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici@npm:^6.19.5":
+  version: 6.20.1
+  resolution: "undici@npm:6.20.1"
+  checksum: 10/68604b53754a95ec89d52efc08fe3e70e333997300c9a5b69f2b6496f1f0f568b2e35adec6442985a7b1d2f7a5648ef5062d1736e4d68082d473cb82177674bc
+  languageName: node
+  linkType: hard
+
 "union-value@npm:^1.0.0":
   version: 1.0.1
   resolution: "union-value@npm:1.0.1"
@@ -14455,6 +14605,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"whatwg-encoding@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "whatwg-encoding@npm:3.1.1"
+  dependencies:
+    iconv-lite: "npm:0.6.3"
+  checksum: 10/bbef815eb67f91487c7f2ef96329743f5fd8357d7d62b1119237d25d41c7e452dff8197235b2d3c031365a17f61d3bb73ca49d0ed1582475aa4a670815e79534
+  languageName: node
+  linkType: hard
+
+"whatwg-mimetype@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "whatwg-mimetype@npm:4.0.0"
+  checksum: 10/894a618e2d90bf444b6f309f3ceb6e58cf21b2beaa00c8b333696958c4076f0c7b30b9d33413c9ffff7c5832a0a0c8569e5bb347ef44beded72aeefd0acd62e8
+  languageName: node
+  linkType: hard
+
 "whatwg-url@npm:^5.0.0":
   version: 5.0.0
   resolution: "whatwg-url@npm:5.0.0"
@@ -14698,7 +14864,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^1.10.0":
+"yaml@npm:1.10.2, yaml@npm:^1.10.0":
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
   checksum: 10/e088b37b4d4885b70b50c9fa1b7e54bd2e27f5c87205f9deaffd1fb293ab263d9c964feadb9817a7b129a5bf30a06582cb08750f810568ecc14f3cdbabb79cb3

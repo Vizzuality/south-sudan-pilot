@@ -30,20 +30,25 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  "fixed z-10 bg-rhino-blue-900 text-white p-5 transition ease-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-500 data-[state=open]:duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950",
+  "group fixed z-10 p-5 transition ease-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-500 data-[state=open]:duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950",
   {
     variants: {
       side: {
         top: "inset-x-0 top-0 border-t border-t-white/30 data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
         bottom:
           "inset-x-0 bottom-0 border-b border-b-white/30 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-l border-l-white/30 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+        left: "inset-y-0 left-0 h-full w-full border-l border-l-white/30 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:w-[400px]",
         right:
-          "inset-y-0 right-0 h-full w-3/4  border-r border-r-white/30 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+          "inset-y-0 right-0 h-full w-full border-r border-r-white/30 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:w-[400px]",
+      },
+      variant: {
+        default: "bg-rhino-blue-900 text-white",
+        light: "bg-white text-rhino-blue-950",
       },
     },
     defaultVariants: {
       side: "right",
+      variant: "default",
     },
   },
 );
@@ -55,9 +60,13 @@ interface SheetContentProps
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "right", className, children, ...props }, ref) => (
+>(({ side = "right", variant = "default", className, children, ...props }, ref) => (
   <SheetPortal>
-    <SheetPrimitive.Content ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
+    <SheetPrimitive.Content
+      ref={ref}
+      className={cn(sheetVariants({ side, variant }), className)}
+      {...props}
+    >
       {children}
     </SheetPrimitive.Content>
   </SheetPortal>

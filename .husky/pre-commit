@@ -1,0 +1,2 @@
+cd ./cms && yarn config-sync export -y
+cd ../client && yarn types && yarn lint --fix && yarn check-types && git add src/types/generated/

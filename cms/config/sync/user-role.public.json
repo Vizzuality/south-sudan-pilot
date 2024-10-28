@@ -4,6 +4,30 @@
   "type": "public",
   "permissions": [
     {
+      "action": "api::dataset.dataset.find"
+    },
+    {
+      "action": "api::dataset.dataset.findOne"
+    },
+    {
+      "action": "api::layer.layer.find"
+    },
+    {
+      "action": "api::layer.layer.findOne"
+    },
+    {
+      "action": "api::sub-topic.sub-topic.find"
+    },
+    {
+      "action": "api::sub-topic.sub-topic.findOne"
+    },
+    {
+      "action": "api::topic.topic.find"
+    },
+    {
+      "action": "api::topic.topic.findOne"
+    },
+    {
       "action": "plugin::users-permissions.auth.callback"
     },
     {

@@ -4,23 +4,17 @@
   "info": {
     "singularName": "sub-topic",
     "pluralName": "sub-topics",
-    "displayName": "Sub-Topic"
+    "displayName": "Sub-Topic",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
-    },
-    "Description": {
-      "type": "text"
-    },
-    "datasets": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::dataset.dataset"
+    "name": {
+      "type": "string",
+      "required": true
     }
   }
 }

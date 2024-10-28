@@ -8,20 +8,18 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
+    "name": {
+      "type": "string",
+      "required": true
     },
-    "Slug": {
-      "type": "string"
-    },
-    "sub_topics": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::sub-topic.sub-topic"
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": false
     }
   }
 }
