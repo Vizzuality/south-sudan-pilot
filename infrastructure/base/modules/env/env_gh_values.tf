@@ -49,6 +49,15 @@ locals {
 
   cms_variable_map_with_unprefixed_keys = {
     CMS_URL = local.cms_lb_url
+
+    DATABASE_CLIENT                  = "postgres"
+    DATABASE_HOST                    = module.postgresql.host
+    DATABASE_PORT                    = module.postgresql.port
+    DATABASE_NAME                    = module.postgresql.db_name
+    DATABASE_USERNAME                = module.postgresql.username
+
+    AWS_REGION                = var.aws_region
+    AWS_SES_DOMAIN            = var.domain
   }
   cms_secret_map_with_unprefixed_keys = {
     HOST = "0.0.0.0"
@@ -65,17 +74,10 @@ locals {
     TRANSFER_TOKEN_SALT = random_password.transfer_token_salt.result
     JWT_SECRET          = random_password.jwt_secret.result
 
-    DATABASE_CLIENT                  = "postgres"
-    DATABASE_HOST                    = module.postgresql.host
-    DATABASE_PORT                    = module.postgresql.port
-    DATABASE_NAME                    = module.postgresql.db_name
-    DATABASE_USERNAME                = module.postgresql.username
     DATABASE_PASSWORD                = module.postgresql.password
     DATABASE_SSL                     = true
     DATABASE_SSL_REJECT_UNAUTHORIZED = false
 
-    AWS_REGION                = var.aws_region
-    AWS_SES_DOMAIN            = var.domain
     AWS_SES_ACCESS_KEY_ID     = aws_iam_access_key.email_user_access_key.id
     AWS_SES_ACCESS_KEY_SECRET = aws_iam_access_key.email_user_access_key.secret
   }

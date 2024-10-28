@@ -32,3 +32,13 @@ resource "aws_iam_user_policy" "get_ecr_token_policy" {
     ]
   })
 }
+
+// uncomment once the email identity has been verified
+resource "aws_ses_domain_identity_verification" "domain_identity_verification" {
+  domain = var.domain
+}
+
+// The configuration must be manually set to the identity on the AWS console
+resource "aws_ses_configuration_set" "email_configuration_set" {
+  name = "${var.project}-email-config-set"
+}

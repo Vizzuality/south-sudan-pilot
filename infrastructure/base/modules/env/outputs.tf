@@ -67,3 +67,11 @@ output "email_iam_user_access_key_id" {
 output "email_iam_user_access_key_secret" {
   value = aws_iam_access_key.email_user_access_key.secret
 }
+
+output "programmatic_asset_user_access_key_id" {
+  value = aws_iam_access_key.programmatic_asset_user_access_key.id
+}
+
+output "programmatic_asset_user_access_key_secret" {
+  value = aws_iam_access_key.programmatic_asset_user_access_key.secret
+}
