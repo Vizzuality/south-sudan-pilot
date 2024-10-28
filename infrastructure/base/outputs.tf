@@ -6,6 +6,15 @@ output "staging_postgresql_port" {
   value = module.staging.postgresql_port
 }
 
+
+output "programmatic_asset_user_access_key" {
+  value = module.staging.programmatic_asset_user_access_key_id
+}
+output "programmatic_asset_user_access_secret" {
+  sensitive = true
+  value = module.staging.programmatic_asset_user_access_key_secret
+}
+
 output "staging_dns_entries" {
   value = concat([
     {
@@ -80,3 +89,13 @@ output "acm_certificate_domain_validation_options" {
 #     }
 #   ])
 # }
+
+
+output "postgresql_username" {
+  value = module.staging.postgresql_username
+}
+
+output "postgresql_password" {
+  sensitive = true
+  value = module.staging.postgresql_password
+}

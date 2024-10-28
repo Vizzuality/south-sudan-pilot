@@ -24,10 +24,15 @@ resource "aws_s3_bucket_versioning" "asset_bucket_versioning" {
   }
 }
 
+// this is commented, because we want to extend the policy it outside of the module
+// if we declare the aws_s3_bucket_policy both here and outside the module, they will overwrite each other
+// alternating every time the TF config is applied.
+/*
 resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
   bucket = aws_s3_bucket.bucket.id
-  policy = data.aws_iam_policy_document.allow_access_from_account.json
+  policy = data.aws_iam_policy_document.base_bucket_policy.json
 }
+*/
 
 resource "aws_s3_bucket_cors_configuration" "bucket_cors_configuration" {
   bucket = aws_s3_bucket.bucket.id
@@ -53,15 +58,18 @@ resource "aws_s3_bucket_public_access_block" "s3_bucket_public_access" {
   bucket = aws_s3_bucket.bucket.id
 
   block_public_acls       = false
-  block_public_policy     = true
+  block_public_policy     = false
   ignore_public_acls      = false
-  restrict_public_buckets = true
+  restrict_public_buckets = false
 }
 
 data "aws_caller_identity" "current" {}
 
-data "aws_iam_policy_document" "allow_access_from_account" {
+// Base bucket policy with access from all identities in the account
+data "aws_iam_policy_document" "base_bucket_policy" {
   statement {
+    sid = "accountAccess"
+
     principals {
       type        = "AWS"
       identifiers = [data.aws_caller_identity.current.account_id]
@@ -69,10 +77,11 @@ data "aws_iam_policy_document" "allow_access_from_account" {
 
     actions = [
       "s3:PutObject",
-      "s3:GetObject",
+      "s3:GetObject*",
       "s3:ListBucket",
       "s3:DeleteObject",
-      "s3:PutObjectAcl"
+      "s3:PutObjectAcl",
+      "s3:PutObjectTagging"
     ]
 
     resources = [
