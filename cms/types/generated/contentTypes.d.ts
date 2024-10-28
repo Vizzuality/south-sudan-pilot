@@ -873,6 +873,53 @@ export interface ApiLayerLayer extends Schema.CollectionType {
   };
 }
 
+export interface ApiLocationLocation extends Schema.CollectionType {
+  collectionName: 'locations';
+  info: {
+    singularName: 'location';
+    pluralName: 'locations';
+    displayName: 'Location';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    type: Attribute.Enumeration<['administrative', 'hydrological']> &
+      Attribute.Required;
+    level: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 3;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Required;
+    children: Attribute.Relation<
+      'api::location.location',
+      'oneToMany',
+      'api::location.location'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSubTopicSubTopic extends Schema.CollectionType {
   collectionName: 'sub_topics';
   info: {
@@ -954,6 +1001,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::dataset.dataset': ApiDatasetDataset;
       'api::layer.layer': ApiLayerLayer;
+      'api::location.location': ApiLocationLocation;
       'api::sub-topic.sub-topic': ApiSubTopicSubTopic;
       'api::topic.topic': ApiTopicTopic;
     }

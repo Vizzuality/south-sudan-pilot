@@ -16,6 +16,12 @@
       "action": "api::layer.layer.findOne"
     },
     {
+      "action": "api::location.location.find"
+    },
+    {
+      "action": "api::location.location.findOne"
+    },
+    {
       "action": "api::sub-topic.sub-topic.find"
     },
     {

@@ -1,5 +1,5 @@
 {
-  "key": "plugin_content_manager_configuration_content_types::api::layer.layer",
+  "key": "plugin_content_manager_configuration_content_types::api::location.location",
   "value": {
     "settings": {
       "bulkable": true,
@@ -47,44 +47,45 @@
           "sortable": true
         }
       },
-      "mapbox_config": {
+      "level": {
         "edit": {
-          "label": "mapbox_config",
+          "label": "level",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "mapbox_config",
-          "searchable": false,
-          "sortable": false
+          "label": "level",
+          "searchable": true,
+          "sortable": true
         }
       },
-      "params_config": {
+      "code": {
         "edit": {
-          "label": "params_config",
+          "label": "code",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "params_config",
-          "searchable": false,
-          "sortable": false
+          "label": "code",
+          "searchable": true,
+          "sortable": true
         }
       },
-      "legend_config": {
+      "children": {
         "edit": {
-          "label": "legend_config",
+          "label": "children",
           "description": "",
           "placeholder": "",
           "visible": true,
-          "editable": true
+          "editable": true,
+          "mainField": "name"
         },
         "list": {
-          "label": "legend_config",
+          "label": "children",
           "searchable": false,
           "sortable": false
         }
@@ -149,12 +150,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "type",
-        "legend_config"
-      ],
       "edit": [
         [
           {
@@ -162,31 +157,36 @@
             "size": 6
           },
           {
-            "name": "type",
+            "name": "code",
             "size": 6
           }
         ],
         [
           {
-            "name": "mapbox_config",
-            "size": 12
+            "name": "type",
+            "size": 6
+          },
+          {
+            "name": "level",
+            "size": 4
           }
         ],
         [
           {
-            "name": "params_config",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "legend_config",
-            "size": 12
+            "name": "children",
+            "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "type",
+        "level",
+        "code",
+        "name"
       ]
     },
-    "uid": "api::layer.layer"
+    "uid": "api::location.location"
   },
   "type": "object",
   "environment": null,

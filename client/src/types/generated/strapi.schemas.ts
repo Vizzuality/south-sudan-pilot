@@ -266,10 +266,6 @@ export type TopicUpdatedBy = {
   data?: TopicUpdatedByData;
 };
 
-export type TopicCreatedBy = {
-  data?: TopicCreatedByData;
-};
-
 export interface Topic {
   createdAt?: string;
   createdBy?: TopicCreatedBy;
@@ -278,21 +274,6 @@ export interface Topic {
   updatedAt?: string;
   updatedBy?: TopicUpdatedBy;
 }
-
-export type TopicCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
-
-export type TopicCreatedByDataAttributesUpdatedByData = {
-  attributes?: TopicCreatedByDataAttributesUpdatedByDataAttributes;
-  id?: number;
-};
-
-export type TopicCreatedByDataAttributesUpdatedBy = {
-  data?: TopicCreatedByDataAttributesUpdatedByData;
-};
-
-export type TopicCreatedByDataAttributesRoles = {
-  data?: TopicCreatedByDataAttributesRolesDataItem[];
-};
 
 export type TopicCreatedByDataAttributes = {
   blocked?: boolean;
@@ -314,6 +295,42 @@ export type TopicCreatedByDataAttributes = {
 export type TopicCreatedByData = {
   attributes?: TopicCreatedByDataAttributes;
   id?: number;
+};
+
+export type TopicCreatedBy = {
+  data?: TopicCreatedByData;
+};
+
+export type TopicCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type TopicCreatedByDataAttributesUpdatedByData = {
+  attributes?: TopicCreatedByDataAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type TopicCreatedByDataAttributesUpdatedBy = {
+  data?: TopicCreatedByDataAttributesUpdatedByData;
+};
+
+export type TopicCreatedByDataAttributesRolesDataItemAttributes = {
+  code?: string;
+  createdAt?: string;
+  createdBy?: TopicCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+  description?: string;
+  name?: string;
+  permissions?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissions;
+  updatedAt?: string;
+  updatedBy?: TopicCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+  users?: TopicCreatedByDataAttributesRolesDataItemAttributesUsers;
+};
+
+export type TopicCreatedByDataAttributesRolesDataItem = {
+  attributes?: TopicCreatedByDataAttributesRolesDataItemAttributes;
+  id?: number;
+};
+
+export type TopicCreatedByDataAttributesRoles = {
+  data?: TopicCreatedByDataAttributesRolesDataItem[];
 };
 
 export type TopicCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
@@ -347,23 +364,6 @@ export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissions = {
   data?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
 };
 
-export type TopicCreatedByDataAttributesRolesDataItemAttributes = {
-  code?: string;
-  createdAt?: string;
-  createdBy?: TopicCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
-  description?: string;
-  name?: string;
-  permissions?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissions;
-  updatedAt?: string;
-  updatedBy?: TopicCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
-  users?: TopicCreatedByDataAttributesRolesDataItemAttributesUsers;
-};
-
-export type TopicCreatedByDataAttributesRolesDataItem = {
-  attributes?: TopicCreatedByDataAttributesRolesDataItemAttributes;
-  id?: number;
-};
-
 export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
 
 export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
@@ -373,6 +373,19 @@ export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataIt
 
 export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
   data?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+};
+
+export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
+  action?: string;
+  actionParameters?: unknown;
+  conditions?: unknown;
+  createdAt?: string;
+  createdBy?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+  properties?: unknown;
+  role?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+  subject?: string;
+  updatedAt?: string;
+  updatedBy?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
 };
 
 export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes = { [key: string]: unknown };
@@ -395,19 +408,6 @@ export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataIt
 
 export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy = {
   data?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
-};
-
-export type TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
-  action?: string;
-  actionParameters?: unknown;
-  conditions?: unknown;
-  createdAt?: string;
-  createdBy?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-  properties?: unknown;
-  role?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
-  subject?: string;
-  updatedAt?: string;
-  updatedBy?: TopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
 };
 
 export type TopicCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
@@ -466,14 +466,6 @@ export interface TopicRequest {
 
 export type SubTopicResponseMeta = { [key: string]: unknown };
 
-export interface SubTopic {
-  createdAt?: string;
-  createdBy?: SubTopicCreatedBy;
-  name: string;
-  updatedAt?: string;
-  updatedBy?: SubTopicUpdatedBy;
-}
-
 export interface SubTopicResponseDataObject {
   attributes?: SubTopic;
   id?: number;
@@ -495,23 +487,6 @@ export type SubTopicUpdatedBy = {
   data?: SubTopicUpdatedByData;
 };
 
-export type SubTopicCreatedByDataAttributes = {
-  blocked?: boolean;
-  createdAt?: string;
-  createdBy?: SubTopicCreatedByDataAttributesCreatedBy;
-  email?: string;
-  firstname?: string;
-  isActive?: boolean;
-  lastname?: string;
-  preferedLanguage?: string;
-  registrationToken?: string;
-  resetPasswordToken?: string;
-  roles?: SubTopicCreatedByDataAttributesRoles;
-  updatedAt?: string;
-  updatedBy?: SubTopicCreatedByDataAttributesUpdatedBy;
-  username?: string;
-};
-
 export type SubTopicCreatedByData = {
   attributes?: SubTopicCreatedByDataAttributes;
   id?: number;
@@ -520,6 +495,14 @@ export type SubTopicCreatedByData = {
 export type SubTopicCreatedBy = {
   data?: SubTopicCreatedByData;
 };
+
+export interface SubTopic {
+  createdAt?: string;
+  createdBy?: SubTopicCreatedBy;
+  name: string;
+  updatedAt?: string;
+  updatedBy?: SubTopicUpdatedBy;
+}
 
 export type SubTopicCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
 
@@ -541,6 +524,23 @@ export type SubTopicCreatedByDataAttributesRoles = {
   data?: SubTopicCreatedByDataAttributesRolesDataItem[];
 };
 
+export type SubTopicCreatedByDataAttributes = {
+  blocked?: boolean;
+  createdAt?: string;
+  createdBy?: SubTopicCreatedByDataAttributesCreatedBy;
+  email?: string;
+  firstname?: string;
+  isActive?: boolean;
+  lastname?: string;
+  preferedLanguage?: string;
+  registrationToken?: string;
+  resetPasswordToken?: string;
+  roles?: SubTopicCreatedByDataAttributesRoles;
+  updatedAt?: string;
+  updatedBy?: SubTopicCreatedByDataAttributesUpdatedBy;
+  username?: string;
+};
+
 export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
 
 export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
@@ -550,26 +550,6 @@ export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUsersDataItem 
 
 export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUsers = {
   data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
-};
-
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
-
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
-  attributes?: SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
-  id?: number;
-};
-
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
-  data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
-};
-
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
-  attributes?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
-  id?: number;
-};
-
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissions = {
-  data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
 };
 
 export type SubTopicCreatedByDataAttributesRolesDataItemAttributes = {
@@ -584,15 +564,15 @@ export type SubTopicCreatedByDataAttributesRolesDataItemAttributes = {
   users?: SubTopicCreatedByDataAttributesRolesDataItemAttributesUsers;
 };
 
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
 
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
-  attributes?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
+  attributes?: SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
   id?: number;
 };
 
-export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
-  data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
+  data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
 };
 
 export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
@@ -606,6 +586,26 @@ export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDat
   subject?: string;
   updatedAt?: string;
   updatedBy?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
+};
+
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
+  attributes?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
+  id?: number;
+};
+
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissions = {
+  data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
+};
+
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
+  attributes?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
+  data?: SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
 };
 
 export type SubTopicCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes = { [key: string]: unknown };
@@ -683,6 +683,316 @@ export interface SubTopicRequest {
   data: SubTopicRequestData;
 }
 
+export type LocationResponseMeta = { [key: string]: unknown };
+
+export interface LocationResponseDataObject {
+  attributes?: Location;
+  id?: number;
+}
+
+export interface LocationResponse {
+  data?: LocationResponseDataObject;
+  meta?: LocationResponseMeta;
+}
+
+export type LocationUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationUpdatedByData = {
+  attributes?: LocationUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationUpdatedBy = {
+  data?: LocationUpdatedByData;
+};
+
+export type LocationType = typeof LocationType[keyof typeof LocationType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const LocationType = {
+  administrative: 'administrative',
+  hydrological: 'hydrological',
+} as const;
+
+export interface Location {
+  children?: LocationChildren;
+  code: string;
+  createdAt?: string;
+  createdBy?: LocationCreatedBy;
+  level: number;
+  name: string;
+  type: LocationType;
+  updatedAt?: string;
+  updatedBy?: LocationUpdatedBy;
+}
+
+export type LocationCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationCreatedByData = {
+  attributes?: LocationCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationCreatedBy = {
+  data?: LocationCreatedByData;
+};
+
+export type LocationChildren = {
+  data?: LocationChildrenDataItem[];
+};
+
+export type LocationChildrenDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesUpdatedByData = {
+  attributes?: LocationChildrenDataItemAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesUpdatedBy = {
+  data?: LocationChildrenDataItemAttributesUpdatedByData;
+};
+
+export type LocationChildrenDataItemAttributesType = typeof LocationChildrenDataItemAttributesType[keyof typeof LocationChildrenDataItemAttributesType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const LocationChildrenDataItemAttributesType = {
+  administrative: 'administrative',
+  hydrological: 'hydrological',
+} as const;
+
+export type LocationChildrenDataItemAttributes = {
+  children?: LocationChildrenDataItemAttributesChildren;
+  code?: string;
+  createdAt?: string;
+  createdBy?: LocationChildrenDataItemAttributesCreatedBy;
+  level?: number;
+  name?: string;
+  type?: LocationChildrenDataItemAttributesType;
+  updatedAt?: string;
+  updatedBy?: LocationChildrenDataItemAttributesUpdatedBy;
+};
+
+export type LocationChildrenDataItem = {
+  attributes?: LocationChildrenDataItemAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributes = {
+  blocked?: boolean;
+  createdAt?: string;
+  createdBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedBy;
+  email?: string;
+  firstname?: string;
+  isActive?: boolean;
+  lastname?: string;
+  preferedLanguage?: string;
+  registrationToken?: string;
+  resetPasswordToken?: string;
+  roles?: LocationChildrenDataItemAttributesCreatedByDataAttributesRoles;
+  updatedAt?: string;
+  updatedBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedBy;
+  username?: string;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItem = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRoles = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItem[];
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes = {
+  code?: string;
+  createdAt?: string;
+  createdBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+  description?: string;
+  name?: string;
+  permissions?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
+  updatedAt?: string;
+  updatedBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+  users?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
+  action?: string;
+  actionParameters?: unknown;
+  conditions?: unknown;
+  createdAt?: string;
+  createdBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+  properties?: unknown;
+  role?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+  subject?: string;
+  updatedAt?: string;
+  updatedBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByData = {
+  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedBy = {
+  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByData;
+};
+
+export type LocationChildrenDataItemAttributesChildrenDataItemAttributes = { [key: string]: unknown };
+
+export type LocationChildrenDataItemAttributesChildrenDataItem = {
+  attributes?: LocationChildrenDataItemAttributesChildrenDataItemAttributes;
+  id?: number;
+};
+
+export type LocationChildrenDataItemAttributesChildren = {
+  data?: LocationChildrenDataItemAttributesChildrenDataItem[];
+};
+
+export type LocationListResponseMetaPagination = {
+  page?: number;
+  /** @maximum 1 */
+  pageCount?: number;
+  /** @minimum 25 */
+  pageSize?: number;
+  total?: number;
+};
+
+export type LocationListResponseMeta = {
+  pagination?: LocationListResponseMetaPagination;
+};
+
+export interface LocationListResponseDataItem {
+  attributes?: Location;
+  id?: number;
+}
+
+export interface LocationListResponse {
+  data?: LocationListResponseDataItem[];
+  meta?: LocationListResponseMeta;
+}
+
+export interface LocationRequest {
+  data: LocationRequestData;
+}
+
+export type LocationRequestDataType = typeof LocationRequestDataType[keyof typeof LocationRequestDataType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const LocationRequestDataType = {
+  administrative: 'administrative',
+  hydrological: 'hydrological',
+} as const;
+
+export type LocationRequestDataChildrenItem = number | string;
+
+export type LocationRequestData = {
+  children?: LocationRequestDataChildrenItem[];
+  code: string;
+  level: number;
+  name: string;
+  type: LocationRequestDataType;
+};
+
 export type LegendLegendConfigComponentType = typeof LegendLegendConfigComponentType[keyof typeof LegendLegendConfigComponentType];
 
 
@@ -706,11 +1016,6 @@ export interface LegendLegendConfigComponent {
 }
 
 export type LayerResponseMeta = { [key: string]: unknown };
-
-export interface LayerResponseDataObject {
-  attributes?: Layer;
-  id?: number;
-}
 
 export interface LayerResponse {
   data?: LayerResponseDataObject;
@@ -749,6 +1054,11 @@ export interface Layer {
   updatedBy?: LayerUpdatedBy;
 }
 
+export interface LayerResponseDataObject {
+  attributes?: Layer;
+  id?: number;
+}
+
 export type LayerCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
 
 export type LayerCreatedByDataAttributesUpdatedByData = {
@@ -758,6 +1068,15 @@ export type LayerCreatedByDataAttributesUpdatedByData = {
 
 export type LayerCreatedByDataAttributesUpdatedBy = {
   data?: LayerCreatedByDataAttributesUpdatedByData;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItem = {
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributes;
+  id?: number;
+};
+
+export type LayerCreatedByDataAttributesRoles = {
+  data?: LayerCreatedByDataAttributesRolesDataItem[];
 };
 
 export type LayerCreatedByDataAttributes = {
@@ -786,6 +1105,21 @@ export type LayerCreatedBy = {
   data?: LayerCreatedByData;
 };
 
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+  id?: number;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUsers = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+};
+
 export type LayerCreatedByDataAttributesRolesDataItemAttributes = {
   code?: string;
   createdAt?: string;
@@ -798,48 +1132,11 @@ export type LayerCreatedByDataAttributesRolesDataItemAttributes = {
   users?: LayerCreatedByDataAttributesRolesDataItemAttributesUsers;
 };
 
-export type LayerCreatedByDataAttributesRolesDataItem = {
-  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributes;
-  id?: number;
-};
-
-export type LayerCreatedByDataAttributesRoles = {
-  data?: LayerCreatedByDataAttributesRolesDataItem[];
-};
-
-export type LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
-
-export type LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
-  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
-  id?: number;
-};
-
-export type LayerCreatedByDataAttributesRolesDataItemAttributesUsers = {
-  data?: LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
-};
-
 export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
 
 export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
   attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
   id?: number;
-};
-
-export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
-  data?: LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
-};
-
-export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
-  action?: string;
-  actionParameters?: unknown;
-  conditions?: unknown;
-  createdAt?: string;
-  createdBy?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-  properties?: unknown;
-  role?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
-  subject?: string;
-  updatedAt?: string;
-  updatedBy?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
 };
 
 export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
@@ -882,6 +1179,19 @@ export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataIt
 
 export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy = {
   data?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
+  action?: string;
+  actionParameters?: unknown;
+  conditions?: unknown;
+  createdAt?: string;
+  createdBy?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+  properties?: unknown;
+  role?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+  subject?: string;
+  updatedAt?: string;
+  updatedBy?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
 };
 
 export type LayerCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
@@ -952,26 +1262,14 @@ export interface LayerRequest {
 
 export type DatasetResponseMeta = { [key: string]: unknown };
 
-export interface DatasetResponse {
-  data?: DatasetResponseDataObject;
-  meta?: DatasetResponseMeta;
-}
-
-export interface Dataset {
-  createdAt?: string;
-  createdBy?: DatasetCreatedBy;
-  default_layer?: DatasetDefaultLayer;
-  layers?: DatasetLayers;
-  name: string;
-  sub_topic?: DatasetSubTopic;
-  topic?: DatasetTopic;
-  updatedAt?: string;
-  updatedBy?: DatasetUpdatedBy;
-}
-
 export interface DatasetResponseDataObject {
   attributes?: Dataset;
   id?: number;
+}
+
+export interface DatasetResponse {
+  data?: DatasetResponseDataObject;
+  meta?: DatasetResponseMeta;
 }
 
 export type DatasetUpdatedByDataAttributes = { [key: string]: unknown };
@@ -985,16 +1283,17 @@ export type DatasetUpdatedBy = {
   data?: DatasetUpdatedByData;
 };
 
-export type DatasetTopicData = {
-  attributes?: DatasetTopicDataAttributes;
-  id?: number;
-};
-
-export type DatasetTopic = {
-  data?: DatasetTopicData;
-};
-
-export type DatasetTopicDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+export interface Dataset {
+  createdAt?: string;
+  createdBy?: DatasetCreatedBy;
+  default_layer?: DatasetDefaultLayer;
+  layers?: DatasetLayers;
+  name: string;
+  sub_topic?: DatasetSubTopic;
+  topic?: DatasetTopic;
+  updatedAt?: string;
+  updatedBy?: DatasetUpdatedBy;
+}
 
 export type DatasetTopicDataAttributesUpdatedByData = {
   attributes?: DatasetTopicDataAttributesUpdatedByDataAttributes;
@@ -1013,6 +1312,17 @@ export type DatasetTopicDataAttributes = {
   updatedAt?: string;
   updatedBy?: DatasetTopicDataAttributesUpdatedBy;
 };
+
+export type DatasetTopicData = {
+  attributes?: DatasetTopicDataAttributes;
+  id?: number;
+};
+
+export type DatasetTopic = {
+  data?: DatasetTopicData;
+};
+
+export type DatasetTopicDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
 
 export type DatasetTopicDataAttributesCreatedByDataAttributes = { [key: string]: unknown };
 
@@ -1064,18 +1374,6 @@ export type DatasetSubTopicDataAttributesCreatedBy = {
   data?: DatasetSubTopicDataAttributesCreatedByData;
 };
 
-export type DatasetLayersDataItemAttributes = {
-  createdAt?: string;
-  createdBy?: DatasetLayersDataItemAttributesCreatedBy;
-  legend_config?: DatasetLayersDataItemAttributesLegendConfig;
-  mapbox_config?: unknown;
-  name?: string;
-  params_config?: unknown;
-  type?: DatasetLayersDataItemAttributesType;
-  updatedAt?: string;
-  updatedBy?: DatasetLayersDataItemAttributesUpdatedBy;
-};
-
 export type DatasetLayersDataItem = {
   attributes?: DatasetLayersDataItemAttributes;
   id?: number;
@@ -1104,6 +1402,18 @@ export const DatasetLayersDataItemAttributesType = {
   static: 'static',
   animated: 'animated',
 } as const;
+
+export type DatasetLayersDataItemAttributes = {
+  createdAt?: string;
+  createdBy?: DatasetLayersDataItemAttributesCreatedBy;
+  legend_config?: DatasetLayersDataItemAttributesLegendConfig;
+  mapbox_config?: unknown;
+  name?: string;
+  params_config?: unknown;
+  type?: DatasetLayersDataItemAttributesType;
+  updatedAt?: string;
+  updatedBy?: DatasetLayersDataItemAttributesUpdatedBy;
+};
 
 export type DatasetLayersDataItemAttributesLegendConfigType = typeof DatasetLayersDataItemAttributesLegendConfigType[keyof typeof DatasetLayersDataItemAttributesLegendConfigType];
 
@@ -1164,6 +1474,18 @@ export type DatasetLayersDataItemAttributesCreatedByDataAttributesUpdatedBy = {
   data?: DatasetLayersDataItemAttributesCreatedByDataAttributesUpdatedByData;
 };
 
+export type DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes = {
+  code?: string;
+  createdAt?: string;
+  createdBy?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+  description?: string;
+  name?: string;
+  permissions?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
+  updatedAt?: string;
+  updatedBy?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+  users?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
+};
+
 export type DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItem = {
   attributes?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
   id?: number;
@@ -1202,18 +1524,6 @@ export type DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemA
 
 export type DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions = {
   data?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
-};
-
-export type DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes = {
-  code?: string;
-  createdAt?: string;
-  createdBy?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
-  description?: string;
-  name?: string;
-  permissions?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
-  updatedAt?: string;
-  updatedBy?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
-  users?: DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
 };
 
 export type DatasetLayersDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };

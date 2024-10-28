@@ -107,22 +107,22 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "slug"
+      ],
       "edit": [
         [
           {
-            "name": "slug",
+            "name": "name",
             "size": 6
           },
           {
-            "name": "name",
+            "name": "slug",
             "size": 6
           }
         ]
-      ],
-      "list": [
-        "id",
-        "slug",
-        "name"
       ]
     },
     "uid": "api::topic.topic"
