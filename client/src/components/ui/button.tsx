@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-neutral-950",
+          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-casper-blue-400",
         yellow:
           "bg-supernova-yellow-400 hover:bg-supernova-yellow-300 text-casper-blue-950 focus-visible:ring-casper-blue-400 data-[state=open]:bg-rhino-blue-900 data-[state=open]:hover:bg-rhino-blue-950 data-[state=open]:text-supernova-yellow-400",
         ghost:
-          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-neutral-950",
+          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 ring-offset-white focus-visible:ring-casper-blue-400",
       },
       size: {
         default: "h-8 w-auto xl:h-10 px-4 xl:py-2",
