@@ -2055,6 +2055,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-checkbox@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@radix-ui/react-checkbox@npm:1.1.2"
+  dependencies:
+    "@radix-ui/primitive": "npm:1.1.0"
+    "@radix-ui/react-compose-refs": "npm:1.1.0"
+    "@radix-ui/react-context": "npm:1.1.1"
+    "@radix-ui/react-presence": "npm:1.1.1"
+    "@radix-ui/react-primitive": "npm:2.0.0"
+    "@radix-ui/react-use-controllable-state": "npm:1.1.0"
+    "@radix-ui/react-use-previous": "npm:1.1.0"
+    "@radix-ui/react-use-size": "npm:1.1.0"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/3b94434e0988100091eea7905fa939e808b49709be2ec371111829b75873f8820499d95f7e769fa31ba6adc48d6a58afd383d26f2a8a92edf0f88cb68c1de3ed
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-collection@npm:1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/react-collection@npm:1.1.0"
@@ -4212,6 +4238,7 @@ __metadata:
   resolution: "client@workspace:."
   dependencies:
     "@artsy/fresnel": "npm:7.1.4"
+    "@radix-ui/react-checkbox": "npm:1.1.2"
     "@radix-ui/react-dialog": "npm:1.1.2"
     "@radix-ui/react-label": "npm:2.1.0"
     "@radix-ui/react-popover": "npm:1.1.2"
@@ -4243,7 +4270,7 @@ __metadata:
     jiti: "npm:1.21.6"
     mapbox-gl: "npm:3.7.0"
     next: "npm:14.2.15"
-    nuqs: "npm:2.0.3"
+    nuqs: "npm:2.0.4"
     orval: "npm:7.2.0"
     pino-http: "npm:10.3.0"
     pinst: "npm:3.0.0"
@@ -7675,9 +7702,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuqs@npm:2.0.3":
-  version: 2.0.3
-  resolution: "nuqs@npm:2.0.3"
+"nuqs@npm:2.0.4":
+  version: 2.0.4
+  resolution: "nuqs@npm:2.0.4"
   dependencies:
     mitt: "npm:^3.0.1"
   peerDependencies:
@@ -7692,7 +7719,7 @@ __metadata:
       optional: true
     react-router-dom:
       optional: true
-  checksum: 10c0/d37b95e10738d58351209518d19ba72a1e08733405b39dbcd64e9b28092ca627983506aa4a9f8504f51c2c729323c8fdfc3bf00cc8360e9b1e9bc85fcb44fba0
+  checksum: 10c0/5df69ad5676a4e00ba595f226c114106930b908de59305d25df415cd6772a323fc9fbe517b6fde972cc8ca90e0c3f758105c4b96283ccb66d51b479c78e6bd38
   languageName: node
   linkType: hard
 

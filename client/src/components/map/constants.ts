@@ -44,7 +44,17 @@ export const LABELS: Record<LabelsStyle, { name: string }> = {
   },
 };
 
-export const DEFAULT_MAP_SETTINGS = {
+export const BASEMAP_LAYERS = {
+  "admin-boundaries": { group: "Boundaries", name: "Administrative boundaries" },
+  "hydro-boundaries": { group: "Boundaries", name: "Hydrological basins" },
+} as const;
+
+export const DEFAULT_MAP_SETTINGS: {
+  basemap: BasemapStyle;
+  labels: LabelsStyle;
+  basemapLayers: readonly (keyof typeof BASEMAP_LAYERS)[];
+} = {
   basemap: BasemapStyle.Light,
-  labels: LabelsStyle.Light,
+  labels: LabelsStyle.Dark,
+  basemapLayers: ["admin-boundaries", "hydro-boundaries"],
 };

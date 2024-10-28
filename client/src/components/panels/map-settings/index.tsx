@@ -1,16 +1,19 @@
 import Image from "next/image";
 
-import { BASEMAPS, LABELS } from "@/components/map/constants";
+import { BASEMAP_LAYERS, BASEMAPS, LABELS } from "@/components/map/constants";
 import { BasemapStyle, LabelsStyle } from "@/components/map/types";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import useMapBasemap from "@/hooks/use-map-basemap";
+import useMapBasemapLayers from "@/hooks/use-map-basemap-layers";
 import useMapLabels from "@/hooks/use-map-labels";
 import GlobeFilledIcon from "@/svgs/globe-filled.svg";
 
 const MapSettingsPanel = () => {
   const [basemap, setBasemap] = useMapBasemap();
   const [labels, setLabels] = useMapLabels();
+  const [basemapLayers, setBasemapLayers] = useMapBasemapLayers();
 
   return (
     <div className="pb-4 pt-1.5">
@@ -19,6 +22,7 @@ const MapSettingsPanel = () => {
           <GlobeFilledIcon className="shrink-0" />
           Map style
         </legend>
+
         <RadioGroup
           value={basemap}
           onValueChange={(value) => setBasemap(value as BasemapStyle)}
@@ -45,6 +49,7 @@ const MapSettingsPanel = () => {
           ))}
         </RadioGroup>
       </fieldset>
+
       <fieldset className="mt-2 px-4">
         <legend className="text-xs leading-6">Labels</legend>
         <RadioGroup
@@ -62,6 +67,35 @@ const MapSettingsPanel = () => {
           ))}
         </RadioGroup>
       </fieldset>
+
+      {Array.from(new Set(Object.values(BASEMAP_LAYERS).map(({ group }) => group))).map((group) => (
+        <fieldset key={group} className="mt-2 px-4">
+          <legend className="text-xs leading-6">{group}</legend>
+          {Object.entries(BASEMAP_LAYERS)
+            .filter(([, layer]) => layer.group === group)
+            .map(([key, layer]) => (
+              <div key={key} className="flex items-center gap-2 py-0.5">
+                <Checkbox
+                  value={key}
+                  id={`basemap-layer-${key}`}
+                  checked={basemapLayers.includes(key as keyof typeof BASEMAP_LAYERS)}
+                  onCheckedChange={(checked) => {
+                    if (checked) {
+                      setBasemapLayers((layers) => [...layers, key as keyof typeof BASEMAP_LAYERS]);
+                    } else {
+                      setBasemapLayers((layers) =>
+                        layers.filter((layer) => layer !== (key as keyof typeof BASEMAP_LAYERS)),
+                      );
+                    }
+                  }}
+                />
+                <Label htmlFor={`basemap-layer-${key}`} className="text-xs leading-5">
+                  {layer.name}
+                </Label>
+              </div>
+            ))}
+        </fieldset>
+      ))}
     </div>
   );
 };
