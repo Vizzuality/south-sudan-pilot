@@ -34,9 +34,9 @@
       "type": "string",
       "required": true
     },
-    "children": {
+    "parent": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::location.location"
     }
   }

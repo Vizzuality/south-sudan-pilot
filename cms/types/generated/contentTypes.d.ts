@@ -898,9 +898,9 @@ export interface ApiLocationLocation extends Schema.CollectionType {
         number
       >;
     code: Attribute.String & Attribute.Required;
-    children: Attribute.Relation<
+    parent: Attribute.Relation<
       'api::location.location',
-      'oneToMany',
+      'oneToOne',
       'api::location.location'
     >;
     createdAt: Attribute.DateTime;

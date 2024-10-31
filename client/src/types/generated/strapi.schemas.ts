@@ -716,16 +716,225 @@ export const LocationType = {
 } as const;
 
 export interface Location {
-  children?: LocationChildren;
   code: string;
   createdAt?: string;
   createdBy?: LocationCreatedBy;
   level: number;
   name: string;
+  parent?: LocationParent;
   type: LocationType;
   updatedAt?: string;
   updatedBy?: LocationUpdatedBy;
 }
+
+export type LocationParentData = {
+  attributes?: LocationParentDataAttributes;
+  id?: number;
+};
+
+export type LocationParent = {
+  data?: LocationParentData;
+};
+
+export type LocationParentDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesUpdatedByData = {
+  attributes?: LocationParentDataAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesUpdatedBy = {
+  data?: LocationParentDataAttributesUpdatedByData;
+};
+
+export type LocationParentDataAttributesType = typeof LocationParentDataAttributesType[keyof typeof LocationParentDataAttributesType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const LocationParentDataAttributesType = {
+  administrative: 'administrative',
+  hydrological: 'hydrological',
+} as const;
+
+export type LocationParentDataAttributesParentDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesParentData = {
+  attributes?: LocationParentDataAttributesParentDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesParent = {
+  data?: LocationParentDataAttributesParentData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributes = {
+  blocked?: boolean;
+  createdAt?: string;
+  createdBy?: LocationParentDataAttributesCreatedByDataAttributesCreatedBy;
+  email?: string;
+  firstname?: string;
+  isActive?: boolean;
+  lastname?: string;
+  preferedLanguage?: string;
+  registrationToken?: string;
+  resetPasswordToken?: string;
+  roles?: LocationParentDataAttributesCreatedByDataAttributesRoles;
+  updatedAt?: string;
+  updatedBy?: LocationParentDataAttributesCreatedByDataAttributesUpdatedBy;
+  username?: string;
+};
+
+export type LocationParentDataAttributesCreatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedBy = {
+  data?: LocationParentDataAttributesCreatedByData;
+};
+
+export type LocationParentDataAttributes = {
+  code?: string;
+  createdAt?: string;
+  createdBy?: LocationParentDataAttributesCreatedBy;
+  level?: number;
+  name?: string;
+  parent?: LocationParentDataAttributesParent;
+  type?: LocationParentDataAttributesType;
+  updatedAt?: string;
+  updatedBy?: LocationParentDataAttributesUpdatedBy;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesUpdatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesUpdatedBy = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesUpdatedByData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItem = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRoles = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItem[];
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsers = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributes = {
+  code?: string;
+  createdAt?: string;
+  createdBy?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+  description?: string;
+  name?: string;
+  permissions?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
+  updatedAt?: string;
+  updatedBy?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+  users?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
+  action?: string;
+  actionParameters?: unknown;
+  conditions?: unknown;
+  createdAt?: string;
+  createdBy?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+  properties?: unknown;
+  role?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+  subject?: string;
+  updatedAt?: string;
+  updatedBy?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesCreatedByDataAttributes = { [key: string]: unknown };
+
+export type LocationParentDataAttributesCreatedByDataAttributesCreatedByData = {
+  attributes?: LocationParentDataAttributesCreatedByDataAttributesCreatedByDataAttributes;
+  id?: number;
+};
+
+export type LocationParentDataAttributesCreatedByDataAttributesCreatedBy = {
+  data?: LocationParentDataAttributesCreatedByDataAttributesCreatedByData;
+};
 
 export type LocationCreatedByDataAttributes = { [key: string]: unknown };
 
@@ -736,215 +945,6 @@ export type LocationCreatedByData = {
 
 export type LocationCreatedBy = {
   data?: LocationCreatedByData;
-};
-
-export type LocationChildren = {
-  data?: LocationChildrenDataItem[];
-};
-
-export type LocationChildrenDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesUpdatedByData = {
-  attributes?: LocationChildrenDataItemAttributesUpdatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesUpdatedBy = {
-  data?: LocationChildrenDataItemAttributesUpdatedByData;
-};
-
-export type LocationChildrenDataItemAttributesType = typeof LocationChildrenDataItemAttributesType[keyof typeof LocationChildrenDataItemAttributesType];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const LocationChildrenDataItemAttributesType = {
-  administrative: 'administrative',
-  hydrological: 'hydrological',
-} as const;
-
-export type LocationChildrenDataItemAttributes = {
-  children?: LocationChildrenDataItemAttributesChildren;
-  code?: string;
-  createdAt?: string;
-  createdBy?: LocationChildrenDataItemAttributesCreatedBy;
-  level?: number;
-  name?: string;
-  type?: LocationChildrenDataItemAttributesType;
-  updatedAt?: string;
-  updatedBy?: LocationChildrenDataItemAttributesUpdatedBy;
-};
-
-export type LocationChildrenDataItem = {
-  attributes?: LocationChildrenDataItemAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributes = {
-  blocked?: boolean;
-  createdAt?: string;
-  createdBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedBy;
-  email?: string;
-  firstname?: string;
-  isActive?: boolean;
-  lastname?: string;
-  preferedLanguage?: string;
-  registrationToken?: string;
-  resetPasswordToken?: string;
-  roles?: LocationChildrenDataItemAttributesCreatedByDataAttributesRoles;
-  updatedAt?: string;
-  updatedBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedBy;
-  username?: string;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesUpdatedByData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItem = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRoles = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItem[];
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes = {
-  code?: string;
-  createdAt?: string;
-  createdBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
-  description?: string;
-  name?: string;
-  permissions?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
-  updatedAt?: string;
-  updatedBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
-  users?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
-  action?: string;
-  actionParameters?: unknown;
-  conditions?: unknown;
-  createdAt?: string;
-  createdBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-  properties?: unknown;
-  role?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
-  subject?: string;
-  updatedAt?: string;
-  updatedBy?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByData = {
-  attributes?: LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedBy = {
-  data?: LocationChildrenDataItemAttributesCreatedByDataAttributesCreatedByData;
-};
-
-export type LocationChildrenDataItemAttributesChildrenDataItemAttributes = { [key: string]: unknown };
-
-export type LocationChildrenDataItemAttributesChildrenDataItem = {
-  attributes?: LocationChildrenDataItemAttributesChildrenDataItemAttributes;
-  id?: number;
-};
-
-export type LocationChildrenDataItemAttributesChildren = {
-  data?: LocationChildrenDataItemAttributesChildrenDataItem[];
 };
 
 export type LocationListResponseMetaPagination = {
@@ -983,13 +983,13 @@ export const LocationRequestDataType = {
   hydrological: 'hydrological',
 } as const;
 
-export type LocationRequestDataChildrenItem = number | string;
+export type LocationRequestDataParent = number | string;
 
 export type LocationRequestData = {
-  children?: LocationRequestDataChildrenItem[];
   code: string;
   level: number;
   name: string;
+  parent?: LocationRequestDataParent;
   type: LocationRequestDataType;
 };
 

@@ -75,9 +75,9 @@
           "sortable": true
         }
       },
-      "children": {
+      "parent": {
         "edit": {
-          "label": "children",
+          "label": "parent",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -85,9 +85,9 @@
           "mainField": "name"
         },
         "list": {
-          "label": "children",
-          "searchable": false,
-          "sortable": false
+          "label": "parent",
+          "searchable": true,
+          "sortable": true
         }
       },
       "createdAt": {
@@ -150,6 +150,13 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "type",
+        "level",
+        "code",
+        "name"
+      ],
       "edit": [
         [
           {
@@ -173,17 +180,10 @@
         ],
         [
           {
-            "name": "children",
+            "name": "parent",
             "size": 6
           }
         ]
-      ],
-      "list": [
-        "id",
-        "type",
-        "level",
-        "code",
-        "name"
       ]
     },
     "uid": "api::location.location"
