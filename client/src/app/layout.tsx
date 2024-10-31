@@ -10,8 +10,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Hydrological Information Management Systems",
-    default: "Hydrological Information Management Systems",
+    template: "%s | Geospatial Visualization Tool",
+    default: "Geospatial Visualization Tool",
   },
   description:
     "Pilot for flood and drought hazard maps in South Sudan, enhancing access to water management data and supporting informed decision-making.",
