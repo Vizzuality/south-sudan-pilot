@@ -12,8 +12,6 @@ export default function useApplyMapSettings(map: MapRef | null) {
   const [labels] = useMapLabels();
   const [basemapLayers] = useMapBasemapLayers();
 
-  console.log(basemapLayers);
-
   useEffect(() => {
     if (map) {
       toggleGroupLayers(map, "basemap-", (group) => group === `basemap-${basemap}`);
