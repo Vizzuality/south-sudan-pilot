@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactMapGL from "react-map-gl";
 
+import LayerManager from "@/components/map/layer-manager";
 import { SIDEBAR_WIDTH } from "@/components/ui/sidebar";
 import { env } from "@/env";
 import useApplyMapSettings from "@/hooks/use-apply-map-settings";
@@ -72,6 +73,7 @@ const Map = () => {
       logoPosition="bottom-right"
       onLoad={() => setMap(mapRef.current)}
     >
+      <LayerManager />
       <Controls />
     </ReactMapGL>
   );

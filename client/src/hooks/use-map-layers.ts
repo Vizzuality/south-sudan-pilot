@@ -2,11 +2,12 @@ import { parseAsArrayOf, parseAsJson, useQueryState } from "nuqs";
 import { useCallback } from "react";
 import { z } from "zod";
 
-// order, visibility, opacity
+import { LayerSettings } from "@/types/layer";
+
 const schema = z.object({
   id: z.number(),
   visibility: z.boolean(),
-  opacity: z.number().int().min(0).max(100),
+  opacity: z.number().min(0).max(1),
 });
 
 export default function useMapLayers() {
@@ -21,7 +22,7 @@ export default function useMapLayers() {
         {
           id,
           visibility: true,
-          opacity: 100,
+          opacity: 1,
         },
         ...layers,
       ]);
@@ -62,5 +63,8 @@ export default function useMapLayers() {
     [setLayers],
   );
 
-  return [layers, { addLayer, removeLayer, updateLayer, updateLayerOrder }] as const;
+  return [
+    layers as (LayerSettings & { id: number })[],
+    { addLayer, removeLayer, updateLayer, updateLayerOrder },
+  ] as const;
 }
