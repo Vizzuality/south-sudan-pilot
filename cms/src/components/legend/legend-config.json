@@ -20,6 +20,9 @@
       "type": "component",
       "repeatable": true,
       "component": "legend.items"
+    },
+    "unit": {
+      "type": "string"
     }
   }
 }

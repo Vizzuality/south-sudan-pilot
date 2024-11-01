@@ -68,6 +68,8 @@
           "legend_config.type",
           "legend_config.items.color",
           "legend_config.items.value",
+          "legend_config.items.pattern",
+          "legend_config.unit",
           "dataset"
         ]
       },
@@ -93,6 +95,8 @@
           "legend_config.type",
           "legend_config.items.color",
           "legend_config.items.value",
+          "legend_config.items.pattern",
+          "legend_config.unit",
           "dataset"
         ]
       },
@@ -111,6 +115,8 @@
           "legend_config.type",
           "legend_config.items.color",
           "legend_config.items.value",
+          "legend_config.items.pattern",
+          "legend_config.unit",
           "dataset"
         ]
       },

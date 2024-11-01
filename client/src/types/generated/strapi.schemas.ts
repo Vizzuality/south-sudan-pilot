@@ -1006,6 +1006,7 @@ export const LegendLegendConfigComponentType = {
 export type LegendLegendConfigComponentItemsItem = {
   color?: string;
   id?: number;
+  pattern?: string;
   value?: string;
 };
 
@@ -1013,6 +1014,7 @@ export interface LegendLegendConfigComponent {
   id?: number;
   items?: LegendLegendConfigComponentItemsItem[];
   type?: LegendLegendConfigComponentType;
+  unit?: string;
 }
 
 export type LayerResponseMeta = { [key: string]: unknown };
@@ -1226,6 +1228,7 @@ export const LayerDatasetDataAttributesLayersDataItemAttributesLegendConfigType 
 export type LayerDatasetDataAttributesLayersDataItemAttributesLegendConfigItemsItem = {
   color?: string;
   id?: number;
+  pattern?: string;
   value?: string;
 };
 
@@ -1233,6 +1236,7 @@ export type LayerDatasetDataAttributesLayersDataItemAttributesLegendConfig = {
   id?: number;
   items?: LayerDatasetDataAttributesLayersDataItemAttributesLegendConfigItemsItem[];
   type?: LayerDatasetDataAttributesLayersDataItemAttributesLegendConfigType;
+  unit?: string;
 };
 
 export type LayerDatasetDataAttributesLayersDataItemAttributesDatasetDataAttributes = { [key: string]: unknown };
@@ -1595,6 +1599,7 @@ export const DatasetLayersDataItemAttributesLegendConfigType = {
 export type DatasetLayersDataItemAttributesLegendConfigItemsItem = {
   color?: string;
   id?: number;
+  pattern?: string;
   value?: string;
 };
 
@@ -1602,6 +1607,7 @@ export type DatasetLayersDataItemAttributesLegendConfig = {
   id?: number;
   items?: DatasetLayersDataItemAttributesLegendConfigItemsItem[];
   type?: DatasetLayersDataItemAttributesLegendConfigType;
+  unit?: string;
 };
 
 export type DatasetLayersDataItemAttributesDatasetData = {

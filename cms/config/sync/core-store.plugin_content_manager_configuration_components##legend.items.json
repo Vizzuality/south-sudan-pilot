@@ -46,13 +46,28 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "pattern": {
+        "edit": {
+          "label": "pattern",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "pattern",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
       "list": [
         "id",
         "color",
-        "value"
+        "value",
+        "pattern"
       ],
       "edit": [
         [
@@ -60,6 +75,12 @@
             "name": "color",
             "size": 6
           },
+          {
+            "name": "pattern",
+            "size": 6
+          }
+        ],
+        [
           {
             "name": "value",
             "size": 6

@@ -10,6 +10,7 @@ export interface LegendLegendConfig extends Schema.Component {
     type: Attribute.Enumeration<['basic', 'choropleth', 'gradient']> &
       Attribute.Required;
     items: Attribute.Component<'legend.items', true>;
+    unit: Attribute.String;
   };
 }
 
@@ -22,6 +23,7 @@ export interface LegendItems extends Schema.Component {
   attributes: {
     color: Attribute.String & Attribute.Required;
     value: Attribute.String;
+    pattern: Attribute.String;
   };
 }
 
