@@ -45,7 +45,7 @@ export default function useDatasetsBySubTopic(topicSlug: string, layersFields = 
           let currentSubTopic = null;
 
           for (const item of data.data) {
-            const subTopic = item.attributes!.sub_topic!.data!.attributes!.name!;
+            const subTopic = item.attributes!.sub_topic!.data!.attributes!.name! as string;
             const dataset = item.attributes!.name;
             const layers = item.attributes!.layers!.data!;
 
