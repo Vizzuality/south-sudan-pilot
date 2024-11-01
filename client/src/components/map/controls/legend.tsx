@@ -24,7 +24,11 @@ const LegendControls = () => {
               <ListBulletIcon aria-hidden />
             </Button>
           </PopoverTrigger>
-          <PopoverContent side="left" align="end" className="w-[250px]">
+          <PopoverContent
+            side="left"
+            align="end"
+            className="max-h-[500px] w-[300px] max-w-[calc(100vw_-_theme(spacing.8)_-_2_*_theme(spacing.5)_-_24px)] overflow-y-auto"
+          >
             <Legend />
           </PopoverContent>
         </Popover>
@@ -35,13 +39,13 @@ const LegendControls = () => {
             <Button
               type="button"
               variant="yellow-alt"
-              className="group w-[250px] justify-between font-sans"
+              className="group w-[300px] justify-between px-2.5 font-sans"
             >
               <span>Legend</span>
               <ChevronDownIcon aria-hidden className="group-data-[state=closed]:rotate-180" />
             </Button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="border-t border-t-casper-blue-400 bg-white">
+          <CollapsibleContent className="max-h-[500px] w-[300px] overflow-y-auto border-t border-t-casper-blue-400 bg-white">
             <Legend />
           </CollapsibleContent>
         </Collapsible>

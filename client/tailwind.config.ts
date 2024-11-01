@@ -13,6 +13,9 @@ const config: Config = {
     },
     colors: {
       white: "#ffffff",
+      gray: {
+        "500": "#60626A",
+      },
       "casper-blue": {
         "50": "#f4f8fa",
         "200": "#d4e0e9",
@@ -37,6 +40,9 @@ const config: Config = {
       },
     },
     extend: {
+      fontSize: {
+        "2xs": ["10px", "16px"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
