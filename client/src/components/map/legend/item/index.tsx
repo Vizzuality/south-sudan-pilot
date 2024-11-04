@@ -1,3 +1,6 @@
+import { DraggableAttributes } from "@dnd-kit/core";
+import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -18,9 +21,11 @@ import GradientLegend from "./gradient-legend";
 interface LegendItemProps {
   id: number;
   settings: LayerSettings;
+  sortableAttributes?: DraggableAttributes;
+  sortableListeners?: SyntheticListenerMap;
 }
 
-const LegendItem = ({ id, settings }: LegendItemProps) => {
+const LegendItem = ({ id, settings, sortableAttributes, sortableListeners }: LegendItemProps) => {
   const { data, isLoading } = useLayerLegend(id);
   const [, { updateLayer }] = useMapLayers();
 
@@ -29,8 +34,15 @@ const LegendItem = ({ id, settings }: LegendItemProps) => {
   }
 
   return (
-    <div className="flex items-start gap-2 px-2.5 py-2 font-sans text-sm">
-      <Button type="button" variant="ghost" size="auto" className="relative top-1 shrink-0">
+    <div className="flex items-start gap-2 bg-white px-2.5 py-2 font-sans text-sm">
+      <Button
+        type="button"
+        variant="ghost"
+        size="auto"
+        className="relative top-1 shrink-0"
+        {...(sortableAttributes ?? {})}
+        {...(sortableListeners ?? {})}
+      >
         <span className="sr-only">Grab to reorder the layer</span>
         <HandleIcon className="!h-3 !w-auto text-casper-blue-400" aria-hidden />
       </Button>
