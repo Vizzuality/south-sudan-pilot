@@ -37,6 +37,11 @@
       "repeatable": false,
       "component": "legend.legend-config",
       "required": true
+    },
+    "dataset": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::dataset.dataset"
     }
   }
 }

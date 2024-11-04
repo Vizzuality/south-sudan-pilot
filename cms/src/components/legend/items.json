@@ -13,6 +13,9 @@
     },
     "value": {
       "type": "string"
+    },
+    "pattern": {
+      "type": "string"
     }
   }
 }

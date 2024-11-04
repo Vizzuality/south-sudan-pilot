@@ -89,6 +89,21 @@
           "sortable": false
         }
       },
+      "dataset": {
+        "edit": {
+          "label": "dataset",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "dataset",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -149,18 +164,18 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "type",
-        "legend_config"
-      ],
       "edit": [
         [
           {
             "name": "name",
             "size": 6
           },
+          {
+            "name": "dataset",
+            "size": 6
+          }
+        ],
+        [
           {
             "name": "type",
             "size": 6
@@ -184,6 +199,12 @@
             "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "dataset",
+        "type",
+        "name"
       ]
     },
     "uid": "api::layer.layer"

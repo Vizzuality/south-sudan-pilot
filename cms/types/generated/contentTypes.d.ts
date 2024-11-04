@@ -856,6 +856,11 @@ export interface ApiLayerLayer extends Schema.CollectionType {
     params_config: Attribute.JSON & Attribute.Required;
     legend_config: Attribute.Component<'legend.legend-config'> &
       Attribute.Required;
+    dataset: Attribute.Relation<
+      'api::layer.layer',
+      'oneToOne',
+      'api::dataset.dataset'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

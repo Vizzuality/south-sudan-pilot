@@ -13,6 +13,9 @@ const config: Config = {
     },
     colors: {
       white: "#ffffff",
+      gray: {
+        "500": "#60626A",
+      },
       "casper-blue": {
         "50": "#f4f8fa",
         "200": "#d4e0e9",
@@ -37,6 +40,9 @@ const config: Config = {
       },
     },
     extend: {
+      fontSize: {
+        "2xs": ["10px", "16px"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -53,6 +59,21 @@ const config: Config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      // From https://github.com/shadcn-ui/ui/issues/2053#issuecomment-1902542088
+      keyframes: {
+        "collapsible-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-collapsible-content-height)" },
+        },
+        "collapsible-up": {
+          from: { height: "var(--radix-collapsible-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "collapsible-down": "collapsible-down 0.2s ease-out",
+        "collapsible-up": "collapsible-up 0.2s ease-out",
       },
     },
   },
