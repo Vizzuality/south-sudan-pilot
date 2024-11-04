@@ -15,7 +15,7 @@ const NavigationDesktop = () => {
           <SidebarTrigger className="absolute right-0 top-6 z-10 translate-x-1/2 transition-transform group-data-[state=collapsed]:translate-x-full [&_svg]:rotate-90 group-data-[state=collapsed]:[&_svg]:-rotate-90" />
         </SidebarHeader>
         <SidebarContent className="overflow-auto">
-          <div className="bg-rhino-blue-900 px-10 pb-6 text-white">
+          <div className="bg-rhino-blue-900 px-10 pb-8 text-white">
             <Intro />
           </div>
           <MainPanel />
