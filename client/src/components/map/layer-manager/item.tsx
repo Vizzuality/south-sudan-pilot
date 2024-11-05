@@ -12,7 +12,7 @@ interface LayerManagerItemProps {
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
   const config = useLayerConfig(id, settings);
 
-  if (!config) {
+  if (!config?.styles) {
     return null;
   }
 

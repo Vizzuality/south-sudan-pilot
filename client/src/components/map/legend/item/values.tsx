@@ -16,9 +16,10 @@ const Values = (data: ValuesProps) => {
           title={item.value}
           className={cn({
             "flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap": true,
-            "text-left": index === 0,
-            "text-center": index > 0 && index + 1 < data.items!.length,
-            "text-right": index + 1 === data.items!.length,
+            "text-left": data.type === "gradient" && index === 0,
+            "text-center":
+              data.type !== "gradient" || (index > 0 && index + 1 < data.items!.length),
+            "text-right": data.type === "gradient" && index + 1 === data.items!.length,
           })}
         >
           {item.value}
