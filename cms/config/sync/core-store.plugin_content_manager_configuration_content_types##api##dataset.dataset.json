@@ -183,9 +183,9 @@
       ],
       "list": [
         "id",
-        "name",
-        "default_layer",
-        "topic"
+        "topic",
+        "sub_topic",
+        "name"
       ]
     },
     "uid": "api::dataset.dataset"
