@@ -48,6 +48,7 @@
     "react-map-gl": "7.1.7",
     "tailwind-merge": "2.5.4",
     "tailwindcss-animate": "1.0.7",
+    "tailwindcss-border-image": "1.1.2",
     "typescript-eslint": "8.9.0",
     "zod": "3.23.8"
   },

@@ -4757,6 +4757,7 @@ __metadata:
     tailwind-merge: "npm:2.5.4"
     tailwindcss: "npm:3.4.14"
     tailwindcss-animate: "npm:1.0.7"
+    tailwindcss-border-image: "npm:1.1.2"
     typescript: "npm:5.6.3"
     typescript-eslint: "npm:8.9.0"
     zod: "npm:3.23.8"
@@ -10107,6 +10108,15 @@ __metadata:
   peerDependencies:
     tailwindcss: "*"
   checksum: 10c0/ec7dbd1631076b97d66a1fbaaa06e0725fccfa63119221e8d87a997b02dcede98ad88bb1ef6665b968f5d260fcefb10592e0299ca70208d365b37761edf5e19a
+  languageName: node
+  linkType: hard
+
+"tailwindcss-border-image@npm:1.1.2":
+  version: 1.1.2
+  resolution: "tailwindcss-border-image@npm:1.1.2"
+  peerDependencies:
+    tailwindcss: ">=3.0.0"
+  checksum: 10c0/83d7613d61fe158389feff90939d8a5a9af3901817c8318203b8cd7877d403b36795590aec477c4d81ebb989aca2708d7a33a74f85d478af10a4793dfd2d0f85
   languageName: node
   linkType: hard
 

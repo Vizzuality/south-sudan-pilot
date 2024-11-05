@@ -18,7 +18,10 @@ const NavigationMobile = () => {
     <>
       <Sheet modal={false} open={tab === Tab.Main || tab === Tab.Location}>
         <SheetOverlay className="!bottom-[68px]" />
-        <SheetContent side="bottom" className="bottom-[68px] h-[calc(100%_-_68px)]">
+        <SheetContent
+          side="bottom"
+          className="bottom-[68px] h-[calc(100%_-_68px)] overflow-auto pb-0"
+        >
           <SheetHeader className="text-center">
             <SheetTitle className="sr-only">{TABS[tab].name}</SheetTitle>
             <Intro showDescription={tab === Tab.Main} />

@@ -1,0 +1,11 @@
+<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="5" y="5" width="11" height="11" stroke="#A4BDD0" stroke-width="0.5"/>
+<path d="M5 11V21" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M10 16L3.27826e-07 16" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M5 0V10" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M10 5L3.27826e-07 5" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M16 11V21" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M21 16L11 16" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M16 0V10" stroke="#A4BDD0" stroke-width="1.5"/>
+<path d="M21 5L11 5" stroke="#A4BDD0" stroke-width="1.5"/>
+</svg>
