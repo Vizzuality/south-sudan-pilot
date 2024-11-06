@@ -12,7 +12,7 @@ const MapSettingsControls = () => {
           <GlobeIcon aria-hidden />
         </Button>
       </PopoverTrigger>
-      <PopoverContent side="left" align="end" className="w-[250px]">
+      <PopoverContent side="left" align="start" className="w-[250px]">
         <MapSettingsPanel />
       </PopoverContent>
     </Popover>

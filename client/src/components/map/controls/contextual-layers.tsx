@@ -7,9 +7,9 @@ const ContextualLayersControls = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button type="button" variant="yellow" className="w-8 font-sans xl:w-auto">
-          <LayersIcon aria-hidden className="xl:!size-5" />
-          <span className="sr-only xl:not-sr-only">Contextual layers</span>
+        <Button type="button" variant="yellow" size="icon">
+          <span className="sr-only">Contextual layers</span>
+          <LayersIcon aria-hidden />
         </Button>
       </SheetTrigger>
       <SheetContent
