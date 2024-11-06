@@ -3,6 +3,7 @@ import { AnyLayer, AnySource, SkyLayer } from "react-map-gl";
 export interface LayerSettings {
   visibility: boolean;
   opacity: number;
+  "return-period"?: number;
 }
 
 export interface LayerConfig {
@@ -13,6 +14,7 @@ export interface LayerConfig {
 export interface LayerParamsConfigValue {
   key: string;
   default: unknown;
+  options?: unknown[];
 }
 
 export type LayerParamsConfig = LayerParamsConfigValue[];

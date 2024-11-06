@@ -3,7 +3,12 @@ import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
 
 type DatasetsBySubTopic = {
   subTopic: string;
-  datasets: { id: number; name: string; layers: DatasetLayersDataItem[] }[];
+  datasets: {
+    id: number;
+    name: string;
+    defaultLayerId: number | undefined;
+    layers: DatasetLayersDataItem[];
+  }[];
 };
 
 export default function useDatasetsBySubTopic(topicSlug: string, layersFields = ["name"]) {
@@ -18,8 +23,12 @@ export default function useDatasetsBySubTopic(topicSlug: string, layersFields = 
         sub_topic: {
           fields: ["name"],
         },
+        default_layer: {
+          fields: ["id"],
+        },
         layers: {
           fields: layersFields,
+          sort: "name",
         },
       },
       filters: {
@@ -47,6 +56,7 @@ export default function useDatasetsBySubTopic(topicSlug: string, layersFields = 
           for (const item of data.data) {
             const subTopic = item.attributes!.sub_topic!.data!.attributes!.name! as string;
             const dataset = item.attributes!.name;
+            const defaultLayerId = item.attributes!.default_layer!.data?.id;
             const layers = item.attributes!.layers!.data!;
 
             if (currentSubTopic === null || currentSubTopic !== subTopic) {
@@ -58,6 +68,7 @@ export default function useDatasetsBySubTopic(topicSlug: string, layersFields = 
             res[currentIndex].datasets.push({
               id: item.id!,
               name: dataset,
+              defaultLayerId,
               layers,
             });
           }

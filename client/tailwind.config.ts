@@ -1,5 +1,8 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import TailwindAnimate from "tailwindcss-animate";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import TailwindBorderImage from "tailwindcss-border-image";
 
 import type { Config } from "tailwindcss";
 
@@ -78,7 +81,7 @@ const config: Config = {
     },
   },
   extend: {},
-  plugins: [TailwindAnimate],
+  plugins: [TailwindAnimate, TailwindBorderImage],
 };
 
 export default config;

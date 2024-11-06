@@ -9,7 +9,18 @@ const BasicLegend = (data: BasicLegendProps) => {
   }
 
   if (data.items.length === 1) {
-    return <Square item={data.items[0]} className="h-3" />;
+    const item = data.items[0];
+
+    if (item.value !== null) {
+      return (
+        <div className="flex items-start gap-2">
+          <Square item={item} className="relative top-0.5 h-3 w-5 shrink-0" />
+          <div className="text-2xs text-gray-500">{item.value}</div>
+        </div>
+      );
+    } else {
+      return <Square item={item} className="h-3" />;
+    }
   }
 
   return (

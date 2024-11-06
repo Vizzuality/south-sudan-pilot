@@ -12,12 +12,17 @@ interface LayerManagerItemProps {
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
   const config = useLayerConfig(id, settings);
 
-  if (!config) {
+  if (!config?.styles) {
     return null;
   }
 
   return (
-    <Source {...config.source}>
+    <Source
+      // The key ensures that if the URL of the source changes, Mapbox will correctly detect the
+      // change
+      key={config.source.url}
+      {...config.source}
+    >
       {config.styles.map((style) => (
         <Layer key={style.id} {...style} beforeId={beforeId} />
       ))}

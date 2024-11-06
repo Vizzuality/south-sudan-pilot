@@ -107,11 +107,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "slug"
-      ],
       "edit": [
         [
           {
@@ -123,6 +118,11 @@
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "slug",
+        "name"
       ]
     },
     "uid": "api::topic.topic"
