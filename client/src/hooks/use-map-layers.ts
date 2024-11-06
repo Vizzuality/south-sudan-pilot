@@ -8,6 +8,7 @@ const schema = z.object({
   id: z.number(),
   visibility: z.boolean(),
   opacity: z.number().min(0).max(1),
+  "return-period": z.number().int().optional(),
 });
 
 export default function useMapLayers() {
@@ -17,12 +18,13 @@ export default function useMapLayers() {
   );
 
   const addLayer = useCallback(
-    (id: number) => {
+    (id: number, attributes?: Partial<z.infer<typeof schema>>) => {
       setLayers((layers) => [
         {
           id,
           visibility: true,
           opacity: 1,
+          ...attributes,
         },
         ...layers,
       ]);

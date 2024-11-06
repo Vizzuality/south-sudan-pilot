@@ -14,6 +14,8 @@ import { Switch } from "@/components/ui/switch";
 import useMapLayers from "@/hooks/use-map-layers";
 import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
 
+import { getDefaultReturnPeriod, getDefaultSelectedLayerId, getReturnPeriods } from "./utils";
+
 interface DatasetCardProps {
   id: number;
   name: string;
@@ -24,22 +26,18 @@ interface DatasetCardProps {
 const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => {
   const [layersConfiguration, { addLayer, updateLayer, removeLayer }] = useMapLayers();
 
-  const defaultSelectedLayerId = useMemo(() => {
-    // The ids of the layers that belong to the dataset
-    const datasetLayerIds = layers.map(({ id }) => id!);
-    // The ids of the layers active on the map, probably not from this dataset
-    const activeLayerIds = layersConfiguration.map(({ id }) => id!);
-    // The id of the layer that belongs to the dataset and is active, if any
-    const activeDatasetLayerId = datasetLayerIds.find((id) => activeLayerIds.includes(id));
+  const defaultSelectedLayerId = useMemo(
+    () => getDefaultSelectedLayerId(defaultLayerId, layers, layersConfiguration),
+    [layers, defaultLayerId, layersConfiguration],
+  );
 
-    if (activeDatasetLayerId) {
-      return activeDatasetLayerId;
-    }
-
-    return defaultLayerId;
-  }, [layers, defaultLayerId, layersConfiguration]);
+  const defaultSelectedReturnPeriod = useMemo(
+    () => getDefaultReturnPeriod(defaultSelectedLayerId, layers, layersConfiguration),
+    [layers, layersConfiguration, defaultSelectedLayerId],
+  );
 
   const [selectedLayerId, setSelectedLayerId] = useState(defaultSelectedLayerId);
+  const [selectedReturnPeriod, setSelectedReturnPeriod] = useState(defaultSelectedReturnPeriod);
 
   const isDatasetActive = useMemo(() => {
     if (selectedLayerId === undefined) {
@@ -48,6 +46,11 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
 
     return layersConfiguration.findIndex(({ id }) => id === selectedLayerId) !== -1;
   }, [selectedLayerId, layersConfiguration]);
+
+  const layerReturnPeriods = useMemo(
+    () => getReturnPeriods(selectedLayerId, layers),
+    [layers, selectedLayerId],
+  );
 
   const onToggleDataset = useCallback(
     (active: boolean) => {
@@ -58,25 +61,48 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
       if (!active) {
         removeLayer(selectedLayerId);
       } else {
-        addLayer(selectedLayerId);
+        addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod });
       }
     },
-    [selectedLayerId, addLayer, removeLayer],
+    [selectedLayerId, addLayer, removeLayer, selectedReturnPeriod],
   );
 
   const onChangeSelectedLayer = useCallback(
     (stringId: string) => {
       const id = Number.parseInt(stringId);
       const previousId = selectedLayerId;
+      const returnPeriod = getDefaultReturnPeriod(id, layers, layersConfiguration);
 
       setSelectedLayerId(id);
+      setSelectedReturnPeriod(returnPeriod);
+
       // If the dataset was active and the layer is changed, we replace the current layer by the new
       // one keeping all the same settings (visibility, opacity, etc.)
       if (isDatasetActive && previousId !== undefined) {
-        updateLayer(previousId, { id });
+        updateLayer(previousId, { id, ["return-period"]: returnPeriod });
       }
     },
-    [selectedLayerId, setSelectedLayerId, isDatasetActive, updateLayer],
+    [
+      selectedLayerId,
+      setSelectedLayerId,
+      isDatasetActive,
+      updateLayer,
+      layers,
+      layersConfiguration,
+    ],
+  );
+
+  const onChangeSelectedReturnPeriod = useCallback(
+    (stringReturnPeriod: string) => {
+      const returnPeriod = Number.parseInt(stringReturnPeriod);
+
+      setSelectedReturnPeriod(returnPeriod);
+
+      if (isDatasetActive && selectedLayerId !== undefined) {
+        updateLayer(selectedLayerId, { ["return-period"]: returnPeriod });
+      }
+    },
+    [selectedLayerId, setSelectedReturnPeriod, isDatasetActive, updateLayer],
   );
 
   return (
@@ -89,7 +115,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
           <Switch id={`${id}-toggle`} checked={isDatasetActive} onCheckedChange={onToggleDataset} />
         </div>
       </div>
-      <div className="mt-1">
+      <div className="mt-1 flex flex-col gap-1.5">
         <Select
           value={selectedLayerId !== undefined ? `${selectedLayerId}` : ""}
           onValueChange={onChangeSelectedLayer}
@@ -105,6 +131,23 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
             ))}
           </SelectContent>
         </Select>
+        {!!layerReturnPeriods && (
+          <Select
+            value={selectedReturnPeriod !== undefined ? `${selectedReturnPeriod}` : ""}
+            onValueChange={onChangeSelectedReturnPeriod}
+          >
+            <SelectTrigger aria-label="Return period">
+              <SelectValue placeholder="Select a return period" />
+            </SelectTrigger>
+            <SelectContent>
+              {layerReturnPeriods.options.map((option) => (
+                <SelectItem key={option} value={`${option}`}>
+                  {`${option}-year return period`}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </div>
     </div>
   );

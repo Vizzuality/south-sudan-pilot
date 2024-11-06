@@ -44,6 +44,9 @@ const resolveLayerConfig = (
         setVisibility({ v }: { v: boolean }) {
           return v ? "visible" : "none";
         },
+        match({ input, outputs }: { input: unknown; outputs: [unknown, unknown][] }) {
+          return outputs.find(([value]) => input === value)?.[1];
+        },
       },
       enumerations: {
         params: resolvedParamsConfig,
