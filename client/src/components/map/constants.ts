@@ -47,16 +47,16 @@ export const LABELS: Record<LabelsStyle, { name: string }> = {
 export const BASEMAP_LAYERS = {
   "admin-boundaries": { group: "Boundaries", name: "Administrative boundaries" },
   "hydro-boundaries": { group: "Boundaries", name: "Hydrological basins" },
-  "populated-infrastructures": { group: "Infrastructures", name: "Populated infrastructures" },
+  "education-and-health": { group: "Infrastructures", name: "Education & health facilities" },
   "transportation-network-infrastructures": {
     group: "Infrastructures",
-    name: "Transportation network",
+    name: "Roads",
   },
-  "water-related-infrastructures": {
+  "waterways-waterpoints": {
     group: "Infrastructures",
-    name: "Water-related infrastructures",
+    name: "Waterways & waterpoints",
   },
-  "hydrographic-data": { group: "Water bodies", name: "Hydrographic data" },
+  "hydrographic-data": { group: "Waterbodies", name: "Hydrographic data" },
 } as const;
 
 export const DEFAULT_MAP_SETTINGS: {
