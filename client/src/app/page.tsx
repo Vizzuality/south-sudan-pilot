@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 import Navigation from "@/components/navigation";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -19,8 +20,10 @@ export default function Home() {
   return (
     <main className="h-svh w-svw">
       <SidebarProvider className="flex h-full w-full flex-col-reverse xl:block">
-        <Navigation />
-        <Map />
+        <Suspense>
+          <Navigation />
+          <Map />
+        </Suspense>
       </SidebarProvider>
     </main>
   );
