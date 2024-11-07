@@ -35,8 +35,10 @@ const ContextualLayersPanel = () => {
       </SheetHeader>
 
       <p className="mt-11">
-        Introduction lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-        amet, consectetu elit.
+        Toggle on and off contextual layers to add demographic, land use, and soil property data to
+        your map view. These layers provide additional insights, helping to understand population
+        dynamics, land cover, and soil characteristics, which are essential for comprehensive water
+        resource analysis.
       </p>
 
       {isLoading && (

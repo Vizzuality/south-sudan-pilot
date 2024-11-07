@@ -10,8 +10,9 @@ const Intro = ({ showDescription = true }: IntroProps) => {
       </h1>
       {showDescription && (
         <p className="mx-auto mt-0.5 max-w-[280px] text-xs xl:mt-4 xl:max-w-none xl:text-sm">
-          Introduction lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-          sit amet, consectetu elit.
+          Explore South Sudan’s geospatial visualization tool, a centralized platform for accessing
+          and analyzing hydrological data. Discover insights on flood, drought, and
+          hydrometeorological patterns to support effective water resource management.
         </p>
       )}
     </div>
