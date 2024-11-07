@@ -126,14 +126,14 @@ class Layer(AsDictionaryMixin):
             return self.pre_process_data(data, temporal_coverage)
         return self.pre_process_data(data)
 
-    def process_data(self, file_name: str, min_z: int = 4, max_z: int = 12):
+    def process_data(self, file_name: str, min_z: int = 4, max_z: int = 12, temporal_coverage=None):
         """
         Process the data and save it to the output path.
         """
         if self.type == "raster" and self.format == "GeoTIFF":
             self._layer.process(self.url, self.styles, file_name, min_z, max_z)
         elif self.type == "raster" and self.format == "Zarr":
-            data = self.get_data()
+            data = self.get_data(temporal_coverage)
             self._layer.process(data, self.styles, file_name, min_z, max_z)
         else:
             data = self.get_data()

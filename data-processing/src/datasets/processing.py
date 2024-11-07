@@ -40,14 +40,22 @@ class LayerProcessing:
         if dataset_name not in self.datasets_dict:
             self.datasets_dict[dataset_name] = {}
 
-        # Update the layer information
-        self.datasets_dict[dataset_name][layer_name] = file_name
+        # Check if layer_name is already in the dictionary, if not add it
+        if layer_name not in self.datasets_dict[dataset_name]:
+            self.datasets_dict[dataset_name][layer_name] = []
+
+        # Check if the file name is already in the list, if not add it
+        if file_name not in self.datasets_dict[dataset_name][layer_name]:
+            self.datasets_dict[dataset_name][layer_name].append(file_name)
+        else:
+            print(f"Layer {layer_name} from {dataset_name} already processed.")
+            return
 
         # Save the updated dictionary to the file
         with open(self.dict_path, "w") as f:
             json.dump(self.datasets_dict, f)
 
-    def _generate_file_name(self, dataset_name, layer_name):
+    def _generate_file_name(self, dataset_name, layer_name, year=None):
         """
         Generate a file name based on the dataset name and layer name.
         """
@@ -58,13 +66,22 @@ class LayerProcessing:
         layer_name_lower = layer_name.lower().replace(" - ", " ").replace(" ", "_")
 
         # Form the file name
-        file_name = f"{shortened_dataset_name}_{layer_name_lower}"
+        if year:
+            file_name = f"{shortened_dataset_name}_{layer_name_lower}/{str(year)}"
+        else:
+            file_name = f"{shortened_dataset_name}_{layer_name_lower}"
+
         return file_name
 
-    def create_layers(self):
+    def create_layers(self, min_z: int = 4, max_z: int = 12, year: int = None):
         """
         Process the datasets and create layers.
         """
+        if year:
+            time_coverage = slice(f"{str(year)}-01-01", f"{str(year)}-12-31")
+        else:
+            time_coverage = None
+
         for dataset_name in tqdm(self.datasets_list):
             print(dataset_name)
 
@@ -74,8 +91,8 @@ class LayerProcessing:
                 if layer_name not in self.datasets_dict.get(dataset_name, {}):
                     print("Processing", layer_name, "from", dataset_name)
                     # Generate file name
-                    file_name = self._generate_file_name(dataset_name, layer_name)
+                    file_name = self._generate_file_name(dataset_name, layer_name, year)
                     # Process the layer and save it
-                    layer.process_data(file_name)
+                    layer.process_data(file_name, min_z, max_z, time_coverage)
                     # Update and save the datasets dictionary
                     self._save_datasets_dict(dataset_name, layer_name, file_name)
