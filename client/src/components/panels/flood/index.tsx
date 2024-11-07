@@ -1,3 +1,6 @@
+import Image from "next/image";
+
+import FloodImage from "@/../public/assets/images/flood-illustration.png";
 import DatasetCard from "@/components/dataset-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import useDatasetsBySubTopic from "@/hooks/use-datasets-by-sub-topic";
@@ -12,6 +15,12 @@ const FloodPanel = () => {
         Analyze model-based and EO-based flood information, including flood extent, depth, and
         return periods, to better understand flood risks and support proactive planning.
       </p>
+      <figure className="relative mx-auto mb-6 w-max max-w-full">
+        <Image src={FloodImage} alt="Brown tumultuous water" placeholder="blur" />
+        <figcaption className="absolute bottom-0 left-0 bg-rhino-blue-950/10 px-2.5 py-1 text-xs italic text-white backdrop-blur-sm">
+          Wolfgang Hasselmann
+        </figcaption>
+      </figure>
       {isLoading && (
         <div className="flex flex-col gap-6">
           <Skeleton className="h-7 w-2/5" />
