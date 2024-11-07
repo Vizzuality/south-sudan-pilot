@@ -105,32 +105,36 @@ class Layer(AsDictionaryMixin):
         data = self._layer.load_data(self.url)
         return data
 
-    def pre_process_data(self, data):
+    def pre_process_data(self, data, temporal_coverage=None):
         """
         Processes the data if a processing function is defined.
         Otherwise, returns the data as is.
         """
         if self._pre_processing is None:
-            return data  # Return data without processing if no processing is defined
+            return data
         else:
-            return self._pre_processing.process(data)  # Process the data as before
+            if self.type == "raster":
+                return self._pre_processing.process(data, temporal_coverage)
+            return self._pre_processing.process(data)
 
-    def get_data(self):
+    def get_data(self, temporal_coverage=None):
         """
         Returns the processed data.
         """
         data = self.load_data()
+        if self.type == "raster":
+            return self.pre_process_data(data, temporal_coverage)
         return self.pre_process_data(data)
 
-    def process_data(self, file_name):
+    def process_data(self, file_name: str, min_z: int = 4, max_z: int = 12):
         """
         Process the data and save it to the output path.
         """
         if self.type == "raster" and self.format == "GeoTIFF":
-            self._layer.process(self.url, self.styles, file_name)
+            self._layer.process(self.url, self.styles, file_name, min_z, max_z)
         elif self.type == "raster" and self.format == "Zarr":
             data = self.get_data()
-            self._layer.process(data, self.styles, file_name)
+            self._layer.process(data, self.styles, file_name, min_z, max_z)
         else:
             data = self.get_data()
             self._layer.process(data, file_name)
