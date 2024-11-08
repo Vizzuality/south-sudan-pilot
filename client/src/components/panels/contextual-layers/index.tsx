@@ -9,7 +9,7 @@ import XMarkIcon from "@/svgs/xmark.svg";
 import Item from "./item";
 
 const ContextualLayersPanel = () => {
-  const { data, isLoading } = useDatasetsBySubTopic("contextual");
+  const { data, isLoading } = useDatasetsBySubTopic("contextual", ["layer", "download_link"]);
 
   return (
     <>
@@ -71,6 +71,7 @@ const ContextualLayersPanel = () => {
                   // Assuming the dataset has just one layer, which is currently the case
                   id: dataset.layers[0].id!,
                   name: dataset.layers[0].attributes!.name!,
+                  downloadLink: dataset.layers[0].attributes!.download_link,
                 }))}
             />
           ))}

@@ -70,7 +70,8 @@
           "legend_config.items.value",
           "legend_config.items.pattern",
           "legend_config.unit",
-          "dataset"
+          "dataset",
+          "download_link"
         ]
       },
       "conditions": []
@@ -97,7 +98,8 @@
           "legend_config.items.value",
           "legend_config.items.pattern",
           "legend_config.unit",
-          "dataset"
+          "dataset",
+          "download_link"
         ]
       },
       "conditions": []
@@ -117,7 +119,8 @@
           "legend_config.items.value",
           "legend_config.items.pattern",
           "legend_config.unit",
-          "dataset"
+          "dataset",
+          "download_link"
         ]
       },
       "conditions": []
