@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import useDatasetsBySubTopic from "@/hooks/use-datasets-by-sub-topic";
 
 const DroughtPanel = () => {
-  const { data, isLoading } = useDatasetsBySubTopic("drought", [
+  const { data, isLoading } = useDatasetsBySubTopic("drought", "sub_topic.name:desc,name", [
     "name",
     "params_config",
     "download_link",

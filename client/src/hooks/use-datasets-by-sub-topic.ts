@@ -11,7 +11,11 @@ type DatasetsBySubTopic = {
   }[];
 };
 
-export default function useDatasetsBySubTopic(topicSlug: string, layersFields = ["name"]) {
+export default function useDatasetsBySubTopic(
+  topicSlug: string,
+  sort = "sub_topic.name,name",
+  layersFields = ["name"],
+) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore-error
   const { data, isLoading } = useGetDatasets<DatasetsBySubTopic[]>(
@@ -38,7 +42,7 @@ export default function useDatasetsBySubTopic(topicSlug: string, layersFields = 
           },
         },
       },
-      sort: "sub_topic.name",
+      sort,
     },
     {
       query: {
