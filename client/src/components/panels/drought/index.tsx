@@ -14,7 +14,7 @@ const DroughtPanel = () => {
 
   return (
     <div className="min-h-screen px-5 py-5 lg:min-h-0 lg:px-10">
-      <p className="mb-6">
+      <p className="mb-6 text-sm leading-[26px]">
         Explore agricultural and meteorological drought data to assess exposure and hazard levels
         across South Sudan. Analyze drought indicators, such as SPI, SPEI, SNDVI, and SMA indices,
         to understand drought severity and support resilient water and land management.
