@@ -117,7 +117,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
   return (
     <div className="p-4 border-image-[url(/assets/images/border-image.svg)] border-slice-10 border-image-width-2.5 border-outset-[5px] border-repeat-round">
       <div className="flex items-start justify-between gap-4">
-        <Label htmlFor={`${id}-toggle`} className="text-[20px]">
+        <Label htmlFor={`dataset-${id}-toggle`} className="text-[20px]">
           {name}
         </Label>
         <div className="flex items-center gap-0.5 pt-1">
@@ -144,7 +144,11 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
               />
             </Link>
           </Button>
-          <Switch id={`${id}-toggle`} checked={isDatasetActive} onCheckedChange={onToggleDataset} />
+          <Switch
+            id={`dataset-${id}-toggle`}
+            checked={isDatasetActive}
+            onCheckedChange={onToggleDataset}
+          />
         </div>
       </div>
       <div className="mt-1 flex flex-col gap-1.5">
