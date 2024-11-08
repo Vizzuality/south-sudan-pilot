@@ -89,6 +89,8 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
       // one keeping all the same settings (visibility, opacity, etc.)
       if (isDatasetActive && previousId !== undefined) {
         updateLayer(previousId, { id, ["return-period"]: returnPeriod });
+      } else {
+        addLayer(id, { ["return-period"]: returnPeriod });
       }
     },
     [
@@ -96,6 +98,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
       setSelectedLayerId,
       isDatasetActive,
       updateLayer,
+      addLayer,
       layers,
       layersConfiguration,
     ],
@@ -109,9 +112,11 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
 
       if (isDatasetActive && selectedLayerId !== undefined) {
         updateLayer(selectedLayerId, { ["return-period"]: returnPeriod });
+      } else if (selectedLayerId !== undefined) {
+        addLayer(selectedLayerId, { ["return-period"]: returnPeriod });
       }
     },
-    [selectedLayerId, setSelectedReturnPeriod, isDatasetActive, updateLayer],
+    [selectedLayerId, setSelectedReturnPeriod, isDatasetActive, addLayer, updateLayer],
   );
 
   return (
