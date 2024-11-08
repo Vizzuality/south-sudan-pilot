@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -12,6 +14,8 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import useMapLayers from "@/hooks/use-map-layers";
+import { cn } from "@/lib/utils";
+import DownloadIcon from "@/svgs/download.svg";
 import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
 
 import { getDefaultReturnPeriod, getDefaultSelectedLayerId, getReturnPeriods } from "./utils";
@@ -38,6 +42,11 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
 
   const [selectedLayerId, setSelectedLayerId] = useState(defaultSelectedLayerId);
   const [selectedReturnPeriod, setSelectedReturnPeriod] = useState(defaultSelectedReturnPeriod);
+
+  const selectedLayer = useMemo(
+    () => layers.find(({ id }) => id === selectedLayerId),
+    [layers, selectedLayerId],
+  );
 
   const isDatasetActive = useMemo(() => {
     if (selectedLayerId === undefined) {
@@ -111,7 +120,30 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
         <Label htmlFor={`${id}-toggle`} className="text-[20px]">
           {name}
         </Label>
-        <div className="pt-1">
+        <div className="flex items-center gap-0.5 pt-1">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className={cn({
+              "group/download": true,
+              "pointer-events-none opacity-20": !selectedLayer?.attributes!.download_link,
+            })}
+            aria-disabled={!selectedLayer?.attributes!.download_link}
+            tabIndex={!selectedLayer?.attributes!.download_link ? -1 : undefined}
+            asChild
+          >
+            <Link
+              href={selectedLayer?.attributes!.download_link ?? ""}
+              rel="noopener noreferrer"
+              download={selectedLayer?.attributes!.name}
+            >
+              <span className="sr-only">Download</span>
+              <DownloadIcon
+                className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
+                aria-hidden
+              />
+            </Link>
+          </Button>
           <Switch id={`${id}-toggle`} checked={isDatasetActive} onCheckedChange={onToggleDataset} />
         </div>
       </div>

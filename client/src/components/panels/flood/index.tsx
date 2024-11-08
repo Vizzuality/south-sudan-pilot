@@ -6,7 +6,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import useDatasetsBySubTopic from "@/hooks/use-datasets-by-sub-topic";
 
 const FloodPanel = () => {
-  const { data, isLoading } = useDatasetsBySubTopic("flood", ["name", "params_config"]);
+  const { data, isLoading } = useDatasetsBySubTopic("flood", [
+    "name",
+    "params_config",
+    "download_link",
+  ]);
 
   return (
     <div className="min-h-screen px-5 py-5 lg:min-h-0 lg:px-10">
