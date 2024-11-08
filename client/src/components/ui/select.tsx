@@ -69,9 +69,9 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "text-neutral-950 relative z-50 max-h-96 w-[var(--radix-select-trigger-width)] overflow-hidden border border-casper-blue-400 bg-casper-blue-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "text-neutral-950 relative z-50 max-h-96 w-[var(--radix-select-trigger-width)] overflow-hidden border border-casper-blue-400 bg-casper-blue-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         position === "popper" &&
-          "data-[side=bottom]:-translate-y-px data-[side=left]:translate-x-px data-[side=right]:-translate-x-px data-[side=top]:translate-y-px",
+          "data-[side=bottom]:translate-y-0.5 data-[side=left]:-translate-x-0.5 data-[side=right]:translate-x-0.5 data-[side=top]:-translate-y-0.5",
         className,
       )}
       position={position}
@@ -111,7 +111,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center px-3 py-2 text-sm outline-none transition-colors focus:bg-casper-blue-200 data-[disabled]:pointer-events-none data-[state=checked]:pl-8 data-[state=checked]:font-semibold data-[disabled]:opacity-20",
+      "relative flex w-full cursor-default select-none items-center px-2 py-2 text-sm outline-none transition-colors focus:bg-casper-blue-400 data-[disabled]:pointer-events-none data-[state=checked]:bg-casper-blue-400 data-[state=checked]:pl-6 data-[state=checked]:font-semibold data-[disabled]:opacity-20",
       className,
     )}
     {...props}
