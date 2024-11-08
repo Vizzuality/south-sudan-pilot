@@ -1053,6 +1053,7 @@ export interface Layer {
   createdAt?: string;
   createdBy?: LayerCreatedBy;
   dataset?: LayerDataset;
+  download_link?: string;
   legend_config: LegendLegendConfigComponent;
   mapbox_config: unknown;
   name: string;
@@ -1206,6 +1207,7 @@ export type LayerDatasetDataAttributesLayersDataItemAttributes = {
   createdAt?: string;
   createdBy?: LayerDatasetDataAttributesLayersDataItemAttributesCreatedBy;
   dataset?: LayerDatasetDataAttributesLayersDataItemAttributesDataset;
+  download_link?: string;
   legend_config?: LayerDatasetDataAttributesLayersDataItemAttributesLegendConfig;
   mapbox_config?: unknown;
   name?: string;
@@ -1476,6 +1478,7 @@ export type LayerRequestDataDataset = number | string;
 
 export type LayerRequestData = {
   dataset?: LayerRequestDataDataset;
+  download_link?: string;
   legend_config: LegendLegendConfigComponent;
   mapbox_config: unknown;
   name: string;
@@ -1552,6 +1555,7 @@ export type DatasetLayersDataItemAttributes = {
   createdAt?: string;
   createdBy?: DatasetLayersDataItemAttributesCreatedBy;
   dataset?: DatasetLayersDataItemAttributesDataset;
+  download_link?: string;
   legend_config?: DatasetLayersDataItemAttributesLegendConfig;
   mapbox_config?: unknown;
   name?: string;

@@ -42,6 +42,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::dataset.dataset"
+    },
+    "download_link": {
+      "type": "string",
+      "regex": "^(https?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+((\\/[\\w\\-\\._~:\\/\\?#\\[\\]@!$&'\\(\\)\\*+,;=]*)*)$"
     }
   }
 }

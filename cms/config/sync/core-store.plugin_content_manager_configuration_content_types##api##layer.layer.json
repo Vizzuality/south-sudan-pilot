@@ -104,6 +104,20 @@
           "sortable": true
         }
       },
+      "download_link": {
+        "edit": {
+          "label": "download_link",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "download_link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -164,6 +178,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "dataset",
+        "type",
+        "name"
+      ],
       "edit": [
         [
           {
@@ -198,13 +218,13 @@
             "name": "legend_config",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "download_link",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "dataset",
-        "type",
-        "name"
       ]
     },
     "uid": "api::layer.layer"

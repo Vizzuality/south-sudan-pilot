@@ -861,6 +861,7 @@ export interface ApiLayerLayer extends Schema.CollectionType {
       'oneToOne',
       'api::dataset.dataset'
     >;
+    download_link: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
