@@ -1001,12 +1001,15 @@ export const LegendLegendConfigComponentType = {
   basic: 'basic',
   choropleth: 'choropleth',
   gradient: 'gradient',
+  scale: 'scale',
 } as const;
 
 export type LegendLegendConfigComponentItemsItem = {
   color?: string;
+  group?: string;
   id?: number;
   pattern?: string;
+  size?: number;
   value?: string;
 };
 
@@ -1225,12 +1228,15 @@ export const LayerDatasetDataAttributesLayersDataItemAttributesLegendConfigType 
   basic: 'basic',
   choropleth: 'choropleth',
   gradient: 'gradient',
+  scale: 'scale',
 } as const;
 
 export type LayerDatasetDataAttributesLayersDataItemAttributesLegendConfigItemsItem = {
   color?: string;
+  group?: string;
   id?: number;
   pattern?: string;
+  size?: number;
   value?: string;
 };
 
@@ -1598,12 +1604,15 @@ export const DatasetLayersDataItemAttributesLegendConfigType = {
   basic: 'basic',
   choropleth: 'choropleth',
   gradient: 'gradient',
+  scale: 'scale',
 } as const;
 
 export type DatasetLayersDataItemAttributesLegendConfigItemsItem = {
   color?: string;
+  group?: string;
   id?: number;
   pattern?: string;
+  size?: number;
   value?: string;
 };
 

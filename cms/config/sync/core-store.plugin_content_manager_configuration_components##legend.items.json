@@ -60,6 +60,34 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "size": {
+        "edit": {
+          "label": "size",
+          "description": "Only for legends of type “scale”",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "size",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "group": {
+        "edit": {
+          "label": "group",
+          "description": "Only for legends of type “scale”",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "group",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
@@ -83,6 +111,16 @@
         [
           {
             "name": "value",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "size",
+            "size": 4
+          },
+          {
+            "name": "group",
             "size": 6
           }
         ]
