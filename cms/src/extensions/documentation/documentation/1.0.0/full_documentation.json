@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-08T08:14:51.291Z"
+    "x-generation-date": "2024-11-11T08:14:01.299Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -244,7 +244,8 @@
                               "enum": [
                                 "basic",
                                 "choropleth",
-                                "gradient"
+                                "gradient",
+                                "scale"
                               ]
                             },
                             "items": {
@@ -262,6 +263,12 @@
                                     "type": "string"
                                   },
                                   "pattern": {
+                                    "type": "string"
+                                  },
+                                  "size": {
+                                    "type": "integer"
+                                  },
+                                  "group": {
                                     "type": "string"
                                   }
                                 }
@@ -1094,7 +1101,8 @@
                                           "enum": [
                                             "basic",
                                             "choropleth",
-                                            "gradient"
+                                            "gradient",
+                                            "scale"
                                           ]
                                         },
                                         "items": {
@@ -1112,6 +1120,12 @@
                                                 "type": "string"
                                               },
                                               "pattern": {
+                                                "type": "string"
+                                              },
+                                              "size": {
+                                                "type": "integer"
+                                              },
+                                              "group": {
                                                 "type": "string"
                                               }
                                             }
@@ -1717,7 +1731,8 @@
             "enum": [
               "basic",
               "choropleth",
-              "gradient"
+              "gradient",
+              "scale"
             ]
           },
           "items": {
@@ -1735,6 +1750,12 @@
                   "type": "string"
                 },
                 "pattern": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "integer"
+                },
+                "group": {
                   "type": "string"
                 }
               }

@@ -16,6 +16,13 @@
     },
     "pattern": {
       "type": "string"
+    },
+    "size": {
+      "type": "integer",
+      "min": 0
+    },
+    "group": {
+      "type": "string"
     }
   }
 }

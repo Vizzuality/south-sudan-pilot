@@ -11,7 +11,8 @@
       "enum": [
         "basic",
         "choropleth",
-        "gradient"
+        "gradient",
+        "scale"
       ],
       "required": true
     },
