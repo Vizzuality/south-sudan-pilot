@@ -157,21 +157,23 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
         </div>
       </div>
       <div className="mt-1 flex flex-col gap-1.5">
-        <Select
-          value={selectedLayerId !== undefined ? `${selectedLayerId}` : ""}
-          onValueChange={onChangeSelectedLayer}
-        >
-          <SelectTrigger aria-label="Layer">
-            <SelectValue placeholder="Select a layer" />
-          </SelectTrigger>
-          <SelectContent>
-            {layers.map((layer) => (
-              <SelectItem key={layer.id} value={`${layer.id}`}>
-                {layer.attributes?.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {layers.length > 1 && (
+          <Select
+            value={selectedLayerId !== undefined ? `${selectedLayerId}` : ""}
+            onValueChange={onChangeSelectedLayer}
+          >
+            <SelectTrigger aria-label="Layer">
+              <SelectValue placeholder="Select a layer" />
+            </SelectTrigger>
+            <SelectContent>
+              {layers.map((layer) => (
+                <SelectItem key={layer.id} value={`${layer.id}`}>
+                  {layer.attributes?.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
         {!!layerReturnPeriods && (
           <Select
             value={selectedReturnPeriod !== undefined ? `${selectedReturnPeriod}` : ""}
