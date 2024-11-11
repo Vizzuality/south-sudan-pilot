@@ -17,6 +17,7 @@ import { LayerSettings } from "@/types/layer";
 import BasicLegend from "./basic-legend";
 import ChoroplethLegend from "./choropleth-legend";
 import GradientLegend from "./gradient-legend";
+import ScaleLegend from "./scale-legend";
 
 interface LegendItemProps {
   id: number;
@@ -130,6 +131,7 @@ const LegendItem = ({ id, settings, sortableAttributes, sortableListeners }: Leg
               {data.type === "basic" && <BasicLegend {...data} />}
               {data.type === "choropleth" && <ChoroplethLegend {...data} />}
               {data.type === "gradient" && <GradientLegend {...data} />}
+              {data.type === "scale" && <ScaleLegend {...data} />}
             </>
           )}
         </div>
