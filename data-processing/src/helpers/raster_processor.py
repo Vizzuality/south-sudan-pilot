@@ -12,11 +12,11 @@ import rasterio
 import xarray as xr
 from cog_converter import COGConverter
 from mbtiles_converter import MBTilesConverter
-from qgis.core import (
-    QgsRasterFileWriter,
-    QgsRasterLayer,
-    QgsRasterPipe,
-)
+#from qgis.core import (
+#    QgsRasterFileWriter,
+#    QgsRasterLayer,
+#    QgsRasterPipe,
+#)
 from qml_parser import QMLParser
 
 logging.basicConfig(level=logging.INFO)
