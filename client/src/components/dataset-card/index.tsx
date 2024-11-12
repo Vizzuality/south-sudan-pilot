@@ -1,10 +1,14 @@
 "use client";
 
+import { format } from "date-fns/format";
 import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import MonthPicker from "@/components/ui/month-picker";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -15,10 +19,18 @@ import {
 import { Switch } from "@/components/ui/switch";
 import useMapLayers from "@/hooks/use-map-layers";
 import { cn } from "@/lib/utils";
+import CalendarDaysIcon from "@/svgs/calendar-days.svg";
+import ChevronDownIcon from "@/svgs/chevron-down.svg";
 import DownloadIcon from "@/svgs/download.svg";
 import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
+import { LayerParamsConfig } from "@/types/layer";
 
-import { getDefaultReturnPeriod, getDefaultSelectedLayerId, getReturnPeriods } from "./utils";
+import {
+  getDefaultReturnPeriod,
+  getDefaultSelectedLayerId,
+  getReturnPeriods,
+  getDefaultDate,
+} from "./utils";
 
 interface DatasetCardProps {
   id: number;
@@ -40,13 +52,28 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
     [layers, layersConfiguration, defaultSelectedLayerId],
   );
 
+  const defaultSelectedDate = useMemo(
+    () => getDefaultDate(defaultSelectedLayerId, layers, layersConfiguration),
+    [layers, layersConfiguration, defaultSelectedLayerId],
+  );
+
   const [selectedLayerId, setSelectedLayerId] = useState(defaultSelectedLayerId);
   const [selectedReturnPeriod, setSelectedReturnPeriod] = useState(defaultSelectedReturnPeriod);
+  const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
 
   const selectedLayer = useMemo(
     () => layers.find(({ id }) => id === selectedLayerId),
     [layers, selectedLayerId],
   );
+
+  const dateRange = useMemo(() => {
+    if (!selectedLayer) {
+      return undefined;
+    }
+
+    const paramsConfig = selectedLayer.attributes!.params_config! as LayerParamsConfig;
+    return paramsConfig.find(({ key }) => key === "date-range")?.default as [string, string];
+  }, [selectedLayer]);
 
   const isDatasetActive = useMemo(() => {
     if (selectedLayerId === undefined) {
@@ -70,10 +97,10 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
       if (!active) {
         removeLayer(selectedLayerId);
       } else {
-        addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod });
+        addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod, date: selectedDate });
       }
     },
-    [selectedLayerId, addLayer, removeLayer, selectedReturnPeriod],
+    [selectedLayerId, addLayer, removeLayer, selectedReturnPeriod, selectedDate],
   );
 
   const onChangeSelectedLayer = useCallback(
@@ -81,6 +108,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
       const id = Number.parseInt(stringId);
       const previousId = selectedLayerId;
       const returnPeriod = getDefaultReturnPeriod(id, layers, layersConfiguration);
+      const date = getDefaultDate(id, layers, layersConfiguration);
 
       setSelectedLayerId(id);
       setSelectedReturnPeriod(returnPeriod);
@@ -88,9 +116,9 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
       // If the dataset was active and the layer is changed, we replace the current layer by the new
       // one keeping all the same settings (visibility, opacity, etc.)
       if (isDatasetActive && previousId !== undefined) {
-        updateLayer(previousId, { id, ["return-period"]: returnPeriod });
+        updateLayer(previousId, { id, ["return-period"]: returnPeriod, date });
       } else {
-        addLayer(id, { ["return-period"]: returnPeriod });
+        addLayer(id, { ["return-period"]: returnPeriod, date });
       }
     },
     [
@@ -107,16 +135,48 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
   const onChangeSelectedReturnPeriod = useCallback(
     (stringReturnPeriod: string) => {
       const returnPeriod = Number.parseInt(stringReturnPeriod);
+      const date = getDefaultDate(selectedLayerId, layers, layersConfiguration);
 
       setSelectedReturnPeriod(returnPeriod);
 
       if (isDatasetActive && selectedLayerId !== undefined) {
         updateLayer(selectedLayerId, { ["return-period"]: returnPeriod });
       } else if (selectedLayerId !== undefined) {
-        addLayer(selectedLayerId, { ["return-period"]: returnPeriod });
+        addLayer(selectedLayerId, { ["return-period"]: returnPeriod, date });
       }
     },
-    [selectedLayerId, setSelectedReturnPeriod, isDatasetActive, addLayer, updateLayer],
+    [
+      selectedLayerId,
+      setSelectedReturnPeriod,
+      isDatasetActive,
+      addLayer,
+      updateLayer,
+      layers,
+      layersConfiguration,
+    ],
+  );
+
+  const onChangeSelectedDate = useCallback(
+    (date: string) => {
+      const returnPeriod = getDefaultReturnPeriod(selectedLayerId, layers, layersConfiguration);
+
+      setSelectedDate(date);
+
+      if (isDatasetActive && selectedLayerId !== undefined) {
+        updateLayer(selectedLayerId, { date });
+      } else if (selectedLayerId !== undefined) {
+        addLayer(selectedLayerId, { ["return-period"]: returnPeriod, date });
+      }
+    },
+    [
+      selectedLayerId,
+      setSelectedReturnPeriod,
+      isDatasetActive,
+      addLayer,
+      updateLayer,
+      layers,
+      layersConfiguration,
+    ],
   );
 
   return (
@@ -190,6 +250,43 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
               ))}
             </SelectContent>
           </Select>
+        )}
+        {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
+          <div className="flex items-center justify-between gap-4">
+            <Label htmlFor={`dataset-${id}-date`} className="shrink-0 text-xs font-medium">
+              Displayed on map
+            </Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  id={`dataset-${id}-date`}
+                  type="button"
+                  variant="yellow"
+                  className="group flex-grow justify-between px-3 xl:h-auto xl:py-1.5"
+                >
+                  <CalendarDaysIcon aria-hidden />
+                  {format(selectedDate, "MMMM, yyyy")}
+                  <ChevronDownIcon
+                    className="ml-auto group-data-[state=open]:rotate-180"
+                    aria-hidden
+                  />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                side="bottom"
+                align="end"
+                sideOffset={2}
+                className="w-[var(--radix-popover-trigger-width)]"
+              >
+                <MonthPicker
+                  selected={selectedDate}
+                  minDate={dateRange[0]}
+                  maxDate={dateRange[1]}
+                  onSelect={onChangeSelectedDate}
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
         )}
       </div>
     </div>

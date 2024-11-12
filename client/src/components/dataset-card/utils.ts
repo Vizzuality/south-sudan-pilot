@@ -74,3 +74,28 @@ export const getReturnPeriods = (layerId: number | undefined, layers: DatasetLay
     options: [...(returnPeriod.options as number[])].sort((a, b) => a - b),
   };
 };
+
+export const getDefaultDate = (
+  layerId: number | undefined,
+  layers: DatasetLayersDataItem[],
+  layersConfiguration: ReturnType<typeof useMapLayers>[0],
+) => {
+  const layerConfiguration = layersConfiguration.find(({ id }) => id === layerId);
+
+  // If the layer is active and already has a selected return period, we return it
+  if (layerConfiguration?.["date"] !== undefined) {
+    return layerConfiguration["date"];
+  }
+
+  // Else we look for the default return period stored in `params_config`
+  const layer = layers.find(({ id }) => id === layerId);
+  const defaultDate = (layer?.attributes!.params_config as LayerParamsConfig | undefined)?.find(
+    ({ key }) => key === "date",
+  );
+
+  if (!defaultDate || defaultDate.default === undefined || defaultDate.default === null) {
+    return undefined;
+  }
+
+  return defaultDate.default as string;
+};
