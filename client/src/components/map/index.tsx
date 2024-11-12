@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactMapGL from "react-map-gl";
 
+import DeckglMapboxProvider from "@/components/map/deckgl-mapbox-provider";
 import LayerManager from "@/components/map/layer-manager";
 import { SIDEBAR_WIDTH } from "@/components/ui/sidebar";
 import { env } from "@/env";
@@ -30,6 +31,13 @@ const Map = () => {
 
   const [bounds, setBounds] = useMapBounds();
 
+  const maxBounds = useMemo(
+    () => (isDesktop ? DESKTOP_MAX_BOUNDS : MOBILE_MAX_BOUNDS),
+    [isDesktop],
+  );
+
+  const style = useMemo(() => ({ width: "100%", height: "100%" }), []);
+
   const initialViewState = useMemo(() => {
     const padding = isDesktop ? 100 : 20;
     const sidebarPadding = isSidebarExpanded ? Number.parseInt(SIDEBAR_WIDTH.replace("px", "")) : 0;
@@ -47,9 +55,22 @@ const Map = () => {
     };
   }, [bounds, isDesktop, isSidebarExpanded]);
 
+  // The inner map is memoized so that it doesn't rerender when the map is panned due to the bounds
+  // changing
+  const innerMap = useMemo(() => {
+    return (
+      <DeckglMapboxProvider>
+        <LayerManager />
+        <Controls />
+      </DeckglMapboxProvider>
+    );
+  }, []);
+
   const onMove = useCallback(() => {
     setBounds(map?.getBounds()?.toArray() as [LngLatLike, LngLatLike]);
   }, [map, setBounds]);
+
+  const onLoad = useCallback(() => setMap(mapRef.current), [setMap]);
 
   // Update the position of the map based on the sidebar's state
   useEffect(() => {
@@ -66,15 +87,14 @@ const Map = () => {
       ref={mapRef}
       mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
       initialViewState={initialViewState}
-      maxBounds={isDesktop ? DESKTOP_MAX_BOUNDS : MOBILE_MAX_BOUNDS}
-      style={{ width: "100%", height: "100%" }}
+      maxBounds={maxBounds}
+      style={style}
       mapStyle={env.NEXT_PUBLIC_MAPBOX_STYLE}
       onMove={onMove}
       logoPosition="bottom-right"
-      onLoad={() => setMap(mapRef.current)}
+      onLoad={onLoad}
     >
-      <LayerManager />
-      <Controls />
+      {innerMap}
     </ReactMapGL>
   );
 };
