@@ -1,7 +1,9 @@
 import { JSONConverter } from "@deck.gl/json";
+import { getYear } from "date-fns";
 import { useMemo } from "react";
 
 import { useGetLayersId } from "@/types/generated/layer";
+import { LayerType } from "@/types/generated/strapi.schemas";
 import {
   LayerConfig,
   LayerParamsConfig,
@@ -47,6 +49,20 @@ const resolveLayerConfig = (
         match({ input, outputs }: { input: unknown; outputs: [unknown, unknown][] }) {
           return outputs.find(([value]) => input === value)?.[1];
         },
+        replace({
+          string,
+          pattern,
+          replacement,
+        }: {
+          string: string;
+          pattern: string;
+          replacement: string | number;
+        }) {
+          return string.replace(pattern, `${replacement}`);
+        },
+        getYear({ date }: { date: string }) {
+          return getYear(date);
+        },
       },
       enumerations: {
         params: resolvedParamsConfig,
@@ -65,12 +81,13 @@ export default function useLayerConfig(layerId: number, settings: LayerSettings)
           return undefined;
         }
 
-        const { params_config: paramsConfig, mapbox_config: config } = data.data.attributes!;
+        const { type, params_config: paramsConfig, mapbox_config: config } = data.data.attributes!;
 
         return {
+          type,
           paramsConfig,
           config,
-        } as { paramsConfig: LayerParamsConfig; config: LayerConfig };
+        } as { type: LayerType; paramsConfig: LayerParamsConfig; config: LayerConfig };
       },
     },
   });
@@ -91,5 +108,17 @@ export default function useLayerConfig(layerId: number, settings: LayerSettings)
     return resolveLayerConfig(data.config, resolvedParamsConfig);
   }, [data, isLoading, resolvedParamsConfig]);
 
-  return resolvedConfig;
+  const type = useMemo(() => {
+    if (isLoading || !data) {
+      return null;
+    }
+
+    return data.type;
+  }, [data, isLoading]);
+
+  if (!type || !resolvedConfig) {
+    return undefined;
+  }
+
+  return { type, config: resolvedConfig };
 }

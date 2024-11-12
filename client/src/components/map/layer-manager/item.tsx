@@ -1,7 +1,8 @@
-import { Layer, Source } from "react-map-gl";
-
 import useLayerConfig from "@/hooks/use-layer-config";
 import { LayerSettings } from "@/types/layer";
+
+import AnimatedLayer from "./animated-layer";
+import StaticLayer from "./static-layer";
 
 interface LayerManagerItemProps {
   id: number;
@@ -10,24 +11,23 @@ interface LayerManagerItemProps {
 }
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
-  const config = useLayerConfig(id, settings);
+  const layerConfig = useLayerConfig(id, settings);
 
-  if (!config?.styles) {
+  if (!layerConfig) {
     return null;
   }
 
-  return (
-    <Source
-      // The key ensures that if the URL of the source changes, Mapbox will correctly detect the
-      // change
-      key={config.source.url}
-      {...config.source}
-    >
-      {config.styles.map((style) => (
-        <Layer key={style.id} {...style} beforeId={beforeId} />
-      ))}
-    </Source>
-  );
+  const { type, config } = layerConfig;
+
+  if (!config.styles) {
+    return null;
+  }
+
+  if (type === "animated" && config.source.type === "raster" && !!settings.date) {
+    return <AnimatedLayer config={config} date={settings.date} beforeId={beforeId} />;
+  }
+
+  return <StaticLayer config={config} beforeId={beforeId} />;
 };
 
 export default LayerManagerItem;

@@ -4,6 +4,7 @@ export interface LayerSettings {
   visibility: boolean;
   opacity: number;
   "return-period"?: number;
+  date?: string;
 }
 
 export interface LayerConfig {

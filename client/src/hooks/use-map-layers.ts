@@ -9,6 +9,7 @@ const schema = z.object({
   visibility: z.boolean(),
   opacity: z.number().min(0).max(1),
   "return-period": z.number().int().optional(),
+  date: z.string().date().optional(),
 });
 
 export default function useMapLayers() {
