@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chart_datas",
+  "info": {
+    "singularName": "chart-data",
+    "pluralName": "chart-datas",
+    "displayName": "Chart Data",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "location_code": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "x_values": {
+      "type": "json",
+      "required": true
+    },
+    "y_values": {
+      "type": "json",
+      "required": true
+    },
+    "layer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::layer.layer",
+      "inversedBy": "chart_data"
+    }
+  }
+}

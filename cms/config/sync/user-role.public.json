@@ -4,6 +4,12 @@
   "type": "public",
   "permissions": [
     {
+      "action": "api::chart-data.chart-data.find"
+    },
+    {
+      "action": "api::chart-data.chart-data.findOne"
+    },
+    {
       "action": "api::dataset.dataset.find"
     },
     {

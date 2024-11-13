@@ -1,13 +1,13 @@
 {
-  "key": "plugin_content_manager_configuration_content_types::api::layer.layer",
+  "key": "plugin_content_manager_configuration_content_types::api::chart-data.chart-data",
   "value": {
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 100,
-      "mainField": "name",
-      "defaultSortBy": "name",
+      "mainField": "location_code",
+      "defaultSortBy": "location_code",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -19,79 +19,65 @@
           "sortable": true
         }
       },
-      "name": {
+      "location_code": {
         "edit": {
-          "label": "name",
+          "label": "location_code",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "name",
+          "label": "location_code",
           "searchable": true,
           "sortable": true
         }
       },
-      "type": {
+      "year": {
         "edit": {
-          "label": "type",
+          "label": "year",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "type",
+          "label": "year",
           "searchable": true,
           "sortable": true
         }
       },
-      "mapbox_config": {
+      "x_values": {
         "edit": {
-          "label": "mapbox_config",
+          "label": "x_values",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "mapbox_config",
+          "label": "x_values",
           "searchable": false,
           "sortable": false
         }
       },
-      "params_config": {
+      "y_values": {
         "edit": {
-          "label": "params_config",
+          "label": "y_values",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "params_config",
+          "label": "y_values",
           "searchable": false,
           "sortable": false
         }
       },
-      "legend_config": {
+      "layer": {
         "edit": {
-          "label": "legend_config",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "legend_config",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "dataset": {
-        "edit": {
-          "label": "dataset",
+          "label": "layer",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -99,50 +85,7 @@
           "mainField": "name"
         },
         "list": {
-          "label": "dataset",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "download_link": {
-        "edit": {
-          "label": "download_link",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "download_link",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "chart_data": {
-        "edit": {
-          "label": "chart_data",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "location_code"
-        },
-        "list": {
-          "label": "chart_data",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "chart_unit": {
-        "edit": {
-          "label": "chart_unit",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "chart_unit",
+          "label": "layer",
           "searchable": true,
           "sortable": true
         }
@@ -207,66 +150,44 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "dataset",
-        "type",
-        "name"
-      ],
       "edit": [
         [
           {
-            "name": "name",
+            "name": "layer",
             "size": 6
           },
           {
-            "name": "dataset",
+            "name": "location_code",
             "size": 6
           }
         ],
         [
           {
-            "name": "type",
-            "size": 6
+            "name": "year",
+            "size": 4
           }
         ],
         [
           {
-            "name": "mapbox_config",
+            "name": "x_values",
             "size": 12
           }
         ],
         [
           {
-            "name": "params_config",
+            "name": "y_values",
             "size": 12
-          }
-        ],
-        [
-          {
-            "name": "legend_config",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "download_link",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "chart_data",
-            "size": 6
-          },
-          {
-            "name": "chart_unit",
-            "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "layer",
+        "location_code",
+        "year"
       ]
     },
-    "uid": "api::layer.layer"
+    "uid": "api::chart-data.chart-data"
   },
   "type": "object",
   "environment": null,

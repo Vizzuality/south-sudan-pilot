@@ -6,6 +6,58 @@
     {
       "action": "plugin::content-manager.explorer.create",
       "actionParameters": {},
+      "subject": "api::chart-data.chart-data",
+      "properties": {
+        "fields": [
+          "location_code",
+          "year",
+          "x_values",
+          "y_values",
+          "layer"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::chart-data.chart-data",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::chart-data.chart-data",
+      "properties": {
+        "fields": [
+          "location_code",
+          "year",
+          "x_values",
+          "y_values",
+          "layer"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::chart-data.chart-data",
+      "properties": {
+        "fields": [
+          "location_code",
+          "year",
+          "x_values",
+          "y_values",
+          "layer"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
       "subject": "api::dataset.dataset",
       "properties": {
         "fields": [
@@ -100,7 +152,9 @@
           "legend_config.items.group",
           "legend_config.unit",
           "dataset",
-          "download_link"
+          "download_link",
+          "chart_data",
+          "chart_unit"
         ]
       },
       "conditions": []
@@ -130,7 +184,9 @@
           "legend_config.items.group",
           "legend_config.unit",
           "dataset",
-          "download_link"
+          "download_link",
+          "chart_data",
+          "chart_unit"
         ]
       },
       "conditions": []
@@ -153,7 +209,9 @@
           "legend_config.items.group",
           "legend_config.unit",
           "dataset",
-          "download_link"
+          "download_link",
+          "chart_data",
+          "chart_unit"
         ]
       },
       "conditions": []

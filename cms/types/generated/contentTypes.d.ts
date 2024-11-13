@@ -788,6 +788,51 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiChartDataChartData extends Schema.CollectionType {
+  collectionName: 'chart_datas';
+  info: {
+    singularName: 'chart-data';
+    pluralName: 'chart-datas';
+    displayName: 'Chart Data';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    location_code: Attribute.String & Attribute.Required;
+    year: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    x_values: Attribute.JSON & Attribute.Required;
+    y_values: Attribute.JSON & Attribute.Required;
+    layer: Attribute.Relation<
+      'api::chart-data.chart-data',
+      'manyToOne',
+      'api::layer.layer'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::chart-data.chart-data',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::chart-data.chart-data',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiDatasetDataset extends Schema.CollectionType {
   collectionName: 'datasets';
   info: {
@@ -863,6 +908,12 @@ export interface ApiLayerLayer extends Schema.CollectionType {
       'api::dataset.dataset'
     >;
     download_link: Attribute.String;
+    chart_data: Attribute.Relation<
+      'api::layer.layer',
+      'oneToMany',
+      'api::chart-data.chart-data'
+    >;
+    chart_unit: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1006,6 +1057,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::chart-data.chart-data': ApiChartDataChartData;
       'api::dataset.dataset': ApiDatasetDataset;
       'api::layer.layer': ApiLayerLayer;
       'api::location.location': ApiLocationLocation;

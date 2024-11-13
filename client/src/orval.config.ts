@@ -5,7 +5,7 @@ export default defineConfig({
     input: {
       target: "../../cms/src/extensions/documentation/documentation/1.0.0/full_documentation.json",
       filters: {
-        tags: ["Topic", "Sub-topic", "Dataset", "Layer"],
+        tags: ["Topic", "Sub-topic", "Dataset", "Layer", "Chart-data"],
       },
     },
     output: {

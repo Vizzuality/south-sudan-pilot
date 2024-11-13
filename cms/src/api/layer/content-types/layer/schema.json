@@ -46,6 +46,15 @@
     "download_link": {
       "type": "string",
       "regex": "^(https?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+((\\/[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=\\s%]*)*)$"
+    },
+    "chart_data": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chart-data.chart-data",
+      "mappedBy": "layer"
+    },
+    "chart_unit": {
+      "type": "string"
     }
   }
 }
