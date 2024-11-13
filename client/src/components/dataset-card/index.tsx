@@ -1,8 +1,9 @@
 "use client";
 
+import { getMonth } from "date-fns";
 import { format } from "date-fns/format";
 import Link from "next/link";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,8 @@ import { cn } from "@/lib/utils";
 import CalendarDaysIcon from "@/svgs/calendar-days.svg";
 import ChevronDownIcon from "@/svgs/chevron-down.svg";
 import DownloadIcon from "@/svgs/download.svg";
+import PauseIcon from "@/svgs/pause.svg";
+import PlayIcon from "@/svgs/play.svg";
 import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
 import { LayerParamsConfig } from "@/types/layer";
 
@@ -60,6 +63,10 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
   const [selectedLayerId, setSelectedLayerId] = useState(defaultSelectedLayerId);
   const [selectedReturnPeriod, setSelectedReturnPeriod] = useState(defaultSelectedReturnPeriod);
   const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
+  const [isAnimated, setIsAnimated] = useState(false);
+  const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  // Date that was selected before the animation is played
+  const dateBeforeAnimationRef = useRef<string | null>(null);
 
   const selectedLayer = useMemo(
     () => layers.find(({ id }) => id === selectedLayerId),
@@ -168,16 +175,43 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
         addLayer(selectedLayerId, { ["return-period"]: returnPeriod, date });
       }
     },
-    [
-      selectedLayerId,
-      setSelectedReturnPeriod,
-      isDatasetActive,
-      addLayer,
-      updateLayer,
-      layers,
-      layersConfiguration,
-    ],
+    [selectedLayerId, isDatasetActive, addLayer, updateLayer, layers, layersConfiguration],
   );
+
+  const onToggleAnimation = useCallback(() => {
+    const newIsAnimated = !isAnimated;
+
+    if (newIsAnimated) {
+      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
+    } else {
+      dateBeforeAnimationRef.current = null;
+    }
+
+    setIsAnimated(newIsAnimated);
+  }, [selectedDate, isAnimated, setIsAnimated]);
+
+  // When the layer is animated, show each month of the year in a loop
+  useEffect(() => {
+    if (isAnimated && selectedDate !== undefined && selectedLayerId !== undefined) {
+      animationIntervalRef.current = setInterval(() => {
+        const date = format(
+          new Date(selectedDate).setMonth((getMonth(selectedDate) + 1) % 12),
+          "yyyy-MM-dd",
+        );
+
+        setSelectedDate(date);
+        updateLayer(selectedLayerId, { date });
+      }, 500);
+    } else if (animationIntervalRef.current !== null) {
+      clearInterval(animationIntervalRef.current);
+    }
+
+    return () => {
+      if (animationIntervalRef.current !== null) {
+        clearInterval(animationIntervalRef.current);
+      }
+    };
+  }, [selectedLayerId, selectedDate, isAnimated, setSelectedDate, updateLayer]);
 
   return (
     <div className="p-4 border-image-[url(/assets/images/border-image.svg)] border-slice-10 border-image-width-2.5 border-outset-[5px] border-repeat-round">
@@ -245,39 +279,58 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
         )}
         {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
           <div className="flex items-center justify-between gap-4">
-            <Label htmlFor={`dataset-${id}-date`} className="shrink-0 text-xs font-medium">
-              Displayed on map
-            </Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  id={`dataset-${id}-date`}
-                  type="button"
-                  variant="yellow"
-                  className="group flex-grow justify-between px-3 xl:h-auto xl:py-1.5"
-                >
-                  <CalendarDaysIcon aria-hidden />
-                  {format(selectedDate, "MMMM, yyyy")}
-                  <ChevronDownIcon
-                    className="ml-auto group-data-[state=open]:rotate-180"
-                    aria-hidden
-                  />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                side="bottom"
-                align="end"
-                sideOffset={2}
-                className="w-[var(--radix-popover-trigger-width)]"
+            <Button
+              type="button"
+              variant="ghost"
+              size="auto"
+              className="hidden h-6 w-6 rounded-full border border-rhino-blue-950 hover:border-rhino-blue-800 hover:text-rhino-blue-800 lg:inline-flex"
+              aria-pressed={isAnimated}
+              onClick={onToggleAnimation}
+            >
+              <span className="sr-only">Play layer animation</span>
+              {!isAnimated && <PlayIcon className="!size-4 transition-colors" aria-hidden />}
+              {isAnimated && <PauseIcon className="!size-4 transition-colors" aria-hidden />}
+            </Button>
+            <div className="flex w-full items-center gap-2 lg:w-auto">
+              <Label
+                htmlFor={`dataset-${id}-date`}
+                className={cn({
+                  "shrink-0 text-xs font-medium": true,
+                  "pointer-events-none opacity-60": isAnimated,
+                })}
               >
-                <MonthPicker
-                  selected={selectedDate}
-                  minDate={dateRange[0]}
-                  maxDate={dateRange[1]}
-                  onSelect={onChangeSelectedDate}
-                />
-              </PopoverContent>
-            </Popover>
+                Displayed on map
+              </Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    id={`dataset-${id}-date`}
+                    type="button"
+                    variant="yellow"
+                    className="group/month-picker max-w-[220px] flex-grow justify-between px-3 disabled:bg-rhino-blue-50 disabled:text-rhino-blue-950/60 disabled:opacity-100 lg:flex-grow-0 xl:h-auto xl:py-1.5"
+                    disabled={isAnimated}
+                  >
+                    <CalendarDaysIcon aria-hidden />
+                    {format(
+                      isAnimated ? dateBeforeAnimationRef.current! : selectedDate,
+                      "MMMM, yyyy",
+                    )}
+                    <ChevronDownIcon
+                      className="ml-auto group-data-[state=open]/month-picker:rotate-180"
+                      aria-hidden
+                    />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent side="bottom" align="end" sideOffset={2} className="w-[220px]">
+                  <MonthPicker
+                    selected={isAnimated ? dateBeforeAnimationRef.current! : selectedDate}
+                    minDate={dateRange[0]}
+                    maxDate={dateRange[1]}
+                    onSelect={onChangeSelectedDate}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
           </div>
         )}
       </div>
