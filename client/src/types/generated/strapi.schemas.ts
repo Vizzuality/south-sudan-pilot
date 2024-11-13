@@ -1180,6 +1180,7 @@ export type LayerDatasetDataAttributesSubTopicDataAttributesCreatedBy = {
 
 export type LayerDatasetDataAttributesMetadata = {
   description?: string;
+  full_name?: string;
   id?: number;
   main_applications?: string;
   source?: string;
@@ -1511,6 +1512,7 @@ export interface LayerRequest {
 
 export interface MetadataItemComponent {
   description?: string;
+  full_name?: string;
   id?: number;
   main_applications?: string;
   source?: string;
@@ -1909,6 +1911,7 @@ export type DatasetLayersDataItemAttributesDatasetDataAttributesSubTopicDataAttr
 
 export type DatasetLayersDataItemAttributesDatasetDataAttributesMetadata = {
   description?: string;
+  full_name?: string;
   id?: number;
   main_applications?: string;
   source?: string;

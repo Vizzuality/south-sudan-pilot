@@ -75,20 +75,6 @@
           "sortable": false
         }
       },
-      "temporal_resolution": {
-        "edit": {
-          "label": "temporal_resolution",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "temporal_resolution",
-          "searchable": true,
-          "sortable": true
-        }
-      },
       "temporal_coverage": {
         "edit": {
           "label": "temporal_coverage",
@@ -130,6 +116,34 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "full_name": {
+        "edit": {
+          "label": "full_name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "full_name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "temporal_resolution": {
+        "edit": {
+          "label": "temporal_resolution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "temporal_resolution",
+          "searchable": false,
+          "sortable": false
+        }
       }
     },
     "layouts": {
@@ -141,6 +155,10 @@
       ],
       "edit": [
         [
+          {
+            "name": "full_name",
+            "size": 6
+          },
           {
             "name": "source",
             "size": 6

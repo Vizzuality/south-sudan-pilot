@@ -19,9 +19,6 @@
     "main_applications": {
       "type": "richtext"
     },
-    "temporal_resolution": {
-      "type": "string"
-    },
     "temporal_coverage": {
       "type": "richtext"
     },
@@ -30,6 +27,13 @@
     },
     "units": {
       "type": "string"
+    },
+    "full_name": {
+      "type": "string",
+      "required": true
+    },
+    "temporal_resolution": {
+      "type": "richtext"
     }
   }
 }

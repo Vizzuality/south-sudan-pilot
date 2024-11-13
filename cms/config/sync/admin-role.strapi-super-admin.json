@@ -18,10 +18,11 @@
           "metadata.website",
           "metadata.description",
           "metadata.main_applications",
-          "metadata.temporal_resolution",
           "metadata.temporal_coverage",
           "metadata.spatial_resolution",
-          "metadata.units"
+          "metadata.units",
+          "metadata.full_name",
+          "metadata.temporal_resolution"
         ]
       },
       "conditions": []
@@ -48,10 +49,11 @@
           "metadata.website",
           "metadata.description",
           "metadata.main_applications",
-          "metadata.temporal_resolution",
           "metadata.temporal_coverage",
           "metadata.spatial_resolution",
-          "metadata.units"
+          "metadata.units",
+          "metadata.full_name",
+          "metadata.temporal_resolution"
         ]
       },
       "conditions": []
@@ -71,10 +73,11 @@
           "metadata.website",
           "metadata.description",
           "metadata.main_applications",
-          "metadata.temporal_resolution",
           "metadata.temporal_coverage",
           "metadata.spatial_resolution",
-          "metadata.units"
+          "metadata.units",
+          "metadata.full_name",
+          "metadata.temporal_resolution"
         ]
       },
       "conditions": []

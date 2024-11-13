@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-13T14:44:54.472Z"
+    "x-generation-date": "2024-11-13T15:23:46.976Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -733,9 +733,6 @@
                                         "main_applications": {
                                           "type": "string"
                                         },
-                                        "temporal_resolution": {
-                                          "type": "string"
-                                        },
                                         "temporal_coverage": {
                                           "type": "string"
                                         },
@@ -743,6 +740,12 @@
                                           "type": "string"
                                         },
                                         "units": {
+                                          "type": "string"
+                                        },
+                                        "full_name": {
+                                          "type": "string"
+                                        },
+                                        "temporal_resolution": {
                                           "type": "string"
                                         }
                                       }
@@ -985,9 +988,6 @@
           "main_applications": {
             "type": "string"
           },
-          "temporal_resolution": {
-            "type": "string"
-          },
           "temporal_coverage": {
             "type": "string"
           },
@@ -995,6 +995,12 @@
             "type": "string"
           },
           "units": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "temporal_resolution": {
             "type": "string"
           }
         }
@@ -1691,9 +1697,6 @@
                           "main_applications": {
                             "type": "string"
                           },
-                          "temporal_resolution": {
-                            "type": "string"
-                          },
                           "temporal_coverage": {
                             "type": "string"
                           },
@@ -1701,6 +1704,12 @@
                             "type": "string"
                           },
                           "units": {
+                            "type": "string"
+                          },
+                          "full_name": {
+                            "type": "string"
+                          },
+                          "temporal_resolution": {
                             "type": "string"
                           }
                         }

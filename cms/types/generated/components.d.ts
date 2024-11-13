@@ -11,10 +11,11 @@ export interface MetadataItem extends Schema.Component {
     website: Attribute.String;
     description: Attribute.Text;
     main_applications: Attribute.RichText;
-    temporal_resolution: Attribute.String;
     temporal_coverage: Attribute.RichText;
     spatial_resolution: Attribute.String;
     units: Attribute.String;
+    full_name: Attribute.String & Attribute.Required;
+    temporal_resolution: Attribute.RichText;
   };
 }
 

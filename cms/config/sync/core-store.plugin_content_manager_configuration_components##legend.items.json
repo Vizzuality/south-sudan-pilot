@@ -64,7 +64,7 @@
       "size": {
         "edit": {
           "label": "size",
-          "description": "Only for legends of type “scale”",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -78,7 +78,7 @@
       "group": {
         "edit": {
           "label": "group",
-          "description": "Only for legends of type “scale”",
+          "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -112,13 +112,13 @@
           {
             "name": "value",
             "size": 6
-          }
-        ],
-        [
+          },
           {
             "name": "size",
             "size": 4
-          },
+          }
+        ],
+        [
           {
             "name": "group",
             "size": 6
