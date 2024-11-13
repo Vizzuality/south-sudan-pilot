@@ -186,29 +186,21 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
           {name}
         </Label>
         <div className="flex items-center gap-0.5 pt-1">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className={cn({
-              "group/download": true,
-              "pointer-events-none opacity-20": !selectedLayer?.attributes!.download_link,
-            })}
-            aria-disabled={!selectedLayer?.attributes!.download_link}
-            tabIndex={!selectedLayer?.attributes!.download_link ? -1 : undefined}
-            asChild
-          >
-            <Link
-              href={selectedLayer?.attributes!.download_link ?? ""}
-              rel="noopener noreferrer"
-              download={selectedLayer?.attributes!.name}
-            >
-              <span className="sr-only">Download</span>
-              <DownloadIcon
-                className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
-                aria-hidden
-              />
-            </Link>
-          </Button>
+          {!!selectedLayer?.attributes!.download_link && (
+            <Button variant="ghost" size="icon-sm" className="group/download" asChild>
+              <Link
+                href={selectedLayer?.attributes!.download_link ?? ""}
+                rel="noopener noreferrer"
+                download={selectedLayer?.attributes!.name}
+              >
+                <span className="sr-only">Download</span>
+                <DownloadIcon
+                  className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
+                  aria-hidden
+                />
+              </Link>
+            </Button>
+          )}
           <Switch
             id={`dataset-${id}-toggle`}
             checked={isDatasetActive}
