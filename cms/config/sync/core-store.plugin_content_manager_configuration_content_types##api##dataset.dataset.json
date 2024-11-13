@@ -93,6 +93,20 @@
           "sortable": true
         }
       },
+      "metadata": {
+        "edit": {
+          "label": "metadata",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metadata",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -153,6 +167,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "topic",
+        "sub_topic",
+        "name"
+      ],
       "edit": [
         [
           {
@@ -179,13 +199,13 @@
             "name": "default_layer",
             "size": 6
           }
+        ],
+        [
+          {
+            "name": "metadata",
+            "size": 12
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "topic",
-        "sub_topic",
-        "name"
       ]
     },
     "uid": "api::dataset.dataset"

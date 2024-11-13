@@ -13,7 +13,15 @@
           "layers",
           "default_layer",
           "topic",
-          "sub_topic"
+          "sub_topic",
+          "metadata.source",
+          "metadata.website",
+          "metadata.description",
+          "metadata.main_applications",
+          "metadata.temporal_resolution",
+          "metadata.temporal_coverage",
+          "metadata.spatial_resolution",
+          "metadata.units"
         ]
       },
       "conditions": []
@@ -35,7 +43,15 @@
           "layers",
           "default_layer",
           "topic",
-          "sub_topic"
+          "sub_topic",
+          "metadata.source",
+          "metadata.website",
+          "metadata.description",
+          "metadata.main_applications",
+          "metadata.temporal_resolution",
+          "metadata.temporal_coverage",
+          "metadata.spatial_resolution",
+          "metadata.units"
         ]
       },
       "conditions": []
@@ -50,7 +66,15 @@
           "layers",
           "default_layer",
           "topic",
-          "sub_topic"
+          "sub_topic",
+          "metadata.source",
+          "metadata.website",
+          "metadata.description",
+          "metadata.main_applications",
+          "metadata.temporal_resolution",
+          "metadata.temporal_coverage",
+          "metadata.spatial_resolution",
+          "metadata.units"
         ]
       },
       "conditions": []

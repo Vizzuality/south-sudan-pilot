@@ -1,0 +1,199 @@
+{
+  "key": "plugin_content_manager_configuration_components::metadata.item",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "source",
+      "defaultSortBy": "source",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "source": {
+        "edit": {
+          "label": "source",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "source",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "website": {
+        "edit": {
+          "label": "website",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "website",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "main_applications": {
+        "edit": {
+          "label": "main_applications",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "main_applications",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "temporal_resolution": {
+        "edit": {
+          "label": "temporal_resolution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "temporal_resolution",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "temporal_coverage": {
+        "edit": {
+          "label": "temporal_coverage",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "temporal_coverage",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "spatial_resolution": {
+        "edit": {
+          "label": "spatial_resolution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "spatial_resolution",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "units": {
+        "edit": {
+          "label": "units",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "units",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "source",
+        "website",
+        "description"
+      ],
+      "edit": [
+        [
+          {
+            "name": "source",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "website",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "main_applications",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "temporal_resolution",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "temporal_coverage",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "spatial_resolution",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "units",
+            "size": 12
+          }
+        ]
+      ]
+    },
+    "uid": "metadata.item",
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
