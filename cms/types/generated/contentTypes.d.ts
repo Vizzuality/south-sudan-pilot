@@ -950,7 +950,7 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       Attribute.Required &
       Attribute.SetMinMax<
         {
-          min: 1;
+          min: 0;
           max: 3;
         },
         number
