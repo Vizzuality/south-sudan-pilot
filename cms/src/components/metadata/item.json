@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_metadata_item",
+  "info": {
+    "displayName": "Item",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "source": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string",
+      "regex": "^(https?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+((\\/[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=\\s%]*)*)$"
+    },
+    "description": {
+      "type": "text"
+    },
+    "main_applications": {
+      "type": "richtext"
+    },
+    "temporal_resolution": {
+      "type": "string"
+    },
+    "temporal_coverage": {
+      "type": "richtext"
+    },
+    "spatial_resolution": {
+      "type": "string"
+    },
+    "units": {
+      "type": "string"
+    }
+  }
+}

@@ -821,6 +821,7 @@ export interface ApiDatasetDataset extends Schema.CollectionType {
       'oneToOne',
       'api::sub-topic.sub-topic'
     >;
+    metadata: Attribute.Component<'metadata.item'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

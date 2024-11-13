@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-11T08:14:01.299Z"
+    "x-generation-date": "2024-11-13T14:44:54.472Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -147,6 +147,9 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "metadata": {
+                "$ref": "#/components/schemas/MetadataItemComponent"
               }
             }
           }
@@ -712,6 +715,38 @@
                                         }
                                       }
                                     },
+                                    "metadata": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "number"
+                                        },
+                                        "source": {
+                                          "type": "string"
+                                        },
+                                        "website": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "main_applications": {
+                                          "type": "string"
+                                        },
+                                        "temporal_resolution": {
+                                          "type": "string"
+                                        },
+                                        "temporal_coverage": {
+                                          "type": "string"
+                                        },
+                                        "spatial_resolution": {
+                                          "type": "string"
+                                        },
+                                        "units": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
                                     "createdAt": {
                                       "type": "string",
                                       "format": "date-time"
@@ -863,6 +898,9 @@
               }
             }
           },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataItemComponent"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -926,6 +964,38 @@
           },
           "meta": {
             "type": "object"
+          }
+        }
+      },
+      "MetadataItemComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "source": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "main_applications": {
+            "type": "string"
+          },
+          "temporal_resolution": {
+            "type": "string"
+          },
+          "temporal_coverage": {
+            "type": "string"
+          },
+          "spatial_resolution": {
+            "type": "string"
+          },
+          "units": {
+            "type": "string"
           }
         }
       },
@@ -1600,6 +1670,38 @@
                                 }
                               }
                             }
+                          }
+                        }
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "source": {
+                            "type": "string"
+                          },
+                          "website": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "main_applications": {
+                            "type": "string"
+                          },
+                          "temporal_resolution": {
+                            "type": "string"
+                          },
+                          "temporal_coverage": {
+                            "type": "string"
+                          },
+                          "spatial_resolution": {
+                            "type": "string"
+                          },
+                          "units": {
+                            "type": "string"
                           }
                         }
                       },

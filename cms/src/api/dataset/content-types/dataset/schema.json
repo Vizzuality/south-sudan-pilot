@@ -35,6 +35,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::sub-topic.sub-topic"
+    },
+    "metadata": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.item"
     }
   }
 }
