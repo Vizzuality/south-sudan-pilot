@@ -69,7 +69,15 @@ class _PreProcessingSystem:
             },
             "Hydrographic data": {
                 "Rivers": VectorPreProcessing(
-                    columns=["FID_HydroR", "HYRIV_ID", "MAIN_RIV", "geometry"]
+                    columns=[
+                        "FID_HydroR",
+                        "HYRIV_ID",
+                        "MAIN_RIV",
+                        "ORD_STRA",
+                        "ORD_CLAS",
+                        "ORD_FLOW",
+                        "geometry",
+                    ]
                 ),
             },
             "Populated infrastructures": {
@@ -143,10 +151,14 @@ class RasterPreProcessing:
         self.temporal_resolution = temporal_resolution
         self.groupby_type = groupby_type
 
-    def process(self, ds: xr.Dataset) -> xr.Dataset:
+    def process(self, ds: xr.Dataset, temporal_coverage=None) -> xr.Dataset:
         """
         Processes the xarray dataset.
         """
+        # Update the temporal coverage if provided
+        if temporal_coverage is not None:
+            self.temporal_coverage = temporal_coverage
+
         # Choose the variable of interest
         da = ds[self.variable]
         attrs = ds.attrs

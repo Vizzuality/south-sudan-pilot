@@ -9,7 +9,7 @@ import gcsfs
 import xarray as xr
 from animations.animated_tiles import AnimatedTiles
 from animations.utils import create_linear_segmented_colormap
-from helpers.raster_processor import QgsStyledRasterProcessor
+#from helpers.raster_processor import QgsStyledRasterProcessor
 from helpers.raster_tiles import RasterTiles
 
 
@@ -43,7 +43,7 @@ class ZarrRasterLayer:
         ds = xr.open_zarr(store=store, consolidated=True)
         return ds
 
-    def process(self, data, styles, file_name):
+    def process(self, data, styles, file_name, min_z=4, max_z=12):
         """
         Process the raster data.
         """
@@ -63,8 +63,8 @@ class ZarrRasterLayer:
         animater_tiles = AnimatedTiles(
             da,
             output_folder,
-            min_z=4,
-            max_z=12,
+            min_z,
+            max_z,
             color_map=cm,
             vmin=styles.get("vmin"),
             vmax=styles.get("vmax"),
@@ -89,7 +89,7 @@ class GeoTIFFRasterLayer:
         ds = xr.open_dataset(url, engine="rasterio")
         return ds
 
-    def process(self, url, styles, file_name):
+    def process(self, url, styles, file_name, min_z=4, max_z=12):
         """
         Process the raster data.
         """
@@ -102,7 +102,7 @@ class GeoTIFFRasterLayer:
         output_folder.mkdir(parents=True, exist_ok=True)
 
         # Convert GeoTIFF to Tiles
-        raster_tiles = RasterTiles(output_path, output_folder, min_z=4, max_z=12, engine="rasterio")
+        raster_tiles = RasterTiles(output_path, output_folder, min_z, max_z, engine="rasterio")
         raster_tiles.create()
 
 

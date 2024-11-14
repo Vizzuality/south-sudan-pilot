@@ -7,10 +7,13 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+import dask
 import mercantile
 import numpy as np
 import rasterio
 import xarray as xr
+import warnings
+from dask.diagnostics import ProgressBar
 from PIL import Image
 from rio_tiler.colormap import ColorMapType
 from rio_tiler.errors import TileOutsideBounds
@@ -18,6 +21,8 @@ from rio_tiler.io import Reader, XarrayReader
 from tqdm import tqdm
 from utils import create_apngs, get_files_with_years
 
+# Suppress specific warnings from rasterio
+warnings.filterwarnings("ignore", category=rasterio.errors.NotGeoreferencedWarning)
 
 class AnimatedTiles:
     """
@@ -276,13 +281,19 @@ class XArrayEngine(TileEngine):
         except Exception as e:
             print(f"An error occurred while generating tiles: {e}")
 
-    def _create_tile_wrapper(self, tile):
-        self._create_tile(
-            tile,
-            da=self.da,
-            n=self.n,
-            colormap=self.color_map,
-        )
+    def _worker_create_tiles(self, da, n, tiles):
+        for tile in tiles:
+            self._create_tile(
+                tile,
+                da,
+                n,
+                self.color_map,
+            )
+            
+    def _get_slice_data(self, time, time_coord="time"):
+        """Slice the raster dataset based on the time coordinate."""
+        da = self.data.isel({time_coord: time}).copy()
+        return da
 
     def generate_tiles(self, time_coord="time"):
         """
@@ -296,16 +307,13 @@ class XArrayEngine(TileEngine):
         # Calculate the tiles within the bounding box at the given zoom level
         tiles = list(mercantile.tiles(bbox[0], bbox[1], bbox[2], bbox[3], zooms=self.zooms))
 
-        for self.n in tqdm(range(len(time_coords))):
-            # Get the xarray DataArray
-            self.da = self.data.isel({time_coord: self.n})
-            for tile in tiles:
-                self._create_tile(
-                    tile,
-                    da=self.da,
-                    n=self.n,
-                    colormap=self.color_map,
-                )
-            # Using ThreadPoolExecutor to parallelize the process
-            with ThreadPoolExecutor() as executor:
-                executor.map(self._create_tile_wrapper, tiles)
+        tasks = [
+            dask.delayed(self._worker_create_tiles)(
+                self._get_slice_data(n, time_coord), n, tiles
+            )
+            for n in range(len(time_coords))
+        ]
+
+        with ProgressBar(minimum=0.01):
+            dask.compute(*tasks)
+

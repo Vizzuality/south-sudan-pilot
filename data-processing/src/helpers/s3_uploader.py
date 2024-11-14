@@ -36,7 +36,7 @@ def upload_files_to_s3_parallel(
     config = Config(
         region_name=AWS_REGION,
         retries={"max_attempts": 3, "mode": "standard"},
-        max_pool_connections=100,  # Increase the connection pool size
+        max_pool_connections=100,
     )
 
     # S3 client initialization with credentials
