@@ -386,7 +386,7 @@
             "type": "raster",
             "format": "Zarr",
             "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Temperature-ERA5Land/WBHYDROSSD_ERA5-Land_t2m-D-mean_South_Sudan-EPSG4326_19500101_20231231_20240209091716.zarr",
-            "styles": {"colors": ["#FFFFFF", "#E8eB5B", "#211F4D"], "vmin": 10, "vmax": 35, "time_coord": "month"}
+            "styles": {"colors": ["#FFFFFF", "#E85B5B", "#211F4D"], "vmin": 10, "vmax": 35, "time_coord": "month"}
         },
         "Evapotranspiration": {
             "type": "raster",

@@ -4,6 +4,7 @@ Module for creating animated tiles
 
 import io
 import os
+import warnings
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -12,7 +13,6 @@ import mercantile
 import numpy as np
 import rasterio
 import xarray as xr
-import warnings
 from dask.diagnostics import ProgressBar
 from PIL import Image
 from rio_tiler.colormap import ColorMapType
@@ -23,6 +23,7 @@ from utils import create_apngs, get_files_with_years
 
 # Suppress specific warnings from rasterio
 warnings.filterwarnings("ignore", category=rasterio.errors.NotGeoreferencedWarning)
+
 
 class AnimatedTiles:
     """
@@ -289,7 +290,7 @@ class XArrayEngine(TileEngine):
                 n,
                 self.color_map,
             )
-            
+
     def _get_slice_data(self, time, time_coord="time"):
         """Slice the raster dataset based on the time coordinate."""
         da = self.data.isel({time_coord: time}).copy()
@@ -308,12 +309,9 @@ class XArrayEngine(TileEngine):
         tiles = list(mercantile.tiles(bbox[0], bbox[1], bbox[2], bbox[3], zooms=self.zooms))
 
         tasks = [
-            dask.delayed(self._worker_create_tiles)(
-                self._get_slice_data(n, time_coord), n, tiles
-            )
+            dask.delayed(self._worker_create_tiles)(self._get_slice_data(n, time_coord), n, tiles)
             for n in range(len(time_coords))
         ]
 
         with ProgressBar(minimum=0.01):
             dask.compute(*tasks)
-
