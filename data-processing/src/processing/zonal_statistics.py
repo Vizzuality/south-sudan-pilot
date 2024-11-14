@@ -93,10 +93,10 @@ class ZonalStatisticsParallel:
             mean_values = dask.compute(*tasks)
 
         # Create a DataFrame from the results
-        df = pd.DataFrame(mean_values, columns=["index", "x_axis_values"])
+        df = pd.DataFrame(mean_values, columns=["index", "y_axis_values"])
 
         # Add y_axis_values to mean_values
-        df["y_axis_values"] = str((self.raster_data[self.time_coord].values.tolist()))
+        df["x_axis_values"] = str((self.raster_data[self.time_coord].values.tolist()))
 
         # Add units
         df["x_axis_unit"] = self.time_coord
@@ -173,10 +173,10 @@ class ZonalStatistics:
         mean_values = mean_values.reset_index()
 
         # Rename the columns of mean_values
-        mean_values.columns = ["index", "x_axis_values"]
+        mean_values.columns = ["index", "y_axis_values"]
 
         # Add y_axis_values to mean_values
-        mean_values["y_axis_values"] = str((self.raster_data[self.time_coord].values.tolist()))
+        mean_values["x_axis_values"] = str((self.raster_data[self.time_coord].values.tolist()))
 
         # Add units
         mean_values["x_axis_unit"] = self.time_coord
