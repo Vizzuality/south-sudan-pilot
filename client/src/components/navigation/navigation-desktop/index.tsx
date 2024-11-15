@@ -1,16 +1,29 @@
 "use client";
 
+import { useCallback, useState } from "react";
+
 import Intro from "@/components/intro";
 import LocationPanel from "@/components/panels/location";
 import MainPanel from "@/components/panels/main";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarTrigger } from "@/components/ui/sidebar";
+import useLocation from "@/hooks/use-location";
+import { useLocationByCode } from "@/hooks/use-location-by-code";
 import MapPinIcon from "@/svgs/map-pin.svg";
 
 import Logo from "../logo";
 
 const NavigationDesktop = () => {
+  const [locationDialogOpen, setLocationDialogOpen] = useState(false);
+
+  const [location] = useLocation();
+  const { data, isLoading } = useLocationByCode(location.code.slice(-1)[0]);
+
+  const onExitLocationDialog = useCallback(() => {
+    setLocationDialogOpen(false);
+  }, []);
+
   return (
     <>
       <Logo />
@@ -21,19 +34,20 @@ const NavigationDesktop = () => {
         <SidebarContent className="overflow-auto">
           <div className="bg-rhino-blue-900 px-10 pb-5 text-white">
             <Intro />
-            <Dialog>
+            <Dialog open={locationDialogOpen} onOpenChange={setLocationDialogOpen}>
               <DialogTrigger asChild>
                 <Button
                   type="button"
                   variant="ghost"
                   className="relative -left-4 mt-2 gap-4 text-white/60 hover:text-white focus-visible:text-white"
                 >
-                  Select location
+                  {(!!isLoading || !data) && "Select location"}
+                  {!isLoading && !!data && data.name}
                   <MapPinIcon aria-hidden />
                 </Button>
               </DialogTrigger>
-              <DialogContent>
-                <LocationPanel />
+              <DialogContent className="gap-0">
+                <LocationPanel onExit={onExitLocationDialog} />
               </DialogContent>
             </Dialog>
           </div>

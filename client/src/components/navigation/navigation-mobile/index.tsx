@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import Intro from "@/components/intro";
 import LocationPanel from "@/components/panels/location";
@@ -13,6 +13,10 @@ import { Tab } from "./types";
 
 const NavigationMobile = () => {
   const [tab, setTab] = useState<Tab>(Tab.Main);
+
+  const onExitLocationPanel = useCallback(() => {
+    setTab(Tab.Map);
+  }, [setTab]);
 
   return (
     <>
@@ -28,7 +32,7 @@ const NavigationMobile = () => {
           </SheetHeader>
           <div className="mt-6">
             {tab === Tab.Main && <MainPanel />}
-            {tab === Tab.Location && <LocationPanel />}
+            {tab === Tab.Location && <LocationPanel onExit={onExitLocationPanel} />}
           </div>
         </SheetContent>
       </Sheet>
