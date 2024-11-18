@@ -26,7 +26,7 @@ export default function useApplyMapLocation(map: MapRef | null) {
   }, [data, isLoading]);
 
   useEffect(() => {
-    const hasChangedLocation = location !== previousLocation;
+    const hasChangedLocation = JSON.stringify(location) !== JSON.stringify(previousLocation);
     if (hasChangedLocation) {
       triggerFitBoundsRef.current = true;
     }
