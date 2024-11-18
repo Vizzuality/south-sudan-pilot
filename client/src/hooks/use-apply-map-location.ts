@@ -35,5 +35,5 @@ export default function useApplyMapLocation(map: MapRef | null) {
       map.fitBounds(bounds);
       triggerFitBoundsRef.current = false;
     }
-  }, [map, location, previousLocation, data, isLoading]);
+  }, [map, location, previousLocation, bounds]);
 }
