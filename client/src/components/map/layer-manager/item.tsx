@@ -2,6 +2,7 @@ import useLayerConfig from "@/hooks/use-layer-config";
 import { LayerSettings } from "@/types/layer";
 
 import AnimatedLayer from "./animated-layer";
+import RasterLayer from "./raster-layer";
 import StaticLayer from "./static-layer";
 
 interface LayerManagerItemProps {
@@ -25,6 +26,10 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
 
   if (type === "animated" && config.source.type === "raster" && !!settings.date) {
     return <AnimatedLayer config={config} date={settings.date} beforeId={beforeId} />;
+  }
+
+  if (config.source.type === "raster") {
+    return <RasterLayer config={config} beforeId={beforeId} />;
   }
 
   return <StaticLayer config={config} beforeId={beforeId} />;
