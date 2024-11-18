@@ -62,7 +62,7 @@ const MonthPicker = ({ selected, minDate, maxDate, onSelect }: MonthPickerProps)
         <div className="flex items-center justify-between">
           <Button
             type="button"
-            variant="default"
+            variant="ghost"
             size="icon-sm"
             className="size-7 hover:bg-casper-blue-200"
             onClick={onClickPreviousYear}
@@ -81,7 +81,7 @@ const MonthPicker = ({ selected, minDate, maxDate, onSelect }: MonthPickerProps)
           </Button>
           <Button
             type="button"
-            variant="default"
+            variant="ghost"
             size="icon-sm"
             className="size-7 hover:bg-casper-blue-200"
             onClick={onClickNextYear}

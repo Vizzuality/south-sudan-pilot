@@ -961,6 +961,7 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       'oneToOne',
       'api::location.location'
     >;
+    geometry: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

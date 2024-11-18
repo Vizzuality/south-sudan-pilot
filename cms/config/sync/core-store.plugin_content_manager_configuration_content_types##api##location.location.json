@@ -90,6 +90,20 @@
           "sortable": true
         }
       },
+      "geometry": {
+        "edit": {
+          "label": "geometry",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "geometry",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -182,6 +196,12 @@
           {
             "name": "parent",
             "size": 6
+          }
+        ],
+        [
+          {
+            "name": "geometry",
+            "size": 12
           }
         ]
       ]

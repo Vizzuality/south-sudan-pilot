@@ -16,7 +16,7 @@ const TopicTabs = () => {
   const tabTriggers = useMemo(
     () =>
       Object.entries(TopicTab).map(([name, value]) => (
-        <TabsTrigger key={value} value={value}>
+        <TabsTrigger key={value} variant="yellow" value={value}>
           {name}
         </TabsTrigger>
       )),
@@ -31,7 +31,7 @@ const TopicTabs = () => {
     };
 
     return Object.values(TopicTab).map((value) => (
-      <TabsContent key={value} value={value}>
+      <TabsContent key={value} variant="yellow" value={value}>
         {contentByTopic[value]}
       </TabsContent>
     ));
@@ -46,7 +46,7 @@ const TopicTabs = () => {
 
   return (
     <Tabs value={tab} onValueChange={onChangeTab}>
-      <TabsList>{tabTriggers}</TabsList>
+      <TabsList variant="yellow">{tabTriggers}</TabsList>
       {tabContents}
     </Tabs>
   );
