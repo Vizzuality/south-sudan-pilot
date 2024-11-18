@@ -226,7 +226,8 @@
           "type",
           "level",
           "code",
-          "parent"
+          "parent",
+          "geometry"
         ]
       },
       "conditions": []
@@ -248,7 +249,8 @@
           "type",
           "level",
           "code",
-          "parent"
+          "parent",
+          "geometry"
         ]
       },
       "conditions": []
@@ -263,7 +265,8 @@
           "type",
           "level",
           "code",
-          "parent"
+          "parent",
+          "geometry"
         ]
       },
       "conditions": []

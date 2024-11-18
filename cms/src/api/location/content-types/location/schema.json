@@ -38,6 +38,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::location.location"
+    },
+    "geometry": {
+      "type": "json"
     }
   }
 }

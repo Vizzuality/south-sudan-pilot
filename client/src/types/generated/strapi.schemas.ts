@@ -800,6 +800,7 @@ export interface Location {
   code: string;
   createdAt?: string;
   createdBy?: LocationCreatedBy;
+  geometry?: unknown;
   level: number;
   name: string;
   parent?: LocationParent;
@@ -821,6 +822,7 @@ export type LocationParentDataAttributes = {
   code?: string;
   createdAt?: string;
   createdBy?: LocationParentDataAttributesCreatedBy;
+  geometry?: unknown;
   level?: number;
   name?: string;
   parent?: LocationParentDataAttributesParent;
@@ -1069,6 +1071,7 @@ export type LocationRequestDataParent = number | string;
 
 export type LocationRequestData = {
   code: string;
+  geometry?: unknown;
   level: number;
   name: string;
   parent?: LocationRequestDataParent;
