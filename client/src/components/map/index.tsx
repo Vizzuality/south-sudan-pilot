@@ -59,13 +59,18 @@ const Map = () => {
   // The inner map is memoized so that it doesn't rerender when the map is panned due to the bounds
   // changing
   const innerMap = useMemo(() => {
+    // We make sure to render the layers when the map is ready
+    if (!map) {
+      return null;
+    }
+
     return (
       <DeckglMapboxProvider>
         <LayerManager />
         <Controls />
       </DeckglMapboxProvider>
     );
-  }, []);
+  }, [map]);
 
   const onMove = useCallback(() => {
     setBounds(map?.getBounds()?.toArray() as [LngLatLike, LngLatLike]);

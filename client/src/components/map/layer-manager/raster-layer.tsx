@@ -1,3 +1,4 @@
+import { MaskExtension } from "@deck.gl/extensions";
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer } from "@deck.gl/layers";
 import { useContext, useEffect } from "react";
@@ -49,6 +50,8 @@ const RasterLayer = ({ config, beforeId }: RasterLayerProps) => {
             mipmapFilter: undefined,
           },
           image: subLayer.data,
+          extensions: [new MaskExtension()],
+          maskId: "mask",
         });
       },
     });

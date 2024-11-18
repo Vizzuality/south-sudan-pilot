@@ -1,3 +1,4 @@
+import { MaskExtension } from "@deck.gl/extensions";
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer } from "@deck.gl/layers";
 import parseAPNG from "apng-js";
@@ -83,6 +84,8 @@ const AnimatedLayer = ({ config, date, beforeId }: AnimatedLayerProps) => {
             mipmapFilter: undefined,
           },
           image: subLayer.data[frameIndex].bitmapData,
+          extensions: [new MaskExtension()],
+          maskId: "mask",
         });
       },
     });
