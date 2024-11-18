@@ -7,6 +7,7 @@ import DeckglMapboxProvider from "@/components/map/deckgl-mapbox-provider";
 import LayerManager from "@/components/map/layer-manager";
 import { SIDEBAR_WIDTH } from "@/components/ui/sidebar";
 import { env } from "@/env";
+import useApplyMapLocation from "@/hooks/use-apply-map-location";
 import useApplyMapSettings from "@/hooks/use-apply-map-settings";
 import useBreakpoint from "@/hooks/use-breakpoint";
 import useIsSidebarExpanded from "@/hooks/use-is-sidebar-expanded";
@@ -81,6 +82,9 @@ const Map = () => {
 
   // Apply the basemap and labels
   useApplyMapSettings(map);
+
+  // Zoom the map on the selected location
+  useApplyMapLocation(map);
 
   return (
     <ReactMapGL
