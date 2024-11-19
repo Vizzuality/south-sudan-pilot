@@ -30,10 +30,7 @@ const LocationPanel = ({ onExit }: LocationPanelProps) => {
   );
 
   const onClear = useCallback(() => {
-    setLocation({
-      type: "administrative",
-      code: [],
-    });
+    setLocation(null);
     onExit();
   }, [setLocation, onExit]);
 

@@ -1,4 +1,11 @@
-import { AnyLayer, AnySource, SkyLayer } from "react-map-gl";
+import {
+  CircleLayerSpecification,
+  FillLayerSpecification,
+  LineLayerSpecification,
+  RasterLayerSpecification,
+  SymbolLayerSpecification,
+} from "mapbox-gl";
+import { AnySource } from "react-map-gl";
 
 export interface LayerSettings {
   visibility: boolean;
@@ -9,7 +16,13 @@ export interface LayerSettings {
 
 export interface LayerConfig {
   source: AnySource;
-  styles: Exclude<AnyLayer, SkyLayer>[];
+  styles: (
+    | FillLayerSpecification
+    | CircleLayerSpecification
+    | LineLayerSpecification
+    | SymbolLayerSpecification
+    | RasterLayerSpecification
+  )[];
 }
 
 export interface LayerParamsConfigValue {

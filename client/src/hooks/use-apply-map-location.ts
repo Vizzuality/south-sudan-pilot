@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { MapRef } from "react-map-gl";
 
 import useLocation from "@/hooks/use-location";
-import { useLocationByCode } from "@/hooks/use-location-by-code";
+import { useLocationGeometry } from "@/hooks/use-location-geometry";
 import usePrevious from "@/hooks/use-previous";
 
 export default function useApplyMapLocation(map: MapRef | null) {
@@ -13,20 +13,20 @@ export default function useApplyMapLocation(map: MapRef | null) {
   // This flag indicates when to zoom the map on the location
   const triggerFitBoundsRef = useRef(false);
 
-  const { data, isLoading } = useLocationByCode(location.code.slice(-1)[0], ["geometry"]);
+  const { data, isLoading } = useLocationGeometry(location.code.slice(-1)[0]);
 
   const bounds = useMemo(() => {
-    if (isLoading || data?.geometry === undefined || data?.geometry === null) {
+    if (isLoading || data === undefined || data === null) {
       return undefined;
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return bbox(data.geometry) as [number, number, number, number];
+    return bbox(data) as [number, number, number, number];
   }, [data, isLoading]);
 
   useEffect(() => {
-    const hasChangedLocation = location !== previousLocation;
+    const hasChangedLocation = JSON.stringify(location) !== JSON.stringify(previousLocation);
     if (hasChangedLocation) {
       triggerFitBoundsRef.current = true;
     }

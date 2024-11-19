@@ -1,19 +1,15 @@
+import { AllGeoJSON } from "@turf/helpers";
+
 import { useGetLocations } from "@/types/generated/location";
 
-type LocationByCode = {
-  id: number;
-  name: string;
-  code: string;
-};
-
-export function useLocationByCode(code: string | undefined) {
+export function useLocationGeometry(code: string | undefined) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore-error
-  const { data, isLoading } = useGetLocations<LocationByCode>(
+  const { data, isLoading } = useGetLocations<AllGeoJSON>(
     {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore-error
-      fields: ["name", "code"],
+      fields: ["geometry"],
       filters: {
         code: {
           $eq: code,
@@ -31,11 +27,7 @@ export function useLocationByCode(code: string | undefined) {
             return undefined;
           }
 
-          return {
-            id: data.data[0].id,
-            name: data.data[0].attributes!.name!,
-            code: data.data[0].attributes!.code!,
-          };
+          return data.data[0].attributes!.geometry;
         },
       },
     },

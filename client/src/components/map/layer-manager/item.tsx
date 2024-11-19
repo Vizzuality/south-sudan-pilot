@@ -2,7 +2,8 @@ import useLayerConfig from "@/hooks/use-layer-config";
 import { LayerSettings } from "@/types/layer";
 
 import AnimatedLayer from "./animated-layer";
-import StaticLayer from "./static-layer";
+import RasterLayer from "./raster-layer";
+import VectorLayer from "./vector-layer";
 
 interface LayerManagerItemProps {
   id: number;
@@ -27,7 +28,16 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
     return <AnimatedLayer config={config} date={settings.date} beforeId={beforeId} />;
   }
 
-  return <StaticLayer config={config} beforeId={beforeId} />;
+  if (config.source.type === "raster") {
+    return <RasterLayer config={config} beforeId={beforeId} />;
+  }
+
+  if (config.source.type === "vector") {
+    return <VectorLayer config={config} beforeId={beforeId} />;
+  }
+
+  console.warn(`Unsupported layer type (${config.source.type})`);
+  return null;
 };
 
 export default LayerManagerItem;

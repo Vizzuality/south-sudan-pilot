@@ -28,16 +28,24 @@ const DeckglMapboxProvider = ({ children }: PropsWithChildren) => {
 
   const addLayer = useCallback(
     (layer: Layer) => {
-      layersRef.current = [...layersRef.current, layer];
-      deckGLMapboxOverlay.setProps({ layers: layersRef.current });
+      // Artificially delay adding the layer to give a chance to React Map Gl to render the
+      // positioning layers first
+      setTimeout(() => {
+        layersRef.current = [...layersRef.current, layer];
+        deckGLMapboxOverlay.setProps({ layers: layersRef.current });
+      }, 0);
     },
     [deckGLMapboxOverlay],
   );
 
   const removeLayer = useCallback(
     (layerId: string) => {
-      layersRef.current = layersRef.current.filter(({ id }) => id !== layerId);
-      deckGLMapboxOverlay.setProps({ layers: layersRef.current });
+      // Artificially delay removing the layer to match the `addLayer` function
+      // Without this, Deck.gl would throw an assertion error
+      setTimeout(() => {
+        layersRef.current = layersRef.current.filter(({ id }) => id !== layerId);
+        deckGLMapboxOverlay.setProps({ layers: layersRef.current });
+      }, 0);
     },
     [deckGLMapboxOverlay],
   );

@@ -4269,20 +4269,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@turf/helpers@npm:^5.1.5":
-  version: 5.1.5
-  resolution: "@turf/helpers@npm:5.1.5"
-  checksum: 10c0/f5ed19cddef37fb5098e2509e8472df3afe099dcd6db62b7e541cf37c02c6ea1b13f69c29ff493ded7a1374c1a9b185a87fefee368211934364977dffd48b2e9
-  languageName: node
-  linkType: hard
-
-"@turf/helpers@npm:^7.1.0":
+"@turf/helpers@npm:7.1.0, @turf/helpers@npm:^7.1.0":
   version: 7.1.0
   resolution: "@turf/helpers@npm:7.1.0"
   dependencies:
     "@types/geojson": "npm:^7946.0.10"
     tslib: "npm:^2.6.2"
   checksum: 10c0/0b07c01584d8bee977edec8752109b4f79ab5b149e55a7dbe051e412e150c0a96f2464c9647676a092b7ab4429271eee4a31400ea45e9b55095ae53ad22f43d6
+  languageName: node
+  linkType: hard
+
+"@turf/helpers@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "@turf/helpers@npm:5.1.5"
+  checksum: 10c0/f5ed19cddef37fb5098e2509e8472df3afe099dcd6db62b7e541cf37c02c6ea1b13f69c29ff493ded7a1374c1a9b185a87fefee368211934364977dffd48b2e9
   languageName: node
   linkType: hard
 
@@ -4295,22 +4295,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@turf/meta@npm:^5.1.5":
-  version: 5.2.0
-  resolution: "@turf/meta@npm:5.2.0"
-  dependencies:
-    "@turf/helpers": "npm:^5.1.5"
-  checksum: 10c0/fd41fbad84d840bebf75fdf13a4e3dd15b8c600251533073d5f6129a31a42e4f88790ce396492cec69f42ca4365e96d6f7940aeb302daaedcb795dc9414e7adc
-  languageName: node
-  linkType: hard
-
-"@turf/meta@npm:^7.1.0":
+"@turf/meta@npm:7.1.0, @turf/meta@npm:^7.1.0":
   version: 7.1.0
   resolution: "@turf/meta@npm:7.1.0"
   dependencies:
     "@turf/helpers": "npm:^7.1.0"
     "@types/geojson": "npm:^7946.0.10"
   checksum: 10c0/c7aa77ddb28ef5068b031c1b422d2d5dc1df51975f727be42e2d8d500a026a2e667242d6aa06453f757cbd5ead2db0ba6b9a5d2fcf5ab496574cd4c0ae4fe325
+  languageName: node
+  linkType: hard
+
+"@turf/meta@npm:^5.1.5":
+  version: 5.2.0
+  resolution: "@turf/meta@npm:5.2.0"
+  dependencies:
+    "@turf/helpers": "npm:^5.1.5"
+  checksum: 10c0/fd41fbad84d840bebf75fdf13a4e3dd15b8c600251533073d5f6129a31a42e4f88790ce396492cec69f42ca4365e96d6f7940aeb302daaedcb795dc9414e7adc
   languageName: node
   linkType: hard
 
@@ -5499,6 +5499,7 @@ __metadata:
     "@dnd-kit/core": "npm:6.1.0"
     "@dnd-kit/modifiers": "npm:7.0.0"
     "@dnd-kit/sortable": "npm:8.0.0"
+    "@loaders.gl/gis": "npm:4.3.2"
     "@radix-ui/react-checkbox": "npm:1.1.2"
     "@radix-ui/react-collapsible": "npm:1.1.1"
     "@radix-ui/react-dialog": "npm:1.1.2"
@@ -5517,6 +5518,8 @@ __metadata:
     "@tanstack/eslint-plugin-query": "npm:5.59.7"
     "@tanstack/react-query": "npm:5.59.16"
     "@turf/bbox": "npm:7.1.0"
+    "@turf/helpers": "npm:7.1.0"
+    "@turf/meta": "npm:7.1.0"
     "@types/mapbox-gl": "npm:3.4.0"
     "@types/node": "npm:22.7.6"
     "@types/react": "npm:18.3.1"

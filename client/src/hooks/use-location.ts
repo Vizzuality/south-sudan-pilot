@@ -11,7 +11,7 @@ export default function useLocation() {
     "location",
     parseAsJson(schema.parse).withDefault({
       type: "administrative",
-      code: [],
+      code: ["SS"],
     }),
   );
 }
