@@ -32,24 +32,21 @@ const LayerManager = () => {
         id="layer-position-mask"
         type="background"
         layout={{ visibility: "none" }}
-        beforeId={`layer-position-${layers.length === 0 ? "data-layers" : layers.slice(-1)[0].id}`}
+        beforeId={layers.length === 0 ? "data-layers" : `layer-position-${layers.slice(-1)[0].id}`}
       />,
     ];
   }, [layers]);
 
   const layerManagerItems = useMemo(() => {
     return [
-      ...layers.map((layer, index) => {
-        const beforeId = index === 0 ? "data-layers" : `layer-position-${layers[index - 1].id}`;
+      ...layers.map((layer) => {
+        const beforeId = `layer-position-${layer.id}`;
         const { id, ...settings } = layer;
         return (
           <LayerManagerItem key={`layer-${id}`} id={id} settings={settings} beforeId={beforeId} />
         );
       }),
-      <MaskLayer
-        key="layer-mask"
-        beforeId={layers.length === 0 ? "data-layers" : `layer-position-${layers.slice(-1)[0].id}`}
-      />,
+      <MaskLayer key="layer-mask" beforeId="layer-position-mask" />,
     ];
   }, [layers]);
 
