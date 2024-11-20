@@ -1,16 +1,25 @@
 import Link from "next/link";
+import * as React from "react";
 
+import DatasetMetadata from "@/components/dataset-metadata";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import useMapLayers from "@/hooks/use-map-layers";
 import { cn } from "@/lib/utils";
 import DownloadIcon from "@/svgs/download.svg";
-import { Dataset, Layer } from "@/types/generated/strapi.schemas";
+import QuestionMarkIcon from "@/svgs/question-mark.svg";
+import { Dataset, Layer, MetadataItemComponent } from "@/types/generated/strapi.schemas";
 
 interface ItemProps {
   name: Dataset["name"];
-  layers: { id: number; name: Layer["name"]; downloadLink?: Layer["download_link"] }[];
+  layers: {
+    id: number;
+    name: Layer["name"];
+    downloadLink?: Layer["download_link"];
+    metadata?: MetadataItemComponent;
+  }[];
 }
 
 const Item = ({ name, layers }: ItemProps) => {
@@ -49,6 +58,22 @@ const Item = ({ name, layers }: ItemProps) => {
                   />
                 </Link>
               </Button>
+              {!!layer.metadata && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="ghost" size="icon-sm" className="group/info">
+                      <span className="sr-only">Information</span>
+                      <QuestionMarkIcon
+                        className="!size-4 transition-colors group-hover/info:text-casper-blue-300"
+                        aria-hidden
+                      />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DatasetMetadata name={name} metadata={layer.metadata} />
+                  </DialogContent>
+                </Dialog>
+              )}
               <Switch
                 id={`${layer.id}-toggle`}
                 checked={layersConfiguration.findIndex(({ id }) => id === layer.id) !== -1}

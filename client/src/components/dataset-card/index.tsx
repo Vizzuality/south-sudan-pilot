@@ -6,7 +6,9 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as React from "react";
 
+import DatasetMetadata from "@/components/dataset-metadata";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import MonthPicker from "@/components/ui/month-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -25,7 +27,8 @@ import ChevronDownIcon from "@/svgs/chevron-down.svg";
 import DownloadIcon from "@/svgs/download.svg";
 import PauseIcon from "@/svgs/pause.svg";
 import PlayIcon from "@/svgs/play.svg";
-import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
+import QuestionMarkIcon from "@/svgs/question-mark.svg";
+import { DatasetLayersDataItem, MetadataItemComponent } from "@/types/generated/strapi.schemas";
 import { LayerParamsConfig } from "@/types/layer";
 
 import {
@@ -40,9 +43,10 @@ interface DatasetCardProps {
   name: string;
   defaultLayerId: number | undefined;
   layers: DatasetLayersDataItem[];
+  metadata?: MetadataItemComponent;
 }
 
-const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => {
+const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCardProps) => {
   const [layersConfiguration, { addLayer, updateLayer, removeLayer }] = useMapLayers();
 
   const defaultSelectedLayerId = useMemo(
@@ -234,6 +238,22 @@ const DatasetCard = ({ id, name, defaultLayerId, layers }: DatasetCardProps) => 
                 />
               </Link>
             </Button>
+          )}
+          {!!metadata && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" size="icon-sm" className="group/info">
+                  <span className="sr-only">Information</span>
+                  <QuestionMarkIcon
+                    className="!size-4 transition-colors group-hover/info:text-casper-blue-300"
+                    aria-hidden
+                  />
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DatasetMetadata name={name} metadata={metadata} />
+              </DialogContent>
+            </Dialog>
           )}
           <Switch
             id={`dataset-${id}-toggle`}

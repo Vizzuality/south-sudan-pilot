@@ -46,7 +46,7 @@ const NavigationDesktop = () => {
                   <MapPinIcon aria-hidden />
                 </Button>
               </DialogTrigger>
-              <DialogContent className="gap-0">
+              <DialogContent>
                 <LocationPanel onExit={onExitLocationDialog} />
               </DialogContent>
             </Dialog>

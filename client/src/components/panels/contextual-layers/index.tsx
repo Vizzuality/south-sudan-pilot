@@ -9,10 +9,12 @@ import XMarkIcon from "@/svgs/xmark.svg";
 import Item from "./item";
 
 const ContextualLayersPanel = () => {
-  const { data, isLoading } = useDatasetsBySubTopic("contextual", "sub_topic.name,name", [
-    "layer",
-    "download_link",
-  ]);
+  const { data, isLoading } = useDatasetsBySubTopic(
+    "contextual",
+    "sub_topic.name,name",
+    ["layer", "download_link"],
+    true,
+  );
 
   return (
     <>
@@ -75,6 +77,7 @@ const ContextualLayersPanel = () => {
                   id: dataset.layers[0].id!,
                   name: dataset.layers[0].attributes!.name!,
                   downloadLink: dataset.layers[0].attributes!.download_link,
+                  metadata: dataset.metadata,
                 }))}
             />
           ))}
