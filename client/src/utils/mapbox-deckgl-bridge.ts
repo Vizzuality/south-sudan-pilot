@@ -48,24 +48,30 @@ const resolveVisible = (style: LayerConfig["styles"][0]) => {
   return style.layout?.visibility !== "none";
 };
 
-const resolveOpacity = (style: LayerConfig["styles"][0]) => {
+const resolveOpacity = (style: LayerConfig["styles"][0], zoom: number, defaultValue = 1) => {
+  let value: DataDrivenPropertyValueSpecification<number> | undefined;
+
   if (style.type === "fill") {
-    return style.paint?.["fill-opacity"] as number;
+    value = style.paint?.["fill-opacity"] as number;
+  } else if (style.type === "circle") {
+    value = style.paint?.["circle-opacity"] as number;
+  } else if (style.type === "line") {
+    value = style.paint?.["line-opacity"] as number;
+  } else if (style.type === "symbol") {
+    value = style.paint?.["icon-opacity"] as number;
   }
 
-  if (style.type === "circle") {
-    return style.paint?.["circle-opacity"] as number;
+  if (value === undefined) {
+    return defaultValue;
   }
 
-  if (style.type === "line") {
-    return style.paint?.["line-opacity"] as number;
+  const resolvedValue = resolveMapboxExpression(value, zoom, undefined, "number");
+
+  if (resolvedValue === null || resolvedValue === undefined) {
+    return defaultValue;
   }
 
-  if (style.type === "symbol") {
-    return style.paint?.["icon-opacity"] as number;
-  }
-
-  return 0;
+  return resolvedValue;
 };
 
 const resolveFillColor = (
@@ -232,7 +238,7 @@ const resolveIconSizeScale = (
 export const resolveDeckglProperties = (style: LayerConfig["styles"][0], zoom: number) => {
   const resolvedProperties = {
     visible: resolveVisible(style),
-    opacity: resolveOpacity(style),
+    opacity: resolveOpacity(style, zoom),
     getFillColor: resolveFillColor(style, zoom) as MVTLayerProps["getFillColor"],
     getPointRadius: resolvePointRadius(style, zoom),
     getLineColor: resolveLineColor(style, zoom) as MVTLayerProps["getLineColor"],
