@@ -11,6 +11,7 @@ const HydrometeorologicalPanel = () => {
     "hydrometeorological",
     "sub_topic.name:desc,name",
     ["name", "params_config", "download_link"],
+    true,
   );
 
   return (

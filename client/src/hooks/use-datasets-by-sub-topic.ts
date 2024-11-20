@@ -1,5 +1,5 @@
 import { useGetDatasets } from "@/types/generated/dataset";
-import { DatasetLayersDataItem } from "@/types/generated/strapi.schemas";
+import { DatasetLayersDataItem, MetadataItemComponent } from "@/types/generated/strapi.schemas";
 
 type DatasetsBySubTopic = {
   subTopic: string;
@@ -8,6 +8,7 @@ type DatasetsBySubTopic = {
     name: string;
     defaultLayerId: number | undefined;
     layers: DatasetLayersDataItem[];
+    metadata?: MetadataItemComponent;
   }[];
 };
 
@@ -15,6 +16,7 @@ export default function useDatasetsBySubTopic(
   topicSlug: string,
   sort = "sub_topic.name,name",
   layersFields = ["name"],
+  includeMetadata = false,
 ) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore-error
@@ -34,6 +36,7 @@ export default function useDatasetsBySubTopic(
           fields: layersFields,
           sort: "name",
         },
+        metadata: includeMetadata,
       },
       filters: {
         topic: {
@@ -62,6 +65,7 @@ export default function useDatasetsBySubTopic(
             const dataset = item.attributes!.name;
             const defaultLayerId = item.attributes!.default_layer!.data?.id;
             const layers = item.attributes!.layers!.data!;
+            const metadata = item.attributes!.metadata;
 
             if (currentSubTopic === null || currentSubTopic !== subTopic) {
               currentSubTopic = subTopic;
@@ -74,6 +78,7 @@ export default function useDatasetsBySubTopic(
               name: dataset,
               defaultLayerId,
               layers,
+              ...(includeMetadata ? { metadata: metadata ?? undefined } : {}),
             });
           }
 
