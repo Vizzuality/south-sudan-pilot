@@ -34,7 +34,7 @@ const Item = ({ name, layers }: ItemProps) => {
             <Label htmlFor={`${layer.id}-toggle`} className="text-xl">
               {layer.name}
             </Label>
-            <div className="flex items-center gap-0.5 pt-1">
+            <div className="flex items-center gap-1 pt-1.5">
               {!!layer.downloadLink && (
                 <TooltipProvider>
                   <Tooltip>
@@ -79,6 +79,9 @@ const Item = ({ name, layers }: ItemProps) => {
                     <DatasetMetadata name={name} metadata={layer.metadata} />
                   </DialogContent>
                 </Dialog>
+              )}
+              {(!!layer.downloadLink || !!layer.metadata) && (
+                <div className="mx-0.5 h-5 w-px bg-casper-blue-400" />
               )}
               <Switch
                 id={`${layer.id}-toggle`}

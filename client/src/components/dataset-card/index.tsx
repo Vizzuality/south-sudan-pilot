@@ -224,7 +224,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
         <Label htmlFor={`dataset-${id}-toggle`} className="text-[20px]">
           {name}
         </Label>
-        <div className="flex items-center gap-0.5 pt-1">
+        <div className="flex items-center gap-1 pt-1.5">
           {!!selectedLayer?.attributes!.download_link && (
             <TooltipProvider>
               <Tooltip>
@@ -269,6 +269,9 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
                 <DatasetMetadata name={name} metadata={metadata} />
               </DialogContent>
             </Dialog>
+          )}
+          {(!!selectedLayer?.attributes!.download_link || !!metadata) && (
+            <div className="mx-0.5 h-5 w-px bg-casper-blue-400" />
           )}
           <Switch
             id={`dataset-${id}-toggle`}
