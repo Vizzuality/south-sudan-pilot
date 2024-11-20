@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import useMapLayers from "@/hooks/use-map-layers";
 import { cn } from "@/lib/utils";
 import CalendarDaysIcon from "@/svgs/calendar-days.svg";
@@ -225,31 +226,45 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
         </Label>
         <div className="flex items-center gap-0.5 pt-1">
           {!!selectedLayer?.attributes!.download_link && (
-            <Button variant="ghost" size="icon-sm" className="group/download" asChild>
-              <Link
-                href={selectedLayer?.attributes!.download_link ?? ""}
-                rel="noopener noreferrer"
-                download={selectedLayer?.attributes!.name}
-              >
-                <span className="sr-only">Download</span>
-                <DownloadIcon
-                  className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
-                  aria-hidden
-                />
-              </Link>
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon-sm" className="group/download" asChild>
+                    <Link
+                      href={selectedLayer?.attributes!.download_link ?? ""}
+                      rel="noopener noreferrer"
+                      download={selectedLayer?.attributes!.name}
+                    >
+                      <span className="sr-only">Download</span>
+                      <DownloadIcon
+                        className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
+                        aria-hidden
+                      />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Download dataset</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
           {!!metadata && (
             <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="ghost" size="icon-sm" className="group/info">
-                  <span className="sr-only">Information</span>
-                  <QuestionMarkIcon
-                    className="!size-4 transition-colors group-hover/info:text-casper-blue-300"
-                    aria-hidden
-                  />
-                </Button>
-              </DialogTrigger>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="icon-sm" className="group/info">
+                        <span className="sr-only">Information</span>
+                        <QuestionMarkIcon
+                          className="!size-4 transition-colors group-hover/info:text-casper-blue-300"
+                          aria-hidden
+                        />
+                      </Button>
+                    </DialogTrigger>
+                  </TooltipTrigger>
+                  <TooltipContent>More info</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <DialogContent>
                 <DatasetMetadata name={name} metadata={metadata} />
               </DialogContent>
