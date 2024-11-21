@@ -9,7 +9,7 @@ import gcsfs
 import xarray as xr
 from animations.animated_tiles import AnimatedTiles
 from animations.utils import create_linear_segmented_colormap
-#from helpers.raster_processor import QgsStyledRasterProcessor
+from helpers.raster_processor import QgsStyledRasterProcessor
 from helpers.raster_tiles import RasterTiles
 
 
