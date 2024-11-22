@@ -10,7 +10,7 @@ export default function useTopicTabLayerManagement() {
 
   const [layers, { addLayer, removeLayer }] = useMapLayers();
 
-  const { data, isLoading } = useDatasetsBySubTopic(tab, "sub_topic.name:desc,name");
+  const { data, isLoading } = useDatasetsBySubTopic(tab);
 
   // The ids of all the layers that belong to the topic
   const topicLayerIds = useMemo(() => {
