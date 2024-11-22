@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarTrigger } from "@/components/ui/sidebar";
 import useLocation from "@/hooks/use-location";
-import { useLocationByCode } from "@/hooks/use-location-by-code";
+import { useLocationByCodes } from "@/hooks/use-location-by-codes";
 import MapPinIcon from "@/svgs/map-pin.svg";
 
 import Logo from "../logo";
@@ -18,7 +18,7 @@ const NavigationDesktop = () => {
   const [locationDialogOpen, setLocationDialogOpen] = useState(false);
 
   const [location] = useLocation();
-  const { data, isLoading } = useLocationByCode(location.code.slice(-1)[0]);
+  const { data, isLoading } = useLocationByCodes([...location.code].reverse());
 
   const onExitLocationDialog = useCallback(() => {
     setLocationDialogOpen(false);
@@ -41,8 +41,8 @@ const NavigationDesktop = () => {
                   variant="ghost"
                   className="relative -left-4 mt-2 gap-4 text-white/60 hover:text-white focus-visible:text-white"
                 >
-                  {(!!isLoading || !data) && "Select location"}
-                  {!isLoading && !!data && data.name}
+                  {(isLoading || !data) && "Select location"}
+                  {!isLoading && !!data && data.map(({ name }) => name).join(", ")}
                   <MapPinIcon aria-hidden />
                 </Button>
               </DialogTrigger>

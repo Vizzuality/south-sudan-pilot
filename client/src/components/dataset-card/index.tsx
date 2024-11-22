@@ -24,7 +24,7 @@ import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import YearChart from "@/components/year-chart";
 import useLocation from "@/hooks/use-location";
-import { useLocationByCode } from "@/hooks/use-location-by-code";
+import { useLocationByCodes } from "@/hooks/use-location-by-codes";
 import useMapLayers from "@/hooks/use-map-layers";
 import useYearChartData from "@/hooks/use-year-chart-data";
 import { cn } from "@/lib/utils";
@@ -120,8 +120,8 @@ const DatasetCard = ({
     selectedDate,
   );
 
-  const { data: locationData, isLoading: locationIsLoading } = useLocationByCode(
-    location.code.slice(-1)[0],
+  const { data: locationData, isLoading: locationIsLoading } = useLocationByCodes(
+    location.code.slice(-1),
   );
 
   const onToggleAnimation = useCallback(() => {
@@ -231,7 +231,13 @@ const DatasetCard = ({
   );
 
   const onClickSaveChartData = useCallback(() => {
-    if (chartIsLoading || !chartData || locationIsLoading || !locationData || !selectedDate) {
+    if (
+      chartIsLoading ||
+      !chartData ||
+      locationIsLoading ||
+      !locationData?.length ||
+      !selectedDate
+    ) {
       return;
     }
 
@@ -248,14 +254,14 @@ const DatasetCard = ({
         };
       }, {}),
       year: getYear(selectedDate),
-      location: locationData.name,
+      location: locationData[0].name,
       ...chartData,
     };
 
     const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
 
     const link = document.createElement("a");
-    link.download = `${name} - ${locationData.name}.json`;
+    link.download = `${name} - ${locationData[0].name}.json`;
     link.href = URL.createObjectURL(blob);
     link.click();
     link.remove();
