@@ -101,6 +101,18 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
     [layers, selectedLayerId],
   );
 
+  const onToggleAnimation = useCallback(() => {
+    const newIsAnimated = !isAnimated;
+
+    if (newIsAnimated) {
+      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
+    } else {
+      dateBeforeAnimationRef.current = null;
+    }
+
+    setIsAnimated(newIsAnimated);
+  }, [selectedDate, isAnimated, setIsAnimated]);
+
   const onToggleDataset = useCallback(
     (active: boolean) => {
       if (selectedLayerId === undefined) {
@@ -109,11 +121,22 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
 
       if (!active) {
         removeLayer(selectedLayerId);
+        if (isAnimated) {
+          onToggleAnimation();
+        }
       } else {
         addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod, date: selectedDate });
       }
     },
-    [selectedLayerId, addLayer, removeLayer, selectedReturnPeriod, selectedDate],
+    [
+      selectedLayerId,
+      addLayer,
+      removeLayer,
+      selectedReturnPeriod,
+      selectedDate,
+      isAnimated,
+      onToggleAnimation,
+    ],
   );
 
   const onChangeSelectedLayer = useCallback(
@@ -183,18 +206,6 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
     },
     [selectedLayerId, isDatasetActive, addLayer, updateLayer, layers, layersConfiguration],
   );
-
-  const onToggleAnimation = useCallback(() => {
-    const newIsAnimated = !isAnimated;
-
-    if (newIsAnimated) {
-      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
-    } else {
-      dateBeforeAnimationRef.current = null;
-    }
-
-    setIsAnimated(newIsAnimated);
-  }, [selectedDate, isAnimated, setIsAnimated]);
 
   // When the layer is animated, show each month of the year in a loop
   useEffect(() => {
