@@ -1,11 +1,13 @@
 import { DraggableAttributes } from "@dnd-kit/core";
 import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Slider } from "@/components/ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import useLayerLegend from "@/hooks/use-layer-legend";
 import useMapLayers from "@/hooks/use-map-layers";
 import EyeSlashedIcon from "@/svgs/eye-slashed.svg";
@@ -64,15 +66,22 @@ const LegendItem = ({ id, settings, sortableAttributes, sortableListeners }: Leg
             </div>
             <div className="flex shrink-0 gap-1">
               <Popover>
-                <PopoverTrigger asChild>
-                  <Button type="button" variant="ghost" size="icon-sm" className="group">
-                    <span className="sr-only">Change opacity</span>
-                    <OpacityIcon
-                      className="!size-4 transition-colors group-hover:text-casper-blue-300"
-                      aria-hidden
-                    />
-                  </Button>
-                </PopoverTrigger>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <PopoverTrigger asChild>
+                        <Button type="button" variant="ghost" size="icon-sm" className="group">
+                          <span className="sr-only">Change opacity</span>
+                          <OpacityIcon
+                            className="!size-4 transition-colors group-hover:text-casper-blue-300"
+                            aria-hidden
+                          />
+                        </Button>
+                      </PopoverTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>Opacity</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
                 <PopoverContent
                   side="top"
                   sideOffset={8}
@@ -90,28 +99,35 @@ const LegendItem = ({ id, settings, sortableAttributes, sortableListeners }: Leg
                   <PopoverArrow variant="dark" />
                 </PopoverContent>
               </Popover>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon-sm"
-                className="group"
-                aria-pressed={!settings.visibility}
-                onClick={() => updateLayer(id, { visibility: !settings.visibility })}
-              >
-                <span className="sr-only">Hide</span>
-                {settings.visibility && (
-                  <EyeIcon
-                    className="!size-4 transition-colors group-hover:text-casper-blue-300"
-                    aria-hidden
-                  />
-                )}
-                {!settings.visibility && (
-                  <EyeSlashedIcon
-                    className="!size-4 transition-colors group-hover:text-casper-blue-300"
-                    aria-hidden
-                  />
-                )}
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      className="group"
+                      aria-pressed={!settings.visibility}
+                      onClick={() => updateLayer(id, { visibility: !settings.visibility })}
+                    >
+                      <span className="sr-only">Hide</span>
+                      {settings.visibility && (
+                        <EyeIcon
+                          className="!size-4 transition-colors group-hover:text-casper-blue-300"
+                          aria-hidden
+                        />
+                      )}
+                      {!settings.visibility && (
+                        <EyeSlashedIcon
+                          className="!size-4 transition-colors group-hover:text-casper-blue-300"
+                          aria-hidden
+                        />
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Toggle visibility</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
         )}
