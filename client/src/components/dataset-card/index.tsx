@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import YearChart from "@/components/year-chart";
 import useMapLayers from "@/hooks/use-map-layers";
 import { cn } from "@/lib/utils";
 import CalendarDaysIcon from "@/svgs/calendar-days.svg";
@@ -315,8 +316,13 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
             </SelectContent>
           </Select>
         )}
+        {selectedDate !== undefined && selectedLayerId !== undefined && (
+          <div className="mt-3">
+            <YearChart layerId={selectedLayerId} date={selectedDate} active={isDatasetActive} />
+          </div>
+        )}
         {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
-          <div className="flex items-center justify-between gap-4">
+          <div className="mt-1 flex items-center justify-between gap-4">
             <Button
               type="button"
               variant="ghost"
