@@ -107,6 +107,20 @@
           "sortable": false
         }
       },
+      "short_description": {
+        "edit": {
+          "label": "short_description",
+          "description": "Displayed in the dataset cards",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "short_description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -167,12 +181,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "topic",
-        "sub_topic",
-        "name"
-      ],
       "edit": [
         [
           {
@@ -202,10 +210,22 @@
         ],
         [
           {
+            "name": "short_description",
+            "size": 12
+          }
+        ],
+        [
+          {
             "name": "metadata",
             "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "topic",
+        "sub_topic",
+        "name"
       ]
     },
     "uid": "api::dataset.dataset"

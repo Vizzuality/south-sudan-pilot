@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-18T15:05:56.007Z"
+    "x-generation-date": "2024-11-22T10:48:59.215Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -725,6 +725,9 @@
                                       }
                                     }
                                   },
+                                  "short_description": {
+                                    "type": "string"
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -1045,6 +1048,9 @@
               },
               "metadata": {
                 "$ref": "#/components/schemas/MetadataItemComponent"
+              },
+              "short_description": {
+                "type": "string"
               }
             }
           }
@@ -1645,6 +1651,9 @@
                                         }
                                       }
                                     },
+                                    "short_description": {
+                                      "type": "string"
+                                    },
                                     "createdAt": {
                                       "type": "string",
                                       "format": "date-time"
@@ -1889,6 +1898,9 @@
           },
           "metadata": {
             "$ref": "#/components/schemas/MetadataItemComponent"
+          },
+          "short_description": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -2807,6 +2819,9 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "short_description": {
+                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",

@@ -6,6 +6,7 @@ type DatasetsBySubTopic = {
   datasets: {
     id: number;
     name: string;
+    shortDescription?: string;
     defaultLayerId: number | undefined;
     layers: DatasetLayersDataItem[];
     metadata?: MetadataItemComponent;
@@ -24,7 +25,7 @@ export default function useDatasetsBySubTopic(
     {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore-error
-      fields: ["name"],
+      fields: ["name", "short_description"],
       populate: {
         sub_topic: {
           fields: ["name"],
@@ -63,6 +64,7 @@ export default function useDatasetsBySubTopic(
           for (const item of data.data) {
             const subTopic = item.attributes!.sub_topic!.data!.attributes!.name! as string;
             const dataset = item.attributes!.name;
+            const shortDescription = item.attributes!.short_description;
             const defaultLayerId = item.attributes!.default_layer!.data?.id;
             const layers = item.attributes!.layers!.data!;
             const metadata = item.attributes!.metadata;
@@ -76,6 +78,7 @@ export default function useDatasetsBySubTopic(
             res[currentIndex].datasets.push({
               id: item.id!,
               name: dataset,
+              shortDescription,
               defaultLayerId,
               layers,
               ...(includeMetadata ? { metadata: metadata ?? undefined } : {}),

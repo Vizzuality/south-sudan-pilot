@@ -867,6 +867,10 @@ export interface ApiDatasetDataset extends Schema.CollectionType {
       'api::sub-topic.sub-topic'
     >;
     metadata: Attribute.Component<'metadata.item'>;
+    short_description: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

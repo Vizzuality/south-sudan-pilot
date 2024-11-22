@@ -48,12 +48,20 @@ import {
 interface DatasetCardProps {
   id: number;
   name: string;
+  shortDescription?: string;
   defaultLayerId: number | undefined;
   layers: DatasetLayersDataItem[];
   metadata?: MetadataItemComponent;
 }
 
-const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCardProps) => {
+const DatasetCard = ({
+  id,
+  name,
+  shortDescription,
+  defaultLayerId,
+  layers,
+  metadata,
+}: DatasetCardProps) => {
   const [layersConfiguration, { addLayer, updateLayer, removeLayer }] = useMapLayers();
   const [location] = useLocation();
 
@@ -360,6 +368,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
           />
         </div>
       </div>
+      {!!shortDescription && <div className="mt-1 text-sm">{shortDescription}</div>}
       <div className="mt-1 flex flex-col gap-1.5">
         {layers.length > 1 && (
           <Select

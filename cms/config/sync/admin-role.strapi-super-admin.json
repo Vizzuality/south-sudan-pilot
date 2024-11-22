@@ -74,7 +74,8 @@
           "metadata.spatial_resolution",
           "metadata.units",
           "metadata.full_name",
-          "metadata.temporal_resolution"
+          "metadata.temporal_resolution",
+          "short_description"
         ]
       },
       "conditions": []
@@ -105,7 +106,8 @@
           "metadata.spatial_resolution",
           "metadata.units",
           "metadata.full_name",
-          "metadata.temporal_resolution"
+          "metadata.temporal_resolution",
+          "short_description"
         ]
       },
       "conditions": []
@@ -129,7 +131,8 @@
           "metadata.spatial_resolution",
           "metadata.units",
           "metadata.full_name",
-          "metadata.temporal_resolution"
+          "metadata.temporal_resolution",
+          "short_description"
         ]
       },
       "conditions": []
