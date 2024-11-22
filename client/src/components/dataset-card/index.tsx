@@ -1,7 +1,8 @@
 "use client";
 
-import { getMonth } from "date-fns";
+import { getMonth, getYear } from "date-fns";
 import { format } from "date-fns/format";
+import { camelCase } from "lodash-es";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as React from "react";
@@ -22,11 +23,15 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import YearChart from "@/components/year-chart";
+import useLocation from "@/hooks/use-location";
+import { useLocationByCode } from "@/hooks/use-location-by-code";
 import useMapLayers from "@/hooks/use-map-layers";
+import useYearChartData from "@/hooks/use-year-chart-data";
 import { cn } from "@/lib/utils";
 import CalendarDaysIcon from "@/svgs/calendar-days.svg";
 import ChevronDownIcon from "@/svgs/chevron-down.svg";
 import DownloadIcon from "@/svgs/download.svg";
+import GraphIcon from "@/svgs/graph.svg";
 import PauseIcon from "@/svgs/pause.svg";
 import PlayIcon from "@/svgs/play.svg";
 import QuestionMarkIcon from "@/svgs/question-mark.svg";
@@ -50,6 +55,7 @@ interface DatasetCardProps {
 
 const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCardProps) => {
   const [layersConfiguration, { addLayer, updateLayer, removeLayer }] = useMapLayers();
+  const [location] = useLocation();
 
   const defaultSelectedLayerId = useMemo(
     () => getDefaultSelectedLayerId(defaultLayerId, layers, layersConfiguration),
@@ -99,6 +105,15 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
   const layerReturnPeriods = useMemo(
     () => getReturnPeriods(selectedLayerId, layers),
     [layers, selectedLayerId],
+  );
+
+  const { data: chartData, isLoading: chartIsLoading } = useYearChartData(
+    selectedLayerId,
+    selectedDate,
+  );
+
+  const { data: locationData, isLoading: locationIsLoading } = useLocationByCode(
+    location.code.slice(-1)[0],
   );
 
   const onToggleAnimation = useCallback(() => {
@@ -207,6 +222,37 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
     [selectedLayerId, isDatasetActive, addLayer, updateLayer, layers, layersConfiguration],
   );
 
+  const onClickSaveChartData = useCallback(() => {
+    if (chartIsLoading || !chartData || locationIsLoading || !locationData || !selectedDate) {
+      return;
+    }
+
+    const data = {
+      dataset: name,
+      datasetMetadata: Object.entries(metadata ?? {}).reduce((res, [key, value]) => {
+        if (key === "id") {
+          return res;
+        }
+
+        return {
+          ...res,
+          [camelCase(key)]: value,
+        };
+      }, {}),
+      year: getYear(selectedDate),
+      location: locationData.name,
+      ...chartData,
+    };
+
+    const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+
+    const link = document.createElement("a");
+    link.download = `${name} - ${locationData.name}.json`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    link.remove();
+  }, [name, metadata, chartData, chartIsLoading, selectedDate]);
+
   // When the layer is animated, show each month of the year in a loop
   useEffect(() => {
     if (isAnimated && selectedDate !== undefined && selectedLayerId !== undefined) {
@@ -237,6 +283,28 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
           {name}
         </Label>
         <div className="flex items-center gap-1 pt-1.5">
+          {selectedDate !== undefined && selectedLayerId !== undefined && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="group/chart"
+                    disabled={chartIsLoading || !chartData || locationIsLoading || !locationData}
+                    onClick={onClickSaveChartData}
+                  >
+                    <span className="sr-only">Save chart data</span>
+                    <GraphIcon
+                      className="!size-4 transition-colors group-hover/chart:text-casper-blue-300"
+                      aria-hidden
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Save chart data</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
           {!!selectedLayer?.attributes!.download_link && (
             <TooltipProvider>
               <Tooltip>
@@ -329,7 +397,12 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
         )}
         {selectedDate !== undefined && selectedLayerId !== undefined && (
           <div className="mt-3">
-            <YearChart layerId={selectedLayerId} date={selectedDate} active={isDatasetActive} />
+            <YearChart
+              data={chartData}
+              date={selectedDate}
+              loading={chartIsLoading}
+              active={isDatasetActive}
+            />
           </div>
         )}
         {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (

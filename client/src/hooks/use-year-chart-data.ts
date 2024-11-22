@@ -17,10 +17,10 @@ interface YearChartData {
   colorDomain: [number, number];
 }
 
-export default function useYearChartData(layerId: number, date: string) {
+export default function useYearChartData(layerId?: number, date?: string) {
   const [location] = useLocation();
 
-  const year = useMemo(() => getYear(date), [date]);
+  const year = useMemo(() => getYear(date ?? new Date()), [date]);
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore-error
@@ -60,6 +60,7 @@ export default function useYearChartData(layerId: number, date: string) {
     },
     {
       query: {
+        enabled: layerId !== undefined && date !== undefined,
         placeholderData: { data: [] },
         select: (data) => {
           if (!data?.data?.length) {
