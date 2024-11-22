@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import YearChart from "@/components/year-chart";
 import useMapLayers from "@/hooks/use-map-layers";
 import { cn } from "@/lib/utils";
 import CalendarDaysIcon from "@/svgs/calendar-days.svg";
@@ -100,6 +101,18 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
     [layers, selectedLayerId],
   );
 
+  const onToggleAnimation = useCallback(() => {
+    const newIsAnimated = !isAnimated;
+
+    if (newIsAnimated) {
+      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
+    } else {
+      dateBeforeAnimationRef.current = null;
+    }
+
+    setIsAnimated(newIsAnimated);
+  }, [selectedDate, isAnimated, setIsAnimated]);
+
   const onToggleDataset = useCallback(
     (active: boolean) => {
       if (selectedLayerId === undefined) {
@@ -108,11 +121,22 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
 
       if (!active) {
         removeLayer(selectedLayerId);
+        if (isAnimated) {
+          onToggleAnimation();
+        }
       } else {
         addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod, date: selectedDate });
       }
     },
-    [selectedLayerId, addLayer, removeLayer, selectedReturnPeriod, selectedDate],
+    [
+      selectedLayerId,
+      addLayer,
+      removeLayer,
+      selectedReturnPeriod,
+      selectedDate,
+      isAnimated,
+      onToggleAnimation,
+    ],
   );
 
   const onChangeSelectedLayer = useCallback(
@@ -182,18 +206,6 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
     },
     [selectedLayerId, isDatasetActive, addLayer, updateLayer, layers, layersConfiguration],
   );
-
-  const onToggleAnimation = useCallback(() => {
-    const newIsAnimated = !isAnimated;
-
-    if (newIsAnimated) {
-      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
-    } else {
-      dateBeforeAnimationRef.current = null;
-    }
-
-    setIsAnimated(newIsAnimated);
-  }, [selectedDate, isAnimated, setIsAnimated]);
 
   // When the layer is animated, show each month of the year in a loop
   useEffect(() => {
@@ -315,8 +327,13 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
             </SelectContent>
           </Select>
         )}
+        {selectedDate !== undefined && selectedLayerId !== undefined && (
+          <div className="mt-3">
+            <YearChart layerId={selectedLayerId} date={selectedDate} active={isDatasetActive} />
+          </div>
+        )}
         {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
-          <div className="flex items-center justify-between gap-4">
+          <div className="mt-1 flex items-center justify-between gap-4">
             <Button
               type="button"
               variant="ghost"
