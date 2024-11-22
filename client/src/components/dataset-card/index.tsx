@@ -251,7 +251,7 @@ const DatasetCard = ({ id, name, defaultLayerId, layers, metadata }: DatasetCard
     link.href = URL.createObjectURL(blob);
     link.click();
     link.remove();
-  }, [name, metadata, chartData, chartIsLoading, selectedDate]);
+  }, [chartIsLoading, chartData, locationIsLoading, locationData, selectedDate, name, metadata]);
 
   // When the layer is animated, show each month of the year in a loop
   useEffect(() => {
