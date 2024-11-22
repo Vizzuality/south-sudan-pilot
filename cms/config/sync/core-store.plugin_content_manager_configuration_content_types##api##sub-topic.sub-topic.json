@@ -33,6 +33,20 @@
           "sortable": true
         }
       },
+      "order": {
+        "edit": {
+          "label": "order",
+          "description": "Define the order of the sub-topic within a topic. The value is relative to the other sub-topics.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "order",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -93,17 +107,22 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name"
-      ],
       "edit": [
         [
           {
             "name": "name",
             "size": 6
+          },
+          {
+            "name": "order",
+            "size": 4
           }
         ]
+      ],
+      "list": [
+        "id",
+        "name",
+        "order"
       ]
     },
     "uid": "api::sub-topic.sub-topic"

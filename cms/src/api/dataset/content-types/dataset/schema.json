@@ -44,6 +44,9 @@
     "short_description": {
       "type": "text",
       "maxLength": 100
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

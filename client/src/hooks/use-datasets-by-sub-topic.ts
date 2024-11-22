@@ -15,7 +15,6 @@ type DatasetsBySubTopic = {
 
 export default function useDatasetsBySubTopic(
   topicSlug: string,
-  sort = "sub_topic.name,name",
   layersFields = ["name"],
   includeMetadata = false,
 ) {
@@ -25,10 +24,10 @@ export default function useDatasetsBySubTopic(
     {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore-error
-      fields: ["name", "short_description"],
+      fields: ["name", "short_description", "order"],
       populate: {
         sub_topic: {
-          fields: ["name"],
+          fields: ["name", "order"],
         },
         default_layer: {
           fields: ["id"],
@@ -46,7 +45,7 @@ export default function useDatasetsBySubTopic(
           },
         },
       },
-      sort,
+      sort: "sub_topic.order,order",
     },
     {
       query: {

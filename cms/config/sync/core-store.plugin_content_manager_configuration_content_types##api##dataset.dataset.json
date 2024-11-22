@@ -121,6 +121,20 @@
           "sortable": true
         }
       },
+      "order": {
+        "edit": {
+          "label": "order",
+          "description": "Define the order of the dataset within a sub-topic. The value is relative to the other datasets.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "order",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -186,6 +200,10 @@
           {
             "name": "name",
             "size": 6
+          },
+          {
+            "name": "order",
+            "size": 6
           }
         ],
         [
@@ -225,7 +243,8 @@
         "id",
         "topic",
         "sub_topic",
-        "name"
+        "name",
+        "order"
       ]
     },
     "uid": "api::dataset.dataset"
