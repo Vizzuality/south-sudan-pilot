@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-22T10:48:59.215Z"
+    "x-generation-date": "2024-11-22T14:00:12.515Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -642,6 +642,9 @@
                                               "name": {
                                                 "type": "string"
                                               },
+                                              "order": {
+                                                "type": "integer"
+                                              },
                                               "createdAt": {
                                                 "type": "string",
                                                 "format": "date-time"
@@ -727,6 +730,9 @@
                                   },
                                   "short_description": {
                                     "type": "string"
+                                  },
+                                  "order": {
+                                    "type": "integer"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -1051,6 +1057,9 @@
               },
               "short_description": {
                 "type": "string"
+              },
+              "order": {
+                "type": "integer"
               }
             }
           }
@@ -1568,6 +1577,9 @@
                                                 "name": {
                                                   "type": "string"
                                                 },
+                                                "order": {
+                                                  "type": "integer"
+                                                },
                                                 "createdAt": {
                                                   "type": "string",
                                                   "format": "date-time"
@@ -1653,6 +1665,9 @@
                                     },
                                     "short_description": {
                                       "type": "string"
+                                    },
+                                    "order": {
+                                      "type": "integer"
                                     },
                                     "createdAt": {
                                       "type": "string",
@@ -1901,6 +1916,9 @@
           },
           "short_description": {
             "type": "string"
+          },
+          "order": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",
@@ -2737,6 +2755,9 @@
                                   "name": {
                                     "type": "string"
                                   },
+                                  "order": {
+                                    "type": "integer"
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -2822,6 +2843,9 @@
                       },
                       "short_description": {
                         "type": "string"
+                      },
+                      "order": {
+                        "type": "integer"
                       },
                       "createdAt": {
                         "type": "string",
@@ -3554,6 +3578,9 @@
             "properties": {
               "name": {
                 "type": "string"
+              },
+              "order": {
+                "type": "integer"
               }
             }
           }
@@ -3613,6 +3640,9 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "order": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",

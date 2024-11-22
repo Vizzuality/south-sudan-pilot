@@ -75,7 +75,8 @@
           "metadata.units",
           "metadata.full_name",
           "metadata.temporal_resolution",
-          "short_description"
+          "short_description",
+          "order"
         ]
       },
       "conditions": []
@@ -107,7 +108,8 @@
           "metadata.units",
           "metadata.full_name",
           "metadata.temporal_resolution",
-          "short_description"
+          "short_description",
+          "order"
         ]
       },
       "conditions": []
@@ -132,7 +134,8 @@
           "metadata.units",
           "metadata.full_name",
           "metadata.temporal_resolution",
-          "short_description"
+          "short_description",
+          "order"
         ]
       },
       "conditions": []
@@ -280,7 +283,8 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "name"
+          "name",
+          "order"
         ]
       },
       "conditions": []
@@ -298,7 +302,8 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "name"
+          "name",
+          "order"
         ]
       },
       "conditions": []
@@ -309,7 +314,8 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "name"
+          "name",
+          "order"
         ]
       },
       "conditions": []
