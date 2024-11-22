@@ -3,8 +3,9 @@ import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer } from "@deck.gl/layers";
 import parseAPNG from "apng-js";
 import { getMonth } from "date-fns";
+import { RasterLayerSpecification } from "mapbox-gl";
 import { useContext, useEffect } from "react";
-import { RasterLayer, RasterSource } from "react-map-gl";
+import { RasterSource } from "react-map-gl";
 
 import { LayerConfig } from "@/types/layer";
 
@@ -20,7 +21,7 @@ const AnimatedLayer = ({ config, date, beforeId }: AnimatedLayerProps) => {
   const { addLayer, removeLayer } = useContext(DeckGLMapboxOverlayContext);
 
   useEffect(() => {
-    const style = config.styles[0] as RasterLayer;
+    const style = config.styles[0] as RasterLayerSpecification;
     const source = config.source as RasterSource;
     const frameIndex = getMonth(date);
 
@@ -61,7 +62,8 @@ const AnimatedLayer = ({ config, date, beforeId }: AnimatedLayerProps) => {
                 bitmapData: createImageBitmap(frame.imageData as Blob),
               };
             });
-          });
+          })
+          .catch(() => {});
       },
       renderSubLayers: (subLayer) => {
         if (!subLayer || !subLayer.data || !subLayer.tile) {
