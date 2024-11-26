@@ -1,11 +1,11 @@
 import { Jost, DM_Serif_Text } from "next/font/google";
 
+import Providers from "@/app/providers";
 import Head from "@/components/head";
 
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Providers from "@/app/providers";
 
 export const metadata: Metadata = {
   title: {

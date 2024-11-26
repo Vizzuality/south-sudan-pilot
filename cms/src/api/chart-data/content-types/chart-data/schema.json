@@ -14,12 +14,12 @@
   "attributes": {
     "location_code": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "year": {
       "type": "integer",
       "min": 0,
-      "required": true
+      "required": false
     },
     "x_values": {
       "type": "json",
@@ -34,6 +34,9 @@
       "relation": "manyToOne",
       "target": "api::layer.layer",
       "inversedBy": "chart_data"
+    },
+    "unique_identifier": {
+      "type": "string"
     }
   }
 }

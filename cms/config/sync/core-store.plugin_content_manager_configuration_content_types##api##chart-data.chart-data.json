@@ -22,7 +22,7 @@
       "location_code": {
         "edit": {
           "label": "location_code",
-          "description": "",
+          "description": "Required if the chart's visibility doesn't depend on interaction with the layer. This is the case when the layer's show_chart_on_interaction attribute is false.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -36,7 +36,7 @@
       "year": {
         "edit": {
           "label": "year",
-          "description": "",
+          "description": "Required if the chart's visibility doesn't depend on interaction with the layer. This is the case when the layer's show_chart_on_interaction attribute is false.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -86,6 +86,20 @@
         },
         "list": {
           "label": "layer",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "unique_identifier": {
+        "edit": {
+          "label": "unique_identifier",
+          "description": "Required if the chart's visibility depends on interaction with the layer. This is the case when the layer's show_chart_on_interaction attribute is true.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "unique_identifier",
           "searchable": true,
           "sortable": true
         }
@@ -155,15 +169,19 @@
           {
             "name": "layer",
             "size": 6
-          },
-          {
-            "name": "location_code",
-            "size": 6
           }
         ],
         [
           {
+            "name": "location_code",
+            "size": 4
+          },
+          {
             "name": "year",
+            "size": 4
+          },
+          {
+            "name": "unique_identifier",
             "size": 4
           }
         ],

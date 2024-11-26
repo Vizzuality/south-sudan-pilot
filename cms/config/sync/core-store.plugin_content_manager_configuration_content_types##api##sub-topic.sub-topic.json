@@ -107,6 +107,11 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "order"
+      ],
       "edit": [
         [
           {
@@ -118,11 +123,6 @@
             "size": 4
           }
         ]
-      ],
-      "list": [
-        "id",
-        "name",
-        "order"
       ]
     },
     "uid": "api::sub-topic.sub-topic"

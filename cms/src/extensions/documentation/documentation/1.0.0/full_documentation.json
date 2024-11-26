@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-22T14:01:53.948Z"
+    "x-generation-date": "2024-11-26T13:48:27.187Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -94,8 +94,6 @@
         "properties": {
           "data": {
             "required": [
-              "location_code",
-              "year",
               "x_values",
               "y_values"
             ],
@@ -119,6 +117,9 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "unique_identifier": {
+                "type": "string"
               }
             }
           }
@@ -173,8 +174,6 @@
       "ChartData": {
         "type": "object",
         "required": [
-          "location_code",
-          "year",
           "x_values",
           "y_values"
         ],
@@ -824,6 +823,9 @@
                                         }
                                       }
                                     },
+                                    "unique_identifier": {
+                                      "type": "string"
+                                    },
                                     "createdAt": {
                                       "type": "string",
                                       "format": "date-time"
@@ -876,6 +878,12 @@
                       "chart_unit": {
                         "type": "string"
                       },
+                      "show_chart_on_interaction": {
+                        "type": "boolean"
+                      },
+                      "chart_sentence": {
+                        "type": "string"
+                      },
                       "createdAt": {
                         "type": "string",
                         "format": "date-time"
@@ -923,6 +931,9 @@
                 }
               }
             }
+          },
+          "unique_identifier": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -1759,6 +1770,9 @@
                                           }
                                         }
                                       },
+                                      "unique_identifier": {
+                                        "type": "string"
+                                      },
                                       "createdAt": {
                                         "type": "string",
                                         "format": "date-time"
@@ -1809,6 +1823,12 @@
                           }
                         },
                         "chart_unit": {
+                          "type": "string"
+                        },
+                        "show_chart_on_interaction": {
+                          "type": "boolean"
+                        },
+                        "chart_sentence": {
                           "type": "string"
                         },
                         "createdAt": {
@@ -2082,6 +2102,12 @@
               },
               "chart_unit": {
                 "type": "string"
+              },
+              "show_chart_on_interaction": {
+                "type": "boolean"
+              },
+              "chart_sentence": {
+                "type": "string"
               }
             }
           }
@@ -2303,6 +2329,9 @@
                                                         }
                                                       }
                                                     }
+                                                  },
+                                                  "unique_identifier": {
+                                                    "type": "string"
                                                   },
                                                   "createdAt": {
                                                     "type": "string",
@@ -2606,6 +2635,12 @@
                                       }
                                     },
                                     "chart_unit": {
+                                      "type": "string"
+                                    },
+                                    "show_chart_on_interaction": {
+                                      "type": "boolean"
+                                    },
+                                    "chart_sentence": {
                                       "type": "string"
                                     },
                                     "createdAt": {
@@ -2919,6 +2954,12 @@
             }
           },
           "chart_unit": {
+            "type": "string"
+          },
+          "show_chart_on_interaction": {
+            "type": "boolean"
+          },
+          "chart_sentence": {
             "type": "string"
           },
           "createdAt": {

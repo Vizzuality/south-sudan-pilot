@@ -55,6 +55,13 @@
     },
     "chart_unit": {
       "type": "string"
+    },
+    "show_chart_on_interaction": {
+      "type": "boolean",
+      "default": false
+    },
+    "chart_sentence": {
+      "type": "text"
     }
   }
 }

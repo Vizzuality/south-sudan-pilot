@@ -121,7 +121,7 @@ const VectorLayer = ({ config, beforeId, interactive, onHover, onClick }: Vector
         removeLayer(layer.id);
       });
     };
-  }, [config, beforeId, addLayer, removeLayer, zoom]);
+  }, [config, beforeId, addLayer, removeLayer, zoom, interactive, onHover, onClick]);
 
   return null;
 };
