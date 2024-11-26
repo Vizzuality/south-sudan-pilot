@@ -7,6 +7,7 @@ export default function useLayerLegend(id: number) {
   return useGetLayers<{
     name: string;
     dataset: string;
+    datasetLayersCount: number;
     topicSlug: string;
     type: LegendLegendConfigComponent["type"];
     unit: string;
@@ -23,6 +24,9 @@ export default function useLayerLegend(id: number) {
         dataset: {
           fields: ["name"],
           populate: {
+            layers: {
+              fields: ["id"],
+            },
             topic: {
               fields: ["slug"],
             },
@@ -44,13 +48,14 @@ export default function useLayerLegend(id: number) {
           }
 
           const { name, dataset, legend_config } = data.data[0].attributes!;
-          const { name: datasetName, topic } = dataset!.data!.attributes!;
+          const { name: datasetName, topic, layers } = dataset!.data!.attributes!;
           const { slug: topicSlug } = topic!.data!.attributes!;
           const { type, unit, items } = legend_config!;
 
           return {
             name,
             dataset: datasetName,
+            datasetLayersCount: layers!.data!.length,
             topicSlug,
             type,
             unit,
