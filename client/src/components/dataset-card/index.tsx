@@ -31,6 +31,7 @@ import useYearChartData from "@/hooks/use-year-chart-data";
 import { cn } from "@/lib/utils";
 import CalendarDaysIcon from "@/svgs/calendar-days.svg";
 import ChevronDownIcon from "@/svgs/chevron-down.svg";
+import CursorArrowRaysIcon from "@/svgs/cursor-arrow-rays.svg";
 import DownloadIcon from "@/svgs/download.svg";
 import GraphIcon from "@/svgs/graph.svg";
 import PauseIcon from "@/svgs/pause.svg";
@@ -422,6 +423,12 @@ const DatasetCard = ({
               ))}
             </SelectContent>
           </Select>
+        )}
+        {selectedLayer !== undefined && !!selectedLayer.attributes!.show_chart_on_interaction && (
+          <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
+            <CursorArrowRaysIcon className="size-4" aria-hidden />
+            Select a point on the map for details.
+          </div>
         )}
         {selectedDate !== undefined && selectedLayerId !== undefined && (
           <div className="mt-3">
