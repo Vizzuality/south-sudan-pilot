@@ -23,6 +23,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import YearChart from "@/components/year-chart";
+import useLayerInteractionState from "@/hooks/use-layer-interaction-state";
 import useLocation from "@/hooks/use-location";
 import { useLocationByCodes } from "@/hooks/use-location-by-codes";
 import useMapLayers from "@/hooks/use-map-layers";
@@ -88,6 +89,8 @@ const DatasetCard = ({
   // Date that was selected before the animation is played
   const dateBeforeAnimationRef = useRef<string | null>(null);
 
+  const [, { setHoveredFeature, setSelectedFeature }] = useLayerInteractionState(selectedLayerId);
+
   const selectedLayer = useMemo(
     () => layers.find(({ id }) => id === selectedLayerId),
     [layers, selectedLayerId],
@@ -144,6 +147,8 @@ const DatasetCard = ({
 
       if (!active) {
         removeLayer(selectedLayerId);
+        setHoveredFeature(null);
+        setSelectedFeature(null);
         if (isAnimated) {
           onToggleAnimation();
         }
@@ -159,6 +164,8 @@ const DatasetCard = ({
       selectedDate,
       isAnimated,
       onToggleAnimation,
+      setHoveredFeature,
+      setSelectedFeature,
     ],
   );
 
@@ -168,6 +175,10 @@ const DatasetCard = ({
       const previousId = selectedLayerId;
       const returnPeriod = getDefaultReturnPeriod(id, layers, layersConfiguration);
       const date = getDefaultDate(id, layers, layersConfiguration);
+
+      // We reset the hovered and selected features for the previous layer
+      setHoveredFeature(null);
+      setSelectedFeature(null);
 
       setSelectedLayerId(id);
       setSelectedReturnPeriod(returnPeriod);
@@ -188,6 +199,8 @@ const DatasetCard = ({
       addLayer,
       layers,
       layersConfiguration,
+      setHoveredFeature,
+      setSelectedFeature,
     ],
   );
 

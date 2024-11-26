@@ -1,3 +1,4 @@
+import { GeoJsonProperties } from "geojson";
 import {
   CircleLayerSpecification,
   FillLayerSpecification,
@@ -12,6 +13,11 @@ export interface LayerSettings {
   opacity: number;
   "return-period"?: number;
   date?: string;
+}
+
+export interface LayerInteractionState {
+  hoveredFeature: GeoJsonProperties | null;
+  selectedFeature: GeoJsonProperties | null;
 }
 
 export interface LayerConfig {

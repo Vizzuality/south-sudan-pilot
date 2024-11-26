@@ -266,16 +266,23 @@ export const resolveDeckglProperties = (style: LayerConfig["styles"][0], zoom: n
     resolvedProperties.stroked = false;
   }
 
-  return Object.entries(resolvedProperties).reduce((res, [key, value]) => {
-    if (value === undefined) {
-      return res;
-    }
+  return Object.entries(resolvedProperties).reduce(
+    (res, [key, value]) => {
+      if (value === undefined) {
+        return res;
+      }
 
-    return {
-      ...res,
-      [key]: value,
-    };
-  }, {}) as Partial<typeof resolvedProperties>;
+      return {
+        ...res,
+        [key]: value,
+        updateTriggers: {
+          ...res["updateTriggers"],
+          [key]: [style],
+        },
+      };
+    },
+    { updateTriggers: {} },
+  ) as Partial<typeof resolvedProperties>;
 };
 
 export const convertBinaryToPointGeoJSON = (data: BinaryFeatureCollection) => {

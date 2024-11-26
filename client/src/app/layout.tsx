@@ -1,12 +1,11 @@
 import { Jost, DM_Serif_Text } from "next/font/google";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-import ReactQueryProvider from "@/app/react-query-provider";
 import Head from "@/components/head";
 
 import type { Metadata } from "next";
 
 import "./globals.css";
+import Providers from "@/app/providers";
 
 export const metadata: Metadata = {
   title: {
@@ -38,9 +37,7 @@ export default function RootLayout({
     <html lang="en" className={`${jost.variable} ${dmSerifText.variable}`}>
       <Head />
       <body>
-        <ReactQueryProvider>
-          <NuqsAdapter>{children}</NuqsAdapter>
-        </ReactQueryProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

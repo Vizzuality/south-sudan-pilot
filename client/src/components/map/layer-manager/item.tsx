@@ -1,4 +1,5 @@
 import useLayerConfig from "@/hooks/use-layer-config";
+import useLayerInteractionState from "@/hooks/use-layer-interaction-state";
 import { LayerSettings } from "@/types/layer";
 
 import AnimatedLayer from "./animated-layer";
@@ -12,13 +13,15 @@ interface LayerManagerItemProps {
 }
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
-  const layerConfig = useLayerConfig(id, settings);
+  const [interactionState, { setHoveredFeature, setSelectedFeature }] =
+    useLayerInteractionState(id);
+  const layerConfig = useLayerConfig(id, settings, interactionState);
 
   if (!layerConfig) {
     return null;
   }
 
-  const { type, config } = layerConfig;
+  const { type, config, interactive } = layerConfig;
 
   if (!config.styles) {
     return null;
@@ -33,7 +36,15 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
   }
 
   if (config.source.type === "vector") {
-    return <VectorLayer config={config} beforeId={beforeId} />;
+    return (
+      <VectorLayer
+        config={config}
+        beforeId={beforeId}
+        interactive={interactive}
+        onHover={setHoveredFeature}
+        onClick={setSelectedFeature}
+      />
+    );
   }
 
   console.warn(`Unsupported layer type (${config.source.type})`);
