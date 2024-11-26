@@ -40,6 +40,13 @@
       "type": "component",
       "repeatable": false,
       "component": "metadata.item"
+    },
+    "short_description": {
+      "type": "text",
+      "maxLength": 100
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

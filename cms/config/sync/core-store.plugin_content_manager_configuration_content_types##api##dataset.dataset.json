@@ -107,6 +107,34 @@
           "sortable": false
         }
       },
+      "short_description": {
+        "edit": {
+          "label": "short_description",
+          "description": "Displayed in the dataset cards",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "short_description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "order": {
+        "edit": {
+          "label": "order",
+          "description": "Define the order of the dataset within a sub-topic. The value is relative to the other datasets.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "order",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -167,16 +195,14 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "topic",
-        "sub_topic",
-        "name"
-      ],
       "edit": [
         [
           {
             "name": "name",
+            "size": 6
+          },
+          {
+            "name": "order",
             "size": 6
           }
         ],
@@ -202,10 +228,23 @@
         ],
         [
           {
+            "name": "short_description",
+            "size": 12
+          }
+        ],
+        [
+          {
             "name": "metadata",
             "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "topic",
+        "sub_topic",
+        "name",
+        "order"
       ]
     },
     "uid": "api::dataset.dataset"

@@ -603,6 +603,7 @@ export interface SubTopic {
   createdAt?: string;
   createdBy?: SubTopicCreatedBy;
   name: string;
+  order?: number;
   updatedAt?: string;
   updatedBy?: SubTopicUpdatedBy;
 }
@@ -763,6 +764,7 @@ export interface SubTopicListResponse {
 
 export type SubTopicRequestData = {
   name: string;
+  order?: number;
 };
 
 export interface SubTopicRequest {
@@ -1173,6 +1175,8 @@ export type LayerDatasetDataAttributes = {
   layers?: LayerDatasetDataAttributesLayers;
   metadata?: LayerDatasetDataAttributesMetadata;
   name?: string;
+  order?: number;
+  short_description?: string;
   sub_topic?: LayerDatasetDataAttributesSubTopic;
   topic?: LayerDatasetDataAttributesTopic;
   updatedAt?: string;
@@ -1265,6 +1269,7 @@ export type LayerDatasetDataAttributesSubTopicDataAttributes = {
   createdAt?: string;
   createdBy?: LayerDatasetDataAttributesSubTopicDataAttributesCreatedBy;
   name?: string;
+  order?: number;
   updatedAt?: string;
   updatedBy?: LayerDatasetDataAttributesSubTopicDataAttributesUpdatedBy;
 };
@@ -1699,6 +1704,8 @@ export interface Dataset {
   layers?: DatasetLayers;
   metadata?: MetadataItemComponent;
   name: string;
+  order?: number;
+  short_description?: string;
   sub_topic?: DatasetSubTopic;
   topic?: DatasetTopic;
   updatedAt?: string;
@@ -1822,6 +1829,8 @@ export type DatasetLayersDataItemAttributesDatasetDataAttributes = {
   layers?: DatasetLayersDataItemAttributesDatasetDataAttributesLayers;
   metadata?: DatasetLayersDataItemAttributesDatasetDataAttributesMetadata;
   name?: string;
+  order?: number;
+  short_description?: string;
   sub_topic?: DatasetLayersDataItemAttributesDatasetDataAttributesSubTopic;
   topic?: DatasetLayersDataItemAttributesDatasetDataAttributesTopic;
   updatedAt?: string;
@@ -2038,6 +2047,7 @@ export type DatasetLayersDataItemAttributesDatasetDataAttributesSubTopicDataAttr
   createdAt?: string;
   createdBy?: DatasetLayersDataItemAttributesDatasetDataAttributesSubTopicDataAttributesCreatedBy;
   name?: string;
+  order?: number;
   updatedAt?: string;
   updatedBy?: DatasetLayersDataItemAttributesDatasetDataAttributesSubTopicDataAttributesUpdatedBy;
 };
@@ -2242,6 +2252,8 @@ export type DatasetRequestData = {
   layers?: DatasetRequestDataLayersItem[];
   metadata?: MetadataItemComponent;
   name: string;
+  order?: number;
+  short_description?: string;
   sub_topic?: DatasetRequestDataSubTopic;
   topic?: DatasetRequestDataTopic;
 };
@@ -2364,6 +2376,8 @@ export type ChartDataLayerDataAttributesDatasetDataAttributes = {
   layers?: ChartDataLayerDataAttributesDatasetDataAttributesLayers;
   metadata?: ChartDataLayerDataAttributesDatasetDataAttributesMetadata;
   name?: string;
+  order?: number;
+  short_description?: string;
   sub_topic?: ChartDataLayerDataAttributesDatasetDataAttributesSubTopic;
   topic?: ChartDataLayerDataAttributesDatasetDataAttributesTopic;
   updatedAt?: string;
@@ -2580,6 +2594,7 @@ export type ChartDataLayerDataAttributesDatasetDataAttributesSubTopicDataAttribu
   createdAt?: string;
   createdBy?: ChartDataLayerDataAttributesDatasetDataAttributesSubTopicDataAttributesCreatedBy;
   name?: string;
+  order?: number;
   updatedAt?: string;
   updatedBy?: ChartDataLayerDataAttributesDatasetDataAttributesSubTopicDataAttributesUpdatedBy;
 };

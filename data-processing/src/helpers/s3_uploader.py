@@ -2,6 +2,7 @@
 Module to upload data to s3 bucket.
 """
 
+import logging
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -9,6 +10,10 @@ import boto3
 from botocore.config import Config
 from dotenv import load_dotenv
 from tqdm import tqdm
+
+# Set logging level for botocore to WARNING
+logging.getLogger("botocore").setLevel(logging.WARNING)
+
 
 # Load environment variables from the .env file
 load_dotenv()

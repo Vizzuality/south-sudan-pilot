@@ -867,6 +867,11 @@ export interface ApiDatasetDataset extends Schema.CollectionType {
       'api::sub-topic.sub-topic'
     >;
     metadata: Attribute.Component<'metadata.item'>;
+    short_description: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    order: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -992,6 +997,7 @@ export interface ApiSubTopicSubTopic extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
+    order: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

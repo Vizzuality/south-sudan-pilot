@@ -1,7 +1,8 @@
 aws_region         = "af-south-1" //il-central is much closer geographically but separated by sea, af-south-1 is on the same continent but on the far south
 allowed_account_id = "533267347591"
 project_name       = "wims-ss"
-repo_name          = "wims-south-sudan"
+repo_name          = "south-sudan-pilot"
+//repo_name          = "wims-south-sudan"
 
 staging_domain                      = "ss-hydro-pilot.gmv.com"
 staging_ec2_instance_type           = "m5.large"

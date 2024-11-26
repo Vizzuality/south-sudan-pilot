@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-18T15:05:56.007Z"
+    "x-generation-date": "2024-11-22T14:01:53.948Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -642,6 +642,9 @@
                                               "name": {
                                                 "type": "string"
                                               },
+                                              "order": {
+                                                "type": "integer"
+                                              },
                                               "createdAt": {
                                                 "type": "string",
                                                 "format": "date-time"
@@ -724,6 +727,12 @@
                                         "type": "string"
                                       }
                                     }
+                                  },
+                                  "short_description": {
+                                    "type": "string"
+                                  },
+                                  "order": {
+                                    "type": "integer"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -1045,6 +1054,12 @@
               },
               "metadata": {
                 "$ref": "#/components/schemas/MetadataItemComponent"
+              },
+              "short_description": {
+                "type": "string"
+              },
+              "order": {
+                "type": "integer"
               }
             }
           }
@@ -1562,6 +1577,9 @@
                                                 "name": {
                                                   "type": "string"
                                                 },
+                                                "order": {
+                                                  "type": "integer"
+                                                },
                                                 "createdAt": {
                                                   "type": "string",
                                                   "format": "date-time"
@@ -1644,6 +1662,12 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "short_description": {
+                                      "type": "string"
+                                    },
+                                    "order": {
+                                      "type": "integer"
                                     },
                                     "createdAt": {
                                       "type": "string",
@@ -1889,6 +1913,12 @@
           },
           "metadata": {
             "$ref": "#/components/schemas/MetadataItemComponent"
+          },
+          "short_description": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",
@@ -2725,6 +2755,9 @@
                                   "name": {
                                     "type": "string"
                                   },
+                                  "order": {
+                                    "type": "integer"
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -2807,6 +2840,12 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "short_description": {
+                        "type": "string"
+                      },
+                      "order": {
+                        "type": "integer"
                       },
                       "createdAt": {
                         "type": "string",
@@ -3539,6 +3578,9 @@
             "properties": {
               "name": {
                 "type": "string"
+              },
+              "order": {
+                "type": "integer"
               }
             }
           }
@@ -3598,6 +3640,9 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "order": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",

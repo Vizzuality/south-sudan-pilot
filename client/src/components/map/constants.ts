@@ -9,7 +9,7 @@ export const DEFAULT_BOUNDS: [LngLatLike, LngLatLike] = [
 
 export const DESKTOP_MAX_BOUNDS: [LngLatLike, LngLatLike] = [
   [14, 1],
-  [44, 15],
+  [52, 15],
 ];
 
 export const MOBILE_MAX_BOUNDS: [LngLatLike, LngLatLike] = [

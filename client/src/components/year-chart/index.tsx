@@ -11,6 +11,7 @@ import { Text, TextProps } from "@visx/text";
 import { extent } from "d3-array";
 import { interpolateRgb, piecewise } from "d3-interpolate";
 import { format } from "date-fns/format";
+import { uniqueId } from "lodash-es";
 import { ComponentProps, useCallback, useMemo } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -19,8 +20,9 @@ import tailwindConfig from "@/lib/tailwind-config";
 import { cn } from "@/lib/utils";
 
 interface YearChartProps {
-  layerId: number;
+  data: ReturnType<typeof useYearChartData>["data"];
   date: string;
+  loading: boolean;
   active: boolean;
 }
 
@@ -35,17 +37,15 @@ const Y_AXIS_TICK_WIDTH = 5;
 const Y_AXIS_TICK_COUNT = 5;
 const GRADIENT_OPACITY_EXTENT = [0.9, 0.7];
 
-const YearChart = ({ layerId, date, active }: YearChartProps) => {
+const YearChart = ({ data, date, loading, active }: YearChartProps) => {
   const { parentRef, width } = useParentSize({ ignoreDimensions: ["height"] });
   const height = useMemo(
     () => Math.max(Math.min(width / 2.7, CHART_MAX_HEIGHT), CHART_MIN_HEIGHT),
     [width],
   );
 
-  const { data, isLoading } = useYearChartData(layerId, date);
-
   const unitWidth = useMemo(() => {
-    if (isLoading || !data) {
+    if (loading || !data) {
       return 0;
     }
 
@@ -59,10 +59,10 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
       }, Y_AXIS_TICK_WIDTH) ?? Y_AXIS_TICK_WIDTH;
 
     return (data.unit?.length ?? 0) * 8 + subtract;
-  }, [data, isLoading]);
+  }, [data, loading]);
 
   const xScale = useMemo(() => {
-    if (isLoading || !data) {
+    if (loading || !data) {
       return undefined;
     }
 
@@ -70,10 +70,10 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
       range: [0, width - Y_AXIS_WIDTH - X_AXIS_OFFSET_RIGHT - unitWidth],
       domain: data.data.map(({ x }) => x),
     });
-  }, [width, data, isLoading, unitWidth]);
+  }, [width, data, loading, unitWidth]);
 
   const yScale = useMemo(() => {
-    if (isLoading || !data) {
+    if (loading || !data) {
       return undefined;
     }
 
@@ -82,10 +82,10 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
       domain: extent(data.data.map(({ y }) => y)) as [number, number],
       nice: Y_AXIS_TICK_COUNT,
     });
-  }, [height, data, isLoading]);
+  }, [height, data, loading]);
 
   const fillColorScale = useMemo(() => {
-    if (isLoading || !data) {
+    if (loading || !data) {
       return undefined;
     }
 
@@ -93,7 +93,7 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
       range: data.colorRange,
       domain: data.colorDomain,
     }).interpolate(() => piecewise(interpolateRgb, data.colorRange));
-  }, [data, isLoading]);
+  }, [data, loading]);
 
   const xAxisTickLabelProps = useCallback<
     NonNullable<Exclude<ComponentProps<typeof AxisBottom>["tickLabelProps"], Partial<TextProps>>>
@@ -134,6 +134,8 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
     };
   }, []);
 
+  const gradientId = useMemo(() => uniqueId(), []);
+
   const gradientColorStops = useMemo(() => {
     if (!fillColorScale || !yScale) {
       return [];
@@ -162,8 +164,8 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
 
   return (
     <div ref={parentRef}>
-      {isLoading && !data && <Skeleton style={{ width: `${width}px`, height: `${height}px` }} />}
-      {!isLoading && !!data && !!xScale && !!yScale && !!fillColorScale && (
+      {loading && !data && <Skeleton style={{ width: `${width}px`, height: `${height}px` }} />}
+      {!loading && !!data && !!xScale && !!yScale && !!fillColorScale && (
         <svg
           width={width}
           height={height}
@@ -173,7 +175,7 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
             "grayscale-0": active,
           })}
         >
-          <LinearGradient id={`year-chart-gradient-${layerId}`}>
+          <LinearGradient id={`year-chart-gradient-${gradientId}`}>
             {gradientColorStops.map((stop, index) => (
               <stop key={index} {...stop} />
             ))}
@@ -204,7 +206,7 @@ const YearChart = ({ layerId, date, active }: YearChartProps) => {
               x={(d) => xScale(d.x) ?? 0}
               y={(d) => yScale(d.y) ?? 0}
               yScale={yScale}
-              fill={`url('#year-chart-gradient-${layerId}')`}
+              fill={`url('#year-chart-gradient-${gradientId}')`}
             />
             <LinePath
               data={data.data}

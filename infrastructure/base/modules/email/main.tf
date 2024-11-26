@@ -7,10 +7,23 @@ resource "aws_ses_domain_identity" "domain_identity" {
   domain = var.domain
 }
 
+// This represents a completed email identity verification, so it must be uncommented once
+// it's been completed
+resource "aws_ses_domain_identity_verification" "domain_identity_verification" {
+  domain = aws_ses_domain_identity.domain_identity.id
+}
+
 resource "aws_ses_domain_dkim" "domain_dkim" {
   domain = aws_ses_domain_identity.domain_identity.domain
 }
 
+resource "aws_ses_configuration_set" "email_configuration_set" {
+  name = "${var.project}-email-config-set"
+}
+// MISSING: currently the resource to assign a configuration set to an identity seems to be available
+//only in aws_ses_v2, so it needs to be done manually on the console, or be forced to recreate all ses resources
+
+//Permissions
 resource "aws_iam_user" "email_sender_user" {
   name = "${replace(title(replace(var.domain, "/\\W/", " ")), " ","")}EmailSender"
 }

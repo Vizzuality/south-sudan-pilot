@@ -74,7 +74,9 @@
           "metadata.spatial_resolution",
           "metadata.units",
           "metadata.full_name",
-          "metadata.temporal_resolution"
+          "metadata.temporal_resolution",
+          "short_description",
+          "order"
         ]
       },
       "conditions": []
@@ -105,7 +107,9 @@
           "metadata.spatial_resolution",
           "metadata.units",
           "metadata.full_name",
-          "metadata.temporal_resolution"
+          "metadata.temporal_resolution",
+          "short_description",
+          "order"
         ]
       },
       "conditions": []
@@ -129,7 +133,9 @@
           "metadata.spatial_resolution",
           "metadata.units",
           "metadata.full_name",
-          "metadata.temporal_resolution"
+          "metadata.temporal_resolution",
+          "short_description",
+          "order"
         ]
       },
       "conditions": []
@@ -277,7 +283,8 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "name"
+          "name",
+          "order"
         ]
       },
       "conditions": []
@@ -295,7 +302,8 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "name"
+          "name",
+          "order"
         ]
       },
       "conditions": []
@@ -306,7 +314,8 @@
       "subject": "api::sub-topic.sub-topic",
       "properties": {
         "fields": [
-          "name"
+          "name",
+          "order"
         ]
       },
       "conditions": []

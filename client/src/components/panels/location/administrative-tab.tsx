@@ -85,7 +85,7 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
     <>
       <p>
         Select a location by administrative boundaries to view data specific to states, counties, or
-        regions. This helps focus on localized insights for effective resource management and
+        payams. This helps focus on localized insights for effective resource management and
         planning.
       </p>
       <div className="mt-8 flex flex-col gap-4">
@@ -130,7 +130,7 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
               {!!selectedLocationLevel2 && (
                 <span className="font-semibold">{selectedLocationLevel2.name}</span>
               )}
-              {!selectedLocationLevel2 && "Select countie"}
+              {!selectedLocationLevel2 && "Select county"}
             </ComboboxTrigger>
             {!!selectedLocationLevel2 && (
               <Button
@@ -140,13 +140,13 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
                 className="absolute right-3 top-1/2 size-6 -translate-y-1/2 rounded-full bg-casper-blue-400 text-rhino-blue-950 focus-visible:ring-casper-blue-950"
                 onClick={() => onChangeLocationLevel2(undefined)}
               >
-                <span className="sr-only">Clear countie</span>
+                <span className="sr-only">Clear county</span>
                 <XMarkIcon aria-hidden />
               </Button>
             )}
           </div>
           <ComboboxContent>
-            <ComboboxInput placeholder="Search countie" />
+            <ComboboxInput placeholder="Search county" />
             <ComboboxList>
               <ComboboxEmpty>No results found.</ComboboxEmpty>
               {isLoadingLevel2 && <ComboboxLoading>Loading...</ComboboxLoading>}
@@ -165,7 +165,7 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
               {!!selectedLocationLevel3 && (
                 <span className="font-semibold">{selectedLocationLevel3.name}</span>
               )}
-              {!selectedLocationLevel3 && "Select region"}
+              {!selectedLocationLevel3 && "Select payam"}
             </ComboboxTrigger>
             {!!selectedLocationLevel3 && (
               <Button
@@ -175,13 +175,13 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
                 className="absolute right-3 top-1/2 size-6 -translate-y-1/2 rounded-full bg-casper-blue-400 text-rhino-blue-950 focus-visible:ring-casper-blue-950"
                 onClick={() => onChangeLocationLevel3(undefined)}
               >
-                <span className="sr-only">Clear region</span>
+                <span className="sr-only">Clear payam</span>
                 <XMarkIcon aria-hidden />
               </Button>
             )}
           </div>
           <ComboboxContent>
-            <ComboboxInput placeholder="Search region" />
+            <ComboboxInput placeholder="Search payam" />
             <ComboboxList>
               <ComboboxEmpty>No results found.</ComboboxEmpty>
               {isLoadingLevel3 && <ComboboxLoading>Loading...</ComboboxLoading>}
