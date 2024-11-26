@@ -402,10 +402,22 @@
         }
     },
     "In-situ Data": {
-        "Hurst Nile Basin Volumes": {
+        "Hurst Nile Basin Volumes - Vol1": {
             "type": "vector",
             "format": "Shapefile",
-            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/012-Data%20rescue/HYDROC/HYDROC_shapefile/HYDROC_stations_ALL_volumnes.shp",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/012-Data%20rescue/HYDROC/HYDROC_shapefile/HYDROC_stations_Vol1.shp",
+            "styles": ""
+        },
+        "Hurst Nile Basin Volumes - Vol2": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/012-Data%20rescue/HYDROC/HYDROC_shapefile/HYDROC_stations_Vol2.shp",
+            "styles": ""
+        },
+        "Hurst Nile Basin Volumes - Vol3": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/012-Data%20rescue/HYDROC/HYDROC_shapefile/HYDROC_stations_Vol3.shp",
             "styles": ""
         },
         "MWRI": {
