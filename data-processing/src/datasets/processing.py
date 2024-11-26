@@ -95,4 +95,4 @@ class LayerProcessing:
                     # Process the layer and save it
                     layer.process_data(file_name, min_z, max_z, time_coverage)
                     # Update and save the datasets dictionary
-                    #self._save_datasets_dict(dataset_name, layer_name, file_name)
+                    self._save_datasets_dict(dataset_name, layer_name, file_name)
