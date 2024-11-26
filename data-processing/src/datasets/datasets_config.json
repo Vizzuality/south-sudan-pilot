@@ -401,6 +401,20 @@
             "styles": {"colors": ["#FFFFFF", "#AE55A7", "#211F4D"], "vmin": 0, "vmax": 0.5, "time_coord": "month"}
         }
     },
+    "In-situ Data": {
+        "Hurst Nile Basin Volumes": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/012-Data%20rescue/HYDROC/HYDROC_shapefile/HYDROC_stations_ALL_volumnes.shp",
+            "styles": ""
+        },
+        "MWRI": {
+            "type": "vector",
+            "format": "Shapefile",
+            "base_url": "https://storage.googleapis.com/wbhydross_deliverables/D3-Database/012-Data%20rescue/MWRI/MWRI_shapefile/MWRI_processed_stations.shp",
+            "styles": ""
+        }
+    },
     "Contextual layers": {
         "Population": {
             "type": "raster",
