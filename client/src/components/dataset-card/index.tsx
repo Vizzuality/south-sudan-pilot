@@ -1,19 +1,16 @@
 "use client";
 
-import { getMonth, getYear } from "date-fns";
-import { format } from "date-fns/format";
+import { getYear } from "date-fns";
 import { camelCase } from "lodash-es";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as React from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import DatasetMetadata from "@/components/dataset-metadata";
 import InteractionChart from "@/components/interaction-chart";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import MonthPicker from "@/components/ui/month-picker";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -30,23 +27,18 @@ import useLocation from "@/hooks/use-location";
 import { useLocationByCodes } from "@/hooks/use-location-by-codes";
 import useMapLayers from "@/hooks/use-map-layers";
 import useYearChartData from "@/hooks/use-year-chart-data";
-import { cn } from "@/lib/utils";
-import CalendarDaysIcon from "@/svgs/calendar-days.svg";
-import ChevronDownIcon from "@/svgs/chevron-down.svg";
 import CursorArrowRaysIcon from "@/svgs/cursor-arrow-rays.svg";
 import DownloadIcon from "@/svgs/download.svg";
 import GraphIcon from "@/svgs/graph.svg";
-import PauseIcon from "@/svgs/pause.svg";
-import PlayIcon from "@/svgs/play.svg";
 import QuestionMarkIcon from "@/svgs/question-mark.svg";
 import { DatasetLayersDataItem, MetadataItemComponent } from "@/types/generated/strapi.schemas";
-import { LayerParamsConfig } from "@/types/layer";
 
+import DateControls from "./date-controls";
 import {
+  getDefaultDate,
   getDefaultReturnPeriod,
   getDefaultSelectedLayerId,
   getReturnPeriods,
-  getDefaultDate,
 } from "./utils";
 
 interface DatasetCardProps {
@@ -87,10 +79,6 @@ const DatasetCard = ({
   const [selectedLayerId, setSelectedLayerId] = useState(defaultSelectedLayerId);
   const [selectedReturnPeriod, setSelectedReturnPeriod] = useState(defaultSelectedReturnPeriod);
   const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
-  const [isAnimated, setIsAnimated] = useState(false);
-  const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  // Date that was selected before the animation is played
-  const dateBeforeAnimationRef = useRef<string | null>(null);
 
   const [{ selectedFeature }, { setHoveredFeature, setSelectedFeature }] =
     useLayerInteractionState(selectedLayerId);
@@ -104,15 +92,6 @@ const DatasetCard = ({
     () => selectedLayer?.attributes!.show_chart_on_interaction ?? false,
     [selectedLayer],
   );
-
-  const dateRange = useMemo(() => {
-    if (!selectedLayer) {
-      return undefined;
-    }
-
-    const paramsConfig = selectedLayer.attributes!.params_config! as LayerParamsConfig;
-    return paramsConfig.find(({ key }) => key === "date-range")?.default as [string, string];
-  }, [selectedLayer]);
 
   const isDatasetActive = useMemo(() => {
     if (selectedLayerId === undefined) {
@@ -139,18 +118,6 @@ const DatasetCard = ({
     location.code.slice(-1),
   );
 
-  const onToggleAnimation = useCallback(() => {
-    const newIsAnimated = !isAnimated;
-
-    if (newIsAnimated) {
-      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
-    } else {
-      dateBeforeAnimationRef.current = null;
-    }
-
-    setIsAnimated(newIsAnimated);
-  }, [selectedDate, isAnimated, setIsAnimated]);
-
   const onToggleDataset = useCallback(
     (active: boolean) => {
       if (selectedLayerId === undefined) {
@@ -161,9 +128,6 @@ const DatasetCard = ({
         removeLayer(selectedLayerId);
         setHoveredFeature(null);
         setSelectedFeature(null);
-        if (isAnimated) {
-          onToggleAnimation();
-        }
       } else {
         addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod, date: selectedDate });
       }
@@ -174,8 +138,6 @@ const DatasetCard = ({
       removeLayer,
       selectedReturnPeriod,
       selectedDate,
-      isAnimated,
-      onToggleAnimation,
       setHoveredFeature,
       setSelectedFeature,
     ],
@@ -238,21 +200,6 @@ const DatasetCard = ({
       layers,
       layersConfiguration,
     ],
-  );
-
-  const onChangeSelectedDate = useCallback(
-    (date: string) => {
-      const returnPeriod = getDefaultReturnPeriod(selectedLayerId, layers, layersConfiguration);
-
-      setSelectedDate(date);
-
-      if (isDatasetActive && selectedLayerId !== undefined) {
-        updateLayer(selectedLayerId, { date });
-      } else if (selectedLayerId !== undefined) {
-        addLayer(selectedLayerId, { ["return-period"]: returnPeriod, date });
-      }
-    },
-    [selectedLayerId, isDatasetActive, addLayer, updateLayer, layers, layersConfiguration],
   );
 
   const onClickSaveChartData = useCallback(() => {
@@ -321,28 +268,15 @@ const DatasetCard = ({
     metadata,
   ]);
 
-  // When the layer is animated, show each month of the year in a loop
-  useEffect(() => {
-    if (isAnimated && selectedDate !== undefined && selectedLayerId !== undefined) {
-      animationIntervalRef.current = setInterval(() => {
-        const date = format(
-          new Date(selectedDate).setMonth((getMonth(selectedDate) + 1) % 12),
-          "yyyy-MM-dd",
-        );
-
-        setSelectedDate(date);
+  const onChangeDate = useCallback(
+    (date: string) => {
+      setSelectedDate(date);
+      if (selectedLayerId !== undefined) {
         updateLayer(selectedLayerId, { date });
-      }, 500);
-    } else if (animationIntervalRef.current !== null) {
-      clearInterval(animationIntervalRef.current);
-    }
-
-    return () => {
-      if (animationIntervalRef.current !== null) {
-        clearInterval(animationIntervalRef.current);
       }
-    };
-  }, [selectedLayerId, selectedDate, isAnimated, setSelectedDate, updateLayer]);
+    },
+    [updateLayer, selectedLayerId, setSelectedDate],
+  );
 
   return (
     <div className="p-4 border-image-[url(/assets/images/border-image.svg)] border-slice-10 border-image-width-2.5 border-outset-[5px] border-repeat-round">
@@ -496,61 +430,8 @@ const DatasetCard = ({
             <InteractionChart data={interactionChartData} loading={interactionChartIsLoading} />
           </div>
         )}
-        {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
-          <div className="mt-1 flex items-center justify-between gap-4">
-            <Button
-              type="button"
-              variant="ghost"
-              size="auto"
-              className="hidden h-6 w-6 rounded-full border border-rhino-blue-950 hover:border-rhino-blue-800 hover:text-rhino-blue-800 lg:inline-flex"
-              aria-pressed={isAnimated}
-              onClick={onToggleAnimation}
-            >
-              <span className="sr-only">Play layer animation</span>
-              {!isAnimated && <PlayIcon className="!size-4 transition-colors" aria-hidden />}
-              {isAnimated && <PauseIcon className="!size-4 transition-colors" aria-hidden />}
-            </Button>
-            <div className="flex w-full items-center gap-2 lg:w-auto">
-              <Label
-                htmlFor={`dataset-${id}-date`}
-                className={cn({
-                  "shrink-0 text-xs font-medium": true,
-                  "pointer-events-none opacity-60": isAnimated,
-                })}
-              >
-                Displayed on map
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    id={`dataset-${id}-date`}
-                    type="button"
-                    variant="yellow"
-                    className="group/month-picker max-w-[220px] flex-grow justify-between px-3 disabled:bg-rhino-blue-50 disabled:text-rhino-blue-950/60 disabled:opacity-100 lg:flex-grow-0 xl:h-auto xl:py-1.5"
-                    disabled={isAnimated}
-                  >
-                    <CalendarDaysIcon aria-hidden />
-                    {format(
-                      isAnimated ? dateBeforeAnimationRef.current! : selectedDate,
-                      "MMMM, yyyy",
-                    )}
-                    <ChevronDownIcon
-                      className="ml-auto group-data-[state=open]/month-picker:rotate-180"
-                      aria-hidden
-                    />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent side="bottom" align="end" sideOffset={2} className="w-[220px]">
-                  <MonthPicker
-                    selected={isAnimated ? dateBeforeAnimationRef.current! : selectedDate}
-                    minDate={dateRange[0]}
-                    maxDate={dateRange[1]}
-                    onSelect={onChangeSelectedDate}
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-          </div>
+        {isDatasetActive && selectedLayer !== undefined && selectedDate !== undefined && (
+          <DateControls layer={selectedLayer} date={selectedDate} onChangeDate={onChangeDate} />
         )}
       </div>
     </div>
