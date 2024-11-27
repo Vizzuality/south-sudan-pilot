@@ -25,6 +25,7 @@ import useYearChartData from "@/hooks/use-year-chart-data";
 import CursorArrowRaysIcon from "@/svgs/cursor-arrow-rays.svg";
 import { DatasetLayersDataItem, MetadataItemComponent } from "@/types/generated/strapi.schemas";
 
+import ChartSentence from "./chart-sentence";
 import DateControls from "./date-controls";
 import DownloadChartButton from "./download-chart-button";
 import DownloadLayerButton from "./download-layer-button";
@@ -194,6 +195,16 @@ const DatasetCard = ({
     return `${name}${!showChartOnInteraction ? ` - ${locationData![0].name}` : ""}.json`;
   }, [isChartDownloadDisabled, locationData, name, showChartOnInteraction]);
 
+  const isInteractionChartVisible = useMemo(
+    () => showChartOnInteraction && selectedLayer !== undefined && !!selectedFeature,
+    [selectedFeature, selectedLayer, showChartOnInteraction],
+  );
+
+  const isYearChartVisible = useMemo(
+    () => selectedDate !== undefined && selectedLayerId !== undefined,
+    [selectedDate, selectedLayerId],
+  );
+
   const onToggleDataset = useCallback(
     (active: boolean) => {
       if (selectedLayerId === undefined) {
@@ -361,21 +372,32 @@ const DatasetCard = ({
             Select a point on the map for details.
           </div>
         )}
-        {showChartOnInteraction && selectedLayer !== undefined && !!selectedFeature && (
+        {isInteractionChartVisible && (
           <div className="mt-3">
             <InteractionChart data={interactionChartData} loading={interactionChartIsLoading} />
           </div>
         )}
-        {selectedDate !== undefined && selectedLayerId !== undefined && (
+        {isYearChartVisible && (
           <div className="mt-3">
             <YearChart
               data={yearChartData}
-              date={selectedDate}
+              date={selectedDate!}
               loading={yearChartIsLoading}
               active={isDatasetActive}
             />
           </div>
         )}
+        {isDatasetActive &&
+          (isInteractionChartVisible || isYearChartVisible) &&
+          selectedLayer !== undefined &&
+          !!selectedLayer.attributes!.chart_sentence && (
+            <div className="mt-0.5">
+              <ChartSentence
+                sentence={selectedLayer.attributes!.chart_sentence}
+                feature={selectedFeature}
+              />
+            </div>
+          )}
         {isDatasetActive && selectedLayer !== undefined && selectedDate !== undefined && (
           <DateControls layer={selectedLayer} date={selectedDate} onChangeDate={onChangeDate} />
         )}

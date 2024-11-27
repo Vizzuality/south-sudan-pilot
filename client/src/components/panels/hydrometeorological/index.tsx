@@ -9,7 +9,7 @@ import HydrometeorologicalImage from "../../../../public/assets/images/hydromete
 const HydrometeorologicalPanel = () => {
   const { data, isLoading } = useDatasetsBySubTopic(
     "hydrometeorological",
-    ["name", "params_config", "download_link", "show_chart_on_interaction"],
+    ["name", "params_config", "download_link", "show_chart_on_interaction", "chart_sentence"],
     true,
   );
 
