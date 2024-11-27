@@ -100,6 +100,11 @@ const DatasetCard = ({
     [layers, selectedLayerId],
   );
 
+  const showChartOnInteraction = useMemo(
+    () => selectedLayer?.attributes!.show_chart_on_interaction ?? false,
+    [selectedLayer],
+  );
+
   const dateRange = useMemo(() => {
     if (!selectedLayer) {
       return undefined;
@@ -127,7 +132,7 @@ const DatasetCard = ({
     selectedDate,
   );
 
-  const { data: interactionChartData, isLoading: interacionChartIsLoading } =
+  const { data: interactionChartData, isLoading: interactionChartIsLoading } =
     useInteractionChartData(selectedLayer, selectedFeature);
 
   const { data: locationData, isLoading: locationIsLoading } = useLocationByCodes(
@@ -251,13 +256,20 @@ const DatasetCard = ({
   );
 
   const onClickSaveChartData = useCallback(() => {
-    if (
-      yearChartIsLoading ||
-      !yearChartData ||
-      locationIsLoading ||
-      !locationData?.length ||
-      !selectedDate
-    ) {
+    const canDownload =
+      (showChartOnInteraction &&
+        !interactionChartIsLoading &&
+        !!interactionChartData &&
+        !!selectedFeature) ||
+      (!showChartOnInteraction &&
+        !yearChartIsLoading &&
+        !!yearChartData &&
+        !locationIsLoading &&
+        !!locationData &&
+        locationData.length > 0 &&
+        !!selectedDate);
+
+    if (!canDownload) {
       return;
     }
 
@@ -273,15 +285,25 @@ const DatasetCard = ({
           [camelCase(key)]: value,
         };
       }, {}),
-      year: getYear(selectedDate),
-      location: locationData[0].name,
-      ...yearChartData,
+      ...(!showChartOnInteraction
+        ? {
+            year: getYear(selectedDate!),
+            location: locationData![0].name,
+            ...yearChartData,
+          }
+        : {}),
+      ...(showChartOnInteraction
+        ? {
+            feature: selectedFeature,
+            ...interactionChartData,
+          }
+        : {}),
     };
 
     const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
 
     const link = document.createElement("a");
-    link.download = `${name} - ${locationData[0].name}.json`;
+    link.download = `${name}${!showChartOnInteraction ? ` - ${locationData![0].name}` : ""}.json`;
     link.href = URL.createObjectURL(blob);
     link.click();
     link.remove();
@@ -291,6 +313,10 @@ const DatasetCard = ({
     locationIsLoading,
     locationData,
     selectedDate,
+    interactionChartIsLoading,
+    interactionChartData,
+    showChartOnInteraction,
+    selectedFeature,
     name,
     metadata,
   ]);
@@ -325,7 +351,10 @@ const DatasetCard = ({
           {name}
         </Label>
         <div className="flex items-center gap-1 pt-1.5">
-          {selectedDate !== undefined && selectedLayerId !== undefined && (
+          {((showChartOnInteraction && selectedFeature) ||
+            (!showChartOnInteraction &&
+              selectedDate !== undefined &&
+              selectedLayerId !== undefined)) && (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -334,7 +363,13 @@ const DatasetCard = ({
                     size="icon-sm"
                     className="group/chart"
                     disabled={
-                      yearChartIsLoading || !yearChartData || locationIsLoading || !locationData
+                      (showChartOnInteraction &&
+                        (interactionChartIsLoading || !interactionChartData)) ||
+                      (!showChartOnInteraction &&
+                        (yearChartIsLoading ||
+                          !yearChartData ||
+                          locationIsLoading ||
+                          !locationData))
                     }
                     onClick={onClickSaveChartData}
                   >
@@ -440,14 +475,12 @@ const DatasetCard = ({
             </SelectContent>
           </Select>
         )}
-        {isDatasetActive &&
-          selectedLayer !== undefined &&
-          !!selectedLayer.attributes!.show_chart_on_interaction && (
-            <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
-              <CursorArrowRaysIcon className="size-4" aria-hidden />
-              Select a point on the map for details.
-            </div>
-          )}
+        {isDatasetActive && selectedLayer !== undefined && !!showChartOnInteraction && (
+          <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
+            <CursorArrowRaysIcon className="size-4" aria-hidden />
+            Select a point on the map for details.
+          </div>
+        )}
         {selectedDate !== undefined && selectedLayerId !== undefined && (
           <div className="mt-3">
             <YearChart
@@ -458,13 +491,11 @@ const DatasetCard = ({
             />
           </div>
         )}
-        {selectedLayer !== undefined &&
-          !!selectedLayer.attributes!.show_chart_on_interaction &&
-          !!selectedFeature && (
-            <div className="mt-3">
-              <InteractionChart data={interactionChartData} loading={interacionChartIsLoading} />
-            </div>
-          )}
+        {selectedLayer !== undefined && !!showChartOnInteraction && !!selectedFeature && (
+          <div className="mt-3">
+            <InteractionChart data={interactionChartData} loading={interactionChartIsLoading} />
+          </div>
+        )}
         {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
           <div className="mt-1 flex items-center justify-between gap-4">
             <Button
