@@ -1,6 +1,5 @@
 import { getMonth } from "date-fns";
 import { format } from "date-fns/format";
-import * as React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";

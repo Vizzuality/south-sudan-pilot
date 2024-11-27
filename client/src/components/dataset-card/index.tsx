@@ -2,14 +2,10 @@
 
 import { getYear } from "date-fns";
 import { camelCase } from "lodash-es";
-import Link from "next/link";
 import * as React from "react";
 import { useCallback, useMemo, useState } from "react";
 
-import DatasetMetadata from "@/components/dataset-metadata";
 import InteractionChart from "@/components/interaction-chart";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -19,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import YearChart from "@/components/year-chart";
 import useInteractionChartData from "@/hooks/use-interaction-chart-data";
 import useLayerInteractionState from "@/hooks/use-layer-interaction-state";
@@ -28,12 +23,12 @@ import { useLocationByCodes } from "@/hooks/use-location-by-codes";
 import useMapLayers from "@/hooks/use-map-layers";
 import useYearChartData from "@/hooks/use-year-chart-data";
 import CursorArrowRaysIcon from "@/svgs/cursor-arrow-rays.svg";
-import DownloadIcon from "@/svgs/download.svg";
-import GraphIcon from "@/svgs/graph.svg";
-import QuestionMarkIcon from "@/svgs/question-mark.svg";
 import { DatasetLayersDataItem, MetadataItemComponent } from "@/types/generated/strapi.schemas";
 
 import DateControls from "./date-controls";
+import DownloadChartButton from "./download-chart-button";
+import DownloadLayerButton from "./download-layer-button";
+import MetadataButton from "./metadata-button";
 import {
   getDefaultDate,
   getDefaultReturnPeriod,
@@ -117,6 +112,87 @@ const DatasetCard = ({
   const { data: locationData, isLoading: locationIsLoading } = useLocationByCodes(
     location.code.slice(-1),
   );
+
+  const isChartDownloadVisible = useMemo(() => {
+    return (
+      (showChartOnInteraction && selectedFeature) ||
+      (!showChartOnInteraction && selectedDate !== undefined && selectedLayerId !== undefined)
+    );
+  }, [selectedDate, selectedFeature, selectedLayerId, showChartOnInteraction]);
+
+  const isChartDownloadDisabled = useMemo(() => {
+    const isInteractionChartDownloadDisabled =
+      showChartOnInteraction && (interactionChartIsLoading || !interactionChartData);
+
+    const isYearChartDownloadDisabled =
+      !showChartOnInteraction &&
+      (yearChartIsLoading ||
+        !yearChartData ||
+        locationIsLoading ||
+        !locationData ||
+        locationData.length === 0);
+
+    return isInteractionChartDownloadDisabled || isYearChartDownloadDisabled;
+  }, [
+    interactionChartData,
+    interactionChartIsLoading,
+    locationData,
+    locationIsLoading,
+    showChartOnInteraction,
+    yearChartData,
+    yearChartIsLoading,
+  ]);
+
+  const downloadableChartData = useMemo(() => {
+    if (isChartDownloadDisabled) {
+      return;
+    }
+
+    return {
+      dataset: name,
+      datasetMetadata: Object.entries(metadata ?? {}).reduce((res, [key, value]) => {
+        if (key === "id") {
+          return res;
+        }
+
+        return {
+          ...res,
+          [camelCase(key)]: value,
+        };
+      }, {}),
+      ...(!showChartOnInteraction
+        ? {
+            year: getYear(selectedDate!),
+            location: locationData![0].name,
+            ...yearChartData,
+          }
+        : {}),
+      ...(showChartOnInteraction
+        ? {
+            feature: selectedFeature,
+            ...interactionChartData,
+          }
+        : {}),
+    };
+  }, [
+    interactionChartData,
+    isChartDownloadDisabled,
+    locationData,
+    metadata,
+    name,
+    selectedDate,
+    selectedFeature,
+    showChartOnInteraction,
+    yearChartData,
+  ]);
+
+  const downloadableChartDataFileName = useMemo(() => {
+    if (isChartDownloadDisabled) {
+      return "";
+    }
+
+    return `${name}${!showChartOnInteraction ? ` - ${locationData![0].name}` : ""}.json`;
+  }, [isChartDownloadDisabled, locationData, name, showChartOnInteraction]);
 
   const onToggleDataset = useCallback(
     (active: boolean) => {
@@ -202,72 +278,6 @@ const DatasetCard = ({
     ],
   );
 
-  const onClickSaveChartData = useCallback(() => {
-    const canDownload =
-      (showChartOnInteraction &&
-        !interactionChartIsLoading &&
-        !!interactionChartData &&
-        !!selectedFeature) ||
-      (!showChartOnInteraction &&
-        !yearChartIsLoading &&
-        !!yearChartData &&
-        !locationIsLoading &&
-        !!locationData &&
-        locationData.length > 0 &&
-        !!selectedDate);
-
-    if (!canDownload) {
-      return;
-    }
-
-    const data = {
-      dataset: name,
-      datasetMetadata: Object.entries(metadata ?? {}).reduce((res, [key, value]) => {
-        if (key === "id") {
-          return res;
-        }
-
-        return {
-          ...res,
-          [camelCase(key)]: value,
-        };
-      }, {}),
-      ...(!showChartOnInteraction
-        ? {
-            year: getYear(selectedDate!),
-            location: locationData![0].name,
-            ...yearChartData,
-          }
-        : {}),
-      ...(showChartOnInteraction
-        ? {
-            feature: selectedFeature,
-            ...interactionChartData,
-          }
-        : {}),
-    };
-
-    const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-
-    const link = document.createElement("a");
-    link.download = `${name}${!showChartOnInteraction ? ` - ${locationData![0].name}` : ""}.json`;
-    link.href = URL.createObjectURL(blob);
-    link.click();
-    link.remove();
-  }, [
-    yearChartIsLoading,
-    yearChartData,
-    locationIsLoading,
-    locationData,
-    selectedDate,
-    interactionChartIsLoading,
-    interactionChartData,
-    showChartOnInteraction,
-    selectedFeature,
-    name,
-    metadata,
-  ]);
-
   const onChangeDate = useCallback(
     (date: string) => {
       setSelectedDate(date);
@@ -285,84 +295,20 @@ const DatasetCard = ({
           {name}
         </Label>
         <div className="flex items-center gap-1 pt-1.5">
-          {((showChartOnInteraction && selectedFeature) ||
-            (!showChartOnInteraction &&
-              selectedDate !== undefined &&
-              selectedLayerId !== undefined)) && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    className="group/chart"
-                    disabled={
-                      (showChartOnInteraction &&
-                        (interactionChartIsLoading || !interactionChartData)) ||
-                      (!showChartOnInteraction &&
-                        (yearChartIsLoading ||
-                          !yearChartData ||
-                          locationIsLoading ||
-                          !locationData))
-                    }
-                    onClick={onClickSaveChartData}
-                  >
-                    <span className="sr-only">Save chart data</span>
-                    <GraphIcon
-                      className="!size-4 transition-colors group-hover/chart:text-casper-blue-300"
-                      aria-hidden
-                    />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Save chart data</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          {isChartDownloadVisible && (
+            <DownloadChartButton
+              data={downloadableChartData}
+              fileName={downloadableChartDataFileName}
+              disabled={isChartDownloadDisabled}
+            />
           )}
-          {!!selectedLayer?.attributes!.download_link && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon-sm" className="group/download" asChild>
-                    <Link
-                      href={selectedLayer?.attributes!.download_link ?? ""}
-                      rel="noopener noreferrer"
-                      download={selectedLayer?.attributes!.name}
-                    >
-                      <span className="sr-only">Download</span>
-                      <DownloadIcon
-                        className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
-                        aria-hidden
-                      />
-                    </Link>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Download dataset</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          {selectedLayer !== undefined && !!selectedLayer.attributes!.download_link && (
+            <DownloadLayerButton
+              link={selectedLayer.attributes!.download_link}
+              fileName={selectedLayer.attributes!.name!}
+            />
           )}
-          {!!metadata && (
-            <Dialog>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <DialogTrigger asChild>
-                      <Button variant="ghost" size="icon-sm" className="group/info">
-                        <span className="sr-only">Information</span>
-                        <QuestionMarkIcon
-                          className="!size-4 transition-colors group-hover/info:text-casper-blue-300"
-                          aria-hidden
-                        />
-                      </Button>
-                    </DialogTrigger>
-                  </TooltipTrigger>
-                  <TooltipContent>More info</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <DialogContent>
-                <DatasetMetadata name={name} metadata={metadata} />
-              </DialogContent>
-            </Dialog>
-          )}
+          {!!metadata && <MetadataButton datasetName={name} metadata={metadata} />}
           {(!!selectedLayer?.attributes!.download_link || !!metadata) && (
             <div className="mx-0.5 h-5 w-px bg-casper-blue-400" />
           )}
@@ -409,10 +355,15 @@ const DatasetCard = ({
             </SelectContent>
           </Select>
         )}
-        {isDatasetActive && selectedLayer !== undefined && !!showChartOnInteraction && (
+        {isDatasetActive && showChartOnInteraction && selectedLayer !== undefined && (
           <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
             <CursorArrowRaysIcon className="size-4" aria-hidden />
             Select a point on the map for details.
+          </div>
+        )}
+        {showChartOnInteraction && selectedLayer !== undefined && !!selectedFeature && (
+          <div className="mt-3">
+            <InteractionChart data={interactionChartData} loading={interactionChartIsLoading} />
           </div>
         )}
         {selectedDate !== undefined && selectedLayerId !== undefined && (
@@ -423,11 +374,6 @@ const DatasetCard = ({
               loading={yearChartIsLoading}
               active={isDatasetActive}
             />
-          </div>
-        )}
-        {selectedLayer !== undefined && !!showChartOnInteraction && !!selectedFeature && (
-          <div className="mt-3">
-            <InteractionChart data={interactionChartData} loading={interactionChartIsLoading} />
           </div>
         )}
         {isDatasetActive && selectedLayer !== undefined && selectedDate !== undefined && (
