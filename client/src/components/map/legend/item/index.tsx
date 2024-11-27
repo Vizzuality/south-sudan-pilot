@@ -131,11 +131,9 @@ const LegendItem = ({ id, settings, sortableAttributes, sortableListeners }: Leg
             </div>
           </div>
         )}
-        {!isLoading &&
-          data.topicSlug !== "contextual" &&
-          data.topicSlug !== "hydrometeorological" && (
-            <div className="mt-1 text-xs">{data.name}</div>
-          )}
+        {!isLoading && data.topicSlug !== "contextual" && data.datasetLayersCount > 1 && (
+          <div className="mt-1 text-xs">{data.name}</div>
+        )}
         <div className="mt-1">
           {isLoading && (
             <>

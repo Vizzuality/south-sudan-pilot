@@ -800,9 +800,8 @@ export interface ApiChartDataChartData extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    location_code: Attribute.String & Attribute.Required;
+    location_code: Attribute.String;
     year: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetMinMax<
         {
           min: 0;
@@ -816,6 +815,7 @@ export interface ApiChartDataChartData extends Schema.CollectionType {
       'manyToOne',
       'api::layer.layer'
     >;
+    unique_identifier: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -919,6 +919,8 @@ export interface ApiLayerLayer extends Schema.CollectionType {
       'api::chart-data.chart-data'
     >;
     chart_unit: Attribute.String;
+    show_chart_on_interaction: Attribute.Boolean & Attribute.DefaultTo<false>;
+    chart_sentence: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

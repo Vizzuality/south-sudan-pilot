@@ -1,7 +1,6 @@
 import { Jost, DM_Serif_Text } from "next/font/google";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-import ReactQueryProvider from "@/app/react-query-provider";
+import Providers from "@/app/providers";
 import Head from "@/components/head";
 
 import type { Metadata } from "next";
@@ -38,9 +37,7 @@ export default function RootLayout({
     <html lang="en" className={`${jost.variable} ${dmSerifText.variable}`}>
       <Head />
       <body>
-        <ReactQueryProvider>
-          <NuqsAdapter>{children}</NuqsAdapter>
-        </ReactQueryProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

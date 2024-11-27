@@ -25,6 +25,7 @@ const config: Config = {
         "300": "#b6cbda",
         "400": "#a4bdd0",
         "500": "#7999b8",
+        "800": "#4E5F7F",
         "950": "#2b3340",
       },
       "rhino-blue": {
@@ -41,6 +42,7 @@ const config: Config = {
       "supernova-yellow": {
         "300": "#ffe043",
         "400": "#ffcc15",
+        "600": "#CE8800",
       },
     },
     extend: {

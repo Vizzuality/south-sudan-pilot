@@ -1,5 +1,6 @@
+import { GetPickingInfoParams } from "@deck.gl/core";
 import { MaskExtension } from "@deck.gl/extensions";
-import { MVTLayer, MVTLayerProps } from "@deck.gl/geo-layers";
+import { MVTLayer, MVTLayerPickingInfo, MVTLayerProps } from "@deck.gl/geo-layers";
 import { ScatterplotLayer } from "@deck.gl/layers";
 import { BinaryFeatureCollection } from "@loaders.gl/schema";
 import { useContext, useEffect } from "react";
@@ -7,17 +8,24 @@ import { VectorSourceRaw as IVectorTileSource } from "react-map-gl";
 
 import { env } from "@/env";
 import useMapZoom from "@/hooks/use-map-zoom";
-import { LayerConfig } from "@/types/layer";
-import { convertBinaryToPointGeoJSON, resolveDeckglProperties } from "@/utils/mapbox-deckgl-bridge";
+import { LayerConfig, LayerInteractionState } from "@/types/layer";
+import {
+  convertBinaryToPointGeoJSON,
+  resolveDeckglProperties,
+  resolveInteractive,
+} from "@/utils/mapbox-deckgl-bridge";
 
 import { DeckGLMapboxOverlayContext } from "../deckgl-mapbox-provider";
 
 interface VectorLayerProps {
   config: LayerConfig;
   beforeId: string;
+  interactive: boolean;
+  onHover: (properties: LayerInteractionState["hoveredFeature"]) => void;
+  onClick: (properties: LayerInteractionState["selectedFeature"]) => void;
 }
 
-const VectorLayer = ({ config, beforeId }: VectorLayerProps) => {
+const VectorLayer = ({ config, beforeId, interactive, onHover, onClick }: VectorLayerProps) => {
   const { addLayer, removeLayer } = useContext(DeckGLMapboxOverlayContext);
   const zoom = useMapZoom();
 
@@ -51,6 +59,23 @@ const VectorLayer = ({ config, beforeId }: VectorLayerProps) => {
         ...resolveDeckglProperties(style, zoom),
         extensions: [new MaskExtension()],
         maskId: "mask",
+        pickable: interactive,
+        onHover: ({ picked, object }) => {
+          if (picked) {
+            onHover(object.properties);
+          } else {
+            onHover(null);
+          }
+        },
+        onClick: ({ picked, object }) => {
+          const isFeatureInteractive = resolveInteractive(style, zoom, object);
+
+          if (picked && isFeatureInteractive) {
+            onClick(object.properties);
+          } else {
+            onClick(null);
+          }
+        },
       };
 
       // Here's an edge case: when the vector layer contains polygons and lines, Mapbox allows
@@ -77,7 +102,20 @@ const VectorLayer = ({ config, beforeId }: VectorLayerProps) => {
         };
       }
 
-      layers.push(new MVTLayer(layerProps));
+      // We extend the MVTLayer class to make sure that when interacting with the layer, we pick
+      // the correct feature information, which is decoded binary data (i.e. GeoJSON properties) for
+      // the circle layers
+      class MVTJSONLayer extends MVTLayer {
+        getPickingInfo(params: GetPickingInfoParams) {
+          if (style.type === "circle") {
+            return params.info as MVTLayerPickingInfo<unknown>;
+          }
+
+          return super.getPickingInfo(params);
+        }
+      }
+
+      layers.push(new MVTJSONLayer(layerProps));
     });
 
     layers.map((layer) => {
@@ -89,7 +127,7 @@ const VectorLayer = ({ config, beforeId }: VectorLayerProps) => {
         removeLayer(layer.id);
       });
     };
-  }, [config, beforeId, addLayer, removeLayer, zoom]);
+  }, [config, beforeId, addLayer, removeLayer, zoom, interactive, onHover, onClick]);
 
   return null;
 };

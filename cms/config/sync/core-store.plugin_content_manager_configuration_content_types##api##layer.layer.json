@@ -147,6 +147,34 @@
           "sortable": true
         }
       },
+      "show_chart_on_interaction": {
+        "edit": {
+          "label": "show_chart_on_interaction",
+          "description": "Whether the chart should only be shown once the user has interacted with the layer",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "show_chart_on_interaction",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "chart_sentence": {
+        "edit": {
+          "label": "chart_sentence",
+          "description": "Sentence displayed below the chart. If show_chart_on_interaction is true, the selected feature's attributes can be accessed as follows: {name_of_attribute}.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "chart_sentence",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -207,12 +235,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "dataset",
-        "type",
-        "name"
-      ],
       "edit": [
         [
           {
@@ -263,7 +285,25 @@
             "name": "chart_unit",
             "size": 6
           }
+        ],
+        [
+          {
+            "name": "show_chart_on_interaction",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "chart_sentence",
+            "size": 12
+          }
         ]
+      ],
+      "list": [
+        "id",
+        "dataset",
+        "type",
+        "name"
       ]
     },
     "uid": "api::layer.layer"

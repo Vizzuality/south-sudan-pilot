@@ -3,6 +3,7 @@ import { binaryToGeojson } from "@loaders.gl/gis";
 import { BinaryFeatureCollection } from "@loaders.gl/schema";
 import { featureCollection, point } from "@turf/helpers";
 import { coordAll } from "@turf/meta";
+import { GeoJsonProperties } from "geojson";
 import { DataDrivenPropertyValueSpecification } from "mapbox-gl";
 import {
   expression as mapboxExpression,
@@ -235,6 +236,41 @@ const resolveIconSizeScale = (
   return resolvedValue;
 };
 
+export const resolveInteractive = (
+  style: LayerConfig["styles"][0],
+  zoom: number,
+  feature: GeoJsonProperties,
+  defaultValue = false,
+) => {
+  let value: DataDrivenPropertyValueSpecification<boolean> | undefined;
+
+  if (
+    style.type === "fill" ||
+    style.type === "circle" ||
+    style.type === "line" ||
+    style.type === "symbol"
+  ) {
+    // NOTE: this property is custom, that's why we need to disable the error
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    value = style.layout?.["interactive"];
+  } else {
+    return undefined;
+  }
+
+  if (value === undefined) {
+    return defaultValue;
+  }
+
+  const resolvedValue = resolveMapboxExpression(value, zoom, feature, "boolean");
+
+  if (resolvedValue === null || resolvedValue === undefined) {
+    return defaultValue;
+  }
+
+  return resolvedValue;
+};
+
 export const resolveDeckglProperties = (style: LayerConfig["styles"][0], zoom: number) => {
   const resolvedProperties = {
     visible: resolveVisible(style),
@@ -266,16 +302,23 @@ export const resolveDeckglProperties = (style: LayerConfig["styles"][0], zoom: n
     resolvedProperties.stroked = false;
   }
 
-  return Object.entries(resolvedProperties).reduce((res, [key, value]) => {
-    if (value === undefined) {
-      return res;
-    }
+  return Object.entries(resolvedProperties).reduce(
+    (res, [key, value]) => {
+      if (value === undefined) {
+        return res;
+      }
 
-    return {
-      ...res,
-      [key]: value,
-    };
-  }, {}) as Partial<typeof resolvedProperties>;
+      return {
+        ...res,
+        [key]: value,
+        updateTriggers: {
+          ...res["updateTriggers"],
+          [key]: [style],
+        },
+      };
+    },
+    { updateTriggers: {} },
+  ) as Partial<typeof resolvedProperties>;
 };
 
 export const convertBinaryToPointGeoJSON = (data: BinaryFeatureCollection) => {

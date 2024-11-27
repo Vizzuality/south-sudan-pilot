@@ -13,7 +13,8 @@
           "year",
           "x_values",
           "y_values",
-          "layer"
+          "layer",
+          "unique_identifier"
         ]
       },
       "conditions": []
@@ -35,7 +36,8 @@
           "year",
           "x_values",
           "y_values",
-          "layer"
+          "layer",
+          "unique_identifier"
         ]
       },
       "conditions": []
@@ -50,7 +52,8 @@
           "year",
           "x_values",
           "y_values",
-          "layer"
+          "layer",
+          "unique_identifier"
         ]
       },
       "conditions": []
@@ -160,7 +163,9 @@
           "dataset",
           "download_link",
           "chart_data",
-          "chart_unit"
+          "chart_unit",
+          "show_chart_on_interaction",
+          "chart_sentence"
         ]
       },
       "conditions": []
@@ -192,7 +197,9 @@
           "dataset",
           "download_link",
           "chart_data",
-          "chart_unit"
+          "chart_unit",
+          "show_chart_on_interaction",
+          "chart_sentence"
         ]
       },
       "conditions": []
@@ -217,7 +224,9 @@
           "dataset",
           "download_link",
           "chart_data",
-          "chart_unit"
+          "chart_unit",
+          "show_chart_on_interaction",
+          "chart_sentence"
         ]
       },
       "conditions": []

@@ -1,5 +1,24 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface MetadataItem extends Schema.Component {
+  collectionName: 'components_metadata_item';
+  info: {
+    displayName: 'Item';
+    description: '';
+  };
+  attributes: {
+    source: Attribute.String;
+    website: Attribute.String;
+    description: Attribute.Text;
+    main_applications: Attribute.RichText;
+    temporal_coverage: Attribute.RichText;
+    spatial_resolution: Attribute.String;
+    units: Attribute.String;
+    full_name: Attribute.String & Attribute.Required;
+    temporal_resolution: Attribute.RichText;
+  };
+}
+
 export interface LegendLegendConfig extends Schema.Component {
   collectionName: 'components_legend_legend_configs';
   info: {
@@ -35,31 +54,12 @@ export interface LegendItems extends Schema.Component {
   };
 }
 
-export interface MetadataItem extends Schema.Component {
-  collectionName: 'components_metadata_item';
-  info: {
-    displayName: 'Item';
-    description: '';
-  };
-  attributes: {
-    source: Attribute.String;
-    website: Attribute.String;
-    description: Attribute.Text;
-    main_applications: Attribute.RichText;
-    temporal_coverage: Attribute.RichText;
-    spatial_resolution: Attribute.String;
-    units: Attribute.String;
-    full_name: Attribute.String & Attribute.Required;
-    temporal_resolution: Attribute.RichText;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'metadata.item': MetadataItem;
       'legend.legend-config': LegendLegendConfig;
       'legend.items': LegendItems;
-      'metadata.item': MetadataItem;
     }
   }
 }

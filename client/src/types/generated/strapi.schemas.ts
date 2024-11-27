@@ -1145,6 +1145,7 @@ export const LayerType = {
 
 export interface Layer {
   chart_data?: LayerChartData;
+  chart_sentence?: string;
   chart_unit?: string;
   createdAt?: string;
   createdBy?: LayerCreatedBy;
@@ -1154,6 +1155,7 @@ export interface Layer {
   mapbox_config: unknown;
   name: string;
   params_config: unknown;
+  show_chart_on_interaction?: boolean;
   type: LayerType;
   updatedAt?: string;
   updatedBy?: LayerUpdatedBy;
@@ -1318,6 +1320,7 @@ export const LayerDatasetDataAttributesLayersDataItemAttributesType = {
 
 export type LayerDatasetDataAttributesLayersDataItemAttributes = {
   chart_data?: LayerDatasetDataAttributesLayersDataItemAttributesChartData;
+  chart_sentence?: string;
   chart_unit?: string;
   createdAt?: string;
   createdBy?: LayerDatasetDataAttributesLayersDataItemAttributesCreatedBy;
@@ -1327,6 +1330,7 @@ export type LayerDatasetDataAttributesLayersDataItemAttributes = {
   mapbox_config?: unknown;
   name?: string;
   params_config?: unknown;
+  show_chart_on_interaction?: boolean;
   type?: LayerDatasetDataAttributesLayersDataItemAttributesType;
   updatedAt?: string;
   updatedBy?: LayerDatasetDataAttributesLayersDataItemAttributesUpdatedBy;
@@ -1386,6 +1390,7 @@ export type LayerDatasetDataAttributesLayersDataItemAttributesChartDataDataItemA
   createdBy?: LayerDatasetDataAttributesLayersDataItemAttributesChartDataDataItemAttributesCreatedBy;
   layer?: LayerDatasetDataAttributesLayersDataItemAttributesChartDataDataItemAttributesLayer;
   location_code?: string;
+  unique_identifier?: string;
   updatedAt?: string;
   updatedBy?: LayerDatasetDataAttributesLayersDataItemAttributesChartDataDataItemAttributesUpdatedBy;
   x_values?: unknown;
@@ -1667,6 +1672,7 @@ export type LayerRequestDataChartDataItem = number | string;
 
 export type LayerRequestData = {
   chart_data?: LayerRequestDataChartDataItem[];
+  chart_sentence?: string;
   chart_unit?: string;
   dataset?: LayerRequestDataDataset;
   download_link?: string;
@@ -1674,6 +1680,7 @@ export type LayerRequestData = {
   mapbox_config: unknown;
   name: string;
   params_config: unknown;
+  show_chart_on_interaction?: boolean;
   type: LayerRequestDataType;
 };
 
@@ -1776,6 +1783,7 @@ export const DatasetLayersDataItemAttributesType = {
 
 export type DatasetLayersDataItemAttributes = {
   chart_data?: DatasetLayersDataItemAttributesChartData;
+  chart_sentence?: string;
   chart_unit?: string;
   createdAt?: string;
   createdBy?: DatasetLayersDataItemAttributesCreatedBy;
@@ -1785,6 +1793,7 @@ export type DatasetLayersDataItemAttributes = {
   mapbox_config?: unknown;
   name?: string;
   params_config?: unknown;
+  show_chart_on_interaction?: boolean;
   type?: DatasetLayersDataItemAttributesType;
   updatedAt?: string;
   updatedBy?: DatasetLayersDataItemAttributesUpdatedBy;
@@ -2176,6 +2185,7 @@ export type DatasetLayersDataItemAttributesChartDataDataItemAttributes = {
   createdBy?: DatasetLayersDataItemAttributesChartDataDataItemAttributesCreatedBy;
   layer?: DatasetLayersDataItemAttributesChartDataDataItemAttributesLayer;
   location_code?: string;
+  unique_identifier?: string;
   updatedAt?: string;
   updatedBy?: DatasetLayersDataItemAttributesChartDataDataItemAttributesUpdatedBy;
   x_values?: unknown;
@@ -2289,12 +2299,13 @@ export interface ChartData {
   createdAt?: string;
   createdBy?: ChartDataCreatedBy;
   layer?: ChartDataLayer;
-  location_code: string;
+  location_code?: string;
+  unique_identifier?: string;
   updatedAt?: string;
   updatedBy?: ChartDataUpdatedBy;
   x_values: unknown;
   y_values: unknown;
-  year: number;
+  year?: number;
 }
 
 export type ChartDataLayerDataAttributesUpdatedByDataAttributes = { [key: string]: unknown };
@@ -2310,6 +2321,7 @@ export type ChartDataLayerDataAttributesUpdatedBy = {
 
 export type ChartDataLayerDataAttributes = {
   chart_data?: ChartDataLayerDataAttributesChartData;
+  chart_sentence?: string;
   chart_unit?: string;
   createdAt?: string;
   createdBy?: ChartDataLayerDataAttributesCreatedBy;
@@ -2319,6 +2331,7 @@ export type ChartDataLayerDataAttributes = {
   mapbox_config?: unknown;
   name?: string;
   params_config?: unknown;
+  show_chart_on_interaction?: boolean;
   type?: ChartDataLayerDataAttributesType;
   updatedAt?: string;
   updatedBy?: ChartDataLayerDataAttributesUpdatedBy;
@@ -2692,6 +2705,7 @@ export type ChartDataLayerDataAttributesChartDataDataItemAttributes = {
   createdBy?: ChartDataLayerDataAttributesChartDataDataItemAttributesCreatedBy;
   layer?: ChartDataLayerDataAttributesChartDataDataItemAttributesLayer;
   location_code?: string;
+  unique_identifier?: string;
   updatedAt?: string;
   updatedBy?: ChartDataLayerDataAttributesChartDataDataItemAttributesUpdatedBy;
   x_values?: unknown;
@@ -2779,10 +2793,11 @@ export type ChartDataRequestDataLayer = number | string;
 
 export type ChartDataRequestData = {
   layer?: ChartDataRequestDataLayer;
-  location_code: string;
+  location_code?: string;
+  unique_identifier?: string;
   x_values: unknown;
   y_values: unknown;
-  year: number;
+  year?: number;
 };
 
 export interface ChartDataRequest {

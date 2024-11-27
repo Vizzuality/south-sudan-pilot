@@ -195,14 +195,16 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "topic",
+        "sub_topic",
+        "name"
+      ],
       "edit": [
         [
           {
             "name": "name",
-            "size": 6
-          },
-          {
-            "name": "order",
             "size": 6
           }
         ],
@@ -237,14 +239,13 @@
             "name": "metadata",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "order",
+            "size": 4
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "topic",
-        "sub_topic",
-        "name",
-        "order"
       ]
     },
     "uid": "api::dataset.dataset"

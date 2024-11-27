@@ -1,18 +1,12 @@
 "use client";
 
-import { getMonth, getYear } from "date-fns";
-import { format } from "date-fns/format";
+import { getYear } from "date-fns";
 import { camelCase } from "lodash-es";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as React from "react";
+import { useCallback, useMemo, useState } from "react";
 
-import DatasetMetadata from "@/components/dataset-metadata";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import InteractionChart from "@/components/interaction-chart";
 import { Label } from "@/components/ui/label";
-import MonthPicker from "@/components/ui/month-picker";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -21,28 +15,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import YearChart from "@/components/year-chart";
+import useInteractionChartData from "@/hooks/use-interaction-chart-data";
+import useLayerInteractionState from "@/hooks/use-layer-interaction-state";
 import useLocation from "@/hooks/use-location";
 import { useLocationByCodes } from "@/hooks/use-location-by-codes";
 import useMapLayers from "@/hooks/use-map-layers";
 import useYearChartData from "@/hooks/use-year-chart-data";
-import { cn } from "@/lib/utils";
-import CalendarDaysIcon from "@/svgs/calendar-days.svg";
-import ChevronDownIcon from "@/svgs/chevron-down.svg";
-import DownloadIcon from "@/svgs/download.svg";
-import GraphIcon from "@/svgs/graph.svg";
-import PauseIcon from "@/svgs/pause.svg";
-import PlayIcon from "@/svgs/play.svg";
-import QuestionMarkIcon from "@/svgs/question-mark.svg";
+import CursorArrowRaysIcon from "@/svgs/cursor-arrow-rays.svg";
 import { DatasetLayersDataItem, MetadataItemComponent } from "@/types/generated/strapi.schemas";
-import { LayerParamsConfig } from "@/types/layer";
 
+import ChartSentence from "./chart-sentence";
+import DateControls from "./date-controls";
+import DownloadChartButton from "./download-chart-button";
+import DownloadLayerButton from "./download-layer-button";
+import MetadataButton from "./metadata-button";
 import {
+  getDefaultDate,
   getDefaultReturnPeriod,
   getDefaultSelectedLayerId,
   getReturnPeriods,
-  getDefaultDate,
 } from "./utils";
 
 interface DatasetCardProps {
@@ -83,24 +75,19 @@ const DatasetCard = ({
   const [selectedLayerId, setSelectedLayerId] = useState(defaultSelectedLayerId);
   const [selectedReturnPeriod, setSelectedReturnPeriod] = useState(defaultSelectedReturnPeriod);
   const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
-  const [isAnimated, setIsAnimated] = useState(false);
-  const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  // Date that was selected before the animation is played
-  const dateBeforeAnimationRef = useRef<string | null>(null);
+
+  const [{ selectedFeature }, { setHoveredFeature, setSelectedFeature }] =
+    useLayerInteractionState(selectedLayerId);
 
   const selectedLayer = useMemo(
     () => layers.find(({ id }) => id === selectedLayerId),
     [layers, selectedLayerId],
   );
 
-  const dateRange = useMemo(() => {
-    if (!selectedLayer) {
-      return undefined;
-    }
-
-    const paramsConfig = selectedLayer.attributes!.params_config! as LayerParamsConfig;
-    return paramsConfig.find(({ key }) => key === "date-range")?.default as [string, string];
-  }, [selectedLayer]);
+  const showChartOnInteraction = useMemo(
+    () => selectedLayer?.attributes!.show_chart_on_interaction ?? false,
+    [selectedLayer],
+  );
 
   const isDatasetActive = useMemo(() => {
     if (selectedLayerId === undefined) {
@@ -115,26 +102,108 @@ const DatasetCard = ({
     [layers, selectedLayerId],
   );
 
-  const { data: chartData, isLoading: chartIsLoading } = useYearChartData(
+  const { data: yearChartData, isLoading: yearChartIsLoading } = useYearChartData(
     selectedLayerId,
     selectedDate,
   );
+
+  const { data: interactionChartData, isLoading: interactionChartIsLoading } =
+    useInteractionChartData(selectedLayer, selectedFeature);
 
   const { data: locationData, isLoading: locationIsLoading } = useLocationByCodes(
     location.code.slice(-1),
   );
 
-  const onToggleAnimation = useCallback(() => {
-    const newIsAnimated = !isAnimated;
+  const isChartDownloadVisible = useMemo(() => {
+    return (
+      (showChartOnInteraction && selectedFeature) ||
+      (!showChartOnInteraction && selectedDate !== undefined && selectedLayerId !== undefined)
+    );
+  }, [selectedDate, selectedFeature, selectedLayerId, showChartOnInteraction]);
 
-    if (newIsAnimated) {
-      dateBeforeAnimationRef.current = selectedDate !== undefined ? selectedDate : null;
-    } else {
-      dateBeforeAnimationRef.current = null;
+  const isChartDownloadDisabled = useMemo(() => {
+    const isInteractionChartDownloadDisabled =
+      showChartOnInteraction && (interactionChartIsLoading || !interactionChartData);
+
+    const isYearChartDownloadDisabled =
+      !showChartOnInteraction &&
+      (yearChartIsLoading ||
+        !yearChartData ||
+        locationIsLoading ||
+        !locationData ||
+        locationData.length === 0);
+
+    return isInteractionChartDownloadDisabled || isYearChartDownloadDisabled;
+  }, [
+    interactionChartData,
+    interactionChartIsLoading,
+    locationData,
+    locationIsLoading,
+    showChartOnInteraction,
+    yearChartData,
+    yearChartIsLoading,
+  ]);
+
+  const downloadableChartData = useMemo(() => {
+    if (isChartDownloadDisabled) {
+      return;
     }
 
-    setIsAnimated(newIsAnimated);
-  }, [selectedDate, isAnimated, setIsAnimated]);
+    return {
+      dataset: name,
+      datasetMetadata: Object.entries(metadata ?? {}).reduce((res, [key, value]) => {
+        if (key === "id") {
+          return res;
+        }
+
+        return {
+          ...res,
+          [camelCase(key)]: value,
+        };
+      }, {}),
+      ...(!showChartOnInteraction
+        ? {
+            year: getYear(selectedDate!),
+            location: locationData![0].name,
+            ...yearChartData,
+          }
+        : {}),
+      ...(showChartOnInteraction
+        ? {
+            feature: selectedFeature,
+            ...interactionChartData,
+          }
+        : {}),
+    };
+  }, [
+    interactionChartData,
+    isChartDownloadDisabled,
+    locationData,
+    metadata,
+    name,
+    selectedDate,
+    selectedFeature,
+    showChartOnInteraction,
+    yearChartData,
+  ]);
+
+  const downloadableChartDataFileName = useMemo(() => {
+    if (isChartDownloadDisabled) {
+      return "";
+    }
+
+    return `${name}${!showChartOnInteraction ? ` - ${locationData![0].name}` : ""}.json`;
+  }, [isChartDownloadDisabled, locationData, name, showChartOnInteraction]);
+
+  const isInteractionChartVisible = useMemo(
+    () => showChartOnInteraction && selectedLayer !== undefined && !!selectedFeature,
+    [selectedFeature, selectedLayer, showChartOnInteraction],
+  );
+
+  const isYearChartVisible = useMemo(
+    () => selectedDate !== undefined && selectedLayerId !== undefined,
+    [selectedDate, selectedLayerId],
+  );
 
   const onToggleDataset = useCallback(
     (active: boolean) => {
@@ -144,9 +213,8 @@ const DatasetCard = ({
 
       if (!active) {
         removeLayer(selectedLayerId);
-        if (isAnimated) {
-          onToggleAnimation();
-        }
+        setHoveredFeature(null);
+        setSelectedFeature(null);
       } else {
         addLayer(selectedLayerId, { ["return-period"]: selectedReturnPeriod, date: selectedDate });
       }
@@ -157,8 +225,8 @@ const DatasetCard = ({
       removeLayer,
       selectedReturnPeriod,
       selectedDate,
-      isAnimated,
-      onToggleAnimation,
+      setHoveredFeature,
+      setSelectedFeature,
     ],
   );
 
@@ -168,6 +236,10 @@ const DatasetCard = ({
       const previousId = selectedLayerId;
       const returnPeriod = getDefaultReturnPeriod(id, layers, layersConfiguration);
       const date = getDefaultDate(id, layers, layersConfiguration);
+
+      // We reset the hovered and selected features for the previous layer
+      setHoveredFeature(null);
+      setSelectedFeature(null);
 
       setSelectedLayerId(id);
       setSelectedReturnPeriod(returnPeriod);
@@ -188,6 +260,8 @@ const DatasetCard = ({
       addLayer,
       layers,
       layersConfiguration,
+      setHoveredFeature,
+      setSelectedFeature,
     ],
   );
 
@@ -215,80 +289,15 @@ const DatasetCard = ({
     ],
   );
 
-  const onChangeSelectedDate = useCallback(
+  const onChangeDate = useCallback(
     (date: string) => {
-      const returnPeriod = getDefaultReturnPeriod(selectedLayerId, layers, layersConfiguration);
-
       setSelectedDate(date);
-
-      if (isDatasetActive && selectedLayerId !== undefined) {
+      if (selectedLayerId !== undefined) {
         updateLayer(selectedLayerId, { date });
-      } else if (selectedLayerId !== undefined) {
-        addLayer(selectedLayerId, { ["return-period"]: returnPeriod, date });
       }
     },
-    [selectedLayerId, isDatasetActive, addLayer, updateLayer, layers, layersConfiguration],
+    [updateLayer, selectedLayerId, setSelectedDate],
   );
-
-  const onClickSaveChartData = useCallback(() => {
-    if (
-      chartIsLoading ||
-      !chartData ||
-      locationIsLoading ||
-      !locationData?.length ||
-      !selectedDate
-    ) {
-      return;
-    }
-
-    const data = {
-      dataset: name,
-      datasetMetadata: Object.entries(metadata ?? {}).reduce((res, [key, value]) => {
-        if (key === "id") {
-          return res;
-        }
-
-        return {
-          ...res,
-          [camelCase(key)]: value,
-        };
-      }, {}),
-      year: getYear(selectedDate),
-      location: locationData[0].name,
-      ...chartData,
-    };
-
-    const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-
-    const link = document.createElement("a");
-    link.download = `${name} - ${locationData[0].name}.json`;
-    link.href = URL.createObjectURL(blob);
-    link.click();
-    link.remove();
-  }, [chartIsLoading, chartData, locationIsLoading, locationData, selectedDate, name, metadata]);
-
-  // When the layer is animated, show each month of the year in a loop
-  useEffect(() => {
-    if (isAnimated && selectedDate !== undefined && selectedLayerId !== undefined) {
-      animationIntervalRef.current = setInterval(() => {
-        const date = format(
-          new Date(selectedDate).setMonth((getMonth(selectedDate) + 1) % 12),
-          "yyyy-MM-dd",
-        );
-
-        setSelectedDate(date);
-        updateLayer(selectedLayerId, { date });
-      }, 500);
-    } else if (animationIntervalRef.current !== null) {
-      clearInterval(animationIntervalRef.current);
-    }
-
-    return () => {
-      if (animationIntervalRef.current !== null) {
-        clearInterval(animationIntervalRef.current);
-      }
-    };
-  }, [selectedLayerId, selectedDate, isAnimated, setSelectedDate, updateLayer]);
 
   return (
     <div className="p-4 border-image-[url(/assets/images/border-image.svg)] border-slice-10 border-image-width-2.5 border-outset-[5px] border-repeat-round">
@@ -297,73 +306,20 @@ const DatasetCard = ({
           {name}
         </Label>
         <div className="flex items-center gap-1 pt-1.5">
-          {selectedDate !== undefined && selectedLayerId !== undefined && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    className="group/chart"
-                    disabled={chartIsLoading || !chartData || locationIsLoading || !locationData}
-                    onClick={onClickSaveChartData}
-                  >
-                    <span className="sr-only">Save chart data</span>
-                    <GraphIcon
-                      className="!size-4 transition-colors group-hover/chart:text-casper-blue-300"
-                      aria-hidden
-                    />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Save chart data</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          {isChartDownloadVisible && (
+            <DownloadChartButton
+              data={downloadableChartData}
+              fileName={downloadableChartDataFileName}
+              disabled={isChartDownloadDisabled}
+            />
           )}
-          {!!selectedLayer?.attributes!.download_link && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon-sm" className="group/download" asChild>
-                    <Link
-                      href={selectedLayer?.attributes!.download_link ?? ""}
-                      rel="noopener noreferrer"
-                      download={selectedLayer?.attributes!.name}
-                    >
-                      <span className="sr-only">Download</span>
-                      <DownloadIcon
-                        className="!size-4 transition-colors group-hover/download:text-casper-blue-300"
-                        aria-hidden
-                      />
-                    </Link>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Download dataset</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          {selectedLayer !== undefined && !!selectedLayer.attributes!.download_link && (
+            <DownloadLayerButton
+              link={selectedLayer.attributes!.download_link}
+              fileName={selectedLayer.attributes!.name!}
+            />
           )}
-          {!!metadata && (
-            <Dialog>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <DialogTrigger asChild>
-                      <Button variant="ghost" size="icon-sm" className="group/info">
-                        <span className="sr-only">Information</span>
-                        <QuestionMarkIcon
-                          className="!size-4 transition-colors group-hover/info:text-casper-blue-300"
-                          aria-hidden
-                        />
-                      </Button>
-                    </DialogTrigger>
-                  </TooltipTrigger>
-                  <TooltipContent>More info</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <DialogContent>
-                <DatasetMetadata name={name} metadata={metadata} />
-              </DialogContent>
-            </Dialog>
-          )}
+          {!!metadata && <MetadataButton datasetName={name} metadata={metadata} />}
           {(!!selectedLayer?.attributes!.download_link || !!metadata) && (
             <div className="mx-0.5 h-5 w-px bg-casper-blue-400" />
           )}
@@ -410,71 +366,40 @@ const DatasetCard = ({
             </SelectContent>
           </Select>
         )}
-        {selectedDate !== undefined && selectedLayerId !== undefined && (
+        {isDatasetActive && showChartOnInteraction && selectedLayer !== undefined && (
+          <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
+            <CursorArrowRaysIcon className="size-4" aria-hidden />
+            Select a point on the map for details.
+          </div>
+        )}
+        {isInteractionChartVisible && (
+          <div className="mt-3">
+            <InteractionChart data={interactionChartData} loading={interactionChartIsLoading} />
+          </div>
+        )}
+        {isYearChartVisible && (
           <div className="mt-3">
             <YearChart
-              data={chartData}
-              date={selectedDate}
-              loading={chartIsLoading}
+              data={yearChartData}
+              date={selectedDate!}
+              loading={yearChartIsLoading}
               active={isDatasetActive}
             />
           </div>
         )}
-        {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
-          <div className="mt-1 flex items-center justify-between gap-4">
-            <Button
-              type="button"
-              variant="ghost"
-              size="auto"
-              className="hidden h-6 w-6 rounded-full border border-rhino-blue-950 hover:border-rhino-blue-800 hover:text-rhino-blue-800 lg:inline-flex"
-              aria-pressed={isAnimated}
-              onClick={onToggleAnimation}
-            >
-              <span className="sr-only">Play layer animation</span>
-              {!isAnimated && <PlayIcon className="!size-4 transition-colors" aria-hidden />}
-              {isAnimated && <PauseIcon className="!size-4 transition-colors" aria-hidden />}
-            </Button>
-            <div className="flex w-full items-center gap-2 lg:w-auto">
-              <Label
-                htmlFor={`dataset-${id}-date`}
-                className={cn({
-                  "shrink-0 text-xs font-medium": true,
-                  "pointer-events-none opacity-60": isAnimated,
-                })}
-              >
-                Displayed on map
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    id={`dataset-${id}-date`}
-                    type="button"
-                    variant="yellow"
-                    className="group/month-picker max-w-[220px] flex-grow justify-between px-3 disabled:bg-rhino-blue-50 disabled:text-rhino-blue-950/60 disabled:opacity-100 lg:flex-grow-0 xl:h-auto xl:py-1.5"
-                    disabled={isAnimated}
-                  >
-                    <CalendarDaysIcon aria-hidden />
-                    {format(
-                      isAnimated ? dateBeforeAnimationRef.current! : selectedDate,
-                      "MMMM, yyyy",
-                    )}
-                    <ChevronDownIcon
-                      className="ml-auto group-data-[state=open]/month-picker:rotate-180"
-                      aria-hidden
-                    />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent side="bottom" align="end" sideOffset={2} className="w-[220px]">
-                  <MonthPicker
-                    selected={isAnimated ? dateBeforeAnimationRef.current! : selectedDate}
-                    minDate={dateRange[0]}
-                    maxDate={dateRange[1]}
-                    onSelect={onChangeSelectedDate}
-                  />
-                </PopoverContent>
-              </Popover>
+        {isDatasetActive &&
+          (isInteractionChartVisible || isYearChartVisible) &&
+          selectedLayer !== undefined &&
+          !!selectedLayer.attributes!.chart_sentence && (
+            <div className="mt-0.5">
+              <ChartSentence
+                sentence={selectedLayer.attributes!.chart_sentence}
+                feature={selectedFeature}
+              />
             </div>
-          </div>
+          )}
+        {isDatasetActive && selectedLayer !== undefined && selectedDate !== undefined && (
+          <DateControls layer={selectedLayer} date={selectedDate} onChangeDate={onChangeDate} />
         )}
       </div>
     </div>
