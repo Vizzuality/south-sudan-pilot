@@ -9,7 +9,11 @@ import { VectorSourceRaw as IVectorTileSource } from "react-map-gl";
 import { env } from "@/env";
 import useMapZoom from "@/hooks/use-map-zoom";
 import { LayerConfig, LayerInteractionState } from "@/types/layer";
-import { convertBinaryToPointGeoJSON, resolveDeckglProperties } from "@/utils/mapbox-deckgl-bridge";
+import {
+  convertBinaryToPointGeoJSON,
+  resolveDeckglProperties,
+  resolveInteractive,
+} from "@/utils/mapbox-deckgl-bridge";
 
 import { DeckGLMapboxOverlayContext } from "../deckgl-mapbox-provider";
 
@@ -64,7 +68,9 @@ const VectorLayer = ({ config, beforeId, interactive, onHover, onClick }: Vector
           }
         },
         onClick: ({ picked, object }) => {
-          if (picked) {
+          const isFeatureInteractive = resolveInteractive(style, zoom, object);
+
+          if (picked && isFeatureInteractive) {
             onClick(object.properties);
           } else {
             onClick(null);
