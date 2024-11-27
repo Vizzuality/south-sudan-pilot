@@ -42,6 +42,7 @@ const config: Config = {
       "supernova-yellow": {
         "300": "#ffe043",
         "400": "#ffcc15",
+        "600": "#CE8800",
       },
     },
     extend: {

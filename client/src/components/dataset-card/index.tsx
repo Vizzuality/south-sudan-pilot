@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as React from "react";
 
 import DatasetMetadata from "@/components/dataset-metadata";
+import InteractionChart from "@/components/interaction-chart";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
@@ -23,6 +24,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import YearChart from "@/components/year-chart";
+import useInteractionChartData from "@/hooks/use-interaction-chart-data";
 import useLayerInteractionState from "@/hooks/use-layer-interaction-state";
 import useLocation from "@/hooks/use-location";
 import { useLocationByCodes } from "@/hooks/use-location-by-codes";
@@ -90,7 +92,8 @@ const DatasetCard = ({
   // Date that was selected before the animation is played
   const dateBeforeAnimationRef = useRef<string | null>(null);
 
-  const [, { setHoveredFeature, setSelectedFeature }] = useLayerInteractionState(selectedLayerId);
+  const [{ selectedFeature }, { setHoveredFeature, setSelectedFeature }] =
+    useLayerInteractionState(selectedLayerId);
 
   const selectedLayer = useMemo(
     () => layers.find(({ id }) => id === selectedLayerId),
@@ -119,10 +122,13 @@ const DatasetCard = ({
     [layers, selectedLayerId],
   );
 
-  const { data: chartData, isLoading: chartIsLoading } = useYearChartData(
+  const { data: yearChartData, isLoading: yearChartIsLoading } = useYearChartData(
     selectedLayerId,
     selectedDate,
   );
+
+  const { data: interactionChartData, isLoading: interacionChartIsLoading } =
+    useInteractionChartData(selectedLayer, selectedFeature);
 
   const { data: locationData, isLoading: locationIsLoading } = useLocationByCodes(
     location.code.slice(-1),
@@ -246,8 +252,8 @@ const DatasetCard = ({
 
   const onClickSaveChartData = useCallback(() => {
     if (
-      chartIsLoading ||
-      !chartData ||
+      yearChartIsLoading ||
+      !yearChartData ||
       locationIsLoading ||
       !locationData?.length ||
       !selectedDate
@@ -269,7 +275,7 @@ const DatasetCard = ({
       }, {}),
       year: getYear(selectedDate),
       location: locationData[0].name,
-      ...chartData,
+      ...yearChartData,
     };
 
     const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
@@ -279,7 +285,15 @@ const DatasetCard = ({
     link.href = URL.createObjectURL(blob);
     link.click();
     link.remove();
-  }, [chartIsLoading, chartData, locationIsLoading, locationData, selectedDate, name, metadata]);
+  }, [
+    yearChartIsLoading,
+    yearChartData,
+    locationIsLoading,
+    locationData,
+    selectedDate,
+    name,
+    metadata,
+  ]);
 
   // When the layer is animated, show each month of the year in a loop
   useEffect(() => {
@@ -319,7 +333,9 @@ const DatasetCard = ({
                     variant="ghost"
                     size="icon-sm"
                     className="group/chart"
-                    disabled={chartIsLoading || !chartData || locationIsLoading || !locationData}
+                    disabled={
+                      yearChartIsLoading || !yearChartData || locationIsLoading || !locationData
+                    }
                     onClick={onClickSaveChartData}
                   >
                     <span className="sr-only">Save chart data</span>
@@ -424,22 +440,31 @@ const DatasetCard = ({
             </SelectContent>
           </Select>
         )}
-        {selectedLayer !== undefined && !!selectedLayer.attributes!.show_chart_on_interaction && (
-          <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
-            <CursorArrowRaysIcon className="size-4" aria-hidden />
-            Select a point on the map for details.
-          </div>
-        )}
+        {isDatasetActive &&
+          selectedLayer !== undefined &&
+          !!selectedLayer.attributes!.show_chart_on_interaction && (
+            <div className="mt-3 flex items-center justify-start gap-2 text-xs text-casper-blue-800">
+              <CursorArrowRaysIcon className="size-4" aria-hidden />
+              Select a point on the map for details.
+            </div>
+          )}
         {selectedDate !== undefined && selectedLayerId !== undefined && (
           <div className="mt-3">
             <YearChart
-              data={chartData}
+              data={yearChartData}
               date={selectedDate}
-              loading={chartIsLoading}
+              loading={yearChartIsLoading}
               active={isDatasetActive}
             />
           </div>
         )}
+        {selectedLayer !== undefined &&
+          !!selectedLayer.attributes!.show_chart_on_interaction &&
+          !!selectedFeature && (
+            <div className="mt-3">
+              <InteractionChart data={interactionChartData} loading={interacionChartIsLoading} />
+            </div>
+          )}
         {selectedDate !== undefined && dateRange !== undefined && isDatasetActive && (
           <div className="mt-1 flex items-center justify-between gap-4">
             <Button
