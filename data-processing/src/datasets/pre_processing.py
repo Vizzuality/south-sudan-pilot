@@ -66,6 +66,12 @@ class _PreProcessingSystem:
                     temporal_resolution="time.month",
                     groupby_type="mean",
                 ),
+                "Evapotranspiration": RasterPreProcessing(
+                    variable="AETI",
+                    temporal_coverage=slice("2023-01-01", "2023-12-31"),
+                    temporal_resolution="time.month",
+                    groupby_type=None,
+                ),
             },
             "Hydrographic data": {
                 "Rivers": VectorPreProcessing(

@@ -38,9 +38,12 @@ class ZarrRasterLayer:
         Loads the data from the base URL.
         """
         print(f"Loading Zarr data from {url}...")
-        fs = gcsfs.GCSFileSystem(token="anon")
-        store = fs.get_mapper(url)
-        ds = xr.open_zarr(store=store, consolidated=True)
+        if url.startswith("gs://"):
+            fs = gcsfs.GCSFileSystem(token="anon")
+            store = fs.get_mapper(url)
+            ds = xr.open_zarr(store=store, consolidated=True)
+        else:
+            ds = xr.open_zarr(store=url, consolidated=True)
         return ds
 
     def process(self, data, styles, file_name, min_z=4, max_z=12):
