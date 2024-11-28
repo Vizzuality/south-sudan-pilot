@@ -93,7 +93,13 @@ const ScaleLegend = (data: ScaleLegendProps) => {
         </div>
       ))}
       {!!minMaxValues && (
-        <div className="flex flex-col pt-5">
+        <div
+          className={cn({
+            "flex flex-col": true,
+            "pt-5": !("" in itemsByGroup),
+            "pt-1": "" in itemsByGroup,
+          })}
+        >
           {minMaxValues[0] !== undefined && (
             <div className="relative left-1 text-xs">
               <span className="relative top-px">{minMaxValues[1]}</span>
