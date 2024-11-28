@@ -25,7 +25,7 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
     "administrative",
     2,
     locationCode[0],
-    locationCode.length > 0,
+    locationCode.length > 0 && locationCode[0] !== "SS",
   );
   const { data: dataLevel3, isLoading: isLoadingLevel3 } = useLocationsByType(
     "administrative",
@@ -126,7 +126,7 @@ const AdministrativeTab = ({ locationCode, onChangeLocationCode }: Administrativ
         </Combobox>
         <Combobox value={locationCode?.[1] ?? ""} onValueChange={onChangeLocationLevel2}>
           <div className="relative">
-            <ComboboxTrigger disabled={locationCode.length < 1}>
+            <ComboboxTrigger disabled={locationCode.length < 1 || locationCode[0] === "SS"}>
               {!!selectedLocationLevel2 && (
                 <span className="font-semibold">{selectedLocationLevel2.name}</span>
               )}
