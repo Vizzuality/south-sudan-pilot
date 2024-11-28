@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { Layer } from "react-map-gl";
 
-import MaskLayer from "@/components/map/layer-manager/mask-layer";
 import useMapLayers from "@/hooks/use-map-layers";
 
 import LayerManagerItem from "./item";
+import MaskLayer from "./mask-layer";
+import SelectedLocationLayer from "./selected-location-layer";
 
 const LayerManager = () => {
   const [layers] = useMapLayers();
@@ -15,6 +16,13 @@ const LayerManager = () => {
    */
   const positioningLayers = useMemo(() => {
     return [
+      <Layer
+        key="layer-position-selected-location"
+        id="layer-position-selected-location"
+        type="background"
+        layout={{ visibility: "none" }}
+        beforeId="selected-location"
+      />,
       ...layers.map((layer, index) => {
         const beforeId = index === 0 ? "data-layers" : `layer-position-${layers[index - 1].id}`;
         return (
@@ -39,6 +47,10 @@ const LayerManager = () => {
 
   const layerManagerItems = useMemo(() => {
     return [
+      <SelectedLocationLayer
+        key="layer-selected-location"
+        beforeId="layer-position-selected-location"
+      />,
       ...layers.map((layer) => {
         const beforeId = `layer-position-${layer.id}`;
         const { id, ...settings } = layer;
