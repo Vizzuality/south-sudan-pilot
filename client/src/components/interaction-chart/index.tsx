@@ -1,6 +1,7 @@
 "use client";
 
 import { AxisBottom, AxisLeft, AxisTop } from "@visx/axis";
+import { GlyphCircle } from "@visx/glyph";
 import { GridColumns, GridRows } from "@visx/grid";
 import { Group } from "@visx/group";
 import { useParentSize } from "@visx/responsive";
@@ -26,7 +27,7 @@ const X_AXIS_HEIGHT = 22;
 const X_AXIS_OFFSET_RIGHT = 5;
 const X_AXIS_TICK_COUNT = 5;
 const X_AXIS_TICK_HEIGHT = 5;
-const Y_AXIS_WIDTH = 34;
+const Y_AXIS_WIDTH = 40;
 const Y_AXIS_OFFSET_TOP = 20;
 const Y_AXIS_TICK_WIDTH = 5;
 const Y_AXIS_TICK_COUNT = 5;
@@ -138,8 +139,26 @@ const InteractionChart = ({ data, loading }: InteractionChartProps) => {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               strokeWidth={1}
-              className="stroke-supernova-yellow-600"
+              className="stroke-supernova-yellow-600/30"
             />
+            {data.data.map((d) => {
+              if (d.y === null) {
+                return null;
+              }
+
+              const top = yScale(d.y) ?? 0;
+              const left = xScale(new Date(d.x)) ?? 0;
+
+              return (
+                <GlyphCircle
+                  key={`${d.x}-${d.y}`}
+                  top={top}
+                  left={left}
+                  size={2}
+                  className="fill-supernova-yellow-600"
+                />
+              );
+            })}
           </Group>
           <AxisLeft
             scale={yScale}
