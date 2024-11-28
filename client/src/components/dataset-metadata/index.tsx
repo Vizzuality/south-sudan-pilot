@@ -18,19 +18,19 @@ const DatasetMetadata = ({ name, metadata }: DatasetMetadataProps) => {
       <dl className="mt-8 flex flex-col gap-2 text-xs">
         {!!metadata.full_name && (
           <div>
-            <dt className="font-bold">Full name</dt>
+            <dt className="font-semibold">Full name</dt>
             <dd>{metadata.full_name}</dd>
           </div>
         )}
         {!!metadata.source && (
           <div>
-            <dt className="font-bold">Source</dt>
+            <dt className="font-semibold">Source</dt>
             <dd>{metadata.source}</dd>
           </div>
         )}
         {!!metadata.website && (
           <div>
-            <dt className="font-bold">Website</dt>
+            <dt className="font-semibold">Website</dt>
             <dd>
               <Link
                 href={metadata.website}
@@ -45,13 +45,13 @@ const DatasetMetadata = ({ name, metadata }: DatasetMetadataProps) => {
         )}
         {!!metadata.description && (
           <div>
-            <dt className="font-bold">Description</dt>
+            <dt className="font-semibold">Description</dt>
             <dd>{metadata.description}</dd>
           </div>
         )}
         {!!metadata.main_applications && (
           <div>
-            <dt className="font-bold">Main applications</dt>
+            <dt className="font-semibold">Main applications</dt>
             <dd>
               <Markdown>{metadata.main_applications}</Markdown>
             </dd>
@@ -59,7 +59,7 @@ const DatasetMetadata = ({ name, metadata }: DatasetMetadataProps) => {
         )}
         {!!metadata.temporal_resolution && (
           <div>
-            <dt className="font-bold">Temporal resolution</dt>
+            <dt className="font-semibold">Temporal resolution</dt>
             <dd>
               <Markdown>{metadata.temporal_resolution}</Markdown>
             </dd>
@@ -67,7 +67,7 @@ const DatasetMetadata = ({ name, metadata }: DatasetMetadataProps) => {
         )}
         {!!metadata.temporal_coverage && (
           <div>
-            <dt className="font-bold">Temporal coverage</dt>
+            <dt className="font-semibold">Temporal coverage</dt>
             <dd>
               <Markdown>{metadata.temporal_coverage}</Markdown>
             </dd>
@@ -75,13 +75,13 @@ const DatasetMetadata = ({ name, metadata }: DatasetMetadataProps) => {
         )}
         {!!metadata.spatial_resolution && (
           <div>
-            <dt className="font-bold">Spatial resolution</dt>
+            <dt className="font-semibold">Spatial resolution</dt>
             <dd>{metadata.spatial_resolution}</dd>
           </div>
         )}
         {!!metadata.units && (
           <div>
-            <dt className="font-bold">Units</dt>
+            <dt className="font-semibold">Units</dt>
             <dd>{metadata.units}</dd>
           </div>
         )}

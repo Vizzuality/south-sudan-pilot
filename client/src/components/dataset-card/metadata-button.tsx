@@ -29,7 +29,7 @@ const MetadataButton = ({ datasetName, metadata }: MetadataButtonProps) => {
           <TooltipContent>More info</TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <DialogContent>
+      <DialogContent variant="minimal">
         <DatasetMetadata name={datasetName} metadata={metadata} />
       </DialogContent>
     </Dialog>
