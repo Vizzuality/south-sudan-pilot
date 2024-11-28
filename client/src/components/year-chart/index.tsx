@@ -27,12 +27,12 @@ interface YearChartProps {
 }
 
 const CHART_MIN_HEIGHT = 120;
-const CHART_MAX_HEIGHT = 250;
+const CHART_MAX_HEIGHT = 270;
 const X_AXIS_HEIGHT = 22;
 const X_AXIS_OFFSET_RIGHT = 5;
 const X_AXIS_TICK_HEIGHT = 5;
 const Y_AXIS_WIDTH = 34;
-const Y_AXIS_OFFSET_TOP = 5;
+const Y_AXIS_OFFSET_TOP = 20;
 const Y_AXIS_TICK_WIDTH = 5;
 const Y_AXIS_TICK_COUNT = 5;
 const GRADIENT_OPACITY_EXTENT = [0.9, 0.7];
@@ -40,26 +40,9 @@ const GRADIENT_OPACITY_EXTENT = [0.9, 0.7];
 const YearChart = ({ data, date, loading, active }: YearChartProps) => {
   const { parentRef, width } = useParentSize({ ignoreDimensions: ["height"] });
   const height = useMemo(
-    () => Math.max(Math.min(width / 2.7, CHART_MAX_HEIGHT), CHART_MIN_HEIGHT),
+    () => Math.max(Math.min(width / 2.35, CHART_MAX_HEIGHT), CHART_MIN_HEIGHT),
     [width],
   );
-
-  const unitWidth = useMemo(() => {
-    if (loading || !data) {
-      return 0;
-    }
-
-    const subtract =
-      data.unit?.split("").reduce((res, char) => {
-        if (char === "˚" || char === "/" || char === " ") {
-          return res - 6;
-        }
-
-        return res;
-      }, Y_AXIS_TICK_WIDTH) ?? Y_AXIS_TICK_WIDTH;
-
-    return (data.unit?.length ?? 0) * 8 + subtract;
-  }, [data, loading]);
 
   const xScale = useMemo(() => {
     if (loading || !data) {
@@ -67,10 +50,10 @@ const YearChart = ({ data, date, loading, active }: YearChartProps) => {
     }
 
     return scalePoint({
-      range: [0, width - Y_AXIS_WIDTH - X_AXIS_OFFSET_RIGHT - unitWidth],
+      range: [0, width - Y_AXIS_WIDTH - X_AXIS_OFFSET_RIGHT],
       domain: data.data.map(({ x }) => x),
     });
-  }, [width, data, loading, unitWidth]);
+  }, [width, data, loading]);
 
   const yScale = useMemo(() => {
     if (loading || !data) {
@@ -182,7 +165,7 @@ const YearChart = ({ data, date, loading, active }: YearChartProps) => {
           </LinearGradient>
           <Group left={Y_AXIS_WIDTH}>
             <GridRows
-              width={width - Y_AXIS_WIDTH - unitWidth}
+              width={width - Y_AXIS_WIDTH}
               height={height - X_AXIS_HEIGHT - Y_AXIS_OFFSET_TOP}
               scale={yScale}
               numTicks={Y_AXIS_TICK_COUNT}
@@ -193,7 +176,7 @@ const YearChart = ({ data, date, loading, active }: YearChartProps) => {
             />
             <GridColumns
               top={Y_AXIS_OFFSET_TOP}
-              width={width - X_AXIS_OFFSET_RIGHT - unitWidth}
+              width={width - X_AXIS_OFFSET_RIGHT}
               height={height - X_AXIS_HEIGHT - Y_AXIS_OFFSET_TOP}
               scale={xScale}
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -232,7 +215,7 @@ const YearChart = ({ data, date, loading, active }: YearChartProps) => {
             <AxisTop
               scale={xScale}
               top={Y_AXIS_OFFSET_TOP}
-              tickLength={Y_AXIS_OFFSET_TOP}
+              tickLength={X_AXIS_TICK_HEIGHT}
               tickComponent={() => null}
               tickLabelProps={xAxisTickLabelProps}
               tickClassName="[&>line]:stroke-casper-blue-400/50"
@@ -258,8 +241,8 @@ const YearChart = ({ data, date, loading, active }: YearChartProps) => {
           </Group>
           <Text
             x={width}
-            y={Y_AXIS_OFFSET_TOP}
-            dy={5}
+            y={0}
+            dy={10}
             textAnchor="end"
             className="text-right font-sans text-[11px] text-rhino-blue-950"
           >
