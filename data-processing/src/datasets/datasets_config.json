@@ -391,8 +391,8 @@
         "Evapotranspiration": {
             "type": "raster",
             "format": "Zarr",
-            "base_url": "gs://wbhydross_deliverables/D3-Database/02- Meteorological datasets/Evapotranspiration-WaPOR/WBHYDROSSD_WaPOR_Evapotranspiration_100m_SouthSudan_2023_20240220.zarr",
-            "styles": {"colors": ["#FFFFFF", "#FFBC15", "#211F4D"], "vmin": 0, "vmax": 330, "time_coord": "months"}
+            "base_url": "../data/raw/WaPor_final.zarr",
+            "styles": {"colors": ["#FFFFFF", "#FFBC15", "#211F4D"], "vmin": 0, "vmax": 330, "time_coord": "time"}
         },
         "Soil moisture": {
             "type": "raster",
