@@ -56,7 +56,8 @@ export const BASEMAP_LAYERS = {
     group: "Infrastructures",
     name: "Waterways & waterpoints",
   },
-  "hydrographic-data": { group: "Waterbodies", name: "Hydrographic data" },
+  dem: { group: "Hydrographic data", name: "Digital elevation model" },
+  rivers: { group: "Hydrographic data", name: "Rivers" },
 } as const;
 
 export const DEFAULT_MAP_SETTINGS: {
