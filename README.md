@@ -10,3 +10,7 @@ The platform is divided into 2 Node.js applications:
 - a client application located in the `/client` folder
 
 More detailed documentation and instructions on how to run the applications are available in each of the folders.
+
+## Architecture
+
+![The front-end application accesses a Mapbox account, AWS S3 bucket and the CMS. The CMS relies on a PostgreSQL database. Everything but the Mapbox account are hosted on AWS. The general public can access the front-end application while administrators can access the CMS. Mapbox stores and serves the basemap, vector and some raster layers. AWS S3 stores and serves the pre-computed static and animated raster tiles. PostgreSQL stores data such as the locations, dataset metadata and layer confifiguration. It does not store any geospatial data.](./readme-architecture-diagram.png)
