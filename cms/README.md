@@ -40,6 +40,10 @@ Strapi gives you many possible deployment options for your project including [St
 yarn strapi deploy
 ```
 
+## NOTE on changing Strapi's configuration/data model
+
+Whenever doing any kind of changes to the configuration or data model when developing locally, remember to `export` all the changes to local files, on `Settings/Config Sync/Interface`. This will generate changes on several files managed by Stapi in the filesystem, that must be commited to the VCS, in order to get automatically deployed to the staging environment. It is also  recommended to make a backup of the database when doing major changes to the data model. This can be done by exporting the database from the Strapi admin panel.
+
 ## 📚 Learn more
 
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.

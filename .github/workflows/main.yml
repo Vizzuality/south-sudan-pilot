@@ -1,8 +1,8 @@
-# The workflow also processes GH secrets and variables managed by Terraform or manually, with the TF_ prefix
-# for each relevant GH environment, which are used to build the .env files for the containers.
+# The workflow also processes GH secrets and variables managed by Terraform (with the TF_ prefix) or manually,
+# for each relevant GH environment depending on the prefix (CLIENT_ENV_ for example), which are used to build the .env files for the containers.
 # These follow the naming convention:
-# - TF_[CLIENT_ENV|CMS_ENV]_* - managed by Terraform
-# - [CLIENT_ENV|CMS_ENV]_* - managed manually
+# - TF_[CLIENT_ENV|CMS_ENV]_* - automatically managed by Terraform, and cannot be changed manually
+# - [CLIENT_ENV|CMS_ENV]_* - managed manually by devs, used mostly externally managed services (mapbox api keys, for example)
 
 name: Run deploy to AWS
 

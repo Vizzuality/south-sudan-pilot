@@ -1,0 +1,50 @@
+version: '3.3'
+
+services:
+  cms:
+    build:
+      context: cms
+    ports:
+      - '1337:1337'
+    #env_file:
+      #- ./cms/.env
+    environment:
+      - DATABASE_CLIENT=postgres
+      - DATABASE_SSL=false
+      - DATABASE_URL=postgres://strapi:some_password@db:5432/strapi
+    links:
+      - db
+    command: dev
+    depends_on:
+      - db
+    volumes:
+      - ./cms:/app/cms
+
+  client:
+    build:
+      context: client
+    ports:
+      - '3000:3000'
+    #env_file:
+     # - ./client/.env.local
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:1337/api
+    links:
+      - cms
+    command: dev
+    volumes:
+      - ./client:/app/client
+
+  db:
+    image: postgres:15.4-alpine3.18
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=some_password
+      - POSTGRES_USER=strapi
+      - POSTGRES_DB=strapi
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
