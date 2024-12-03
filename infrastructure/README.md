@@ -25,7 +25,7 @@ Other AWS services are used internally by Elastic Beanstalk, for example:
 The deployment is automated using a GH Action that builds the Docker images and deploys them to Elastic Beanstalk. It roughly follows these steps:
 - Compile the required environment variables corresponding to the environment (e.g. staging, production) and component (e.g. client, cms) being deployed.
 - Build the Docker images and publish them to ECR
-- Generate the Elastic Beanstalk distribution bundle with the docker-compose file, ebextensions, nginx configurations, etc. and deploy it to Elastic Beanstalk
+- Generate the Elastic Beanstalk distribution bundle with the docker-compose file referencing these latest builds of the application, ebextensions, nginx configurations, etc. and deploy it to Elastic Beanstalk
 
 # Infrastructure as Code
 
