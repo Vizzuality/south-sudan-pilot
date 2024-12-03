@@ -15,8 +15,8 @@ const FloodPanel = () => {
   return (
     <div className="min-h-screen px-5 py-5 lg:min-h-0 lg:px-10">
       <p className="mb-6 text-sm leading-[26px]">
-        Access detailed flood data to assess both exposure and hazard levels across South Sudan.
-        Analyze model-based and EO-based flood information, including flood extent, depth, and
+        Access detailed flood data to assess both hazard and exposure across South Sudan. Analyze
+        and compare EO-based and model-based flood information, including flood extent, depth, and
         return periods, to better understand flood risks and support proactive planning.
       </p>
       <figure className="relative mx-auto mb-6 w-max max-w-full">

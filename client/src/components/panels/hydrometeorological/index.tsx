@@ -16,10 +16,9 @@ const HydrometeorologicalPanel = () => {
   return (
     <div className="min-h-screen px-5 py-5 lg:min-h-0 lg:px-10">
       <p className="mb-6 text-sm leading-[26px]">
-        Access comprehensive hydrometeorological data, including precipitation, temperature,
-        evapotranspiration, and water levels, to monitor key environmental variables. Analyze
-        surface water dynamics, soil moisture, and groundwater storage to support proactive water
-        resource and environmental management.
+        Access key hydrometeorological information, including river discharge time series from South
+        Sudan in-situ stations, as well as precipitation, temperature, evapotranspiration, and soil
+        moisture, to monitor key environmental variables.
       </p>
       <figure className="relative mx-auto mb-6 w-max max-w-full">
         <Image src={HydrometeorologicalImage} alt="Brown tumultuous water" placeholder="blur" />
