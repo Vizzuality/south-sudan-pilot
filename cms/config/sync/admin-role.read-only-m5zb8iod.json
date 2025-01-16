@@ -1,0 +1,142 @@
+{
+  "name": "Read-only",
+  "code": "read-only-m5zb8iod",
+  "description": "Access to the content manager and content type builder in read-only",
+  "permissions": [
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::chart-data.chart-data",
+      "properties": {
+        "fields": [
+          "location_code",
+          "year",
+          "x_values",
+          "y_values",
+          "layer",
+          "unique_identifier"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::dataset.dataset",
+      "properties": {
+        "fields": [
+          "name",
+          "layers",
+          "default_layer",
+          "topic",
+          "sub_topic",
+          "metadata.source",
+          "metadata.website",
+          "metadata.description",
+          "metadata.main_applications",
+          "metadata.temporal_coverage",
+          "metadata.spatial_resolution",
+          "metadata.units",
+          "metadata.full_name",
+          "metadata.temporal_resolution",
+          "short_description",
+          "order"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::layer.layer",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "mapbox_config",
+          "params_config",
+          "legend_config.type",
+          "legend_config.items.color",
+          "legend_config.items.value",
+          "legend_config.items.pattern",
+          "legend_config.items.size",
+          "legend_config.items.group",
+          "legend_config.unit",
+          "dataset",
+          "download_link",
+          "chart_data",
+          "chart_unit",
+          "show_chart_on_interaction",
+          "chart_sentence"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::location.location",
+      "properties": {
+        "fields": [
+          "name",
+          "type",
+          "level",
+          "code",
+          "parent",
+          "geometry"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::sub-topic.sub-topic",
+      "properties": {
+        "fields": [
+          "name",
+          "order"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::topic.topic",
+      "properties": {
+        "fields": [
+          "name",
+          "slug"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "plugin::users-permissions.user",
+      "properties": {
+        "fields": [
+          "username",
+          "email",
+          "provider",
+          "password",
+          "resetPasswordToken",
+          "confirmationToken",
+          "confirmed",
+          "blocked",
+          "role"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-type-builder.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    }
+  ]
+}
