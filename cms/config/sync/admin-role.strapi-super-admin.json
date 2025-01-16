@@ -165,7 +165,8 @@
           "chart_data",
           "chart_unit",
           "show_chart_on_interaction",
-          "chart_sentence"
+          "chart_sentence",
+          "allow_chart_data_download"
         ]
       },
       "conditions": []
@@ -199,7 +200,8 @@
           "chart_data",
           "chart_unit",
           "show_chart_on_interaction",
-          "chart_sentence"
+          "chart_sentence",
+          "allow_chart_data_download"
         ]
       },
       "conditions": []
@@ -226,7 +228,8 @@
           "chart_data",
           "chart_unit",
           "show_chart_on_interaction",
-          "chart_sentence"
+          "chart_sentence",
+          "allow_chart_data_download"
         ]
       },
       "conditions": []

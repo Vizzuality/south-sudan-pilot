@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-01-16T12:32:18.676Z"
+    "x-generation-date": "2025-01-16T12:52:37.154Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -883,6 +883,9 @@
                       },
                       "chart_sentence": {
                         "type": "string"
+                      },
+                      "allow_chart_data_download": {
+                        "type": "boolean"
                       },
                       "createdAt": {
                         "type": "string",
@@ -1831,6 +1834,9 @@
                         "chart_sentence": {
                           "type": "string"
                         },
+                        "allow_chart_data_download": {
+                          "type": "boolean"
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -2108,6 +2114,9 @@
               },
               "chart_sentence": {
                 "type": "string"
+              },
+              "allow_chart_data_download": {
+                "type": "boolean"
               }
             }
           }
@@ -2643,6 +2652,9 @@
                                     "chart_sentence": {
                                       "type": "string"
                                     },
+                                    "allow_chart_data_download": {
+                                      "type": "boolean"
+                                    },
                                     "createdAt": {
                                       "type": "string",
                                       "format": "date-time"
@@ -2961,6 +2973,9 @@
           },
           "chart_sentence": {
             "type": "string"
+          },
+          "allow_chart_data_download": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",

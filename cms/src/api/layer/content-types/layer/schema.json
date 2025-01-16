@@ -62,6 +62,10 @@
     },
     "chart_sentence": {
       "type": "text"
+    },
+    "allow_chart_data_download": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

@@ -921,6 +921,7 @@ export interface ApiLayerLayer extends Schema.CollectionType {
     chart_unit: Attribute.String;
     show_chart_on_interaction: Attribute.Boolean & Attribute.DefaultTo<false>;
     chart_sentence: Attribute.Text;
+    allow_chart_data_download: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

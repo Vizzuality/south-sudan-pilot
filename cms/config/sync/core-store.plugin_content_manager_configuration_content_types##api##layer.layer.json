@@ -175,6 +175,20 @@
           "sortable": true
         }
       },
+      "allow_chart_data_download": {
+        "edit": {
+          "label": "allow_chart_data_download",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "allow_chart_data_download",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -282,11 +296,15 @@
             "size": 6
           },
           {
-            "name": "chart_unit",
+            "name": "allow_chart_data_download",
             "size": 6
           }
         ],
         [
+          {
+            "name": "chart_unit",
+            "size": 6
+          },
           {
             "name": "show_chart_on_interaction",
             "size": 6

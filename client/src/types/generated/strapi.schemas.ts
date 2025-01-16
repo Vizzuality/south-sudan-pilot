@@ -1144,6 +1144,7 @@ export const LayerType = {
 } as const;
 
 export interface Layer {
+  allow_chart_data_download?: boolean;
   chart_data?: LayerChartData;
   chart_sentence?: string;
   chart_unit?: string;
@@ -1319,6 +1320,7 @@ export const LayerDatasetDataAttributesLayersDataItemAttributesType = {
 } as const;
 
 export type LayerDatasetDataAttributesLayersDataItemAttributes = {
+  allow_chart_data_download?: boolean;
   chart_data?: LayerDatasetDataAttributesLayersDataItemAttributesChartData;
   chart_sentence?: string;
   chart_unit?: string;
@@ -1671,6 +1673,7 @@ export type LayerRequestDataDataset = number | string;
 export type LayerRequestDataChartDataItem = number | string;
 
 export type LayerRequestData = {
+  allow_chart_data_download?: boolean;
   chart_data?: LayerRequestDataChartDataItem[];
   chart_sentence?: string;
   chart_unit?: string;
@@ -1782,6 +1785,7 @@ export const DatasetLayersDataItemAttributesType = {
 } as const;
 
 export type DatasetLayersDataItemAttributes = {
+  allow_chart_data_download?: boolean;
   chart_data?: DatasetLayersDataItemAttributesChartData;
   chart_sentence?: string;
   chart_unit?: string;
@@ -2320,6 +2324,7 @@ export type ChartDataLayerDataAttributesUpdatedBy = {
 };
 
 export type ChartDataLayerDataAttributes = {
+  allow_chart_data_download?: boolean;
   chart_data?: ChartDataLayerDataAttributesChartData;
   chart_sentence?: string;
   chart_unit?: string;
