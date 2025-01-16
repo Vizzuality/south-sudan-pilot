@@ -19,4 +19,3 @@ app.prepare().then(() => {
   server.listen(3000);
   console.log(`> Ready on http://localhost:${port}`);
 });
-a;
