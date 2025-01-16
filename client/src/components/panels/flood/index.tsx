@@ -8,7 +8,14 @@ import useDatasetsBySubTopic from "@/hooks/use-datasets-by-sub-topic";
 const FloodPanel = () => {
   const { data, isLoading } = useDatasetsBySubTopic(
     "flood",
-    ["name", "params_config", "download_link", "show_chart_on_interaction", "chart_sentence"],
+    [
+      "name",
+      "params_config",
+      "download_link",
+      "show_chart_on_interaction",
+      "chart_sentence",
+      "allow_chart_data_download",
+    ],
     true,
   );
 

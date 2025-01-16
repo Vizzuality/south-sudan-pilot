@@ -118,16 +118,10 @@ const DatasetCard = ({
     return (
       ((showChartOnInteraction && selectedFeature) ||
         (!showChartOnInteraction && selectedDate !== undefined && selectedLayerId !== undefined)) &&
-      (yearChartIsLoading || !yearChartData || yearChartData.isDownloadable)
+      selectedLayer !== undefined &&
+      selectedLayer!.attributes!.allow_chart_data_download
     );
-  }, [
-    selectedDate,
-    selectedFeature,
-    selectedLayerId,
-    showChartOnInteraction,
-    yearChartIsLoading,
-    yearChartData,
-  ]);
+  }, [selectedDate, selectedFeature, selectedLayerId, showChartOnInteraction, selectedLayer]);
 
   const isChartDownloadDisabled = useMemo(() => {
     const isInteractionChartDownloadDisabled =

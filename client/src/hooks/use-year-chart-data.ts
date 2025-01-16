@@ -12,7 +12,6 @@ interface YearChartData {
     x: string;
     y: number;
   }[];
-  isDownloadable: boolean;
   unit: string | undefined;
   colorRange: string[];
   colorDomain: [number, number];
@@ -84,7 +83,6 @@ export default function useYearChartData(layerId?: number, date?: string) {
               x: format(new Date().setMonth(index), "MMM"),
               y: (chartAttributes.y_values as number[])[index],
             })),
-            isDownloadable: layerAttributes!.allow_chart_data_download ?? true,
             unit: layerAttributes!.chart_unit,
             colorRange: legendItems.map(({ color }) => color).filter(Boolean),
             colorDomain: [
